@@ -1,0 +1,708 @@
+class ReconTools {
+    constructor() {
+        this.validateDomain = this.validateDomain.bind(this);
+        this.initializeEventListeners();
+        this.initializeNavbarScroll();
+    }
+
+    initializeEventListeners() {
+        document.addEventListener('DOMContentLoaded', () => {
+            this.setupDomainInput();
+        });
+    }
+
+    validateDomain(domain) {
+        if (!domain) {
+            this.showError('Please enter a domain');
+            return false;
+        }
+
+        const pattern = /^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/;
+        if (!pattern.test(domain)) {
+            this.showError('Please enter a valid domain');
+            return false;
+        }
+
+        return true;
+    }
+
+    getDomain() {
+        const domain = document.getElementById('targetDomain')?.value.trim();
+        if (!domain) {
+            this.showError('Please enter a domain');
+            return null;
+        }
+        if (!this.validateDomain(domain)) {
+            return null;
+        }
+        return this.sanitizeDomain(domain);
+    }
+
+    sanitizeDomain(domain) {
+        return domain.replace(/^https?:\/\//, '').replace(/\/$/, '');
+    }
+
+    showError(message) {
+        this.removeExistingErrors();
+
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'alert alert-danger error-message';
+        errorDiv.style.cssText = `
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1050;
+            padding: 12px 20px;
+            border-radius: 6px;
+            background: var(--gh-danger);
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        `;
+        
+        errorDiv.textContent = message;
+        document.body.appendChild(errorDiv);
+
+        setTimeout(() => {
+            errorDiv.style.opacity = '1';
+        }, 10);
+
+        setTimeout(() => {
+            errorDiv.style.opacity = '0';
+            setTimeout(() => {
+                if (errorDiv.parentNode) {
+                    errorDiv.remove();
+                }
+            }, 300);
+        }, 3000);
+    }
+
+    removeExistingErrors() {
+        const existingErrors = document.querySelectorAll('.error-message');
+        existingErrors.forEach(error => error.remove());
+    }
+
+    executeToolSearch(url, toolName) {
+        const domain = this.getDomain();
+        if (!domain) return;
+        
+        try {
+            const finalUrl = url.replace(/example\.com/g, domain);
+            window.open(finalUrl, '_blank');
+        } catch (error) {
+            this.showError(`Failed to execute ${toolName}: ${error.message}`);
+        }
+    }
+
+    async searchCVE() {
+        const query = document.getElementById('cveSearchInput').value.trim();
+        if (!query) {
+            this.showError('Please enter a CVE ID or keyword');
+            return;
+        }
+
+        const resultsDiv = document.getElementById('cveResults');
+        resultsDiv.innerHTML = '<div class="text-center"><div class="spinner-border text-primary" role="status"></div></div>';
+
+        try {
+            const response = await fetch(`https://services.nvd.nist.gov/rest/json/cves/2.0?keywordSearch=${encodeURIComponent(query)}`);
+            const data = await response.json();
+
+            if (!data.vulnerabilities || data.vulnerabilities.length === 0) {
+                resultsDiv.innerHTML = '<div class="alert alert-info">No CVEs found for the given query.</div>';
+                return;
+            }
+
+            resultsDiv.innerHTML = data.vulnerabilities
+                .map(vuln => {
+                    const cve = vuln.cve;
+                    const severity = this.getSeverityBadge(cve.metrics?.cvssMetricV31?.[0]?.cvssData?.baseScore);
+                    
+                    return `
+                        <div class="cve-card">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <h5 class="mb-0">${cve.id}</h5>
+                                ${severity}
+                            </div>
+                            <p class="mb-3">${cve.descriptions?.[0]?.value || 'No description available'}</p>
+                            <div class="cve-sources">
+                                <a href="https://nvd.nist.gov/vuln/detail/${cve.id}" class="source-link" target="_blank">
+                                    <svg class="me-2" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                    </svg>
+                                    NVD
+                                </a>
+                                <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=${cve.id}" class="source-link" target="_blank">
+                                    <svg class="me-2" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm0 14c-2.03 0-4.43-.82-6.14-2.88C7.55 15.8 9.68 15 12 15s4.45.8 6.14 2.12C16.43 19.18 14.03 20 12 20z"/>
+                                    </svg>
+                                    MITRE
+                                </a>
+                                <a href="https://www.exploit-db.com/search?cve=${cve.id}" class="source-link" target="_blank">
+                                    <svg class="me-2" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M9.763 1.427c-.354.157-.625.456-.748.825L6.006 11H4.558c-.878 0-1.558.672-1.558 1.5s.68 1.5 1.558 1.5h1.448l3.01 8.748c.123.369.394.668.748.825.354.157.764.157 1.118 0 .354-.157.625-.456.748-.825L14.187 14h1.448c.878 0 1.558-.672 1.558-1.5s-.68-1.5-1.558-1.5h-1.448l-3.01-8.748c-.123-.369-.394-.668-.748-.825-.354-.157-.764-.157-1.118 0z"/>
+                                    </svg>
+                                    Exploit-DB
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                })
+                .join('');
+        } catch (error) {
+            resultsDiv.innerHTML = '<div class="alert alert-danger">Error fetching CVE data. Please try again later.</div>';
+            console.error('CVE Search Error:', error);
+        }
+    }
+
+    getSeverityBadge(score) {
+        if (!score) return '';
+        
+        let severityClass = 'severity-low';
+        if (score >= 9.0) severityClass = 'severity-critical';
+        else if (score >= 7.0) severityClass = 'severity-high';
+        else if (score >= 4.0) severityClass = 'severity-medium';
+
+        return `<span class="cve-severity ${severityClass}">Score: ${score}</span>`;
+    }
+
+    initializeNavbarScroll() {
+        let lastScroll = 0;
+        const navbar = document.querySelector('.navbar');
+        const scrollThreshold = 100;
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll <= 0) {
+                navbar.classList.remove('navbar-hidden');
+                return;
+            }
+            
+            if (currentScroll > scrollThreshold) {
+                if (currentScroll > lastScroll) {
+                    navbar.classList.add('navbar-hidden');
+                }
+                else {
+                    navbar.classList.remove('navbar-hidden');
+                }
+            }
+            
+            lastScroll = currentScroll;
+        });
+    }
+}
+
+const reconTools = new ReconTools();
+
+const toolFunctions = {
+    subdomainDork: (url) => reconTools.executeToolSearch(url, 'Subdomain Search'),
+    techDork: (url) => reconTools.executeToolSearch(url, 'Technology Detection'),
+    portDork: (url) => reconTools.executeToolSearch(url, 'Port Scanning'),
+    urlDork: (url) => reconTools.executeToolSearch(url, 'URL Collection'),
+    gitDork: (url) => reconTools.executeToolSearch(url, 'Git Search'),
+    cmsDork: (dork) => reconTools.executeToolSearch(
+        `https://www.google.com/search?q=${encodeURIComponent(dork)}`,
+        'CMS Search'
+    ),
+    cveDork: (url) => reconTools.executeToolSearch(url, 'CVE Search'),
+    directoryDork: (dork) => reconTools.executeToolSearch(
+        `https://www.google.com/search?q=${encodeURIComponent(dork)}`,
+        'Directory Search'
+    ),
+    vulnDork: (dork) => reconTools.executeToolSearch(
+        `https://www.google.com/search?q=${encodeURIComponent(dork)}`,
+        'Vulnerability Search'
+    ),
+    codeDork: (dork) => reconTools.executeToolSearch(
+        `https://www.google.com/search?q=${encodeURIComponent(dork)}`,
+        'Code Search'
+    ),
+    apiDork: (dork) => reconTools.executeToolSearch(
+        `https://www.google.com/search?q=${encodeURIComponent(dork)}`,
+        'API Endpoint Search'
+    ),
+    cloudDork: (dork) => reconTools.executeToolSearch(
+        `https://www.google.com/search?q=${encodeURIComponent(dork)}`,
+        'Cloud Asset Search'
+    ),
+    secretsDork: (dork) => reconTools.executeToolSearch(
+        `https://www.google.com/search?q=${encodeURIComponent(dork)}`,
+        'Secrets Search'
+    ),
+    devDork: (dork) => reconTools.executeToolSearch(
+        `https://www.google.com/search?q=${encodeURIComponent(dork)}`,
+        'Development Asset Search'
+    ),
+    s3Dork: (url) => reconTools.executeToolSearch(url, 'S3 Bucket Search'),
+    paramDork: (dork) => reconTools.executeToolSearch(
+        `https://www.google.com/search?q=${encodeURIComponent(dork)}`,
+        'Parameter Discovery'
+    ),
+    jsDork: (dork) => reconTools.executeToolSearch(
+        `https://www.google.com/search?q=${encodeURIComponent(dork)}`,
+        'JavaScript Analysis'
+    ),
+    authDork: (dork) => reconTools.executeToolSearch(
+        `https://www.google.com/search?q=${encodeURIComponent(dork)}`,
+        'Auth Endpoint Search'
+    ),
+    backupDork: (dork) => reconTools.executeToolSearch(
+        `https://www.google.com/search?q=${encodeURIComponent(dork)}`,
+        'Backup File Search'
+    ),
+    exposedDork: (dork) => reconTools.executeToolSearch(
+        `https://www.google.com/search?q=${encodeURIComponent(dork)}`,
+        'Exposed Data Search'
+    ),
+    sourceDork: (dork) => reconTools.executeToolSearch(
+        `https://www.google.com/search?q=${encodeURIComponent(dork)}`,
+        'Source Code Search'
+    ),
+    errorDork: (dork) => reconTools.executeToolSearch(
+        `https://www.google.com/search?q=${encodeURIComponent(dork)}`,
+        'Error Page Search'
+    ),
+    loginDork: (dork) => reconTools.executeToolSearch(
+        `https://www.google.com/search?q=${encodeURIComponent(dork)}`,
+        'Login Portal Search'
+    ),
+    phpinfoDork: (dork) => reconTools.executeToolSearch(
+        `https://www.google.com/search?q=${encodeURIComponent(dork)}`,
+        'PHPInfo Search'
+    ),
+    builtwithSearch: (domain) => reconTools.executeToolSearch(
+        `https://builtwith.com/${domain}`,
+        'BuiltWith Analysis'
+    ),
+    webtechsurvey: (domain) => reconTools.executeToolSearch(
+        `https://webtechsurvey.com/website/${domain}`,
+        'WebTech Survey'
+    ),
+    whatcms: (domain) => reconTools.executeToolSearch(
+        `https://whatcms.org/?s=${domain}`,
+        'WhatCMS Detection'
+    )
+};
+
+const additionalTools = {
+    crtshSearch: (domain) => reconTools.executeToolSearch(
+        `https://crt.sh/?q=${domain}`, 
+        'Certificate Search'
+    ),
+    securitytrailsSearch: (domain) => reconTools.executeToolSearch(
+        `https://securitytrails.com/domain/${domain}/dns`, 
+        'SecurityTrails DNS'
+    ),
+    netcraftSearch: (domain) => reconTools.executeToolSearch(
+        `https://searchdns.netcraft.com/?restriction=site+contains&host=${domain}`, 
+        'Netcraft Search'
+    ),
+    censysSearch: (domain) => reconTools.executeToolSearch(
+        `https://search.censys.io/search?resource=hosts&q=${domain}`,
+        'Censys Search'
+    ),
+    shodanSearch: (domain) => reconTools.executeToolSearch(
+        `https://www.shodan.io/search?query=${domain}`,
+        'Shodan Search'
+    )
+};
+
+const infoDisclosureDorks = {
+    directoryListing: (domain) => reconTools.executeToolSearch(
+        `site:${domain} intitle:index.of`,
+        'Directory Listing'
+    ),
+    exposedFTP: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:ftp`,
+        'Exposed FTP'
+    ),
+    configFiles: (domain) => reconTools.executeToolSearch(
+        `site:${domain} ext:conf OR ext:config OR ext:cfg`,
+        'Configuration Files'
+    ),
+    backupFiles: (domain) => reconTools.executeToolSearch(
+        `site:${domain} ext:bak OR ext:backup OR ext:old`,
+        'Backup Files'
+    ),
+    sensitiveDocuments: (domain) => reconTools.executeToolSearch(
+        `site:${domain} filetype:pdf OR filetype:doc OR filetype:xlsx`,
+        'Sensitive Documents'
+    )
+};
+
+const cloudExposureDorks = {
+    digitalOcean: (domain) => reconTools.executeToolSearch(
+        `site:${domain} "digitalocean"`,
+        'DigitalOcean Assets'
+    ),
+    firebase: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:firebaseio.com`,
+        'Firebase Exposure'
+    ),
+    googleDrive: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:drive.google.com`,
+        'Google Drive Links'
+    ),
+    azureExposure: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:azure`,
+        'Azure Resources'
+    )
+};
+
+const employeeSearchTools = {
+    linkedinEmployees: (domain) => reconTools.executeToolSearch(
+        `site:linkedin.com/in/ "${domain}"`,
+        'LinkedIn Employees'
+    ),
+    facebookEmployees: (domain) => reconTools.executeToolSearch(
+        `site:facebook.com "${domain}"`,
+        'Facebook Profiles'
+    ),
+    twitterEmployees: (domain) => reconTools.executeToolSearch(
+        `site:twitter.com "${domain}"`,
+        'Twitter Profiles'
+    )
+};
+
+const vulnPatternDorks = {
+    sqlInjection: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:id= OR inurl:pid= OR inurl:category=`,
+        'SQL Injection Parameters'
+    ),
+    openRedirects: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:redir OR inurl:redirect OR inurl:return`,
+        'Open Redirects'
+    ),
+    ssrfParams: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:url= OR inurl:path= OR inurl:dest=`,
+        'SSRF Parameters'
+    ),
+    rceParams: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:cmd= OR inurl:exec= OR inurl:command=`,
+        'RCE Parameters'
+    )
+};
+
+const advancedVulnDorks = {
+    fileUpload: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:upload OR inurl:upload.php OR inurl:fileupload OR inurl:uploadfile`,
+        'File Upload Points'
+    ),
+    
+    apiEndpoints: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:api OR inurl:api/v1 OR inurl:api/v2 OR inurl:/graphql OR inurl:/swagger`,
+        'API Endpoints'
+    ),
+    
+    jwtTokens: (domain) => reconTools.executeToolSearch(
+        `site:${domain} "eyJ0eXAiOiJKV1QiL" OR "eyJ0eXAiOiJKV1Qi"`,
+        'JWT Tokens'
+    ),
+    
+    debugParams: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:debug= OR inurl:test= OR inurl:dev= OR inurl:development`,
+        'Debug Parameters'
+    )
+};
+
+const infrastructureDorks = {
+    internalIPs: (domain) => reconTools.executeToolSearch(
+        `site:${domain} "192.168." OR "10." OR "172." OR "127.0.0"`,
+        'Internal IPs'
+    ),
+    serverInfo: (domain) => reconTools.executeToolSearch(
+        `site:${domain} intitle:"index of" OR intext:"server at" OR intext:"powered by"`,
+        'Server Information'
+    ),
+    networkDevices: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:cisco OR inurl:router OR inurl:firewall OR inurl:switch`,
+        'Network Devices'
+    )
+};
+
+const techStackDorks = {
+    frameworks: (domain) => reconTools.executeToolSearch(
+        `site:${domain} intext:"powered by" OR intext:"built with" OR intext:"running on"`,
+        'Framework Detection'
+    ),
+    
+    cmsVersion: (domain) => reconTools.executeToolSearch(
+        `site:${domain} intext:"wordpress" OR intext:"drupal" OR intext:"joomla" filetype:txt`,
+        'CMS Version'
+    )
+};
+
+const authBypassDorks = {
+    passwordReset: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:reset OR inurl:forgot OR inurl:recover`,
+        'Password Reset'
+    ),
+    
+    authEndpoints: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:login OR inurl:signin OR inurl:sso`,
+        'Auth Endpoints'
+    )
+};
+
+const repoLeakDorks = {
+    gitRepos: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:.git OR inurl:.gitignore OR inurl:git-config`,
+        'Git Repositories'
+    ),
+    
+    sourceCode: (domain) => reconTools.executeToolSearch(
+        `site:${domain} ext:php OR ext:asp OR ext:jsp`,
+        'Source Code'
+    )
+};
+
+const fileTypeDorks = {
+    backupFiles: (domain) => reconTools.executeToolSearch(
+        `site:${domain} ext:bak OR ext:old OR ext:backup OR ext:~ OR ext:swp OR ext:save`,
+        'Backup Files'
+    ),
+    configFiles: (domain) => reconTools.executeToolSearch(
+        `site:${domain} ext:xml OR ext:conf OR ext:cnf OR ext:reg OR ext:inf OR ext:rdp OR ext:cfg OR ext:txt OR ext:ora OR ext:ini OR ext:env`,
+        'Config Files'
+    ),
+    databaseFiles: (domain) => reconTools.executeToolSearch(
+        `site:${domain} ext:sql OR ext:dbf OR ext:mdb OR ext:db OR ext:sqlite`,
+        'Database Files'
+    ),
+    logFiles: (domain) => reconTools.executeToolSearch(
+        `site:${domain} ext:log OR ext:logs OR ext:properties OR ext:stdout OR ext:stderr`,
+        'Log Files'
+    )
+};
+
+const securityMisconfigDorks = {
+    exposedEnvFiles: (domain) => reconTools.executeToolSearch(
+        `site:${domain} filename:.env OR filename:.npmrc OR filename:.dockerenv`,
+        'Environment Files'
+    ),
+    exposedGitlab: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:.gitlab OR filename:gitlab-ci.yml`,
+        'GitLab Exposure'
+    ),
+    dockerFiles: (domain) => reconTools.executeToolSearch(
+        `site:${domain} filename:dockerfile OR filename:docker-compose.yml`,
+        'Docker Files'
+    ),
+    kubernetesFiles: (domain) => reconTools.executeToolSearch(
+        `site:${domain} filename:deployment.yaml OR filename:service.yaml`,
+        'Kubernetes Files'
+    )
+};
+
+const apiDiscoveryDorks = {
+    swaggerDocs: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:swagger OR inurl:api-docs OR inurl:openapi`,
+        'API Documentation'
+    ),
+    graphqlEndpoints: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:graphql OR inurl:graphiql`,
+        'GraphQL Endpoints'
+    ),
+    apiKeys: (domain) => reconTools.executeToolSearch(
+        `site:${domain} "api_key" OR "apikey" OR "client_secret" OR "api_token"`,
+        'API Keys'
+    )
+};
+
+const devEnvironmentDorks = {
+    testEndpoints: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:test OR inurl:demo OR inurl:dev OR inurl:staging`,
+        'Test Endpoints'
+    ),
+    debugEndpoints: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:debug OR inurl:console OR inurl:trace`,
+        'Debug Endpoints'
+    ),
+    devTools: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:adminer OR inurl:phpMyAdmin OR inurl:webmin`,
+        'Development Tools'
+    )
+};
+
+const cloudStorageDorks = {
+    s3Buckets: (domain) => reconTools.executeToolSearch(
+        `site:s3.amazonaws.com "${domain}"`,
+        'S3 Buckets'
+    ),
+    azureStorage: (domain) => reconTools.executeToolSearch(
+        `site:blob.core.windows.net "${domain}"`,
+        'Azure Storage'
+    ),
+    googleStorage: (domain) => reconTools.executeToolSearch(
+        `site:storage.googleapis.com "${domain}"`,
+        'Google Storage'
+    ),
+    digitalOceanSpaces: (domain) => reconTools.executeToolSearch(
+        `site:digitaloceanspaces.com "${domain}"`,
+        'DigitalOcean Spaces'
+    ),
+    awsExposure: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:s3.amazonaws.com OR inurl:amazonaws.com/uploads`,
+        'AWS Exposure'
+    ),
+    azureStorage: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:blob.core.windows.net OR inurl:azureedge.net`,
+        'Azure Storage'
+    ),
+    gcpStorage: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:storage.googleapis.com OR inurl:firebasestorage.googleapis.com`,
+        'GCP Storage'
+    )
+};
+
+const authenticationDorks = {
+    passwordReset: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:reset OR inurl:forgot OR inurl:password OR inurl:recover`,
+        'Password Reset'
+    ),
+    ssoEndpoints: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:oauth OR inurl:saml OR inurl:openid OR inurl:sso`,
+        'SSO Endpoints'
+    ),
+    registrationPages: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:register OR inurl:signup OR inurl:join`,
+        'Registration Pages'
+    )
+};
+
+const errorDorks = {
+    stackTraces: (domain) => reconTools.executeToolSearch(
+        `site:${domain} "stack trace" OR "syntax error" OR "runtime error"`,
+        'Stack Traces'
+    ),
+    debugLogs: (domain) => reconTools.executeToolSearch(
+        `site:${domain} ext:log OR ext:txt intext:"error" OR intext:"debug" OR intext:"warning"`,
+        'Debug Logs'
+    ),
+    errorPages: (domain) => reconTools.executeToolSearch(
+        `site:${domain} intext:"fatal error" OR "warning" OR "undefined" OR "cannot find"`,
+        'Error Pages'
+    )
+};
+
+const sensitiveFilesDorks = {
+    backupFiles: (domain) => reconTools.executeToolSearch(
+        `site:${domain} ext:bak OR ext:backup OR ext:old OR ext:sql OR ext:zip OR ext:tar OR ext:gz`,
+        'Backup Files'
+    ),
+    configFiles: (domain) => reconTools.executeToolSearch(
+        `site:${domain} ext:xml OR ext:conf OR ext:config OR ext:cfg OR ext:ini OR ext:env OR ext:yml`,
+        'Config Files'
+    ),
+    documentFiles: (domain) => reconTools.executeToolSearch(
+        `site:${domain} ext:doc OR ext:docx OR ext:pdf OR ext:xls OR ext:xlsx OR ext:txt`,
+        'Document Files'
+    )
+};
+
+const devTestDorks = {
+    testAccounts: (domain) => reconTools.executeToolSearch(
+        `site:${domain} intext:"test account" OR "demo account" OR "sample account"`,
+        'Test Accounts'
+    ),
+    stagingServers: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:dev. OR inurl:stage. OR inurl:test. OR inurl:demo.`,
+        'Staging Servers'
+    ),
+    devComments: (domain) => reconTools.executeToolSearch(
+        `site:${domain} intext:"TODO" OR "FIXME" OR "HACK" OR "XXX" OR "DEBUG"`,
+        'Developer Comments'
+    )
+};
+
+const apiAuthDorks = {
+    apiKeys: (domain) => reconTools.executeToolSearch(
+        `site:${domain} "api_key" OR "apikey" OR "client_secret" OR "api_token" OR "access_key"`,
+        'API Keys'
+    ),
+    jwtTokens: (domain) => reconTools.executeToolSearch(
+        `site:${domain} "eyJ0eXAiOiJKV1QiLCJhbG" OR "eyJhbGciOiJIUzI1NiJ9"`,
+        'JWT Tokens'
+    ),
+    oauthTokens: (domain) => reconTools.executeToolSearch(
+        `site:${domain} "access_token" OR "authorization_token" OR "bearer" filetype:log OR filetype:env`,
+        'OAuth Tokens'
+    )
+};
+
+const versionControlDorks = {
+    gitExposure: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:.git OR inurl:.gitignore OR inurl:/.git/config`,
+        'Git Exposure'
+    ),
+    svnExposure: (domain) => reconTools.executeToolSearch(
+        `site:${domain} inurl:.svn OR inurl:/.svn/entries`,
+        'SVN Exposure'
+    ),
+    sourceCode: (domain) => reconTools.executeToolSearch(
+        `site:${domain} ext:php OR ext:asp OR ext:aspx OR ext:jsp OR ext:js OR ext:py`,
+        'Source Code'
+    )
+};
+
+const databaseDorks = {
+    sqlDumps: (domain) => reconTools.executeToolSearch(
+        `site:${domain} ext:sql OR ext:dump OR ext:bak intext:INSERT INTO`,
+        'SQL Dumps'
+    ),
+    dbFiles: (domain) => reconTools.executeToolSearch(
+        `site:${domain} ext:db OR ext:sqlite OR ext:sqlite3 OR ext:mdb`,
+        'Database Files'
+    ),
+    backupArchives: (domain) => reconTools.executeToolSearch(
+        `site:${domain} ext:backup OR ext:bak OR ext:old OR ext:zip OR ext:rar OR ext:7z`,
+        'Backup Archives'
+    )
+};
+
+Object.entries(toolFunctions).forEach(([name, fn]) => {
+    window[name] = fn;
+});
+
+window.searchCVE = () => reconTools.searchCVE();
+
+const whoisLookup = () => {
+    const domain = reconTools.getDomain();
+    if (!domain) return;
+    window.open(`https://who.is/whois/${domain}`, '_blank');
+};
+
+const dnsInfo = () => {
+    const domain = reconTools.getDomain();
+    if (!domain) return;
+    window.open(`https://securitytrails.com/domain/${domain}/dns`, '_blank');
+};
+
+const checkSSL = () => {
+    const domain = reconTools.getDomain();
+    if (!domain) return;
+    window.open(`https://www.ssllabs.com/ssltest/analyze.html?d=${domain}`, '_blank');
+};
+
+const reverseIP = () => {
+    const domain = reconTools.getDomain();
+    if (!domain) return;
+    window.open(`https://viewdns.info/reverseip/?host=${domain}`, '_blank');
+};
+
+const asnLookup = () => {
+    const domain = reconTools.getDomain();
+    if (!domain) return;
+    window.open(`https://bgp.he.net/dns/${domain}`, '_blank');
+};
+
+const robotsTxt = () => {
+    const domain = reconTools.getDomain();
+    if (!domain) return;
+    window.open(`https://${domain}/robots.txt`, '_blank');
+};
+
