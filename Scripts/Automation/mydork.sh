@@ -1,12 +1,10 @@
 #!/bin/bash
 
-############################################################################
-# The OSINT project, the main idea of which is to collect all the possible #
-# Google dorks search combinations and to find the information about the   #
-# specific web-site: common admin panels, the widespread file types and    #
-# path traversal. The 100% automated.					   #
-############################################################################
-
+################################################################################
+# Google Dorking Automation Script                                             #
+# Dynamically fetches all dork files from the Proviesec/google-dorks repository #
+# and searches for vulnerabilities in a given domain using Google.             #
+################################################################################
 # Variables
 ## General
 version="3.171"			## Version Year.Day
@@ -27,15 +25,59 @@ sponsorstartdate=`echo $onlinevar | awk -F\" '{print $6}'`	# Sponsor start date
 sponsorenddate=`echo $onlinevar | awk -F\" '{print $8}'`	# Sponsor end date
 sponsordata=`echo $onlinevar | awk -F\" '{print $10}'`		# Sponsor data to be presented
 
-## Colors
-RED=`echo -n '\e[00;31m'`;
-RED_BOLD=`echo -n '\e[01;31m'`;
-GREEN=`echo -n '\e[00;32m'`;
-GREEN_BOLD=`echo -n '\e[01;32m'`;
-ORANGE=`echo -n '\e[00;33m'`;
-BLUE=`echo -n '\e[01;36m'`;
-WHITE=`echo -n '\e[00;37m'`;
-CLEAR_FONT=`echo -n '\e[00m'`;
+# Variables
+repo_url="https://raw.githubusercontent.com/Proviesec/google-dorks/main"
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[1;34m'
+YELLOW='\033[1;33m'
+WHITE='\033[0;37m'
+CLEAR_FONT='\033[0m'
+
+# Check if domain is provided
+if [ -z "$domain" ]; then
+    echo -e "${RED}[!] Domain is required.${CLEAR_FONT}"
+    echo -e "${YELLOW}Usage: $0 <domain> [proxy_url] [proxy_port]${CLEAR_FONT}"
+    exit 1
+fi
+
+# Create output folder
+mkdir -p "$output_folder"
+
+# Function to fetch all dork files
+fetch_dork_files() {
+    echo -e "${BLUE}[*] Fetching all dork files from repository...${CLEAR_FONT}"
+    file_list=$(curl -s https://api.github.com/repos/Proviesec/google-dorks/contents | grep 'name' | grep '\.txt' | awk -F '"' '{print $4}')
+    for file in $file_list; do
+        echo -e "${BLUE}[*] Downloading: $file...${CLEAR_FONT}"
+        curl -s "$repo_url/$file" -o "$output_folder/$file"
+    done
+}
+
+# Fetch all dork files
+fetch_dork_files
+
+# Process each dork file
+for dork_file in "$output_folder"/*.txt; do
+    echo -e "${GREEN}[+] Processing dork file: $(basename "$dork_file")${CLEAR_FONT}"
+    while IFS= read -r dork; do
+        if [ -n "$dork" ]; then
+            echo -e "${YELLOW}[+] Searching with dork: $dork${CLEAR_FONT}"
+            search_url="https://www.google.com/search?q=site:$domain+$dork"
+
+            # Handle proxy if provided
+            if [ -n "$proxyurl" ] && [ -n "$proxyport" ]; then
+                curl -s -x "$proxyurl:$proxyport" "$search_url" >>"$output_folder/$domain-results.txt"
+            else
+                curl -s "$search_url" >>"$output_folder/$domain-results.txt"
+            fi
+        fi
+    done <"$dork_file"
+done
+
+echo -e "${GREEN}[+] Dorking completed. Results saved in $output_folder/$domain-results.txt${CLEAR_FONT}"
 
 ## Login pages
 lpadmin="inurl:admin"
