@@ -1,7 +1,4 @@
-![cover](/cover.png)
-
-![Contributions Welcome](https://img.shields.io/badge/Contributions-welcome-blue.svg)
-
+[](https://github.com/Awesome-Library/awesome-design-systems/blob/master/cover.png)![image](https://github.com/user-attachments/assets/526e5f7b-ffb5-4c50-aee9-f7cee65361dc)
 Know a resource that isn't listed below? Feel free to create a new [pull request](https://github.com/alexpate/awesome-design-systems/pulls).
 
 > A design system is a collection of documentation on principles and best practices, that helps guide a team to build digital products. They are often embodied in UI libraries and pattern libraries, but can extend to include guides on other areas such as 'Voice and Tone'.
