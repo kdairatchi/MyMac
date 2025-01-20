@@ -1,0 +1,11 @@
+argparse
+tldextract
+google
+fake_useragent
+beautifulsoup4
+cfscrape
+nmap-python
+requests
+urllib3
+webtech
+six
