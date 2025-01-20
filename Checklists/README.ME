@@ -54,8 +54,7 @@ We like to keep our Markdown files as uniform as possible. So if you submit a PR
 - [kuromatae](https://github.com/kuromatae)
 - [And many more ...](https://github.com/EdOverflow/bugbounty-cheatsheet/graphs/contributors)
 
-## <a name="Recon_on_wildcard_domain">Recon on wildcard domain</a>  
-This recon process is from [0xpatrick subdomain enumeration workflow](https://0xpatrik.com/subdomain-enumeration-2019/)
+
 
 - [ ] Run Amass
 - [ ] Run Subfinder
@@ -66,7 +65,7 @@ This recon process is from [0xpatrick subdomain enumeration workflow](https://0x
 - [ ] Run massdns
 
 
-## <a name="Single_domain">Single Domain</a>  
+<a name="Single_domain">Single Domain</a>  
 
 ### Scanning  
 
@@ -87,7 +86,7 @@ This recon process is from [0xpatrick subdomain enumeration workflow](https://0x
 - [ ] Github  
 - [ ] OSINT     
 
-### <a name="Information">Information Gathering</a>
+<a name="Information">Information Gathering</a>
 - [ ] Manually explore the site  
 - [ ] Spider/crawl for missed or hidden content  
 - [ ] Check for files that expose content, such as robots.txt, sitemap.xml, .DS_Store  
@@ -105,7 +104,7 @@ This recon process is from [0xpatrick subdomain enumeration workflow](https://0x
 - [ ] Identify Debug parameters  
 
 
-### <a name="Configuration">Configuration Management</a>
+<a name="Configuration">Configuration Management</a>
 
 - [ ] Check for commonly used application and administrative URLs  
 - [ ] Check for old, backup and unreferenced files  
@@ -117,7 +116,7 @@ This recon process is from [0xpatrick subdomain enumeration workflow](https://0x
 - [ ] Check for sensitive data in client-side code (e.g. API keys, credentials)  
 
 
-### <a name="Transmission">Secure Transmission</a>
+<a name="Transmission">Secure Transmission</a>
 
 - [ ] Check SSL Version, Algorithms, Key length  
 - [ ] Check for Digital Certificate Validity (Duration, Signature and CN)  
@@ -128,7 +127,7 @@ This recon process is from [0xpatrick subdomain enumeration workflow](https://0x
 
 
 
-### <a name="Authentication">Authentication</a>
+<a name="Authentication">Authentication</a>
 - [ ] Test for user enumeration  
 - [ ] Test for authentication bypass  
 - [ ] Test for bruteforce protection  
@@ -148,7 +147,7 @@ This recon process is from [0xpatrick subdomain enumeration workflow](https://0x
 
 
 
-### <a name="Session">Session Management</a>
+<a name="Session">Session Management</a>
 - [ ] Establish how session management is handled in the application (eg, tokens in cookies, token in URL)  
 - [ ] Check session tokens for cookie flags (httpOnly and secure)  
 - [ ] Check session cookie scope (path and domain)  
@@ -165,7 +164,7 @@ This recon process is from [0xpatrick subdomain enumeration workflow](https://0x
 
 
 
-### <a name="Authorization">Authorization</a>
+<a name="Authorization">Authorization</a>
 - [ ] Test for path traversal  
 - [ ] Test for bypassing authorization schema  
 - [ ] Test for vertical Access control problems (a.k.a. Privilege Escalation)  
@@ -173,7 +172,7 @@ This recon process is from [0xpatrick subdomain enumeration workflow](https://0x
 - [ ] Test for missing authorization  
 
 
-### <a name="Validation">Data Validation</a>
+<a name="Validation">Data Validation</a>
 - [ ] Test for Reflected Cross Site Scripting  
 - [ ] Test for Stored Cross Site Scripting  
 - [ ] Test for DOM based Cross Site Scripting  
@@ -206,14 +205,14 @@ This recon process is from [0xpatrick subdomain enumeration workflow](https://0x
 - [ ] Test for Mass Assignment  
 - [ ] Test for NULL/Invalid Session Cookie  
 
-### <a name="Denial">Denial of Service</a>
+<a name="Denial">Denial of Service</a>
 - [ ] Test for anti-automation  
 - [ ] Test for account lockout  
 - [ ] Test for HTTP protocol DoS  
 - [ ] Test for SQL wildcard DoS  
 
 
-### <a name="Business">Business Logic</a>
+<a name="Business">Business Logic</a>
 - [ ] Test for feature misuse  
 - [ ] Test for lack of non-repudiation  
 - [ ] Test for trust relationships  
@@ -221,7 +220,7 @@ This recon process is from [0xpatrick subdomain enumeration workflow](https://0x
 - [ ] Test segregation of duties  
 
 
-### <a name="Cryptography">Cryptography</a>
+<a name="Cryptography">Cryptography</a>
 - [ ] Check if data which should be encrypted is not  
 - [ ] Check for wrong algorithms usage depending on context  
 - [ ] Check for weak algorithms usage  
@@ -229,7 +228,7 @@ This recon process is from [0xpatrick subdomain enumeration workflow](https://0x
 - [ ] Check for randomness functions  
 
 
-### <a name="File">Risky Functionality - File Uploads</a>
+<a name="File">Risky Functionality - File Uploads</a>
 - [ ] Test that acceptable file types are whitelisted  
 - [ ] Test that file size limits, upload frequency and total file counts are defined and are enforced  
 - [ ] Test that file contents match the defined file type  
@@ -240,7 +239,7 @@ This recon process is from [0xpatrick subdomain enumeration workflow](https://0x
 - [ ] Test that files and other media are integrated with the authentication and authorisation schemas  
 
 
-### <a name="Card">Risky Functionality - Card Payment</a>
+<a name="Card">Risky Functionality - Card Payment</a>
 - [ ] Test for known vulnerabilities and configuration issues on Web Server and Web Application  
 - [ ] Test for default or guessable password  
 - [ ] Test for non-production data in live environment, and vice-versa  
@@ -254,7 +253,7 @@ This recon process is from [0xpatrick subdomain enumeration workflow](https://0x
 - [ ] Test for CSRF  
 
 
-### <a name="HTML">HTML 5</a>
+<a name="HTML">HTML 5</a>
 - [ ] Test Web Messaging  
 - [ ] Test for Web Storage SQL injection  
 - [ ] Check CORS implementation  
