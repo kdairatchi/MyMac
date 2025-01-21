@@ -1,4 +1,5 @@
-# Awesome Shodan Search Queries [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+# Awesome Shodan Search Queries 
+![image](https://github.com/user-attachments/assets/fa9d6cf7-5ebd-4d98-b1fa-d432a1594391)
 
 
 Over time, I've collected an assortment of interesting, funny, and depressing search queries to plug into [Shodan](https://www.shodan.io/), the ([literal](https://www.vice.com/en_uk/article/9bvxmd/shodan-exposes-the-dark-side-of-the-net)) internet search engine. Some return facepalm-inducing results, while others return serious and/or ancient vulnerabilities in the wild.
