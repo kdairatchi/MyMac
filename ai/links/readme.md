@@ -11,6 +11,8 @@
 [Genrate Pitures](https://deepai.org/)
 
 
+[Catorized AI List](https://www.aixploria.com/en/ultimate-list-ai/)
+
 
 [Free Ai Tools](https://www.insidr.ai/best-free-ai-tools/)
 
