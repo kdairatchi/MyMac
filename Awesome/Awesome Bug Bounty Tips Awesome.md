@@ -1,6 +1,213 @@
 # Awesome Bug Bounty Tips [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 A curated list of amazingly bug bounty tips from security researchers around the world.
+Here’s a detailed **Awesome Scripting and Automation Tools** list designed to focus on bug bounty automation. It's GitHub-ready, beginner-friendly, and curated with actionable scripts and tools for effective automation.
 
+---
+
+# **Awesome Bug Bounty Scripting & Automation Tools**
+
+> A curated list of scripts, tools, and techniques to automate bug bounty and cybersecurity workflows.
+
+---
+
+## **Table of Contents**
+
+1. [Introduction](#introduction)
+2. [Environment Setup](#environment-setup)
+3. [Automation Tools](#automation-tools)
+4. [Essential Scripts](#essential-scripts)
+5. [Automated Recon](#automated-recon)
+6. [Reporting Automation](#reporting-automation)
+7. [Learning Resources](#learning-resources)
+
+---
+
+## **1. Introduction**
+
+Bug hunting often involves repetitive tasks like subdomain enumeration, vulnerability scanning, and reporting. Automating these tasks helps to:
+
+- Save time and effort.
+- Focus on manual, high-value targets.
+- Reduce human errors.
+
+This list focuses on tools and scripts that streamline automation while keeping the process beginner-friendly.
+
+---
+
+## **2. Environment Setup**
+
+### Install Essential Tools
+Install core tools for scripting and automation:
+```bash
+sudo apt update && sudo apt install -y git curl jq python3 python3-pip golang
+```
+
+### Directory Structure
+Organize your workspace:
+```bash
+mkdir -p ~/bugbounty/{scripts,tools,results,reports}
+```
+
+### Install Common Tools
+```bash
+# Subdomain Enumeration
+go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+
+# HTTP Probing
+go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
+
+# Vulnerability Scanning
+go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+```
+
+---
+
+## **3. Automation Tools**
+
+### **Recon Tools**
+1. **[Subfinder](https://github.com/projectdiscovery/subfinder)** - Passive subdomain enumeration.
+2. **[Amass](https://github.com/OWASP/Amass)** - Active reconnaissance.
+3. **[Httpx](https://github.com/projectdiscovery/httpx)** - Probe live hosts.
+
+### **Vulnerability Scanning Tools**
+1. **[Nuclei](https://github.com/projectdiscovery/nuclei)** - Template-based scanning.
+2. **[Dalfox](https://github.com/hahwul/dalfox)** - XSS scanning tool.
+3. **[SQLMap](https://github.com/sqlmapproject/sqlmap)** - SQL injection automation.
+
+### **Content Discovery**
+1. **[FFuF](https://github.com/ffuf/ffuf)** - Fuzzing tool.
+2. **[Dirsearch](https://github.com/maurosoria/dirsearch)** - Directory brute-forcing.
+
+---
+
+## **4. Essential Scripts**
+
+### **Template for a Recon Script**
+```bash
+#!/bin/bash
+# Recon Automation Script
+
+target=$1
+output_dir="results/$target"
+
+mkdir -p $output_dir
+
+echo "[+] Enumerating subdomains for $target"
+subfinder -d $target -silent | anew $output_dir/subdomains.txt
+
+echo "[+] Probing live subdomains"
+cat $output_dir/subdomains.txt | httpx -silent | anew $output_dir/live_subdomains.txt
+
+echo "[+] Scanning for vulnerabilities"
+nuclei -l $output_dir/live_subdomains.txt -t vulnerabilities/ -o $output_dir/vulnerabilities.txt
+```
+
+### **Git Sync Automation**
+```bash
+#!/bin/bash
+# Auto-sync a GitHub repository
+
+repo_dir="/path/to/repo"
+cd $repo_dir
+
+echo "[+] Pulling latest changes..."
+git pull origin main
+
+echo "[+] Running automation scripts..."
+./scripts/automate.sh
+
+echo "[+] Pushing updates..."
+git add .
+git commit -m "Automated updates"
+git push origin main
+```
+
+### **Health Check Script**
+```bash
+#!/bin/bash
+# Server Health Check
+
+hosts=("host1.com" "host2.com" "host3.com")
+
+for host in "${hosts[@]}"; do
+  if ping -c 1 $host &> /dev/null; then
+    echo "[+] $host is reachable"
+  else
+    echo "[-] $host is unreachable"
+  fi
+done
+```
+
+---
+
+## **5. Automated Recon**
+
+### **Full Recon Pipeline**
+```bash
+#!/bin/bash
+# Full Recon Automation Script
+
+target=$1
+output_dir="recon_results/$target"
+
+mkdir -p $output_dir
+
+echo "[+] Enumerating subdomains"
+subfinder -d $target -silent | anew $output_dir/subdomains.txt
+amass enum -passive -d $target | anew $output_dir/subdomains.txt
+
+echo "[+] Probing live subdomains"
+cat $output_dir/subdomains.txt | httpx -silent | anew $output_dir/live_hosts.txt
+
+echo "[+] Fuzzing directories"
+ffuf -w wordlist.txt -u https://FUZZ -t 50 -o $output_dir/fuzzing.txt
+
+echo "[+] Scanning for vulnerabilities"
+nuclei -l $output_dir/live_hosts.txt -t vulnerabilities/ -o $output_dir/vulnerabilities.txt
+```
+
+---
+
+## **6. Reporting Automation**
+
+### **Generate Markdown Report**
+```bash
+#!/bin/bash
+# Markdown Report Generator
+
+target=$1
+output_file="reports/$target.md"
+
+echo "# Vulnerability Report for $target" > $output_file
+echo "## Reconnaissance" >> $output_file
+echo "- Subdomains: $(wc -l recon_results/$target/subdomains.txt)" >> $output_file
+echo "- Live Hosts: $(wc -l recon_results/$target/live_hosts.txt)" >> $output_file
+
+echo "## Vulnerabilities" >> $output_file
+cat recon_results/$target/vulnerabilities.txt >> $output_file
+```
+
+---
+
+## **7. Learning Resources**
+
+### **Documentation**
+- [ProjectDiscovery Docs](https://docs.projectdiscovery.io/)
+- [OWASP Testing Guide](https://owasp.org/www-project-web-security-testing-guide/)
+
+### **Practice Labs**
+- [PortSwigger Web Security Academy](https://portswigger.net/web-security)
+- [TryHackMe](https://tryhackme.com/)
+- [HackTheBox](https://hackthebox.com/)
+
+---
+
+### **Contribute**
+Feel free to fork this repo, add your custom scripts, and submit pull requests!
+
+---
+
+This **Awesome Scripting and Automation Tools** list is designed to grow and adapt. Suggestions and contributions are always welcome! 🚀
 ## Why?
 It is hard to look for Bug Bounty Tips from different social media websites. This repo helps to keep all these scattered tips at one place.
 
