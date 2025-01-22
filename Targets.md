@@ -7,3 +7,10 @@
 
 
 [Hackenproof🤖](https://hackenproof.com/?__cf_chl_tk=7cbWnpdey0SxTgfxJAfcHaxJ5omth8uLhJuAX5BH6ao-1737349814-1.0.1.1-7jHpig_QWICjU1kUewJUY6AD1a0Hjtw7XGJuFGWRvQ4)
+
+
+[Firebounty🔥](https://firebounty.com/)
+
+
+[Raw Domains BB🫡](https://raw.githubusercontent.com/arkadiyt/bounty-targets-data/refs/heads/main/data/domains.txt)
+
