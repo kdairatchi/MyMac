@@ -1,0 +1,5 @@
+password = hackthebox3705 
+telegram_bot = selfinvestbug123_bot  ##changeme 
+telegram_id = 123456
+dns_server = myserver.xyz
+xss_hunter = https://yourown.xss.ht/
