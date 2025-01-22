@@ -1347,6 +1347,388 @@ This expanded list includes **even more actionable insights** for scripting, aut
 
 ---
 
+
+## GitHub has blocked your push because it detected a secret (like a GitHub Personal Access Token) in your repository. To resolve this and safeguard your repository:
+
+---
+
+### **Steps to Fix and Prevent Issues**
+
+#### 1. **Remove Secrets from History**
+   - **Identify the Secret:**
+     GitHub tells you where the secret is located, e.g., `MyMac/Automated-Scanner/tools/.tokens:1`. Open the file and remove the secret.
+   - **Amend the Commit:**
+     After removing the secret, re-commit the changes:
+     ```bash
+     git rm --cached MyMac/Automated-Scanner/tools/.tokens
+     git commit --amend --no-edit
+     git push origin main --force
+     ```
+
+#### 2. **Use `git filter-repo` to Remove Secrets from Entire History**
+   If the secret exists in older commits:
+   - **Install `git-filter-repo`:**
+     ```bash
+     pip install git-filter-repo
+     ```
+   - **Remove the Secret:**
+     Replace `<path>` with the file path containing the secret:
+     ```bash
+     git filter-repo --path <path> --invert-paths
+     ```
+   - **Force Push Clean History:**
+     ```bash
+     git push origin main --force
+     ```
+
+---
+
+### **Set Up Best Practices to Prevent Future Issues**
+
+#### 3. **Enable GitHub Push Protection**
+   GitHub will block pushes containing sensitive information by default if push protection is enabled. Ensure it's active in your repository settings:
+   1. Go to **Settings > Code Security and Analysis > Push Protection**.
+   2. Enable **Push Protection**.
+
+#### 4. **Use `.gitignore` to Prevent Secrets from Being Committed**
+   Add paths of sensitive files to a `.gitignore` file:
+   ```plaintext
+   # Ignore token files
+   *.tokens
+   *.env
+   ```
+   Then stage and commit the `.gitignore` file:
+   ```bash
+   git add .gitignore
+   git commit -m "Add .gitignore to prevent committing sensitive files"
+   git push origin main
+   ```
+
+#### 5. **Scan for Secrets Locally**
+   Use tools like [GitGuardian CLI](https://www.gitguardian.com/ggshield) to scan your commits for secrets before pushing:
+   ```bash
+   ggshield secret scan pre-commit
+   ```
+
+#### 6. **Replace Existing Tokens**
+   If a token was exposed, revoke it and create a new one:
+   - **Revoke the token** via GitHub's **Settings > Developer Settings > Personal Access Tokens**.
+   - **Create a new token** and securely store it in environment variables or secret management tools like AWS Secrets Manager or HashiCorp Vault.
+
+#### 7. **Use `.env` Files for Secrets**
+   Store secrets in `.env` files and load them dynamically into your scripts using tools like `dotenv`. Example `.env` file:
+   ```plaintext
+   GITHUB_TOKEN=your_token_here
+   ```
+   Add `.env` to `.gitignore`:
+   ```plaintext
+   .env
+   ```
+
+---
+
+### **Push Again After Fixing Issues**
+   - After cleaning the history and ensuring no secrets remain, retry your push:
+     ```bash
+     git push origin main
+     ```
+### **Comprehensive GitHub Solutions and Best Practices**
+
+Here’s a detailed guide to handling common Git issues, maintaining repository hygiene, securing your code, and improving workflows for professional-grade repositories.
+
+---
+
+### **1. General Git and GitHub Commands**
+
+#### **Clone a Repository**
+```bash
+git clone https://github.com/username/repo.git
+```
+
+#### **Create and Push a New Branch**
+```bash
+git checkout -b feature-branch
+git push origin feature-branch
+```
+
+#### **Merge Branches**
+```bash
+git checkout main
+git merge feature-branch
+git push origin main
+```
+
+#### **Stash Uncommitted Changes**
+```bash
+git stash
+# Apply the stash later
+git stash pop
+```
+
+---
+
+### **2. Fixing Common Git Issues**
+
+#### **Remove Untracked Files**
+```bash
+git clean -f -d
+```
+
+#### **Undo the Last Commit**
+```bash
+git reset --soft HEAD~1  # Keeps changes staged
+git reset --hard HEAD~1  # Discards changes completely
+```
+
+#### **Resolve Merge Conflicts**
+1. Open conflicted files.
+2. Edit the conflict markers (`<<<<<<`, `======`, `>>>>>>`).
+3. Stage the resolved files:
+   ```bash
+   git add <file>
+   ```
+4. Continue the merge:
+   ```bash
+   git commit
+   ```
+
+#### **Fix Detached HEAD**
+```bash
+git checkout <branch>
+```
+
+---
+
+### **3. Managing Secrets**
+
+#### **Prevent Secrets in Commits**
+Add sensitive files to `.gitignore`:
+```plaintext
+.env
+*.key
+*.pem
+*.tokens
+```
+
+#### **Scan Commits for Secrets**
+Use tools like [TruffleHog](https://github.com/trufflesecurity/trufflehog):
+```bash
+trufflehog --regex --entropy=True https://github.com/username/repo.git
+```
+
+#### **Replace Leaked Secrets**
+If a secret is exposed:
+1. **Revoke the token** immediately.
+2. Use `git filter-repo` to remove it:
+   ```bash
+   git filter-repo --path-sensitive-file --invert-paths
+   ```
+3. Push the cleaned history:
+   ```bash
+   git push origin main --force
+   ```
+
+---
+
+### **4. Improving Repository Security**
+
+#### **Enable 2FA for Your GitHub Account**
+1. Go to **Settings > Security > Two-factor authentication**.
+2. Follow the prompts to set up 2FA.
+
+#### **Set Up Branch Protection**
+1. Go to **Settings > Branches > Add branch protection rule**.
+2. Enable:
+   - Require pull request reviews.
+   - Require status checks.
+   - Restrict who can push.
+
+#### **Enable Secret Scanning**
+1. Go to **Settings > Security & Analysis**.
+2. Enable **Secret Scanning** and **Push Protection**.
+
+---
+
+### **5. Automating Workflows**
+
+#### **Using GitHub Actions**
+Create a `.github/workflows/main.yml` file:
+```yaml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Run Tests
+        run: |
+          npm install
+          npm test
+```
+
+#### **Schedule Automated Tasks**
+Run a workflow daily:
+```yaml
+on:
+  schedule:
+    - cron: "0 0 * * *"
+```
+
+---
+
+### **6. Commit Hygiene**
+
+#### **Write Descriptive Commit Messages**
+Follow the conventional commit format:
+```plaintext
+<type>(<scope>): <short summary>
+
+[optional body]
+
+[optional footer(s)]
+```
+Example:
+```plaintext
+feat(auth): add login endpoint
+fix(auth): resolve token expiration issue
+```
+
+#### **Sign Commits**
+Enable GPG signing for commits:
+```bash
+git config --global user.signingkey <GPG_KEY_ID>
+git config --global commit.gpgsign true
+```
+
+---
+
+### **7. Version Control Best Practices**
+
+#### **Tagging Releases**
+```bash
+git tag -a v1.0.0 -m "Initial release"
+git push origin v1.0.0
+```
+
+#### **Changelog Automation**
+Use [Conventional Changelog](https://github.com/conventional-changelog):
+```bash
+npx conventional-changelog-cli -p angular
+```
+
+---
+
+### **8. Collaboration**
+
+#### **Create a Pull Request**
+1. Push changes:
+   ```bash
+   git push origin feature-branch
+   ```
+2. Go to the repository on GitHub and create a PR.
+
+#### **Review PRs**
+- Use GitHub’s review tools to add comments.
+- Mark a PR as approved or request changes.
+
+---
+
+### **9. Repository Hygiene**
+
+#### **Archive Old Branches**
+Delete merged branches:
+```bash
+git branch -d feature-branch
+git push origin --delete feature-branch
+```
+
+#### **Clean Up Commit History**
+Use rebase for a cleaner history:
+```bash
+git rebase -i HEAD~<number-of-commits>
+```
+
+---
+
+### **10. Advanced Git Commands**
+
+#### **Revert a Specific Commit**
+```bash
+git revert <commit-hash>
+```
+
+#### **Cherry-Pick a Commit**
+```bash
+git cherry-pick <commit-hash>
+```
+
+#### **View Commit History**
+```bash
+git log --oneline --graph --decorate
+```
+
+#### **Show Changes Between Branches**
+```bash
+git diff branch1..branch2
+```
+
+---
+
+### **11. Backup and Restore**
+
+#### **Backup a Repository**
+```bash
+git bundle create repo.bundle --all
+```
+
+#### **Restore from Backup**
+```bash
+git clone repo.bundle
+```
+
+---
+
+### **12. Troubleshooting**
+
+#### **Fix Corrupted Repositories**
+```bash
+git fsck --full
+```
+
+#### **Rebuild the Index**
+```bash
+rm -f .git/index
+git reset
+```
+
+#### **Recover Lost Commits**
+```bash
+git reflog
+git reset --hard <commit-hash>
+```
+
+---
+
+### **13. Resources for Learning**
+- [Pro Git Book](https://git-scm.com/book/en/v2)
+- [GitHub Docs](https://docs.github.com/)
+- [Git Cheatsheet](https://education.github.com/git-cheat-sheet-education.pdf)
+
+---
+
+This list ensures you have everything covered, from basic Git operations to advanced GitHub features, to help you create efficient, secure, and collaborative workflows.
+If you still encounter issues, GitHub’s documentation [here](https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push) provides more details on resolving blocked pushes.
+
+
 ## **30. Learning Resources**
 
 ### **Tutorials**
