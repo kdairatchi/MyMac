@@ -16,4 +16,7 @@
 [Website](https://lostsec.xyz/)
 
 
-[Support This Caring HardWorking Man He Does Alot For The Company...Always Give Back To The Creators,Devs ,Bugbounty Hunters They Can Be Stingy With Intel For Multiple Reason So Big Thanks On Everything Boss, We All Can Grow Together On A Long Journay😇](buymeacoffee.com/coffinxp)
+Support This Caring HardWorking Man He Does Alot For The Company...Always Give Back To The Creators,Devs ,Bugbounty Hunters They Can Be Stingy With Intel For Multiple Reason So Big Thanks On Everything Boss, We All Can Grow Together On A Long Journay😇
+
+
+buymeacoffee.com/coffinxp
