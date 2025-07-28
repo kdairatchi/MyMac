@@ -9,6 +9,24 @@
 # License: Educational Use Only
 # ============================================================================
 
+# ======================= SAFETY & EDUCATIONAL WARNING =======================
+echo -e "${RED}${BOLD}WARNING: This script is for EDUCATIONAL USE ONLY.\n"
+echo -e "Run ONLY in isolated VMs or test environments.\n"
+echo -e "Unauthorized use is strictly prohibited.\n${NC}"
+
+# VM detection (basic)
+if command -v systemd-detect-virt &>/dev/null; then
+    if ! systemd-detect-virt --vm &>/dev/null; then
+        echo -e "${YELLOW}[*] It appears you are NOT running in a VM.\nPlease use a virtual machine for safety.${NC}"
+        read -p "Continue anyway? [y/N]: " answer
+        if [[ ! "$answer" =~ ^[Yy]$ ]]; then
+            echo -e "${RED}Exiting for safety.${NC}"
+            exit 1
+        fi
+    fi
+fi
+# ============================================================================
+
 # Global Configuration
 VERSION="3.0"
 SCRIPT_NAME="Ultimate Red Team Automation"
@@ -119,29 +137,105 @@ check_dependencies() {
     fi
 }
 
+detect_os() {
+    if [[ -f /etc/os-release ]]; then
+        source /etc/os-release
+        OS_NAME="$ID"
+        OS_VERSION="$VERSION_ID"
+        OS_PRETTY="$PRETTY_NAME"
+    elif [[ -f /etc/redhat-release ]]; then
+        OS_NAME="rhel"
+        OS_PRETTY=$(cat /etc/redhat-release)
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        OS_NAME="macos"
+        OS_PRETTY="macOS $(sw_vers -productVersion)"
+    else
+        OS_NAME="unknown"
+        OS_PRETTY="Unknown OS"
+    fi
+    
+    # Check if it's RedHunt OS
+    if [[ "$OS_PRETTY" == *"RedHunt"* ]] || [[ -f /usr/share/redhunt-os/version ]]; then
+        OS_NAME="redhunt"
+        OS_PRETTY="RedHunt OS"
+        log "INFO" "Detected RedHunt OS - Security-focused distribution"
+    fi
+    
+    # Check for snap support
+    if command -v snap &> /dev/null; then
+        SNAP_AVAILABLE=true
+        log "DEBUG" "Snap package manager available"
+    else
+        SNAP_AVAILABLE=false
+    fi
+    
+    log "INFO" "Detected OS: $OS_PRETTY"
+}
+
 install_dependencies() {
     log "INFO" "Installing missing dependencies..."
+    detect_os
     
-    # Detect OS
-    if [[ -f /etc/debian_version ]]; then
-        sudo apt update
-        sudo apt install -y git python3 python3-pip curl wget jq docker.io golang nodejs npm
-        # Install yq for YAML processing
-        sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-        sudo chmod +x /usr/local/bin/yq
-    elif [[ -f /etc/redhat-release ]]; then
-        sudo yum install -y git python3 python3-pip curl wget jq docker golang nodejs npm
-        sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-        sudo chmod +x /usr/local/bin/yq
-    elif [[ "$OSTYPE" == "darwin"* ]]; then
-        if command -v brew &> /dev/null; then
-            brew install git python3 curl wget jq yq docker golang node npm
-        else
-            log "ERROR" "Homebrew not found. Please install Homebrew first."
-        fi
-    else
-        log "WARNING" "Unsupported OS. Please install dependencies manually."
-    fi
+    case $OS_NAME in
+        "ubuntu"|"debian"|"redhunt")
+            sudo apt update
+            sudo apt install -y git python3 python3-pip curl wget jq docker.io golang nodejs npm \
+                               build-essential cmake make gcc g++ libssl-dev pkg-config \
+                               net-tools nmap masscan gobuster nikto dirb hashcat john \
+                               metasploit-framework sqlmap wireshark tcpdump
+            
+            # Install yq for YAML processing
+            sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+            sudo chmod +x /usr/local/bin/yq
+            
+            # Install snap packages if available
+            if [[ "$SNAP_AVAILABLE" == "true" ]]; then
+                sudo snap install code --classic 2>/dev/null || true
+                sudo snap install discord 2>/dev/null || true
+                sudo snap install postman 2>/dev/null || true
+            fi
+            
+            # RedHunt OS specific tools
+            if [[ "$OS_NAME" == "redhunt" ]]; then
+                log "INFO" "Installing RedHunt OS specific security tools..."
+                sudo apt install -y zaproxy burpsuite maltego recon-ng theharvester \
+                                   aircrack-ng kismet wifite social-engineer-toolkit \
+                                   beef-xss armitage backdoor-factory veil-framework
+            fi
+            ;;
+        "fedora"|"centos"|"rhel")
+            sudo dnf install -y git python3 python3-pip curl wget jq docker golang nodejs npm \
+                               gcc gcc-c++ make cmake openssl-devel pkg-config \
+                               nmap masscan nikto hashcat john
+            sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+            sudo chmod +x /usr/local/bin/yq
+            ;;
+        "arch")
+            sudo pacman -S --noconfirm git python python-pip curl wget jq docker go nodejs npm \
+                                      gcc make cmake openssl pkg-config \
+                                      nmap masscan nikto hashcat john-jumbo
+            sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+            sudo chmod +x /usr/local/bin/yq
+            ;;
+        "macos")
+            if command -v brew &> /dev/null; then
+                brew install git python3 curl wget jq yq docker golang node npm \
+                           nmap masscan nikto hashcat john
+            else
+                log "ERROR" "Homebrew not found. Please install Homebrew first."
+                return 1
+            fi
+            ;;
+        *)
+            log "WARNING" "Unsupported OS: $OS_NAME. Please install dependencies manually."
+            return 1
+            ;;
+    esac
+    
+    # Install Python security libraries
+    pip3 install --user requests beautifulsoup4 lxml colorama termcolor pycryptodome \
+                        scapy netaddr python-nmap dnspython pexpect paramiko \
+                        impacket bloodhound py2neo neo4j-driver
 }
 
 init_config() {
@@ -1463,15 +1557,16 @@ show_main_menu() {
         echo -e "3.  ${BLUE}Command & Control Frameworks${NC}"
         echo -e "4.  ${BLUE}Purple Team Operations${NC}"
         echo -e "5.  ${BLUE}Security Tools Management${NC}"
-        echo -e "6.  ${BLUE}Comprehensive Cheatsheet${NC}"
-        echo -e "7.  ${BLUE}MITRE ATT&CK Matrix${NC}"
-        echo -e "8.  ${BLUE}System Information${NC}"
-        echo -e "9.  ${BLUE}Configuration Settings${NC}"
-        echo -e "10. ${BLUE}View Logs${NC}"
-        echo -e "11. ${BLUE}About & Help${NC}"
-        echo -e "12. ${BLUE}Exit${NC}"
+        echo -e "6.  ${BLUE}Utility Tools (DNS/Anti-Forensics)${NC}"
+        echo -e "7.  ${BLUE}Comprehensive Cheatsheet${NC}"
+        echo -e "8.  ${BLUE}MITRE ATT&CK Matrix${NC}"
+        echo -e "9.  ${BLUE}System Information${NC}"
+        echo -e "10. ${BLUE}Configuration Settings${NC}"
+        echo -e "11. ${BLUE}View Logs${NC}"
+        echo -e "12. ${BLUE}About & Help${NC}"
+        echo -e "13. ${BLUE}Exit${NC}"
         echo -e "${GREEN}═══════════════════════════════════════════════════════════════════════════════${NC}"
-        echo -n -e "${YELLOW}Enter your choice [1-12]: ${NC}"
+        echo -n -e "${YELLOW}Enter your choice [1-13]: ${NC}"
         read main_choice
         
         case $main_choice in
@@ -1480,17 +1575,18 @@ show_main_menu() {
             3) show_c2_menu;;
             4) show_purple_team_menu;;
             5) show_tools_menu;;
-            6) show_comprehensive_cheatsheet;;
-            7) show_mitre_attack_matrix;;
-            8) show_system_info;;
-            9) show_config_menu;;
-            10) show_logs_menu;;
-            11) show_about_help;;
-            12) 
+            6) show_utility_tools_menu;;
+            7) show_comprehensive_cheatsheet;;
+            8) show_mitre_attack_matrix;;
+            9) show_system_info;;
+            10) show_config_menu;;
+            11) show_logs_menu;;
+            12) show_about_help;;
+            13) 
                 cleanup_and_exit
                 ;;
             *) 
-                log "ERROR" "Invalid choice. Please enter a number between 1 and 12."
+                log "ERROR" "Invalid choice. Please enter a number between 1 and 13."
                 read -p "Press Enter to continue..."
                 ;;
         esac
@@ -1586,7 +1682,7 @@ show_logs_menu() {
     while true; do
         clear
         echo -e "${GREEN}╔══════════════════════════════════════════════════════════════════════════════╗${NC}"
-        echo -e "${GREEN}║                               LOG VIEWER                                    ║${NC}"
+        echo -e "${GREEN}║                                                             LOG VIEWER                                    ║${NC}"
         echo -e "${GREEN}╚══════════════════════════════════════════════════════════════════════════════╝${NC}"
         echo -e "1. ${BLUE}View Script Logs${NC}"
         echo -e "2. ${BLUE}View Caldera Logs${NC}"
@@ -1777,15 +1873,30 @@ trap 'cleanup_and_exit' EXIT
 
 main() {
     # Initial setup
+    detect_os
     check_root
     check_dependencies
     init_config
     
     # Welcome message
     log "SUCCESS" "Ultimate Red Team Automation v$VERSION started successfully"
+    log "INFO" "Operating System: $OS_PRETTY"
     log "INFO" "Configuration loaded from: $CONFIG_FILE"
     log "INFO" "Tools directory: $TOOLS_DIR"
     log "INFO" "Log file: $LOG_FILE"
+    
+    # RedHunt OS specific message
+    if [[ "$OS_NAME" == "redhunt" ]]; then
+        log "INFO" "RedHunt OS detected - Security tools pre-installed"
+        log "INFO" "Snap support: $([[ "$SNAP_AVAILABLE" == "true" ]] && echo "Available" || echo "Not Available")"
+    fi
+    
+    # Check for existing installations
+    log "INFO" "Checking existing tool installations..."
+    [[ -d "$CALDERA_DIR" ]] && log "INFO" "✓ MITRE Caldera found"
+    [[ -d "$ATOMIC_RED_TEAM_DIR" ]] && log "INFO" "✓ Atomic Red Team found"
+    [[ -f "$TOOLS_DIR/dns_changer_eye.py" ]] && log "INFO" "✓ DNS Changer Eye found"
+    [[ -f "$TOOLS_DIR/cleartracks.sh" ]] && log "INFO" "✓ ClearTracks found"
     
     # Start main menu loop
     show_main_menu
