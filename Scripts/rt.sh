@@ -1,7 +1,7 @@
 #!/bin/bash
 # RedOps-Automator v2.0
 # Enhanced Red Team Automation Suite
-# Author: Kdairatchi x GPT
+# Author: anon 
 
 # Colors
 RED='\033[0;31m'
