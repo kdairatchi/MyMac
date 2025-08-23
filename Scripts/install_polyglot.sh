@@ -31,8 +31,8 @@ fi
 chmod +x polyglot.py
 
 # Create symlink for easy access
-ln -sf $(pwd)/polyglot_cli.py /usr/local/bin/polyglot || \
-echo "Could not create symlink, you can run: ./polyglot_cli.py"
+ln -sf $(pwd)/polyglot.py /usr/local/bin/polyglot || \
+echo "Could not create symlink, you can run: ./polyglot.py"
 
 echo "Installation complete!"
-echo "Run: ./polyglot_cli.py --help for usage information"
+echo "Run: ./polyglot.py --help for usage information"
