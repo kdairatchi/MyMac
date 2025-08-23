@@ -19,7 +19,7 @@ RESET="\e[0m"
 banner() {
     echo -e "${RED}"
     echo "==============================================="
-    echo "          🔎 Ultimate Nmap Automator v3 🔎"
+    echo "          🔎 Nmap Automator 🔎"
     echo "==============================================="
     echo -e "${RESET}"
 }
