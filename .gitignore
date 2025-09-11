@@ -5,3 +5,5 @@ Scripts/wordlists/*.zip
 Scripts/wordlists/*.tar*
 *.iso
 *.img
+Scripts/wordlists/
+Scripts/resources/pentest
