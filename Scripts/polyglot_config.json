@@ -1,0 +1,10 @@
+{
+    "default_combinations": ["jpg", "zip", "pdf"],
+    "output_directory": "./polyglot_files",
+    "auto_detect_after_creation": true,
+    "log_level": "INFO",
+    "allowed_file_types": [
+        "jpg", "png", "gif", "zip", "pdf", "gzip", "mp3", "wav"
+    ],
+    "max_file_size": 10485760
+}
