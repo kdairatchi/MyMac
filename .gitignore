@@ -1,3 +1,7 @@
-
-# Large wordlists
+# Big wordlists & archives
 Scripts/wordlists/rockyou.txt
+Scripts/wordlists/*.7z
+Scripts/wordlists/*.zip
+Scripts/wordlists/*.tar*
+*.iso
+*.img
