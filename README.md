@@ -13,19 +13,23 @@ Maintained by **[kdairatchi](https://github.com/kdairatchi)** · [ProwlrBot](htt
 | Dir | Contents |
 |---|---|
 | [`ai/`](ai/) | AI-assisted hunting prompts and notes |
-| [`Awesome/`](Awesome/) | Curated awesome-lists (47 files) — tools, resources, readings |
+| [`Awesome/`](Awesome/) | Curated awesome-lists — tools, resources, readings |
 | [`burp/`](burp/) | Burp Suite configs, extensions, match/replace rules |
-| [`Cheatsheets/`](Cheatsheets/) | Per-class cheatsheets (29 files) |
-| [`Checklists/`](Checklists/) | Hunt checklists — web, mobile, API, cloud |
+| [`Cheatsheets/`](Cheatsheets/) | Per-class cheatsheets + Keyhacks + tools index |
+| [`Checklists/`](Checklists/) | Hunt checklists — web, mobile, API, cloud + vuln-classes |
 | [`cloudflare-waf-bypass/`](cloudflare-waf-bypass/) | CF WAF bypass techniques |
 | [`Dorks/`](Dorks/) | Google / GitHub / Shodan dorks |
 | [`infosec/`](infosec/) | General infosec references |
-| [`notes/`](notes/) | Field notes by topic (16 files) |
+| [`Methodology/`](Methodology/) | Hunt methodology, triage + validation, rules |
+| [`notes/`](notes/) | Field notes by topic |
 | [`OWASP/`](OWASP/) | WSTG, MASTG, API Top 10, cheatsheets |
-| [`Payloads/`](Payloads/) | Categorized payloads |
-| [`POCS/`](POCS/) | Proof-of-concept exploits (10) |
-| [`Red Team/`](<Red Team/>) | Red team TTPs, tooling (29 files) |
-| [`Scripts/`](Scripts/) | Automation scripts — recon, fuzz, helpers (78 files) |
+| [`Payloads/`](Payloads/) | Categorized payloads (XSS, 403, JWT, WP, leaks) |
+| [`POCS/`](POCS/) | Proof-of-concept exploits |
+| [`Recon/`](Recon/) | Web2 recon playbook + HackSearch queries |
+| [`Red Team/`](<Red Team/>) | Red team TTPs, tooling |
+| [`Scripts/`](Scripts/) | Automation scripts — recon, fuzz, helpers |
+| [`Templates/`](Templates/) | Report-writing + target-notes templates |
+| [`Web3/`](Web3/) | Smart contract audit methodology, bug classes, grep arsenal, Foundry PoCs |
 | [`Links.md`](Links.md) | Master link index (1,300+ references) |
 | [`Targets.md`](Targets.md) | Target intel notes |
 | [`bug.md`](bug.md) | Quick bug notes |
@@ -47,8 +51,8 @@ ls Scripts/
 
 ### Companion repos
 
-- [`kdairatchi/bb-arsenal`](https://github.com/kdairatchi/bb-arsenal) — consolidated research notebook
 - [`kdairatchi/nuclei-templates-custom`](https://github.com/kdairatchi/nuclei-templates-custom) — personal nuclei templates
+- [`kdairatchi/gf-patterns`](https://github.com/kdairatchi/gf-patterns) — gf pattern library (67 patterns, ERE-safe)
 - [`kdairatchi/WordList`](https://github.com/kdairatchi/WordList) — custom wordlists
 
 ---
