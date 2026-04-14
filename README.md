@@ -6,27 +6,29 @@ Maintained by **[kdairatchi](https://github.com/kdairatchi)** · [ProwlrBot](htt
 
 ![status](https://img.shields.io/badge/status-active-success) ![license](https://img.shields.io/badge/license-MIT-blue) ![topics](https://img.shields.io/badge/topics-bugbounty%20%7C%20pentest%20%7C%20recon%20%7C%20payloads-purple)
 
+See [`INDEX.md`](INDEX.md) for a flat, scannable map of the whole repo.
+
 ---
 
 ## What's in here
 
 | Dir | Contents |
 |---|---|
-| [`ai/`](ai/) | AI-assisted hunting prompts and notes |
+| [`AI/`](AI/) | AI-assisted hunting prompts and notes |
 | [`Awesome/`](Awesome/) | Curated awesome-lists — tools, resources, readings |
-| [`burp/`](burp/) | Burp Suite configs, extensions, match/replace rules |
+| [`Burp/`](Burp/) | Burp Suite configs, extensions, match/replace rules |
 | [`Cheatsheets/`](Cheatsheets/) | Per-class cheatsheets + Keyhacks + tools index |
 | [`Checklists/`](Checklists/) | Hunt checklists — web, mobile, API, cloud + vuln-classes |
-| [`cloudflare-waf-bypass/`](cloudflare-waf-bypass/) | CF WAF bypass techniques |
+| [`Cloudflare-WAF-Bypass/`](Cloudflare-WAF-Bypass/) | CF WAF bypass techniques |
 | [`Dorks/`](Dorks/) | Google / GitHub / Shodan dorks |
-| [`infosec/`](infosec/) | General infosec references |
+| [`Infosec/`](Infosec/) | General infosec references |
 | [`Methodology/`](Methodology/) | Hunt methodology, triage + validation, rules |
-| [`notes/`](notes/) | Field notes by topic |
+| [`Notes/`](Notes/) | Field notes by topic |
 | [`OWASP/`](OWASP/) | WSTG, MASTG, API Top 10, cheatsheets |
 | [`Payloads/`](Payloads/) | Categorized payloads (XSS, 403, JWT, WP, leaks) |
-| [`POCS/`](POCS/) | Proof-of-concept exploits |
-| [`Recon/`](Recon/) | Web2 recon playbook + HackSearch queries |
-| [`Red Team/`](<Red Team/>) | Red team TTPs, tooling |
+| [`PoCs/`](PoCs/) | Proof-of-concept exploits |
+| [`Recon/`](Recon/) | Recon playbook, subdomain enum, content discovery, JS analysis, GitHub dorking |
+| [`RedTeam/`](RedTeam/) | Red team TTPs, tooling, OPSEC |
 | [`Scripts/`](Scripts/) | Automation scripts — recon, fuzz, helpers |
 | [`Templates/`](Templates/) | Report-writing + target-notes templates |
 | [`Web3/`](Web3/) | Smart contract audit methodology, bug classes, grep arsenal, Foundry PoCs |
@@ -43,7 +45,7 @@ git clone https://github.com/kdairatchi/MyMac
 cd MyMac
 
 # Find something fast
-grep -rln "SSRF" Checklists/ Cheatsheets/ notes/
+grep -rln "SSRF" Checklists/ Cheatsheets/ Notes/
 
 # Run a script
 ls Scripts/
