@@ -1,9 +1,24 @@
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+
+# Editors
+.vscode/
+.idea/
+
+# Raw tool output (keep curated notes, not raw dumps)
+subfinder-results-*.txt
+httpx-results-*.txt
+nuclei-results-*.txt
+*.jsonl.bak
+
 # Big wordlists & archives
 Scripts/wordlists/rockyou.txt
 Scripts/wordlists/*.7z
 Scripts/wordlists/*.zip
 Scripts/wordlists/*.tar*
-*.iso
-*.img
 Scripts/wordlists/
 Scripts/resources/pentest
+*.iso
+*.img
