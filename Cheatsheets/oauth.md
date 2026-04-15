@@ -89,6 +89,33 @@ Same issues as JWT (see `jwt.md`) — alg confusion, jku spoof, etc. — since I
 ## References
 
 - PortSwigger OAuth — https://portswigger.net/web-security/oauth
-- Dhakal research — https://research.dhakal.org/
+- OAuth 2.0 Security Best Current Practice — https://datatracker.ietf.org/doc/html/rfc9700
 - RFC 6749, RFC 7636 (PKCE), RFC 9207 (iss parameter)
 - oauth.tools — https://oauth.tools
+- Salt Labs OAuth research — https://salt.security/blog/
+
+## Visual: Authorization Code + PKCE
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant C as Client (app)
+    participant B as Browser
+    participant AS as Auth Server
+    participant RS as Resource Server
+
+    C->>C: generate code_verifier, code_challenge = S256(verifier)
+    U->>C: click Login
+    C->>B: redirect /authorize?response_type=code&client_id&redirect_uri&state&code_challenge&code_challenge_method=S256
+    B->>AS: GET /authorize
+    AS->>U: login + consent
+    U->>AS: approve
+    AS->>B: 302 redirect_uri?code=XYZ&state=...
+    B->>C: deliver code + state
+    C->>C: verify state matches
+    C->>AS: POST /token (code, code_verifier, client_id, redirect_uri)
+    AS->>AS: verify challenge == S256(verifier)
+    AS-->>C: access_token (+ refresh_token, id_token)
+    C->>RS: GET /api (Authorization: Bearer access_token)
+    RS-->>C: resource
+```

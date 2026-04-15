@@ -122,3 +122,24 @@ Capture returned AWS creds. Validate with `aws sts get-caller-identity` and stop
 - Orange Tsai — https://github.com/orangetw/awesome-url-parsers
 - SSRF Bible — https://docs.google.com/document/d/1v1TkWZtrhzRLy0bYXBcdLUedXGb9njTNIJXa3u9akHM
 - gopherus — https://github.com/tarunkant/Gopherus
+- Capital One breach (SSRF→IMDSv1→S3) — https://krebsonsecurity.com/2019/08/what-we-can-learn-from-the-capital-one-hack/
+
+## Visual: URL parser diff + cloud IMDS targets
+
+```mermaid
+flowchart TD
+    I[User-supplied URL] --> PARSE[App URL parser]
+    PARSE --> ALLOW{Allowlist host?}
+    ALLOW -- no --> BLOCK[Reject]
+    ALLOW -- yes --> FETCH[HTTP client fetch]
+    FETCH --> DIFF{Parser diff:\napp vs client}
+    DIFF -- same --> OK[Safe path]
+    DIFF -- differs --> BYPASS[SSRF via\n@, #, //, \\, [], whitespace,\nDNS rebind, redirect chains]
+    BYPASS --> TARG[Internal targets]
+    TARG --> AWS[AWS IMDS\n169.254.169.254/latest/meta-data/iam/security-credentials/]
+    TARG --> GCP[GCP metadata\nmetadata.google.internal\nMetadata-Flavor: Google]
+    TARG --> AZ[Azure IMDS\n169.254.169.254/metadata/instance?api-version=2021-02-01\nMetadata: true]
+    TARG --> DO[DigitalOcean\n169.254.169.254/metadata/v1/]
+    TARG --> K8S[Kubernetes\nkubernetes.default.svc\n/var/run/secrets/...]
+    TARG --> INT[Internal services\nRedis / Consul / Jenkins / Elasticsearch]
+```

@@ -117,3 +117,4 @@ See `waf-bypass.md`. SQLi-specific: inline comments `/*!50000SELECT*/`, whitespa
 - PortSwigger — https://portswigger.net/web-security/sql-injection
 - PayloadsAllTheThings SQLi — https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/SQL%20Injection
 - HackTricks — https://book.hacktricks.xyz/pentesting-web/sql-injection
+- HackerOne writeup (Starbucks ORDER BY injection) — https://hackerone.com/reports/531051

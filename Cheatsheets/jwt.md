@@ -92,3 +92,26 @@ Known wordlist: `jwt-secrets.txt` from `rzepsky/JWT-Cracker-List` and `wallarm/j
 - jwt_tool — https://github.com/ticarpi/jwt_tool
 - PortSwigger Academy JWT — https://portswigger.net/web-security/jwt
 - jwt.io — https://jwt.io
+
+## Visual: token structure + attack surface
+
+```mermaid
+flowchart LR
+    T[JWT: header.payload.signature] --> H[Header\n{alg, typ, kid, jku, x5u}]
+    T --> P[Payload\n{sub, iss, aud, exp, roles}]
+    T --> S[Signature]
+
+    H --> H1[alg=none]
+    H --> H2[alg confusion RS256 to HS256]
+    H --> H3[kid path traversal / SQLi]
+    H --> H4[jku / x5u to attacker JWKS]
+
+    P --> P1[claim tampering: role, sub, aud]
+    P --> P2[exp / nbf skew]
+    P --> P3[iss mismatch across tenants]
+    P --> P4[embedded user-controlled data]
+
+    S --> S1[weak HMAC secret brute]
+    S --> S2[unverified signature]
+    S --> S3[key confusion public-key as HMAC key]
+```

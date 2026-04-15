@@ -30,7 +30,7 @@ def handleResponse(req, interesting):
     table.add(req)
 ```
 
-Burp → Repeater → Extension → Turbo Intruder → send; or Burp's built-in "Send group in parallel" (last-byte sync) in 2023.12+.
+Burp → Repeater → Extension → Turbo Intruder → send; or Burp's built-in "Send group in parallel" (single-packet / last-byte sync) available in Burp 2023.10+.
 
 ## Last-byte sync (HTTP/1.1)
 
@@ -85,3 +85,30 @@ Turbo Intruder's `engine.queue(req1)` + `engine.queue(req2)` fires them together
 - James Kettle — https://portswigger.net/research/smashing-the-state-machine
 - Turbo Intruder — https://github.com/PortSwigger/turbo-intruder
 - PortSwigger Academy race conditions labs
+
+## Visual: single-packet attack
+
+```mermaid
+sequenceDiagram
+    participant A as Attacker
+    participant N as Network
+    participant S as Server (multi-worker)
+    participant DB as Shared state
+
+    A->>A: prepare N requests\nwithhold final bytes of each
+    A->>N: send all headers + bodies minus last byte (HTTP/2 MULTIPLEX)
+    Note over A,N: all requests queued at server
+    A->>N: flush final bytes in ONE TCP packet
+    N->>S: requests arrive in same RTT window
+    par worker 1
+      S->>DB: read balance
+      S->>DB: write balance - 100
+    and worker 2
+      S->>DB: read balance (stale)
+      S->>DB: write balance - 100
+    and worker N
+      S->>DB: read balance (stale)
+      S->>DB: write balance - 100
+    end
+    DB-->>A: N withdrawals succeed on one balance
+```

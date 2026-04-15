@@ -20,8 +20,8 @@ Check cookies, hidden fields, API bodies, cache entries, session blobs, message 
 ## Java
 
 Tools:
-- [ysoserial](https://github.com/frohoff/ysoserial) — generate payloads against library gadgets (CommonsCollections 1-11, Spring, Hibernate, ROME, JSON-lib…).
-- [ysoserial-modified](https://github.com/pwntester/ysoserial.net) — .NET equivalent.
+- [ysoserial](https://github.com/frohoff/ysoserial) — Java payload generator (CommonsCollections 1-11, Spring, Hibernate, ROME, JSON-lib…).
+- [ysoserial.net](https://github.com/pwntester/ysoserial.net) — .NET equivalent (pwntester).
 - [marshalsec](https://github.com/mbechler/marshalsec) — beyond native: Jackson, SnakeYAML, XStream, BlazeDS, Kryo.
 
 Quick test:

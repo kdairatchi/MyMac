@@ -92,11 +92,12 @@ ppscan                          # Burp ext
 - `Object.create(null)` for config objects — no prototype.
 - Freeze: `Object.freeze(Object.prototype)`.
 - Use `Map` for dynamic key lookups.
-- Update lodash ≥ 4.17.21, jQuery ≥ 3.6, kaaliy, `minimist` ≥ 1.2.6.
+- Update lodash ≥ 4.17.21, jQuery ≥ 3.6, `minimist` ≥ 1.2.6, `set-value` ≥ 4.0.1.
 - Input allowlist; reject keys containing `__proto__`, `constructor`, `prototype`.
 
 ## References
 
 - PortSwigger — https://portswigger.net/web-security/prototype-pollution
 - BlackFan — https://github.com/BlackFan/client-side-prototype-pollution
-- HackerOne — https://github.com/HoLyVieR/prototype-pollution-nsec18
+- HoLyVieR NorthSec 2018 research — https://github.com/HoLyVieR/prototype-pollution-nsec18
+- Snyk server-side PP research — https://snyk.io/blog/after-three-years-of-silence-a-new-jquery-prototype-pollution-vulnerability-emerges-once-again/

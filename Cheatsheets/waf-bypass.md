@@ -9,7 +9,7 @@ wafw00f https://target.com
 curl -si "https://target.com/?x=<script>alert(1)</script>" | head -20
 ```
 
-Header tells: `Server: cloudflare`, `X-Sucuri-ID`, `X-Cache: Akamai`, `cf-ray`, `X-Amz-Cf-Id`, `X-Iinfo` (Incapsula), `Set-Cookie: __cfduid`, `AWSALB` + `x-amzn-waf-action`.
+Header tells: `Server: cloudflare`, `X-Sucuri-ID`, `X-Cache: Akamai`, `cf-ray`, `X-Amz-Cf-Id`, `X-Iinfo` (Incapsula), `Set-Cookie: __cf_bm` (Cloudflare; `__cfduid` retired May 2021), `AWSALB` + `x-amzn-waf-action`.
 
 ## Encoding layers
 
@@ -38,7 +38,7 @@ Peel / add layers until WAF and origin disagree.
 
 Origin IP discovery (bypass WAF entirely):
 - Censys / Shodan for SSL cert SAN + `target.com` outside Cloudflare ranges.
-- `crimeflare.org`, historical DNS, subdomain leaks pointing to origin.
+- Historical DNS (SecurityTrails, dnshistory), SPF records, MX records, subdomain leaks pointing to origin.
 - `Host: target.com` on the discovered IP → bypass CDN.
 
 Cache-level:
