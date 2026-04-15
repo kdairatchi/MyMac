@@ -7,6 +7,13 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Obsidian workspace state
+.obsidian/workspace*
+
+# Languages
+node_modules/
+__pycache__/
+
 # Raw tool output (keep curated notes, not raw dumps)
 subfinder-results-*.txt
 httpx-results-*.txt

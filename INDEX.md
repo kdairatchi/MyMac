@@ -21,17 +21,17 @@ Flat map of the workbench. Use `grep -rln <term>` across dirs for cross-cutting 
 ## Checklists — vuln classes
 - [Web2 classes](Checklists/vuln-classes/web2.md)
 - [Web3 classes](Checklists/vuln-classes/web3.md)
-- [OWASP testing (long form)](Checklists/OWASPTestingChecklist1.MD)
+- [OWASP testing (long form)](Checklists/OWASPTestingChecklist1.md)
 - [Business logic](Checklists/BusinessLogicErrors.md)
-- [Authentication](Checklists/Authentication.MD)
+- [Authentication](Checklists/Authentication.md)
 - [Account takeover](Checklists/AccountTakeover.md) · [folder](Checklists/Account%20Takeover/)
 - [2FA bypass](Checklists/2FA%20bypass/)
-- [JWT](Checklists/JWTVulnerabilities.MD)
-- [Web cache poisoning](Checklists/Web%20Cache%20Poisoning.MD)
+- [JWT](Checklists/JWTVulnerabilities.md)
+- [Web cache poisoning](Checklists/Web%20Cache%20Poisoning.md)
 - [Broken link hijacking](Checklists/BrokenLinkHijacking.md)
-- [Email spoofing](Checklists/EmailSpoofing.MD)
+- [Email spoofing](Checklists/EmailSpoofing.md)
 - [Exposed API keys](Checklists/ExposedAPIkeys.md)
-- [Forgot password](Checklists/ForgotPasswordFunctionality.MD)
+- [Forgot password](Checklists/ForgotPasswordFunctionality.md)
 - [Tabnabbing](Checklists/Tabnabbing.md)
 - [Default credentials](Checklists/DefaultCredentials.md)
 - [LFI vulnerable targets](Checklists/lfi_vulnerble_targets.md)
@@ -67,28 +67,28 @@ Flat map of the workbench. Use `grep -rln <term>` across dirs for cross-cutting 
 - [CSV injection](Cheatsheets/CSV%20Injection.md)
 - [Content injection](Cheatsheets/Content%20Injection.md)
 - [RCE](Cheatsheets/RCE.md)
-- [LFI](Cheatsheets/LFI.MD)
+- [LFI](Cheatsheets/LFI.md)
 - [Crypto](Cheatsheets/Crypto.md)
 - [Template injection](Cheatsheets/Template%20Injection.md)
 - [XSLT injection](Cheatsheets/XSLT%20Injection.md)
 - [Open redirect](Cheatsheets/OR.md)
 
 ## Cheatsheets — tech
-- [Apache](Cheatsheets/APACHE.MD)
-- [AWS](Cheatsheets/AWS.MD)
-- [Azure](Cheatsheets/AZURE.MD)
-- [Cloudflare](Cheatsheets/CLOUDFLARE.MD)
-- [Cisco](Cheatsheets/CISCO.MD)
+- [Apache](Cheatsheets/APACHE.md)
+- [AWS](Cheatsheets/AWS.md)
+- [Azure](Cheatsheets/AZURE.md)
+- [Cloudflare](Cheatsheets/CLOUDFLARE.md)
+- [Cisco](Cheatsheets/CISCO.md)
 - [Firebase](Cheatsheets/firebase.md)
-- [Jenkins](Cheatsheets/JENKINS.MD)
-- [Jira](Cheatsheets/JIRA.MD)
+- [Jenkins](Cheatsheets/JENKINS.md)
+- [Jira](Cheatsheets/JIRA.md)
 - [PostgreSQL](Cheatsheets/PostgreSQL.md)
 - [SharePoint](Cheatsheets/SharePoint.md)
-- [WordPress](Cheatsheets/WORDPRESS.MD)
+- [WordPress](Cheatsheets/WORDPRESS.md)
 - [Keyhacks (API key validation)](Cheatsheets/Keyhacks.md)
 - [Tools index](Cheatsheets/tools-index.md)
 - [Security arsenal](Cheatsheets/security-arsenal.md)
-- [Red team cheatsheets](Cheatsheets/Redteam.MD)
+- [Red team cheatsheets](Cheatsheets/Redteam.md)
 - [Recon cheatsheet](Cheatsheets/Recon.md)
 - [Books](Cheatsheets/books.md)
 
@@ -113,14 +113,14 @@ Flat map of the workbench. Use `grep -rln <term>` across dirs for cross-cutting 
 - [XSS bypass 2](Cloudflare-WAF-Bypass/xss2)
 
 ## PoCs / CVEs
-- [CVE-2021-36873](PoCs/CVES/CVE-2021-36873.MD)
-- [CVE-2024-0195](PoCs/CVES/CVE-2024-0195%20/)
-- [CVE-2024-29269 RCE](PoCs/CVES/CVE-2024-29269-RCE%20/)
+- [CVE-2021-36873](PoCs/CVES/CVE-2021-36873.md)
+- [CVE-2024-0195](PoCs/CVES/CVE-2024-0195/)
+- [CVE-2024-29269 RCE](PoCs/CVES/CVE-2024-29269-RCE/)
 - [CVE-2024-2876 SQLi](PoCs/CVES/SQL_Injection_cve_2024/)
 
 ## Red Team
 - [OPSEC (bug bounty)](RedTeam/OPSEC.md)
-- [Methodology + phases](RedTeam/Red%20Team%20Methodology%20and%20Phases.md)
+- [Methodology + phases](RedTeam/methodology-and-phases.md)
 - [C2 frameworks](RedTeam/C2_Frameworks.md) · [C2 interaction](RedTeam/C2_Interaction.md)
 - [Linux persistence](RedTeam/Linux_Persistence.md) · [Linux privesc](RedTeam/Linux_PrivEsc.md)
 - [Windows persistence](RedTeam/Windows_Persistence.md) · [Windows privesc](RedTeam/Windows_PrivEsc.md)
@@ -193,3 +193,37 @@ Flat map of the workbench. Use `grep -rln <term>` across dirs for cross-cutting 
 - [Links master index](Links.md) (1,300+ references)
 - [Targets notes](Targets.md)
 - [Bug quick notes](bug.md)
+
+## Visual: repo topology
+
+```mermaid
+flowchart LR
+    ROOT[MyMac] --> M[Methodology]
+    ROOT --> R[Recon]
+    ROOT --> CL[Checklists]
+    ROOT --> CH[Cheatsheets]
+    ROOT --> W3[Web3]
+    ROOT --> RT[RedTeam]
+    ROOT --> OW[OWASP]
+    ROOT --> AW[Awesome]
+    ROOT --> TPL[Templates]
+    ROOT --> SC[Scripts]
+    ROOT --> POC[PoCs]
+    ROOT --> DRK[Dorks]
+
+    M --> M1[01-scope-review]
+    M --> M2[02-async-recon]
+    M --> M3[03-triage-playbook]
+    M --> M4[bb-methodology]
+    R --> R1[subdomain-enum]
+    R --> R2[content-discovery]
+    R --> R3[js-analysis]
+    R --> R4[github-dorking]
+    CH --> CH1[oauth / jwt / ssrf]
+    CH --> CH2[xss / sqli / xxe]
+    CH --> CH3[race-conditions / cache-poisoning]
+    W3 --> W31[01-foundation]
+    W3 --> W32[02-bug-classes]
+    W3 --> W33[03-grep-arsenal]
+    W3 --> W34[36-solidity-audit-mcp]
+```
