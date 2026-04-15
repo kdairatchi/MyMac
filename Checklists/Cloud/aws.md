@@ -25,8 +25,9 @@ Discovery:
 dig target.s3.amazonaws.com
 
 # Bucket brute — don't hammer, respect rate
-s3scanner scan -b target-backup
-bucketlister target-backup
+s3scanner scan --bucket target-backup
+# Or enumerate from wordlist
+s3scanner scan --bucket-file buckets.txt
 
 # Permissions probe
 aws s3 ls s3://target-backup --no-sign-request

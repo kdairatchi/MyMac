@@ -81,8 +81,8 @@ for r in $(gh repo list target --limit 1000 --json nameWithOwner -q '.[].nameWit
   gitleaks detect --source "/tmp/$r" -r "leaks-$(basename $r).json"
 done
 
-# github-dorks.py (mature list)
-python3 github-search.py -t <gh_pat> -q "org:target password"
+# gwen001/github-search — mature dork runner
+python3 github-code.py -t <gh_pat> -q "org:target password"
 ```
 
 ## Gists + forks
