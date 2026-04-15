@@ -1,0 +1,35 @@
+{
+  "nodes": [
+    {"id": "n1", "type": "text", "x": -600, "y": -400, "width": 260, "height": 80, "text": "# 1. Scope review\nRead program, in/out scope, OOS hosts, payout tiers."},
+    {"id": "n2", "type": "file", "x": -260, "y": -400, "width": 260, "height": 80, "file": "Methodology/01-scope-review.md"},
+    {"id": "n3", "type": "file", "x": 100, "y": -400, "width": 260, "height": 80, "file": "Methodology/02-async-recon.md"},
+    {"id": "n4", "type": "text", "x": 460, "y": -400, "width": 260, "height": 80, "text": "# 3. Recon pipeline\nPassive -> active -> deep. Feed all into attack surface."},
+    {"id": "n5", "type": "file", "x": 460, "y": -260, "width": 260, "height": 80, "file": "Recon/subdomain-enum.md"},
+    {"id": "n6", "type": "file", "x": 460, "y": -140, "width": 260, "height": 80, "file": "Recon/js-analysis.md"},
+    {"id": "n7", "type": "file", "x": 460, "y": -20, "width": 260, "height": 80, "file": "Recon/content-discovery.md"},
+    {"id": "n8", "type": "text", "x": 820, "y": -400, "width": 260, "height": 100, "text": "# 4. Vuln discovery\nManual + nuclei + burp. Map each finding to class (OWASP / bug-classes)."},
+    {"id": "n9", "type": "file", "x": 820, "y": -260, "width": 260, "height": 80, "file": "Cheatsheets/ssrf.md"},
+    {"id": "n10", "type": "file", "x": 820, "y": -140, "width": 260, "height": 80, "file": "Cheatsheets/jwt.md"},
+    {"id": "n11", "type": "file", "x": 820, "y": -20, "width": 260, "height": 80, "file": "Cheatsheets/race-conditions.md"},
+    {"id": "n12", "type": "file", "x": 1180, "y": -400, "width": 260, "height": 80, "file": "Methodology/03-triage-playbook.md"},
+    {"id": "n13", "type": "file", "x": 1180, "y": -260, "width": 260, "height": 80, "file": "Methodology/triage-validation.md"},
+    {"id": "n14", "type": "file", "x": 1540, "y": -400, "width": 260, "height": 80, "file": "Templates/report-writing.md"},
+    {"id": "n15", "type": "text", "x": 1540, "y": -260, "width": 260, "height": 100, "text": "# 6. Submit + track\nSubmit, monitor triage, respond to reviewer, track payout."}
+  ],
+  "edges": [
+    {"id": "e1", "fromNode": "n1", "toNode": "n2", "fromSide": "right", "toSide": "left"},
+    {"id": "e2", "fromNode": "n2", "toNode": "n3", "fromSide": "right", "toSide": "left"},
+    {"id": "e3", "fromNode": "n3", "toNode": "n4", "fromSide": "right", "toSide": "left"},
+    {"id": "e4", "fromNode": "n4", "toNode": "n5", "fromSide": "bottom", "toSide": "top"},
+    {"id": "e5", "fromNode": "n5", "toNode": "n6", "fromSide": "bottom", "toSide": "top"},
+    {"id": "e6", "fromNode": "n6", "toNode": "n7", "fromSide": "bottom", "toSide": "top"},
+    {"id": "e7", "fromNode": "n4", "toNode": "n8", "fromSide": "right", "toSide": "left"},
+    {"id": "e8", "fromNode": "n8", "toNode": "n9", "fromSide": "bottom", "toSide": "top"},
+    {"id": "e9", "fromNode": "n9", "toNode": "n10", "fromSide": "bottom", "toSide": "top"},
+    {"id": "e10", "fromNode": "n10", "toNode": "n11", "fromSide": "bottom", "toSide": "top"},
+    {"id": "e11", "fromNode": "n8", "toNode": "n12", "fromSide": "right", "toSide": "left"},
+    {"id": "e12", "fromNode": "n12", "toNode": "n13", "fromSide": "bottom", "toSide": "top"},
+    {"id": "e13", "fromNode": "n12", "toNode": "n14", "fromSide": "right", "toSide": "left"},
+    {"id": "e14", "fromNode": "n14", "toNode": "n15", "fromSide": "bottom", "toSide": "top"}
+  ]
+}

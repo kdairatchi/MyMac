@@ -75,3 +75,26 @@ cat gau.txt katana.txt | unfurl format '%s://%d%p?%q' | qsreplace FUZZ | sort -u
 - projectdiscovery — https://github.com/projectdiscovery
 - tomnomnom — https://github.com/tomnomnom
 - Jason Haddix TBHM — https://github.com/jhaddix/tbhm
+
+## Visual: recon funnel
+
+```mermaid
+flowchart TD
+    A[Scope + seed domains] --> B[Passive]
+    B --> B1[subfinder -all]
+    B --> B2[amass enum -passive]
+    B --> B3[crt.sh / CT logs]
+    B --> B4[wayback / archive.org]
+    B --> B5[GitHub dorks + trufflehog]
+    B1 & B2 & B3 & B4 & B5 --> M[merge + anew]
+    M --> C[Active low-touch]
+    C --> C1[dnsx resolve]
+    C --> C2[httpx probe + tech]
+    C --> C3[tlsx / naabu top ports]
+    C1 & C2 & C3 --> D[Deep]
+    D --> D1[katana crawl + JS]
+    D --> D2[ffuf content discovery]
+    D --> D3[nuclei targeted tags]
+    D --> D4[param mining / arjun]
+    D1 & D2 & D3 & D4 --> E[Attack surface → triage]
+```

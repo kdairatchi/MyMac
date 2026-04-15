@@ -66,3 +66,22 @@ Common chains:
 - FIRST CVSS calculator — https://www.first.org/cvss/calculator/3.1
 - Bugcrowd VRT — https://bugcrowd.com/vulnerability-rating-taxonomy
 - HackerOne disclosure-quality rubric — https://docs.hackerone.com/hackers/submitting-reports.html
+
+## Visual: triage decision tree
+
+```mermaid
+flowchart TD
+    F[Finding] --> R{Reproducible?}
+    R -- no --> X[Discard / re-test]
+    R -- yes --> S{Real security impact?}
+    S -- no --> INF[Informational / note]
+    S -- yes --> D{Duplicate check:\nplatform + Google + writeups}
+    D -- likely dup --> WAIT[Skip or file low-effort]
+    D -- novel --> I{Impact tier}
+    I --> C[Critical: RCE / auth bypass / PII bulk]
+    I --> H[High: ATO / IDOR sensitive / SSRF internal]
+    I --> M[Medium: stored XSS / SSRF external / CSRF sensitive]
+    I --> L[Low: reflected XSS / info leak / misconfig]
+    C & H & M & L --> PoC[Minimal PoC + evidence]
+    PoC --> REP[Report: title, impact, repro, fix]
+```

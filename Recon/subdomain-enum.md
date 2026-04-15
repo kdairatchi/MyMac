@@ -84,3 +84,20 @@ nuclei -l live.txt -tags takeover -severity high,critical
 - TrickestSec subdomain-enum playbook — https://github.com/trickest/resolvers
 - ProjectDiscovery docs — https://docs.projectdiscovery.io
 - SecLists subdomains — https://github.com/danielmiessler/SecLists
+
+## Visual: pipeline
+
+```mermaid
+flowchart LR
+    SEED[target.com] --> P1[amass -passive]
+    SEED --> P2[subfinder -all]
+    SEED --> P3[assetfinder]
+    SEED --> P4[crt.sh / chaos]
+    P1 & P2 & P3 & P4 --> MERGE[(anew all-subs.txt)]
+    MERGE --> DNS[dnsx -a -cname -resp]
+    DNS --> HTTP[httpx -sc -title -tech -cdn]
+    HTTP --> LIVE[(live-hosts.txt)]
+    LIVE --> KAT[katana -jc -kf]
+    KAT --> URLS[(urls.txt + js.txt)]
+    URLS --> TRIAGE[nuclei / manual triage]
+```

@@ -95,3 +95,26 @@ Validate before reporting (see `Cheatsheets/Keyhacks.md`).
 - SecretFinder — https://github.com/m4ll0k/SecretFinder
 - Mantra — https://github.com/MrEmpy/Mantra
 - sourcemapper — https://github.com/denandz/sourcemapper
+
+## Visual: JS analysis sequence
+
+```mermaid
+sequenceDiagram
+    participant H as Hunter
+    participant K as katana
+    participant JS as JS files
+    participant SM as Sourcemaps
+    participant LF as LinkFinder / SecretFinder
+    participant V as Validator (httpx/curl)
+
+    H->>K: crawl target, -jc -kf
+    K-->>H: urls.txt + js.txt
+    H->>JS: fetch + dedupe
+    H->>SM: try .map recovery (sourcemapper / shuize)
+    SM-->>H: reconstructed sources
+    H->>LF: run LinkFinder + SecretFinder + trufflehog
+    LF-->>H: endpoints, keys, tokens
+    H->>V: validate endpoints + test keys (authz scoped)
+    V-->>H: confirmed live / confirmed valid key
+    H->>H: triage + PoC
+```

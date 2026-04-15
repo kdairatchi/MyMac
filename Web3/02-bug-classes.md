@@ -1118,3 +1118,59 @@ grep -rn "slot\|__gap\|ERC1967Storage" contracts/
 ---
 
 → NEXT: [03-grep-arsenal.md](03-grep-arsenal.md)
+
+## Visual: DeFi bug class mindmap
+
+```mermaid
+mindmap
+  root((DeFi bug classes))
+    Reentrancy
+      Classic single-function
+      Cross-function
+      Cross-contract
+      Read-only reentrancy
+      ERC-777 / ERC-721 hooks
+    Oracle
+      Spot price manipulation
+      Single-source oracle
+      Flashloan-assisted pump
+      Stale / paused feeds
+      TWAP window too short
+    Access control
+      Missing onlyOwner / onlyRole
+      Unprotected initialize
+      tx.origin auth
+      Delegatecall to untrusted
+      Proxy admin hijack
+    Accounting / math
+      Rounding direction abuse
+      Share inflation on first deposit
+      Fee-on-transfer token mishandling
+      Rebasing token mishandling
+      Donation / direct transfer
+    Signature / replay
+      Missing chainId / nonce
+      EIP-712 domain reuse
+      ecrecover(0) bypass
+      Malleable signatures
+    MEV / ordering
+      Sandwich
+      Frontrun liquidation
+      JIT liquidity
+    Governance
+      Flashloan vote
+      Low quorum
+      Timelock bypass
+    Upgradeability
+      Storage collision
+      Uninitialized implementation
+      Selfdestruct of logic
+    Bridges
+      Replay across chains
+      Merkle proof forgery
+      Relayer compromise
+    Protocol economics
+      Bad debt socialization
+      Liquidation incentive mispricing
+      Collateral / debt asset mismatch
+```
