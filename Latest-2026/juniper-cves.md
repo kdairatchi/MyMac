@@ -8,7 +8,6 @@
 - **Severity:** critical · **Hunt:** 5/5 · **Score:** 67.5 · **Status:** poc · **Age:** 0d
 - **Sources:** [1](https://labs.watchtowr.com/sometimes-you-can-just-feel-the-security-in-the-design-junos-os-evolved-cve-2026-21902-rce/)
 
-### Juniper Junos Evolved CVE-2026-21902 Pre-Auth RCE — rce
 - **What:** An incorrect permission assignment for critical resources in Junos OS Evolved allows unauthenticated remote code execution.
 - **Why it matters:** Pre-authenticated RCE on core networking infrastructure (PTX series) grants total network control to attackers.
 - **Hunt signal:** Scan for Junos Evolved management interfaces on PTX devices and check for CVE-2026-21902 patch status.

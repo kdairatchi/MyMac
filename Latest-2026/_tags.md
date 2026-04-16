@@ -1,7 +1,7 @@
 # Tag Index
 Updated 2026-04-16.
 
-- `#web` — 46
+- `#web` — 45
 - `#auth-bypass` — 18
 - `#rce` — 18
 - `#llm` — 16
@@ -9,9 +9,9 @@ Updated 2026-04-16.
 - `#appliance` — 9
 - `#api` — 9
 - `#xss` — 6
-- `#supply-chain` — 5
 - `#data-exfil` — 5
 - `#prompt-injection` — 5
+- `#supply-chain` — 4
 - `#deserialization` — 4
 - `#command-injection` — 4
 - `#privesc` — 4
@@ -25,7 +25,6 @@ Updated 2026-04-16.
 - `#path-traversal` — 2
 - `#desync` — 2
 - `#cache-poisoning` — 2
-- `#nextjs` — 2
 - `#rails` — 1
 - `#csrf` — 1
 - `#flarum` — 1
@@ -33,6 +32,7 @@ Updated 2026-04-16.
 - `#enterprise` — 1
 - `#iis` — 1
 - `#sitecore` — 1
+- `#nextjs` — 1
 - `#race-condition` — 1
 - `#network` — 1
 - `#windows` — 1

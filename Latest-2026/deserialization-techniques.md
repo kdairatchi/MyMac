@@ -8,8 +8,6 @@
 - **Severity:** critical · **Hunt:** 4/5 · **Score:** 27.0 · **Status:** poc · **Age:** 30d
 - **Sources:** [1](https://www.assetnote.io/resources/research/analysis-of-cve-2023-3519-in-citrix-adc-and-netscaler-gateway) · [2](https://www.assetnote.io/resources/research/finding-and-exploiting-citrix-netscaler-buffer-overflow-cve-2023-3519-part-3) · [3](https://www.assetnote.io/resources/research/analysis-of-cve-2023-3519-in-citrix-adc-and-netscaler-gateway-part-2)
 
-### Analysis of CVE-2023-3519 in Citrix ADC and NetScaler Gateway
-
 - **Insights:**
   - Unauthenticated deserialization in NetScaler XML API triggers arbitrary command execution
   - Exploitable via crafted HTTP requests to NSCIService or AAA ports

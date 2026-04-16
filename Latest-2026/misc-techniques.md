@@ -8,7 +8,6 @@
 - **Severity:** unknown · **Hunt:** 4/5 · **Score:** 24.0 · **Status:** poc · **Age:** 0d
 - **Sources:** [1](https://www.assetnote.io/resources/research/doing-the-due-diligence-analyzing-the-next-js-middleware-bypass-cve-2025-29927)
 
-### Next.js Middleware Bypass (CVE-2025-29927)
 - Insight: Next.js middleware bypass vulnerability stems from improper URL rewriting logic, allowing attackers to access protected routes by manipulating request segments.
 - Insight: Exploit chain involves crafting specially crafted request parameters that skip middleware execution, potentially exposing APIs, authentication systems, or internal endpoints.
 - Insight: Vulnerable configurations typically use dynamic route segments (e.g., `[[...slug]]`) with improper middleware scope enforcement.

@@ -36,7 +36,6 @@
 - **Severity:** high · **Hunt:** 4/5 · **Score:** 21.0 · **Status:** poc · **Age:** 30d
 - **Sources:** [1](https://www.assetnote.io/resources/research/nginx-apache-path-confusion-to-auth-bypass-in-pan-os)
 
-### Nginx/Apache Path Confusion to Auth Bypass in PAN-OS (CVE-2025-0108) — auth-bypass
 - **What:** Exploits path handling discrepancies between PAN-OS web server and reverse proxies (Nginx/Apache) to bypass authentication.
 - **Why it matters:** Allows unauthenticated access to protected resources in high-security appliances, potentially compromising entire network segments.
 - **Hunt signal:** Unusual path segment combinations in proxy requests (e.g., double-encoded slashes, mix-case paths)

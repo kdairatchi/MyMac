@@ -8,8 +8,6 @@
 - **Severity:** critical · **Hunt:** 4/5 · **Score:** 54.0 · **Status:** poc · **Age:** 0d
 - **Sources:** [1](https://www.assetnote.io/resources/research/advisory-sharefile-pre-auth-rce-cve-2023-24489) · [2](https://www.assetnote.io/resources/research/encrypted-doesnt-mean-authenticated-sharefile-rce-cve-2023-24489)
 
-### Advisory: ShareFile Pre-Auth RCE
-
 - **Vulnerable Entry Point**: The `UploadClientModule.asmx` endpoint processes unauthenticated SOAP requests without sufficient validation.
 - **Root Cause**: The application utilizes unsafe .NET XML deserialization, parsing user-supplied XML directly into objects.
 - **Exploitation Method**: Attackers can inject .NET gadget chains (e.g., `ObjectDataProvider`) within the XML payload to trigger arbitrary command execution.
@@ -40,7 +38,6 @@
 - **Severity:** critical · **Hunt:** 4/5 · **Score:** 27.0 · **Status:** poc · **Age:** 127d
 - **Sources:** [1](https://www.assetnote.io/resources/research/moveit-transfer-rce-part-two-cve-2023-34362)
 
-### MOVEit Transfer RCE Part Two (CVE-2023-34362)
 - Insight: Variant of CVE-2023-34362 with distinct RCE mechanism in MOVEit Transfer's file processing pipeline
 - Insight: Exploitable via crafted file transfers triggering deserialization of untrusted input
 - Insight: Affects version-specific endpoints handling large file payloads and metadata
@@ -56,8 +53,6 @@ Practical takeaways:
 - **Tags:** `#rce` `#auth-bypass` `#iis` `#sitecore`
 - **Severity:** critical · **Hunt:** 3/5 · **Score:** 26.55 · **Status:** theoretical · **Age:** 1d
 - **Sources:** [1](https://www.assetnote.io/resources/research/bypass-iis-authorisation-with-this-one-weird-trick-three-rces-and-two-auth-bypasses-in-sitecore-9-3)
-
-### Bypass IIS Auth in Sitecore 9.3 - Three RCEs and Auth Bypasses
 
 - **Insight 1:** The research demonstrates novel techniques to bypass IIS authorization mechanisms specifically in Sitecore 9.3, leveraging how the application handles authentication at the web server level.
 - **Insight 2:** Multiple vulnerability vectors exist, including three distinct paths achieving Remote Code Execution, potentially through crafted requests that manipulate Sitecore's interaction with IIS security modules.

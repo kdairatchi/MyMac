@@ -8,7 +8,6 @@
 - **Severity:** critical · **Hunt:** 4/5 · **Score:** 54.0 · **Status:** poc · **Age:** 0d
 - **Sources:** [1](https://labs.watchtowr.com/thanks-itsms-threat-actors-have-never-been-so-organized-bmc-footprints-pre-auth-remote-code-execution-chains/)
 
-### BMC FootPrints Pre-Auth RCE Chains — rce
 - **What:** Pre-authenticated remote code execution vulnerability chains impacting the BMC FootPrints ITSM platform.
 - **Why it matters:** ITSM solutions are high-value targets for ransomware gangs due to their privileged access and sensitive data repositories.
 - **Hunt signal:** pass
