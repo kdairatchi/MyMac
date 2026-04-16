@@ -2,6 +2,17 @@
 
 Flat map of the workbench. Use `grep -rln <term>` across dirs for cross-cutting searches.
 
+**New here?** Read [`START-HERE.md`](START-HERE.md) first.
+
+## Latest (2025/2026)
+- [Latest-2026 tracker](Latest-2026/README.md)
+- [HTTP desync 2025 (Kettle "Must Die")](Latest-2026/desync-2025.md)
+- [Next.js + framework CVEs](Latest-2026/nextjs-framework-cves.md)
+- [Supply chain 2025/2026](Latest-2026/supply-chain.md)
+- [Cloud native — K8s, eBPF, containers](Latest-2026/cloud-native.md)
+- [Appliance exploit chains](Latest-2026/appliance-chains.md)
+- [LLM + agent + MCP security](AI/llm-security.md)
+
 ## Methodology
 - [01 Scope review](Methodology/01-scope-review.md)
 - [02 Async recon](Methodology/02-async-recon.md)

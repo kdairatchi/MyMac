@@ -6,7 +6,7 @@ Maintained by **[kdairatchi](https://github.com/kdairatchi)** · [ProwlrBot](htt
 
 ![status](https://img.shields.io/badge/status-active-success) ![license](https://img.shields.io/badge/license-MIT-blue) ![topics](https://img.shields.io/badge/topics-bugbounty%20%7C%20pentest%20%7C%20recon%20%7C%20payloads-purple)
 
-See [`INDEX.md`](INDEX.md) for a flat, scannable map of the whole repo.
+**Start:** [`START-HERE.md`](START-HERE.md) (beginner→pro onboarding) · **Map:** [`INDEX.md`](INDEX.md) · **Fresh attack surface:** [`Latest-2026/`](Latest-2026/) · **LLM/AI bounties:** [`AI/llm-security.md`](AI/llm-security.md)
 
 ---
 
@@ -14,7 +14,8 @@ See [`INDEX.md`](INDEX.md) for a flat, scannable map of the whole repo.
 
 | Dir | Contents |
 |---|---|
-| [`AI/`](AI/) | AI-assisted hunting prompts and notes |
+| [`AI/`](AI/) | LLM/agent/MCP security + AI-assisted hunting — see [`llm-security.md`](AI/llm-security.md) |
+| [`Latest-2026/`](Latest-2026/) | Rolling tracker: HTTP desync, Next.js/framework CVEs, supply chain, K8s, appliances |
 | [`Awesome/`](Awesome/) | Curated awesome-lists — tools, resources, readings |
 | [`Burp/`](Burp/) | Burp Suite configs, extensions, match/replace rules |
 | [`Cheatsheets/`](Cheatsheets/) | Per-class cheatsheets + Keyhacks + tools index |
