@@ -623,3 +623,74 @@ Contributions welcome! Read the [contribution guidelines](contributing.md) first
 
 To the extent possible under law, vavkamil has waived all copyright and
 related or neighboring rights to this work.
+
+## 2026-04-16
+
+### Nginx UI Broken Access Control — `CVE-2026-33032`
+- **Tags:** `#auth-bypass` `#web`
+- **Severity:** high · **Hunt:** 4/5 · **Score:** 42.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/21042b7c28e9fcf8798886bba78b9e0199d2d4f0) · [2](https://github.com/projectdiscovery/nuclei-templates/commit/d1a5999447e019ece601c8ac6c5213538155dfaf)
+
+This Nuclei template detects CVE-2026-33032, a critical broken access control vulnerability in Nginx UI allowing unauthorized administrative actions. Use this during pentests to identify privilege escalation risks in public-facing Nginx UI instances before publication of the CVE.
+
+---
+*Clustered 2 sources for this item.*
+
+### Odoo Login Redirect XSS
+- **Tags:** `#xss` `#web`
+- **Severity:** high · **Hunt:** 4/5 · **Score:** 42.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/d9f00221d869b5d8c7a817bf1a42febf79d81ae2)
+
+This Nuclei template detects reflected open redirect vulnerabilities in Odoo's login flow that can be chained into cross-site scripting (XSS) attacks. It should be deployed during authentication testing against Odoo systems to identify unsafe redirect parameters leading to client-side code execution.
+
+---
+### CVE-2026-4631 - Cockpit Web Console Pre-Auth RCE — `CVE-2026-4631`
+- **Tags:** `#rce` `#command-injection`
+- **Severity:** high · **Hunt:** 5/5 · **Score:** 35.0 · **Status:** theoretical · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/259a7393fd4bc37f554f80ac67cec9a4996036e9)
+
+A Nuclei template to detect CVE-2026-4631, a pre-authentication remote code execution vulnerability in Cockpit Web Console versions below 360 via SSH option injection. Use in security assessments of critical infrastructure management systems exposed to the internet, especially for pentests of server administration interfaces.
+
+---
+### chore: sign templates 🤖
+- **Tags:** `#web`
+- **Severity:** unknown · **Hunt:** 1/5 · **Score:** 4.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/76748f26148f1e4f15f46c827d5126c9997f94d1) · [2](https://github.com/projectdiscovery/nuclei-templates/commit/944acb4099b9839569a5a28a799b1bd6c27295aa) · [3](https://github.com/projectdiscovery/nuclei-templates/commit/766a46edb48e47d61457dc928ef176c42adf0e3b) · [4](https://github.com/projectdiscovery/nuclei-templates/commit/3cdcc366b7573f061f73ea0e0aa49b6f389903df) · [5](https://github.com/projectdiscovery/nuclei-templates/commit/665bea28f6fdfa5e891120dcd68dae92ba014f76)
+
+This commit introduces digital signing functionality for Nuclei templates to verify authenticity and prevent tampering during deployment. Essential for automated security pipelines requiring integrity verification in enterprise environments or CI/CD workflows handling untrusted template repositories.
+
+---
+*Clustered 5 sources for this item.*
+
+### Update odoo-login-redirect.yaml
+- **Tags:** `#auth-bypass` `#web`
+- **Severity:** unknown · **Hunt:** 1/5 · **Score:** 4.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/b50c2098e23df82ea0bfd08dd1d1a46d5d205b4d)
+
+This template detects login redirect vulnerabilities in Odoo applications, potentially exposing users to phishing or unauthorized access. It should be used in security scans to identify misconfigured authentication flows that could lead to credential theft or session hijacking.
+
+---
+### Nginx OpenCloudOS Test Page Template
+- **Tags:** `#nginx` `#web`
+- **Severity:** unknown · **Hunt:** 1/5 · **Score:** 2.0 · **Status:** unknown · **Age:** 30d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/ad88555dd667eca235ee1b651d7abbd373417894)
+
+This commit adds a new Nuclei template targeting the Nginx test page on OpenCloudOS systems. It enables automated detection of misconfigurations or vulnerabilities specific to the default OpenCloudOS Nginx installation. Use this template during web app pentests or vulnerability scanning to check for OpenCloudOS-specific Nginx exposures.
+
+---
+### Nuclei Template Update Generator
+- **Tags:** `#web` `#scanner`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/1fffe96f0867609476c51d8bfbc17fc7edef47f4)
+
+This update automates the generation of a new addition list for the Nuclei vulnerability scanner template repository, enabling maintainers to track newly added detection rules. The script is used periodically during maintenance to ensure the template catalog stays current and easily consumable for penetration testers and security teams.
+
+---
+### chore: sign templates 🤖
+- **Tags:** `#supply-chain` `#web`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/a89211199fb7b561200ede97a3e74d55dbe0bbab)
+
+This commit introduces digital signatures for all Nuclei templates to ensure integrity and prevent unauthorized modifications. It should be used in environments requiring verification of template authenticity, particularly for security teams validating template sources during automated scanning deployments to mitigate risks from malicious or tampered templates.
+
+---
