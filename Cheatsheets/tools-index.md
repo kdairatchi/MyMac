@@ -724,3 +724,57 @@ sqry -q "apache" | grep -v "^10\." > public_ips.txt
 ```
 
 **Config:** `export SHODAN_API_KEY="your_api_key_here"`
+
+## 2026-04-17
+
+### Vendure Core SQL Injection Nuclei Template — `CVE-2026-40887`
+- **Tags:** `#sqli` `#web`
+- **Severity:** critical · **Hunt:** 4/5 · **Score:** 54.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/252f71b4fb06f74b7ae3469ca87d92f1419fb445)
+
+This Nuclei template detects a SQL Injection vulnerability in Vendure Core via automated scanning. Use it during penetration tests and vulnerability assessments targeting Vendure e-commerce platforms to identify this critical flaw. Ideal for unauthenticated testing scenarios where PoC availability exists.
+
+---
+### Retool PostMessage XSS Template
+- **Tags:** `#xss` `#retool`
+- **Severity:** unknown · **Hunt:** 2/5 · **Score:** 8.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/ac66842d51612c0d67ca961e77a050a03fe26841)
+
+This Nuclei template detects Cross-Site Scripting (XSS) vulnerabilities in Retool Self-Hosted applications through malicious custom component collections exploiting postMessage functionality. Use during vulnerability scans of Retool environments to identify this specific XSS attack vector in custom workflows or integrations.
+
+---
+### Browserless Swagger Detection Template
+- **Tags:** `#api` `#web`
+- **Severity:** info · **Hunt:** 4/5 · **Score:** 6.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/664c594c45d92e1876ded9dd90e9e5f6f564c970)
+
+This Nuclei template detects exposed Swagger UI in Browserless API services, enabling security testers to identify publicly accessible API documentation that might reveal sensitive endpoint structures and data flow details during reconnaissance or vulnerability assessments.
+
+---
+### Nuclei Templates Update Generator
+- **Tags:** `#tool` `#web` `#api`
+- **Severity:** unknown · **Hunt:** 1/5 · **Score:** 4.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/67f0c847aec8b78a71b51461bbc1214cb41eeef9) · [2](https://github.com/projectdiscovery/nuclei-templates/commit/02cb8a9e480843d54728f9d78664d8d0e7c0119f) · [3](https://github.com/projectdiscovery/nuclei-templates/commit/605aede1a91e004efb41f02940c6696a327c108c) · [4](https://github.com/projectdiscovery/nuclei-templates/commit/2d5cedac35482ac180b8fe39920db91f751f29bf)
+
+This automated commit generates a new addition list for the Project Discovery nuclei-templates repository, maintaining an updated catalog of newly added vulnerability scanning templates. Security professionals don’t directly interact with this maintenance process, but it ensures nuclei users can leverage the latest detection rules for emerging vulnerabilities.
+
+---
+*Clustered 4 sources for this item.*
+
+### Vendure Detection Template
+- **Tags:** `#vendure` `#web`
+- **Severity:** unknown · **Hunt:** 1/5 · **Score:** 4.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/54c9eab549d9fb7421afc0113942da0cee44a90c)
+
+This template adds detection capabilities for vulnerabilities in the Vendure e-commerce platform. It enables automated security scanning of Vendure installations using the Nuclei engine, helping identify misconfigurations or known weaknesses during vulnerability assessments. Use this during pentests or in security automation pipelines to proactively detect issues in Vendure deployments.
+
+---
+### Template Signing for Nuclei
+- **Tags:** `#tool` `#supply-chain`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/b5c6d6d823d5cfba2b09014a7c9964b025f0fcba) · [2](https://github.com/projectdiscovery/nuclei-templates/commit/5706cf85bf69e1349f24ef5310b40ac5b4776dca)
+
+This update introduces cryptographic signing for Nuclei templates, enabling users to verify that templates have not been tampered with and are from trusted sources. Use this feature in environments where template integrity is critical, such as enterprise deployments or when using community-provided templates from untrusted sources.
+
+---
+*Clustered 2 sources for this item.*

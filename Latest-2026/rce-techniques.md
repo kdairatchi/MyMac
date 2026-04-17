@@ -104,3 +104,14 @@ filename="shell.php%00.jpg"
 - **CVE-2023-24489** · Citrix ShareFile pre-auth RCE via `UploadClientModule.asmx` — unsafe .NET XML deserialization, `ObjectDataProvider` gadget chain · https://www.assetnote.io/resources/research/advisory-sharefile-pre-auth-rce-cve-2023-24489
 - **CVE-2023-34362** · MOVEit Transfer RCE — deserialization in file processing pipeline, SYSTEM-level compromise via crafted file transfer · https://www.assetnote.io/resources/research/moveit-transfer-rce-part-two-cve-2023-34362
 - **CVE-2023-38646** · Metabase pre-auth RCE — H2 JDBC `INIT` param via `/api/setup/validate`, SQL → Java method invocation chain · https://www.assetnote.io/resources/research/chaining-our-way-to-pre-auth-rce-in-metabase-cve-2023-38646
+
+## 2026-04-17
+
+### Patch Diffing Progress MOVEit Transfer RCE (CVE-2023-34362) — `CVE-2023-34362`
+- **Tags:** `#rce`
+- **Severity:** high · **Hunt:** 4/5 · **Score:** 14.0 · **Status:** patched · **Age:** 30d
+- **Sources:** [1](https://www.assetnote.io/resources/research/patch-diffing-progress-moveit-transfer-rce-cve-2023-34362)
+
+**[Patch Diffing Progress MOVEit Transfer RCE]** — A technique to discover RCE vulnerabilities in Progress MOVEit Transfer by analyzing patch differences. Hunt: Check for unpatched MOVEit Transfer instances and analyze patch diffs for RCE vectors. [src](https://www.assetnote.io/resources/research/patch-diffing-progress-moveit-transfer-rce-cve-2023-34362)
+
+---
