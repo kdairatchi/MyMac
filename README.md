@@ -20,11 +20,9 @@ Maintained by **[kdairatchi](https://github.com/kdairatchi)** · [ProwlrBot](htt
 | [`Burp/`](Burp/) | Burp Suite configs, extensions, match/replace rules |
 | [`Cheatsheets/`](Cheatsheets/) | Per-class cheatsheets + Keyhacks + tools index |
 | [`Checklists/`](Checklists/) | Hunt checklists — web, mobile, API, cloud + vuln-classes |
-| [`Cloudflare-WAF-Bypass/`](Cloudflare-WAF-Bypass/) | CF WAF bypass techniques |
 | [`Dorks/`](Dorks/) | Google / GitHub / Shodan dorks |
-| [`Infosec/`](Infosec/) | General infosec references |
 | [`Methodology/`](Methodology/) | Hunt methodology, triage + validation, rules |
-| [`Notes/`](Notes/) | Field notes by topic |
+| [`Notes/`](Notes/) | Writeups log + daily research drops |
 | [`OWASP/`](OWASP/) | WSTG, MASTG, API Top 10, cheatsheets |
 | [`Payloads/`](Payloads/) | Categorized payloads (XSS, 403, JWT, WP, leaks) |
 | [`PoCs/`](PoCs/) | Proof-of-concept exploits |

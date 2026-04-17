@@ -44,6 +44,10 @@ Flat map of the workbench. Use `grep -rln <term>` across dirs for cross-cutting 
 - [Prompt injection techniques](Latest-2026/prompt-injection-techniques.md) — direct/indirect injection, jailbreak, MCP tool poisoning
 - [Supply chain techniques](Latest-2026/supply-chain-techniques.md) — typosquatting, dependency confusion, CI/CD hijack
 - [Misc techniques](Latest-2026/misc-techniques.md) — framework-specific bugs, middleware bypass, path confusion
+- [Open redirect techniques](Latest-2026/open-redirect-techniques.md) — protocol-relative bypass, @-trick, OAuth redirect_uri theft
+- [CORS techniques](Latest-2026/cors-techniques.md) — credentialed reflection, null origin, regex bypass, ATO chain
+- [Subdomain takeover techniques](Latest-2026/subdomain-takeover-techniques.md) — CNAME fingerprints, claim steps, cookie/OAuth chain
+- [SSTI techniques](Latest-2026/ssti-techniques.md) — engine detection, Jinja2/Twig/Freemarker/ERB/SpEL payloads, tplmap
 
 ## Methodology
 
