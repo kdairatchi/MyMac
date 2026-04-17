@@ -87,6 +87,46 @@ Content-Type: application/json
 # window before lockout = 1 valid window
 ```
 
+## Last-byte sync (HTTP/1.1)
+
+When the target doesn't support HTTP/2:
+
+1. Send all but the last byte of N requests (withhold final byte).
+2. Send the last byte of all N requests back-to-back in rapid succession.
+3. Server processes the queued requests nearly simultaneously.
+
+Turbo Intruder `engine=Engine.THREADED` + `pipeline=True` implements this.
+
+## Multi-endpoint chain races
+
+Race two different endpoints that share state:
+
+```
+POST /transfer  +  POST /close-account   → transfer-then-close races
+POST /email/verify  +  POST /email/change
+POST /apply-coupon  +  POST /remove-coupon
+```
+
+Use `engine.queue(req1)` + `engine.queue(req2)` in the same gate to fire them simultaneously.
+
+## Code pattern: what to look for
+
+Bad — read-modify-write with no atomic check:
+```python
+if not user.has_claimed_bonus:
+    give_bonus(user)
+    user.has_claimed_bonus = True   # race window here
+```
+
+Good — atomic database update:
+```sql
+UPDATE users SET has_claimed_bonus = TRUE
+WHERE id = $1 AND has_claimed_bonus = FALSE RETURNING id;
+-- App checks if any row was returned
+```
+
+Or `SELECT ... FOR UPDATE` inside a transaction.
+
 ## Chain Opportunities
 
 - **Race → double-spend** — apply coupon twice, transfer same balance twice

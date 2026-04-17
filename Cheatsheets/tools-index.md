@@ -694,3 +694,33 @@ This update automates the generation of a new addition list for the Nuclei vulne
 This commit introduces digital signatures for all Nuclei templates to ensure integrity and prevent unauthorized modifications. It should be used in environments requiring verification of template authenticity, particularly for security teams validating template sources during automated scanning deployments to mitigate risks from malicious or tampered templates.
 
 ---
+
+## sqry (Shodan CLI wrapper)
+
+`go install github.com/kdairatchi/sqry@latest`
+
+```bash
+# Basic service discovery
+sqry -q "apache" --json --limit 50
+sqry -q "port:80" --json --limit 50
+sqry -q 'org:"Google LLC"'
+sqry -q "apache" --country US --json --limit 10
+
+# Vulnerability-focused
+sqry -q "product:apache" --join-cves --focus-vulns --json
+sqry --min-cvss 9.0 --max-cvss 10.0 --json
+sqry --kev --json --limit 10
+sqry --cve CVE-2016-10087 --cve-json --pretty
+
+# Advanced
+sqry -q "ip:<target_ip>" --ports --json
+sqry -q "ssl:true" --domains --with-domains
+sqry -q "http" --httpx --screenshot --limit 20
+
+# Pipeline
+sqry -q "apache" | xargs -I {} nmap -sV {}
+sqry -q "apache" | tee ips.txt | wc -l
+sqry -q "apache" | grep -v "^10\." > public_ips.txt
+```
+
+**Config:** `export SHODAN_API_KEY="your_api_key_here"`

