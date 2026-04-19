@@ -1,4 +1,66 @@
-# Miscellaneous Web Techniques
+# Misc Techniques
+
+> Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
+
+_Last updated: 2026-04-17 · Items: 1_
+
+---
+
+## What
+
+_Define the class, prerequisites, and typical finding shape. Fill with real content._
+_pending enrichment — baseline opener below_
+
+See items under ## Items for per-finding details.
+
+---
+
+## CVEs
+
+_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
+
+---
+
+## Probes
+
+_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
+_pending enrichment_
+
+---
+
+## PoCs
+
+_Public PoC links rolled up from items below._
+
+_No PoCs in items yet._
+
+---
+
+## Reproduction
+
+_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
+_pending enrichment_
+
+---
+
+## Defense
+
+_Patch guidance and detection rules. Populated from vendor advisories._
+_pending enrichment_
+
+---
+
+## References
+
+- [projectzero.google](https://projectzero.google/2026/03/mutational-grammar-fuzzing.html)
+- [medium.com](https://medium.com/@dheerajdonikena/how-i-made-200-just-by-changing-a-response-c201624867c4)
+- [medium.com](https://medium.com/@techyringo/i-hacked-deeper-into-a-network-without-moving-heres-how-ssh-pivoting-works-e04952a87214)
+- [medium.com](https://medium.com/@rgoel.goel03/detecting-web-attacks-reconstructing-an-attack-from-logs-and-network-traffic-5739efaa1644)
+- [www.intigriti.com](https://www.intigriti.com/researchers/blog/hacker-spotlight/from-curiosity-to-critical-bugs-interview-with-marc-oliver-munz-c1phy)
+
+---
+
+## Items
 
 > Catch-all for techniques that don't fit a single class — framework-specific bugs, middleware bypass, path confusion, and emerging attack surfaces.
 
@@ -122,6 +184,7 @@ Scan with: `ppmap` — automated prototype pollution scanner.
 ## 2026-04-17
 
 ### On the Effectiveness of Mutational Grammar Fuzzing
+
 - **Tags:** `#web`
 - **Severity:** unknown · **Hunt:** 3/5 · **Score:** 12.0 · **Status:** unknown · **Age:** 0d
 - **Sources:** [1](https://projectzero.google/2026/03/mutational-grammar-fuzzing.html) · [2](https://medium.com/@dheerajdonikena/how-i-made-200-just-by-changing-a-response-c201624867c4) · [3](https://medium.com/@techyringo/i-hacked-deeper-into-a-network-without-moving-heres-how-ssh-pivoting-works-e04952a87214) · [4](https://medium.com/@rgoel.goel03/detecting-web-attacks-reconstructing-an-attack-from-logs-and-network-traffic-5739efaa1644) · [5](https://www.intigriti.com/researchers/blog/hacker-spotlight/from-curiosity-to-critical-bugs-interview-with-marc-oliver-munz-c1phy)
@@ -130,4 +193,3 @@ Scan with: `ppmap` — automated prototype pollution scanner.
 
 ---
 *Clustered 14 sources for this item.*
-

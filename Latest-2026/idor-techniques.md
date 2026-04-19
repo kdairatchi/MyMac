@@ -1,5 +1,63 @@
 # IDOR Techniques
 
+> Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
+
+_Last updated: — · Items: 0_
+
+---
+
+## What
+
+_Define the class, prerequisites, and typical finding shape. Fill with real content._
+_pending enrichment — baseline opener below_
+
+See items under ## Items for per-finding details.
+
+---
+
+## CVEs
+
+_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
+
+---
+
+## Probes
+
+_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
+_pending enrichment_
+
+---
+
+## PoCs
+
+_Public PoC links rolled up from items below._
+
+_No PoCs in items yet._
+
+---
+
+## Reproduction
+
+_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
+_pending enrichment_
+
+---
+
+## Defense
+
+_Patch guidance and detection rules. Populated from vendor advisories._
+_pending enrichment_
+
+---
+
+## References
+
+_Populated by daily refresh-latest pipeline._
+
+---
+
+## Items
+
 > Insecure Direct Object Reference — when a server exposes internal object identifiers that can be substituted to access data belonging to other users or objects.
 
 ## Surface
@@ -19,12 +77,14 @@
 4. **Try GUID enumeration** — check if GUIDs are UUIDv1 (time-based, enumerable) with `python3 -c "import uuid; print([str(uuid.uuid1()) for _ in range(5)])"`
 5. **Check indirect refs** — fuzz string-based params with known filenames (`/etc/passwd`, `../config`, peer usernames)
 6. **Automate ID sweeps** with ffuf:
+
    ```
    ffuf -u https://target.com/api/users/FUZZ/profile \
      -w /usr/share/seclists/Fuzzing/4-digits-0000-9999.txt \
      -H "Cookie: session=<your_token>" \
      -mc 200 -t 50
    ```
+
 7. **Confirm with Autorize** — Burp extension that auto-replays every request under a lower-privileged session; flag 200s where you'd expect 403s
 
 ## Tools

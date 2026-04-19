@@ -1,9 +1,99 @@
-# sourcecodester-cves
+# Sourcecodester CVEs
 
+> Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
+
+_Last updated: 2026-04-16 · Items: 11_
+
+---
+
+## What
+
+_Define the class, prerequisites, and typical finding shape. Fill with real content._
+_pending enrichment — baseline opener below_
+
+See items under ## Items for per-finding details.
+
+---
+
+## CVEs
+
+| CVE | Date | Title | CVSS | Status | Src |
+|---|---|---|---|---|---|
+| CVE-2026-37598 | 2026-04-16 | SourceCodester Patient Scheduler RCE | critical | poc | [src](https://nvd.nist.gov/vuln/detail/CVE-2026-37598) |
+| CVE-2026-37589 | 2026-04-16 | SQLi in SourceCodester Storage Unit Rental | high | poc | [src](https://nvd.nist.gov/vuln/detail/CVE-2026-37589) |
+| CVE-2026-37600 | 2026-04-16 | SourceCodester Scheduler SQLi | high | poc | [src](https://nvd.nist.gov/vuln/detail/CVE-2026-37600) |
+| CVE-2026-37593 | 2026-04-16 | SourceCodester WFH Attendance System SQLi | high | poc | [src](https://nvd.nist.gov/vuln/detail/CVE-2026-37593) |
+| CVE-2026-37592 | 2026-04-16 | Sourcecodester Storage Unit Rental SQLi | high | unknown | [src](https://nvd.nist.gov/vuln/detail/CVE-2026-37592) |
+| CVE-2026-37597 | 2026-04-16 | SQLi in SourceCodester WFH Attendance System | high | poc | [src](https://nvd.nist.gov/vuln/detail/CVE-2026-37597) |
+| CVE-2026-37591 | 2026-04-16 | SQLi in Storage Unit Rental Management System v1.0 | high | poc | [src](https://nvd.nist.gov/vuln/detail/CVE-2026-37591) |
+| CVE-2026-37594 | 2026-04-16 | SourceCodester WFH Attendance v1.0 SQLi | high | unknown | [src](https://nvd.nist.gov/vuln/detail/CVE-2026-37594) |
+| CVE-2026-37590 | 2026-04-16 | SourceCodester Storage Unit Rental Management System SQLi | high | theoretical | [src](https://nvd.nist.gov/vuln/detail/CVE-2026-37590) |
+| CVE-2026-37595 | 2026-04-16 | SQLi in SourceCodester WFH Attendance System v1.0 | high | unknown | [src](https://nvd.nist.gov/vuln/detail/CVE-2026-37595) |
+| CVE-2026-37596 | 2026-04-16 | SourceCodester WFH Attendance System SQLi | high | patched | [src](https://nvd.nist.gov/vuln/detail/CVE-2026-37596) |
+
+---
+
+## Probes
+
+_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
+_pending enrichment_
+
+---
+
+## PoCs
+
+_Public PoC links rolled up from items below._
+
+- **CVE-2026-37598** — [source](https://nvd.nist.gov/vuln/detail/CVE-2026-37598)
+- **CVE-2026-37589** — [source](https://nvd.nist.gov/vuln/detail/CVE-2026-37589)
+- **CVE-2026-37600** — [source](https://nvd.nist.gov/vuln/detail/CVE-2026-37600)
+- **CVE-2026-37593** — [source](https://nvd.nist.gov/vuln/detail/CVE-2026-37593)
+- **CVE-2026-37592** — [source](https://nvd.nist.gov/vuln/detail/CVE-2026-37592)
+- **CVE-2026-37597** — [source](https://nvd.nist.gov/vuln/detail/CVE-2026-37597)
+- **CVE-2026-37591** — [source](https://nvd.nist.gov/vuln/detail/CVE-2026-37591)
+- **CVE-2026-37594** — [source](https://nvd.nist.gov/vuln/detail/CVE-2026-37594)
+- **CVE-2026-37590** — [source](https://nvd.nist.gov/vuln/detail/CVE-2026-37590)
+- **CVE-2026-37595** — [source](https://nvd.nist.gov/vuln/detail/CVE-2026-37595)
+- **CVE-2026-37596** — [source](https://nvd.nist.gov/vuln/detail/CVE-2026-37596)
+
+---
+
+## Reproduction
+
+_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
+_pending enrichment_
+
+---
+
+## Defense
+
+_Patch guidance and detection rules. Populated from vendor advisories._
+_pending enrichment_
+
+---
+
+## References
+
+- [nvd.nist.gov](https://nvd.nist.gov/vuln/detail/CVE-2026-37598)
+- [nvd.nist.gov](https://nvd.nist.gov/vuln/detail/CVE-2026-37589)
+- [nvd.nist.gov](https://nvd.nist.gov/vuln/detail/CVE-2026-37600)
+- [nvd.nist.gov](https://nvd.nist.gov/vuln/detail/CVE-2026-37593)
+- [nvd.nist.gov](https://nvd.nist.gov/vuln/detail/CVE-2026-37592)
+- [nvd.nist.gov](https://nvd.nist.gov/vuln/detail/CVE-2026-37597)
+- [nvd.nist.gov](https://nvd.nist.gov/vuln/detail/CVE-2026-37591)
+- [nvd.nist.gov](https://nvd.nist.gov/vuln/detail/CVE-2026-37594)
+- [nvd.nist.gov](https://nvd.nist.gov/vuln/detail/CVE-2026-37590)
+- [nvd.nist.gov](https://nvd.nist.gov/vuln/detail/CVE-2026-37595)
+- [nvd.nist.gov](https://nvd.nist.gov/vuln/detail/CVE-2026-37596)
+
+---
+
+## Items
 
 ## 2026-04-16
 
 ### SourceCodester Patient Scheduler RCE — `CVE-2026-37598`
+
 - **Tags:** `#rce` `#web`
 - **Severity:** critical · **Hunt:** 3/5 · **Score:** 40.5 · **Status:** poc · **Age:** 0d
 - **Sources:** [1](https://nvd.nist.gov/vuln/detail/CVE-2026-37598)
@@ -14,7 +104,9 @@
 - **Evidence:** [NVD] Confirms vulnerability in v1.0 allows code execution.
 
 ---
+
 ### SQLi in SourceCodester Storage Unit Rental — `CVE-2026-37589`
+
 - **Tags:** `#sqli`
 - **Severity:** high · **Hunt:** 3/5 · **Score:** 31.5 · **Status:** poc · **Age:** 0d
 - **Sources:** [1](https://nvd.nist.gov/vuln/detail/CVE-2026-37589)
@@ -25,7 +117,9 @@
 - **Evidence:** [source] NVD disclosure identifies the specific vulnerable file path and parameter handling.
 
 ---
+
 ### SourceCodester Scheduler SQLi — `CVE-2026-37600`
+
 - **Tags:** `#sqli`
 - **Severity:** high · **Hunt:** 3/5 · **Score:** 31.5 · **Status:** poc · **Age:** 0d
 - **Sources:** [1](https://nvd.nist.gov/vuln/detail/CVE-2026-37600)
@@ -36,7 +130,9 @@
 - **Evidence:** [source] NVD detail page · [opinion] Common failure to sanitize input in legacy PHP management systems.
 
 ---
+
 ### SourceCodester WFH Attendance System SQLi — `CVE-2026-37593`
+
 - **Tags:** `#sqli` `#web`
 - **Severity:** high · **Hunt:** 3/5 · **Score:** 31.5 · **Status:** poc · **Age:** 0d
 - **Sources:** [1](https://nvd.nist.gov/vuln/detail/CVE-2026-37593)
@@ -47,7 +143,9 @@
 - **Evidence:** [NVD] Vulnerability disclosed in view_att.php · Likely requires auth due to /admin/ path.
 
 ---
+
 ### Sourcecodester Storage Unit Rental SQLi — `CVE-2026-37592`
+
 - **Tags:** `#sqli` `#web`
 - **Severity:** high · **Hunt:** 3/5 · **Score:** 21.0 · **Status:** unknown · **Age:** 0d
 - **Sources:** [1](https://nvd.nist.gov/vuln/detail/CVE-2026-37592)
@@ -58,7 +156,9 @@
 - **Evidence:** [source] NVD disclosure points to the vulnerable file · [opinion] Likely a failure to sanitize user input in a SQL query.
 
 ---
+
 ### SQLi in SourceCodester WFH Attendance System — `CVE-2026-37597`
+
 - **Tags:** `#sqli` `#web`
 - **Severity:** high · **Hunt:** 2/5 · **Score:** 21.0 · **Status:** poc · **Age:** 0d
 - **Sources:** [1](https://nvd.nist.gov/vuln/detail/CVE-2026-37597)
@@ -69,7 +169,9 @@
 - **Evidence:** [nvd] Confirms vulnerability in `/wfh_attendance/admin/attendance_list.php` for v1.0.
 
 ---
+
 ### SQLi in Storage Unit Rental Management System v1.0 — `CVE-2026-37591`
+
 - **Tags:** `#sqli`
 - **Severity:** high · **Hunt:** 2/5 · **Score:** 21.0 · **Status:** poc · **Age:** 0d
 - **Sources:** [1](https://nvd.nist.gov/vuln/detail/CVE-2026-37591)
@@ -80,7 +182,9 @@
 - **Evidence:** [NVD] Confirms the vulnerability exists via the `view_details.php` endpoint in version 1.0.
 
 ---
+
 ### SourceCodester WFH Attendance v1.0 SQLi — `CVE-2026-37594`
+
 - **Tags:** `#sqli`
 - **Severity:** high · **Hunt:** 3/5 · **Score:** 21.0 · **Status:** unknown · **Age:** 0d
 - **Sources:** [1](https://nvd.nist.gov/vuln/detail/CVE-2026-37594)
@@ -91,7 +195,9 @@
 - **Evidence:** [source] NVD entry confirms vulnerability in /admin/view_employee.php · [opinion] Path implies authentication is required, reducing immediate internet-facing impact.
 
 ---
+
 ### SourceCodester Storage Unit Rental Management System SQLi — `CVE-2026-37590`
+
 - **Tags:** `#sqli` `#web` `#api`
 - **Severity:** high · **Hunt:** 3/5 · **Score:** 21.0 · **Status:** theoretical · **Age:** 0d
 - **Sources:** [1](https://nvd.nist.gov/vuln/detail/CVE-2026-37590)
@@ -102,7 +208,9 @@
 - **Evidence:** [nvd_recent] Confirmed in admin interface · [opinion] High impact due to access to backend functionality and potential credential theft.
 
 ---
+
 ### SQLi in SourceCodester WFH Attendance System v1.0 — `CVE-2026-37595`
+
 - **Tags:** `#sqli`
 - **Severity:** high · **Hunt:** 2/5 · **Score:** 14.0 · **Status:** unknown · **Age:** 0d
 - **Sources:** [1](https://nvd.nist.gov/vuln/detail/CVE-2026-37595)
@@ -113,7 +221,9 @@
 - **Evidence:** [source] NVD vulnerability disclosure confirms the vulnerable file path and injection type.
 
 ---
+
 ### SourceCodester WFH Attendance System SQLi — `CVE-2026-37596`
+
 - **Tags:** `#sqli`
 - **Severity:** high · **Hunt:** 2/5 · **Score:** 14.0 · **Status:** patched · **Age:** 0d
 - **Sources:** [1](https://nvd.nist.gov/vuln/detail/CVE-2026-37596)

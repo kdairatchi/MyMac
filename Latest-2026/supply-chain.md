@@ -1,4 +1,64 @@
-# Supply Chain — 2025/2026
+# Supply Chain
+
+> Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
+
+_Last updated: — · Items: 5_
+
+---
+
+## What
+
+_Define the class, prerequisites, and typical finding shape. Fill with real content._
+_pending enrichment — baseline opener below_
+
+See items under ## Items for per-finding details.
+
+---
+
+## CVEs
+
+| CVE | Date | Title | CVSS | Status | Src |
+|---|---|---|---|---|---|
+| CVE-2024-3094 | — | Maintainer compromise / account takeover | — | — | — |
+
+---
+
+## Probes
+
+_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
+_pending enrichment_
+
+---
+
+## PoCs
+
+_Public PoC links rolled up from items below._
+
+_No PoCs in items yet._
+
+---
+
+## Reproduction
+
+_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
+_pending enrichment_
+
+---
+
+## Defense
+
+_Patch guidance and detection rules. Populated from vendor advisories._
+_pending enrichment_
+
+---
+
+## References
+
+_Populated by daily refresh-latest pipeline._
+
+---
+
+## Items
 
 > Dated: **2026-04-15**
 
@@ -7,22 +67,27 @@ Post-SolarWinds, post-XZ, supply chain is no longer exotic. In 2025-2026 the att
 ## Attack classes
 
 ### Typosquatting + Slopsquatting
+
 - **Slopsquatting** (Lasso Security, Mar 2025) — LLMs hallucinate package names; attacker registers them. Confirmed hits on `langchain`, `llama-index`, `openai-python` near-misses.
 - Standard typos: `reqeusts`, `urllib` (real but abandoned), `python-dateutil` vs `dateutil`
 
 ### Maintainer compromise / account takeover
+
 - **XZ backdoor (CVE-2024-3094)** — still the playbook. Long-term social engineering → maintainer status → backdoor.
 - **npm token leaks** from public CI logs — scan commits with gitleaks/trufflehog.
 
 ### Lockfile injection
+
 - Attacker controls one transitive dep, pins a malicious version in lockfile
 - `package-lock.json` and `yarn.lock` integrity hashes are last line
 
 ### Manifest confusion
+
 - npm (Darcy Clarke research) — `package.json` vs tarball contents differ; registry trusts manifest
 - PyPI wheel confusion — name in METADATA vs filename
 
 ### Build system abuse
+
 - **GitHub Actions pwn requests** — `pull_request_target` + checkout of PR code → token leak
 - **npm install scripts** — `postinstall` hook, classic
 - **PyPI attestations** — adoption slow, most packages unsigned

@@ -1,5 +1,63 @@
 # CORS Techniques
 
+> Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
+
+_Last updated: — · Items: 0_
+
+---
+
+## What
+
+_Define the class, prerequisites, and typical finding shape. Fill with real content._
+_pending enrichment — baseline opener below_
+
+See items under ## Items for per-finding details.
+
+---
+
+## CVEs
+
+_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
+
+---
+
+## Probes
+
+_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
+_pending enrichment_
+
+---
+
+## PoCs
+
+_Public PoC links rolled up from items below._
+
+_No PoCs in items yet._
+
+---
+
+## Reproduction
+
+_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
+_pending enrichment_
+
+---
+
+## Defense
+
+_Patch guidance and detection rules. Populated from vendor advisories._
+_pending enrichment_
+
+---
+
+## References
+
+_Populated by daily refresh-latest pipeline._
+
+---
+
+## Items
+
 > Cross-Origin Resource Sharing misconfiguration — server reflects attacker-controlled `Origin` in `Access-Control-Allow-Origin` while also setting `Access-Control-Allow-Credentials: true`, enabling cross-origin reads of authenticated responses.
 
 ## Surface
@@ -14,28 +72,38 @@
 ## Test Approach
 
 1. **Probe arbitrary origin reflection** — send `Origin: https://evil.com`, check if it's reflected in `ACAO`:
+
    ```
    curl -s -I -H "Origin: https://evil.com" https://target.com/api/user | grep -i "access-control"
    ```
+
 2. **Check for credentials flag** — vuln only if both `ACAO: https://evil.com` AND `ACAC: true`
 3. **Test null origin** — triggers on sandboxed iframes and `file://` loads:
+
    ```
    curl -s -I -H "Origin: null" https://target.com/api/user | grep -i "access-control"
    ```
+
 4. **Test subdomain of target** — if regex allows `*.target.com`, a compromised subdomain is enough:
+
    ```
    curl -s -I -H "Origin: https://sub.target.com" https://target.com/api/user
    curl -s -I -H "Origin: https://notreallytarget.com" https://target.com/api/user
    ```
+
 5. **Test prefix/suffix bypass** — regex `^https://target\.com` matched by `https://target.com.evil.com`; `\.target\.com$` matched by `https://evil.target.com`:
+
    ```
    curl -s -I -H "Origin: https://target.com.evil.com" https://target.com/api/user
    curl -s -I -H "Origin: https://evil.target.com" https://target.com/api/user
    ```
+
 6. **Run corsy for automated sweep**:
+
    ```
    python3 corsy.py -u https://target.com/api/user -t 10 --headers "Cookie: session=<token>"
    ```
+
 7. **Confirm exploitability** — if ACAO reflects and ACAC is true, write exploit PoC and verify authenticated data is readable cross-origin
 
 ## Tools

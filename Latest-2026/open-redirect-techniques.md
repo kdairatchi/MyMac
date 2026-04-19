@@ -1,5 +1,63 @@
 # Open Redirect Techniques
 
+> Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
+
+_Last updated: — · Items: 0_
+
+---
+
+## What
+
+_Define the class, prerequisites, and typical finding shape. Fill with real content._
+_pending enrichment — baseline opener below_
+
+See items under ## Items for per-finding details.
+
+---
+
+## CVEs
+
+_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
+
+---
+
+## Probes
+
+_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
+_pending enrichment_
+
+---
+
+## PoCs
+
+_Public PoC links rolled up from items below._
+
+_No PoCs in items yet._
+
+---
+
+## Reproduction
+
+_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
+_pending enrichment_
+
+---
+
+## Defense
+
+_Patch guidance and detection rules. Populated from vendor advisories._
+_pending enrichment_
+
+---
+
+## References
+
+_Populated by daily refresh-latest pipeline._
+
+---
+
+## Items
+
 > Open redirect — server-side logic follows a user-controlled URL parameter without validating destination, enabling phishing, OAuth token theft, and XSS chains.
 
 ## Surface
@@ -15,21 +73,27 @@
 ## Test Approach
 
 1. **Discover redirect params** with arjun against every endpoint that returns a 3xx:
+
    ```
    arjun -u https://target.com/login -m GET
    ```
+
 2. **Baseline test** — send `redirect=https://evil.com`, check if `Location:` header or JS redirect goes there
 3. **Try bypass variants** for regex/domain filters (see Payloads)
 4. **Bulk test with gf + ffuf** — extract all redirect params from crawl output:
+
    ```
    cat urls.txt | gf redirect | ffuf -u FUZZ -w /dev/stdin -mr "evil\.com"
    ```
+
 5. **Burp match/replace** — set rule: replace `redirect=https://target.com` with `redirect=//evil.com` across all in-scope requests; observe which flows allow it
 6. **Test OAuth redirect_uri separately** — enumerate registered patterns, try path traversal:
+
    ```
    redirect_uri=https://target.com/callback/../../../evil.com
    redirect_uri=https://target.com/callback%0d%0aLocation:https://evil.com
    ```
+
 7. **Escalate to XSS** — try `javascript:alert(document.domain)` in redirect param; some frameworks pass it to `window.location` unsanitized
 
 ## Tools

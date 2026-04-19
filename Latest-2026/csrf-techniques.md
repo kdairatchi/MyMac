@@ -1,5 +1,63 @@
 # CSRF Techniques
 
+> Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
+
+_Last updated: — · Items: 0_
+
+---
+
+## What
+
+_Define the class, prerequisites, and typical finding shape. Fill with real content._
+_pending enrichment — baseline opener below_
+
+See items under ## Items for per-finding details.
+
+---
+
+## CVEs
+
+_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
+
+---
+
+## Probes
+
+_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
+_pending enrichment_
+
+---
+
+## PoCs
+
+_Public PoC links rolled up from items below._
+
+_No PoCs in items yet._
+
+---
+
+## Reproduction
+
+_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
+_pending enrichment_
+
+---
+
+## Defense
+
+_Patch guidance and detection rules. Populated from vendor advisories._
+_pending enrichment_
+
+---
+
+## References
+
+_Populated by daily refresh-latest pipeline._
+
+---
+
+## Items
+
 > Cross-Site Request Forgery — tricking an authenticated user's browser into performing state-changing requests on a target site without their knowledge.
 
 ## Surface
@@ -21,19 +79,23 @@
    - `SameSite=Lax` — exploitable via top-level GET navigations (limited)
    - `SameSite=Strict` — hardest, but check for subdomain bypasses
 4. **Cookie prefix bypass** — inject `__Host-` or `__Secure-` prefixed cookies via header injection:
+
    ```
    Cookie: __Host-session=attacker_value
    ```
+
 5. **Referer/Origin bypass variants**:
    - Remove `Referer` header entirely
    - Set `Referer: https://target.com.attacker.com/path`
    - Append target: `Referer: https://attacker.com/?target.com`
 6. **JSON CSRF** — if endpoint accepts JSON but no CSRF token, try `Content-Type: text/plain`:
+
    ```html
    <form method="POST" action="https://target.com/api/transfer">
      <input name='{"amount":1000,"to":"attacker"}' value='x'>
    </form>
    ```
+
 7. **WebSocket CSRF** — connect to `wss://target.com/ws` from attacker origin, check if Origin validated
 
 ## Tools

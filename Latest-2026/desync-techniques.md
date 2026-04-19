@@ -1,4 +1,62 @@
-# HTTP Desync / Request Smuggling Techniques
+# Desync Techniques
+
+> Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
+
+_Last updated: — · Items: 0_
+
+---
+
+## What
+
+_Define the class, prerequisites, and typical finding shape. Fill with real content._
+_pending enrichment — baseline opener below_
+
+See items under ## Items for per-finding details.
+
+---
+
+## CVEs
+
+_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
+
+---
+
+## Probes
+
+_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
+_pending enrichment_
+
+---
+
+## PoCs
+
+_Public PoC links rolled up from items below._
+
+_No PoCs in items yet._
+
+---
+
+## Reproduction
+
+_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
+_pending enrichment_
+
+---
+
+## Defense
+
+_Patch guidance and detection rules. Populated from vendor advisories._
+_pending enrichment_
+
+---
+
+## References
+
+_Populated by daily refresh-latest pipeline._
+
+---
+
+## Items
 
 > HTTP desync — exploiting ambiguity in request boundary parsing between proxy and origin to split or smuggle requests, poisoning connection state.
 
@@ -13,6 +71,7 @@
 ## Test Approach
 
 1. **CL.TE timing probe** — front-end uses CL, back-end uses TE; extra byte hangs:
+
    ```
    POST / HTTP/1.1
    Host: target.com
@@ -23,9 +82,11 @@
    abc
    X
    ```
+
    Observe 10s+ delay = CL.TE desync confirmed.
 
 2. **TE.CL confirmation** — front-end uses TE, back-end uses CL:
+
    ```
    POST / HTTP/1.1
    Host: target.com
@@ -39,10 +100,12 @@
    ```
 
 3. **TE.TE obfuscation** — get one end to ignore TE via malformed header:
+
    ```
    Transfer-Encoding: chunked
    Transfer-Encoding: identity
    ```
+
    or: `Transfer-Encoding: xchunked`, `Transfer-Encoding[space]: chunked`
 
 4. **H2.CL** — HTTP/2 request with explicit `content-length` forcing back-end to over-read:

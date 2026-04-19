@@ -1,5 +1,63 @@
 # Subdomain Takeover Techniques
 
+> Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
+
+_Last updated: — · Items: 0_
+
+---
+
+## What
+
+_Define the class, prerequisites, and typical finding shape. Fill with real content._
+_pending enrichment — baseline opener below_
+
+See items under ## Items for per-finding details.
+
+---
+
+## CVEs
+
+_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
+
+---
+
+## Probes
+
+_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
+_pending enrichment_
+
+---
+
+## PoCs
+
+_Public PoC links rolled up from items below._
+
+_No PoCs in items yet._
+
+---
+
+## Reproduction
+
+_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
+_pending enrichment_
+
+---
+
+## Defense
+
+_Patch guidance and detection rules. Populated from vendor advisories._
+_pending enrichment_
+
+---
+
+## References
+
+_Populated by daily refresh-latest pipeline._
+
+---
+
+## Items
+
 > Subdomain takeover — a DNS CNAME points to a third-party service that has been deprovisioned; attacker registers the service resource and takes control of the subdomain.
 
 ## Surface
@@ -28,31 +86,41 @@
 ## Test Approach
 
 1. **Enumerate all subdomains** — cast wide net:
+
    ```
    subfinder -d target.com -all -silent | anew subs.txt
    amass enum -passive -d target.com >> subs.txt
    ```
+
 2. **Resolve CNAMEs** — extract chains pointing to third-party providers:
+
    ```
    cat subs.txt | dnsx -cname -resp -silent | grep -v "target.com$"
    ```
+
 3. **Run nuclei takeover templates** — automated fingerprint matching:
+
    ```
    nuclei -t /root/nuclei-templates/takeovers/ -l subs.txt -silent
    ```
+
 4. **Manual verify** — curl each flagged subdomain, confirm fingerprint string in response:
+
    ```
    curl -s https://dev.target.com | grep -i "NoSuchBucket\|There isn't a GitHub"
    ```
+
 5. **Claim the service** — for confirmed targets:
    - GitHub Pages: create `<org>.github.io` repo or a repo matching the CNAME path
    - S3: create a bucket with the exact subdomain name in the same region
    - Heroku: `heroku apps:create <app-name>` matching the CNAME target
 6. **PoC** — host minimal HTML proving control:
+
    ```html
    <h1>Subdomain Takeover PoC</h1>
    <script>document.write(document.domain + ' — ' + document.cookie)</script>
    ```
+
    Screenshot domain + cookie output for report.
 
 ## Tools
