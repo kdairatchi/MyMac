@@ -118,3 +118,16 @@ Scan with: `ppmap` — automated prototype pollution scanner.
 - **CVE-2025-29927** · Next.js middleware bypass via `x-middleware-subrequest` header or path normalization — affected versions 13-15 with wildcard matchers · https://www.assetnote.io/resources/research/doing-the-due-diligence-analyzing-the-next-js-middleware-bypass-cve-2025-29927
 - **VS Code control character RCE** · ASCII SOH/STX/EOT in filenames or drag-and-drop content triggers terminal command execution — drag-and-pwnd technique, stealthy injection bypassing printable-char filters · https://portswigger.net/research/drag-and-pwnd-leverage-ascii-characters-to-exploit-vs-code
 - **Sitecore 9.3 IIS bypass** · Three distinct RCE vectors + two auth bypasses via IIS authorization integration — check `/sitecore/shell/` and `/sitecore/admin/` paths for exposed management handlers · https://www.assetnote.io/resources/research/bypass-iis-authorisation-with-this-one-weird-trick-three-rces-and-two-auth-bypasses-in-sitecore-9-3
+
+## 2026-04-17
+
+### On the Effectiveness of Mutational Grammar Fuzzing
+- **Tags:** `#web`
+- **Severity:** unknown · **Hunt:** 3/5 · **Score:** 12.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://projectzero.google/2026/03/mutational-grammar-fuzzing.html) · [2](https://medium.com/@dheerajdonikena/how-i-made-200-just-by-changing-a-response-c201624867c4) · [3](https://medium.com/@techyringo/i-hacked-deeper-into-a-network-without-moving-heres-how-ssh-pivoting-works-e04952a87214) · [4](https://medium.com/@rgoel.goel03/detecting-web-attacks-reconstructing-an-attack-from-logs-and-network-traffic-5739efaa1644) · [5](https://www.intigriti.com/researchers/blog/hacker-spotlight/from-curiosity-to-critical-bugs-interview-with-marc-oliver-munz-c1phy)
+
+**On the Effectiveness of Mutational Grammar Fuzzing** — This post refines coverage-guided fuzzing by preserving grammar structure during mutations to uncover complex logic issues (like XSLT/JIT bugs) that standard mutational fuzzers miss. Hunt: low signal — skip. [src](https://projectzero.google/2026/03/mutational-grammar-fuzzing.html)
+
+---
+*Clustered 14 sources for this item.*
+

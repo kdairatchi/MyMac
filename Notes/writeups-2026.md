@@ -182,3 +182,156 @@
 - **Rating:** novel
 
 ---
+
+## 2026-04-19
+
+### SSRF via OpenID dynamic client registration
+- **Tags:** `#ssrf` `#oauth`
+- **Severity:** high · **Hunt:** 2/5 · **Score:** 21.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@The4v1/%EF%B8%8F-02-ssrf-via-openid-dynamic-client-registration-25d0ae1234c1)
+
+- **Trick:** Abuse the OpenID Connect Dynamic Client Registration endpoint by injecting an internal URL (like `http://169.254.169.254`) into the `redirect_uris` field, forcing the Identity Provider to send a validation request to the target.
+- **Why it matters:** Identity Providers are often highly trusted hosts; an SSRF here can pivot to internal cloud metadata or restricted internal services that are otherwise inaccessible.
+- **Rating:** chain-worthy
+
+---
+### Helium Challenge Batch 2 Write-Up : Menemukan 3 Kerentanan Kritis di Aplikasi Job Portal
+- **Tags:** `#web`
+- **Severity:** critical · **Hunt:** 2/5 · **Score:** 18.0 · **Status:** patched · **Age:** 0d
+- **Sources:** [1](https://medium.com/@subzxd14/helium-challenge-batch-2-write-up-menemukan-3-kerentanan-kritis-di-aplikasi-job-portal-61d461bc73ba?source=rss------pentesting-5) · [2](https://github.com/nomi-sec/PoC-in-GitHub/commit/5d162113ddc09079833b17d363cd479b3bdd726d) · [3](https://meetcyber.net/why-i-thought-i-found-a-zero-day-the-false-positive-trap-in-bug-bounty-3ec08e86fc99) · [4](https://github.com/nomi-sec/PoC-in-GitHub/commit/eee6ffc597e28b85d2ccbe52c1562ab2d4ef1a84) · [5](https://github.com/nomi-sec/PoC-in-GitHub/commit/bb527399f5c226fab24d81df6aab640928a79436)
+
+- **Trick:** Indonesian pentester discovered 3 critical vulnerabilities in a job portal application during the Helium Challenge.
+- **Why it matters:** Demonstrates effective vulnerability discovery techniques in a real-world application, providing valuable insights for penetration testers and bug hunters.
+- **Rating:** chain-worthy
+
+---
+*Clustered 9 sources for this item.*
+
+### Forced OAuth profile linking
+- **Tags:** `#oauth`
+- **Severity:** medium · **Hunt:** 3/5 · **Score:** 15.0 · **Status:** theoretical · **Age:** 0d
+- **Sources:** [1](https://medium.com/@The4v1/%EF%B8%8F-03-forced-oauth-profile-linking-041e7e28ed99) · [2](https://medium.com/@The4v1/oauth-2-0-authetication-vulnerabilities-f810876c21eb)
+
+- **Trick:** Manipulating the OAuth callback flow (often via CSRF or missing state validation) to link a victim's social identity (e.g., Google, Facebook) to an attacker's local account.
+- **Why it matters:** Enables account takeover (ATO) by allowing an attacker to bypass authentication and log in as the victim once the link is established, often requiring no user interaction beyond a malicious page visit.
+- **Rating:** chain-worthy
+
+---
+*Clustered 2 sources for this item.*
+
+### Unauthenticated POST Endpoint via Swagger (BFLA)
+- **Tags:** `#auth-bypass` `#api`
+- **Severity:** high · **Hunt:** 2/5 · **Score:** 14.0 · **Status:** patched · **Age:** 0d
+- **Sources:** [1](https://medium.com/@zishanfiroz/how-i-found-an-unauthenticated-post-endpoint-in-a-production-api-a-real-bug-bounty-story-f706957d0702) · [2](https://medium.com/@The4v1/%EF%B8%8F-01-authentication-bypass-via-oauth-implicit-flow-13e26b67e697?source=rss------bug_bounty-5)
+
+- **Trick:** Leveraged Swagger documentation reconnaissance to identify a POST endpoint that was missing authentication checks, allowing unauthenticated access to restricted functionality.
+- **Why it matters:** Broken Function Level Authorization (BFLA) can lead to privilege escalation or full system compromise by exposing sensitive administrative actions to public users.
+- **Rating:** variant
+
+---
+*Clustered 2 sources for this item.*
+
+### Kioptrix Level 1: Apache to Root via ptrace/kmod
+- **Tags:** `#rce` `#privesc`
+- **Severity:** critical · **Hunt:** 1/5 · **Score:** 13.5 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@Punih3r7/kioptrix-level-1-vulnhub-walkthrough-openfuck-apache-exploit-to-root-via-ptrace-kmod-95ef4fea31b4)
+
+- **Trick:** Exploits an outdated Apache/mod_ssl service using the "OpenFuck" exploit for initial access, then escalates privileges via the `ptrace` kmod kernel vulnerability.
+- **Why it matters:** Provides a foundational walkthrough of scanning for service versions, applying legacy RCE exploits, and chaining them with local privilege escalation on Linux systems.
+- **Rating:** variant
+
+---
+### Living Off The Land: Using PowerShell & RDP to Stay Invisible
+- **Tags:** `#command-injection` `#privesc`
+- **Severity:** medium · **Hunt:** 1/5 · **Score:** 5.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@paritoshblogs/how-attackers-use-legit-tools-like-powershell-rdp-to-stay-invisible-living-off-the-land-attacks-d1545a417713?source=rss------bug_bounty-5) · [2](https://medium.com/@laibakashif0011/web-security-series-exploiting-command-injection-for-reverse-shell-bc6c1d3b9aff?source=rss------bug_bounty-5)
+
+- **Trick:** Abusing pre-installed, trusted administrative tools like PowerShell and RDP (LOLBins) to execute malicious code or move laterally without dropping custom malware.
+- **Why it matters:** Traditional antivirus and EDR solutions often whitelist these legitimate system binaries, allowing attackers to conduct "fileless" attacks that evade signature-based detection.
+- **Rating:** chain-worthy
+
+---
+*Clustered 2 sources for this item.*
+
+### AI Agents Unaware of Surveillance
+- **Tags:** `#llm` `#prompt-injection`
+- **Severity:** unknown · **Hunt:** 2/5 · **Score:** 4.0 · **Status:** theoretical · **Age:** 30d
+- **Sources:** [1](https://ad3sh.medium.com/ai-agents-think-they-just-dont-know-they-re-being-watched-2f8eec1dc6a9?source=rss------infosec-5) · [2](https://medium.com/@kanishka_33736/cybersecurity-ai-powered-threats-7604293a8de4?source=rss------pentesting-5)
+
+- **Trick:** AI systems lack awareness of user surveillance, potentially enabling manipulation through hidden context injection.
+- **Why it matters:** Creates attack vectors where prompters could exploit blind spots to bypass safety filters or extract unauthorized outputs.
+- **Rating:** novel
+
+---
+*Clustered 2 sources for this item.*
+
+### OSINT Strategies for OutSystems Pentesting
+- **Tags:** `#web`
+- **Severity:** info · **Hunt:** 2/5 · **Score:** 2.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@lucas_11478/osint-outsystems-estrat%C3%A9gia-para-pentests-security-researchs-and-red-teams-bd5ffec56480?source=rss------pentesting-5)
+
+- **Trick:** Applying OSINT methodologies to uncover exposed OutSystems artifacts, modules, and development metadata that are often left public during deployment.
+- **Why it matters:** Identifying these platform-specific remnants allows attackers to map the application architecture and find potential entry points that developers assumed were hidden.
+- **Rating:** variant
+
+---
+### LLMGoat: Offensive LLM Security Environment
+- **Tags:** `#llm` `#prompt-injection` `#jailbreak` `#data-exfil`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@liteshghute/llmgoat-offensive-llm-security-environment-cf5440aa708d)
+
+- **Trick:** A locally hosted, free exploitation environment (similar to DVWA but for LLMs) that implements the OWASP LLM Top 10 vulnerabilities, allowing offline practice without cloud API costs.
+- **Why it matters:** Provides a safe, cost-effective playground for security researchers to understand, identify, and weaponize LLM-specific attack vectors such as prompt injection and jailbreaking.
+- **Rating:** novel
+
+---
+### Cracking Open the Black Box: IoT Firmware Analysis
+- **Tags:** `#appliance` `#privesc`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://fr3ak-hacks.medium.com/cracking-open-the-black-box-a-practical-guide-to-iot-firmware-analysis-808f289743d8?source=rss------infosec-5)
+
+- **Trick:** Techniques for extracting and reverse-engineering firmware from IoT hardware like routers and cameras.
+- **Why it matters:** Static analysis of extracted filesystems allows researchers to discover hardcoded credentials, insecure keys, and vulnerabilities that are invisible from the outside.
+- **Rating:** variant
+
+---
+### Professional Kali Linux (2026.1+) Post-Installation Setup with Bash
+- **Tags:** `#web`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://meetcyber.net/professional-kali-linux-2026-1-post-installation-setup-with-bash-4a78439d6af1)
+
+- **Trick:** Using a Bash script to automate environment configuration and workspace organization on Kali Linux 2026.1+.
+- **Why it matters:** Standardizes the penetration testing setup process, reducing manual configuration time and ensuring a consistent, ready-to-hack environment.
+- **Rating:** variant
+
+---
+### Wireshark Packet Analysis: Investigating Network Traffic Like a SOC Analyst
+- **Tags:** `#web` `#data-exfil`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@rgoel.goel03/wireshark-packet-analysis-investigating-network-traffic-like-a-soc-analyst-a640e15d06fd?source=rss------infosec-5)
+
+- **Trick:** Provides a practical walkthrough of using Wireshark display filters, following TCP streams, and analyzing protocol headers to dissect network activity.
+- **Why it matters:** Mastering packet-level analysis is essential for verifying exploit behavior, understanding application data flows, and uncovering hidden indicators of compromise or data exfiltration.
+- **Rating:** variant
+
+---
+### Mr Robot TryHackMe Español
+- **Tags:** `#web` `#privesc`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@Us0lfr/mr-robot-tryhackme-espa%C3%B1ol-ea813f4fff9a)
+
+- **Trick:** Walkthrough of the "Mr Robot" medium-difficulty CTF box, likely involving web enumeration (robots.txt), WordPress discovery, password brute-forcing, and standard Linux privilege escalation vectors.
+- **Why it matters:** Reinforces fundamental methodologies for OSINT, web application testing, and system post-exploitation in a controlled environment.
+- **Rating:** variant
+
+---
+### Mobile Security in 2026: Threats, Risks & Best Practices
+- **Tags:** `#mobile` `#web` `#api`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 0.5 · **Status:** unknown · **Age:** 30d
+- **Sources:** [1](https://medium.com/@dhanashreeA/mobile-security-in-2026-threats-risks-best-practices-to-stay-safe-045278e87ad2?source=rss------infosec-5)
+
+- **Trick:** Overview of emerging mobile threats and actionable mitigation strategies for 2026.
+- **Why it matters:** Mobile devices are primary attack targets, making proactive security measures critical for personal and organizational data protection.
+- **Rating:** novel
+
+---

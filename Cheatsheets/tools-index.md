@@ -778,3 +778,56 @@ This update introduces cryptographic signing for Nuclei templates, enabling user
 
 ---
 *Clustered 2 sources for this item.*
+
+## 2026-04-19
+
+### Chatwoot Unfinished Installation Template
+- **Tags:** `#auth-bypass` `#privesc`
+- **Severity:** high · **Hunt:** 3/5 · **Score:** 10.5 · **Status:** unknown · **Age:** 30d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/cae7e066b271e7d0fac47bf3debb9ddd9605147e)
+
+This Nuclei template detects unfinished Chatwoot installations, which may expose administrative interfaces or default credentials leading to full system compromise. Use it during infrastructure scans to identify unhardened SaaS instances that could be hijacked for unauthorized access or lateral movement.
+
+---
+### CVE-2025-69411 Template — `CVE-2025-69411`
+- **Tags:** `#web` `#unknown`
+- **Severity:** unknown · **Hunt:** 3/5 · **Score:** 6.0 · **Status:** unknown · **Age:** 30d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/1f76c8b44c5e9cfbe70774a49702184edf58f9b5)
+
+This Nuclei template detects CVE-2025-69411, a vulnerability in an unspecified product, enabling automated scanning for this newly identified issue. It should be deployed in regular security assessments to identify exposure, particularly in environments where the affected product is deployed and patch status is unknown.
+
+---
+### FortiSandbox Panel Detection Template
+- **Tags:** `#web` `#appliance`
+- **Severity:** unknown · **Hunt:** 1/5 · **Score:** 4.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/382e2219e732e44d8294ac8aa8d259aae485cd9d)
+
+This is a Nuclei template update targeting Fortinet's FortiSandbox web interface, designed to automate vulnerability detection in sandbox deployment environments. It provides structured scanning capabilities for identifying potential misconfigurations or security flaws in FortiSandbox panels, enabling efficient security assessments of appliance-based defense systems.
+
+---
+### Chatwoot Installer Template Update
+- **Tags:** `#web` `#exposed`
+- **Severity:** unknown · **Hunt:** 1/5 · **Score:** 2.0 · **Status:** unknown · **Age:** 30d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/1d49144fb8b1c89379470f9e8ed412302920e9ba) · [2](https://github.com/projectdiscovery/nuclei-templates/commit/21846230ccfb8cb87bd44ca2c176a72a48dbbe82) · [3](https://github.com/projectdiscovery/nuclei-templates/commit/7d7925d0b3518da9be1c68202792b6b2f9057553) · [4](https://github.com/projectdiscovery/nuclei-templates/commit/1a9421bc86cea497ad6b9d8819961ae048566624) · [5](https://github.com/projectdiscovery/nuclei-templates/commit/b54ade37c023c7795462e9c42157956f6319951f)
+
+This Nuclei template targets exposed Chatwoot installation artifacts, renaming and updating the template to detect misconfigured installer directories or scripts left publicly accessible. Use during web application scans to identify insecure deployments of Chatwoot that could lead to unauthorized access or information leakage.
+
+---
+*Clustered 7 sources for this item.*
+
+### FortiSandbox Detection Template
+- **Tags:** `#appliance` `#network`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 0.5 · **Status:** unknown · **Age:** 30d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/adb6b325d69e8b59b6322e979adf3d0bc14f4a17)
+
+This nuclei template detects FortiSandbox instances, a network security appliance by Fortinet, to identify exposed sandbox services during reconnaissance scans. It should be used when mapping enterprise security infrastructure surfaces or verifying Fortinet deployment visibility in target networks.
+
+---
+### Nuclei Templates Checksum Generator
+- **Tags:** `#nuclei` `#tool` `#supply-chain`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 0.5 · **Status:** unknown · **Age:** 30d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/e643751346422302e8e4d080a2e980c8fd14492c)
+
+Automated checksum generation for Nuclei templates to ensure integrity and detect tampering during distribution. Use when verifying template authenticity or validating unmodified downloads in CI/CD pipelines.
+
+---
