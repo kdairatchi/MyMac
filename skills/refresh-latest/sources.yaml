@@ -1,0 +1,222 @@
+# refresh-latest source config
+# Tiers: S (must-fetch), A (high value), B (wide net)
+
+defaults:
+  timeout: 30
+  user_agent: "kdairatchi-refresh-latest/1.0"
+  max_items_per_run: 30
+  max_per_class: 10
+
+fabric:
+  enabled: true
+  binary: /home/anon/go/bin/fabric
+  provider: zai  # Z.AI / GLM (configured via ~/.config/fabric/.env)
+
+  # Per-pattern model routing.
+  # Bulk = free Flash tier; rollup = flagship for voice/reasoning.
+  # Override at runtime: FABRIC_MODEL_<pattern>=name
+  # Real Z.AI catalog (per fabric --listmodels):
+  # glm-4.5, glm-4.5-air, glm-4.6, glm-4.7, glm-5, glm-5-turbo, glm-5.1
+  models:
+    kdai_cve_brief:    glm-4.7      # bulk CVE blocks
+    kdai_writeup_tldr: glm-4.7      # H1/Medium TLDR
+    extract_wisdom:    glm-4.7      # technique posts
+    summarize:         glm-4.5-air  # cheapest — generic summarize
+    rate_content:      glm-4.5-air  # cheapest — reading queue scoring
+    kdai_hunt_summary: glm-5.1      # flagship — daily/weekly rollup, voice-critical
+  fallback: glm-4.5-air             # when primary 429s
+
+  patterns:
+    cve: kdai_cve_brief
+    technique: extract_wisdom
+    writeup: kdai_writeup_tldr
+    tool: summarize
+    reading: rate_content
+    daily_rollup: kdai_hunt_summary
+
+sources:
+
+  # ─────── Tier S: primary research ───────
+
+  portswigger_research:
+    tier: S
+    type: rss
+    url: https://portswigger.net/research/rss
+    class_hint: technique
+    enabled: true
+
+  watchtowr_labs:
+    tier: S
+    type: rss
+    url: https://labs.watchtowr.com/rss/
+    class_hint: cve
+    enabled: true
+
+  assetnote_research:
+    tier: S
+    type: rss
+    url: https://www.assetnote.io/resources/research/rss.xml
+    class_hint: technique
+    enabled: true
+
+  project_zero:
+    tier: S
+    type: rss
+    url: https://googleprojectzero.blogspot.com/feeds/posts/default
+    class_hint: technique
+    enabled: true
+    max_items: 5  # 13MB feed — cap to latest 5 posts
+
+  # ─────── Tier S: CVE libraries (GitHub) ───────
+
+  trickest_cve:
+    tier: S
+    type: github_commits
+    repo: trickest/cve
+    branch: main
+    path_filter: "**/*.md"
+    class_hint: cve
+    enabled: true
+    note: PoC refs for recent CVEs
+
+  nomi_sec_poc:
+    tier: S
+    type: github_commits
+    repo: nomi-sec/PoC-in-GitHub
+    branch: master
+    class_hint: cve
+    enabled: true
+
+  # ─────── Tier A: disclosures + feeds ───────
+
+  hackerone_hacktivity:
+    tier: A
+    type: hackerone
+    url: https://hackerone.com/hacktivity?order_direction=DESC&order_field=latest_disclosable_activity_at&filter=type%3Apublic
+    class_hint: writeup
+    enabled: true
+    min_bounty: 500  # filter noise
+
+  nvd_recent:
+    tier: A
+    type: json
+    url: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=50&pubStartDate={since}&pubEndDate={now}
+    class_hint: cve
+    min_severity: MEDIUM
+    enabled: true
+
+  nuclei_templates:
+    tier: A
+    type: github_commits
+    repo: projectdiscovery/nuclei-templates
+    branch: main
+    path_filter: "http/**/*.yaml"
+    class_hint: tool
+    enabled: true
+
+  # ─────── Tier A: vendor blogs ───────
+
+  anthropic_security:
+    tier: A
+    type: rss
+    url: https://www.anthropic.com/news/rss.xml
+    class_hint: technique
+    filter_keywords: [security, vulnerability, CVE, jailbreak, injection]
+    enabled: false  # Anthropic has no public RSS feed (404). Re-enable when one exists.
+
+  openai_blog:
+    tier: A
+    type: rss
+    url: https://openai.com/blog/rss.xml
+    class_hint: technique
+    filter_keywords: [security, red team, safety, vulnerability]
+    enabled: false  # product marketing, rarely security research — not worth tokens
+
+  intigriti_bugbytes:
+    tier: A
+    type: rss
+    url: https://blog.intigriti.com/feed/
+    class_hint: reading
+    enabled: true
+
+  # ─────── Tier A: Medium ───────
+
+  medium_bugbounty:
+    tier: A
+    type: rss
+    url: https://medium.com/feed/tag/bug-bounty
+    class_hint: writeup
+    enabled: true
+
+  medium_infosec:
+    tier: A
+    type: rss
+    url: https://medium.com/feed/tag/infosec
+    class_hint: writeup
+    enabled: true
+
+  medium_pentesting:
+    tier: A
+    type: rss
+    url: https://medium.com/feed/tag/pentesting
+    class_hint: writeup
+    enabled: true
+
+  # ─────── Tier B: wide net ───────
+
+  reddit_netsec:
+    tier: B
+    type: json
+    url: https://www.reddit.com/r/netsec/top.json?t=day&limit=25
+    class_hint: reading
+    enabled: false  # noisy, low hunt value for token cost
+
+  hn_security:
+    tier: B
+    type: json
+    url: https://hn.algolia.com/api/v1/search_by_date?tags=story&query=security+vulnerability+cve&hitsPerPage=20
+    class_hint: reading
+    enabled: false  # noisy, low hunt value for token cost
+
+  # ─────── Tier B: awesome-list diffs ───────
+
+  awesome_hahwul:
+    tier: B
+    type: github_commits
+    repo: hahwul/WebHackersWeapons
+    class_hint: tool
+    enabled: false  # rarely has commits; re-enable for weekly run
+
+  awesome_bugbounty_edoverflow:
+    tier: B
+    type: github_commits
+    repo: EdOverflow/awesome-bugbounty-tools
+    class_hint: tool
+    enabled: false  # keeps failing github api
+
+  awesome_appsec:
+    tier: B
+    type: github_commits
+    repo: paragonie/awesome-appsec
+    class_hint: reading
+    enabled: false  # rarely has commits
+
+# ─────── Quiet hours (UTC) ───────
+# Skip fetch during these hours (rate-limit courtesy)
+quiet_hours: []
+
+# ─────── Output config ───────
+output:
+  repo: /home/anon/MyMac
+  daily_dir: Notes/daily
+  class_files:
+    cve: Latest-2026
+    technique: Latest-2026
+    writeup: Notes/writeups-2026.md
+    tool: Cheatsheets/tools-index.md
+    reading: Notes/daily/{today}.md
+
+commit:
+  author_name: kdairatchi
+  author_email: "96064915+kdairatchi@users.noreply.github.com"
+  prefix: "research:"
