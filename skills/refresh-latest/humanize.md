@@ -1,4 +1,4 @@
-# Voice reference — kdairatchi style
+# Voice reference — kdairatchi 
 
 Claude reads this before summarizing. Match it.
 
