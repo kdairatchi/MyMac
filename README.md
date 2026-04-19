@@ -2,7 +2,7 @@
 
 A curated, ever-growing collection of bug bounty techniques, payloads, checklists, scripts, and references — organized so a researcher can find what they need in one grep.
 
-Maintained by **[kdairatchi](https://github.com/kdairatchi)** · [ProwlrBot](https://prowlrbot.com)
+Maintained by **[kdairatchi](https://github.com/kdairatchi)**
 
 ![status](https://img.shields.io/badge/status-active-success) ![license](https://img.shields.io/badge/license-MIT-blue) ![topics](https://img.shields.io/badge/topics-bugbounty%20%7C%20pentest%20%7C%20recon%20%7C%20payloads-purple)
 
