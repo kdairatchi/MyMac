@@ -18,6 +18,7 @@ pushed:>2026-04-01
 ```
 
 Combine:
+
 ```
 org:target "DB_PASSWORD" extension:env
 org:target filename:config.json "password"
@@ -99,7 +100,7 @@ Check fork graph — sometimes secrets deleted from main repo survive in a fork.
 
 ## Validation before reporting
 
-- **Verify the key works** — use `Cheatsheets/Keyhacks.md` methods. Expired / revoked keys = NA.
+- **Verify the key works** — use `Cheatsheets/keyhacks.md` methods. Expired / revoked keys = NA.
 - Confirm it belongs to the target (not a third-party integration key that happened to be named similarly).
 - Check if commit is in a deleted / archived repo — still live in clone history.
 

@@ -33,7 +33,7 @@ Fast paths into the repo:
 
 - **Recon oneliners:** `Awesome/Awesome One-liner Bug Bounty Awesome.md`
 - **Fresh attack surface (2025/2026):** [`Latest-2026/`](Latest-2026/)
-- **AI/LLM bounties:** [`AI/llm-security.md`](AI/llm-security.md)
+- **AI/LLM bounties:** [`Cheatsheets/llm-security.md`](Cheatsheets/llm-security.md)
 - **Web3:** [`Web3/00-START-HERE.md`](Web3/00-START-HERE.md)
 - **Tool index:** `Cheatsheets/tools-index.md`
 
@@ -57,23 +57,18 @@ rg --type md "oauth" Methodology/ Cheatsheets/
 
 ```
 MyMac/
-├── AI/              LLM + agent security (llm-security.md is the good one)
 ├── Awesome/         Curated awesome-lists (tools, writeups, oneliners)
-├── Burp/            Burp configs, match/replace, extensions
-├── Cheatsheets/     Per-class + per-tech quick refs (44+ files)
-├── Checklists/      Hunt checklists — web, mobile, API, cloud, vuln-classes
-├── Cloudflare-WAF-Bypass/
-├── Dorks/           Google / GitHub / Shodan dorks
-├── Infosec/         General refs
+├── Cheatsheets/     Per-class + per-tech quick refs — incl. burp, llm-security, keyhacks
+├── Checklists/      Hunt checklists — web, mobile, API, cloud, vuln-classes + OWASP WSTG
 ├── Latest-2026/     Rolling tracker — HTTP desync, Next.js, supply chain, K8s, appliances
 ├── Methodology/     How hunts go — scope → recon → triage → validate
-├── Notes/           Field notes
-├── OWASP/           WSTG, MASTG, API Top 10, cheatsheets
+├── Notes/           Field notes — daily drops + writeups-2026.md (H1 enrichment)
 ├── Payloads/        Categorized payloads
 ├── PoCs/            Proof-of-concept exploits (CVEs)
-├── Recon/           Subdomain enum, content disco, JS analysis, GitHub dorking
+├── Recon/           Subdomain enum, content disco, JS analysis, GitHub/Google/Shodan dorks
 ├── RedTeam/         TTPs, tooling, OPSEC
 ├── Scripts/         Automation helpers
+├── skills/          refresh-latest pipeline (fetches + enriches + files)
 ├── Templates/       Report-writing + target-note templates
 └── Web3/            Smart contract audit methodology
 ```

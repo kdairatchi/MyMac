@@ -13,7 +13,7 @@ If you find this doc and the dates are >3 months old — it's stale, trust the p
 - [Supply Chain 2025/2026](supply-chain.md) — npm/PyPI, slopsquatting, lockfile attacks
 - [Cloud Native](cloud-native.md) — K8s, eBPF, container escape
 - [Appliance chains](appliance-chains.md) — Ivanti/Fortinet/Citrix-style patterns
-- [LLM security → `../AI/llm-security.md`](../AI/llm-security.md)
+- [LLM security → `../Cheatsheets/llm-security.md`](../Cheatsheets/llm-security.md)
 
 ## How to use
 

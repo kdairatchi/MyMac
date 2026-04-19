@@ -60,6 +60,7 @@ python3 SecretFinder.py -i https://target.com/app.js -o cli
 ```
 
 High-value patterns:
+
 - `AIza[0-9A-Za-z_\-]{35}` — Google API keys
 - `AKIA[0-9A-Z]{16}` — AWS Access Key ID
 - `sk_live_[0-9a-zA-Z]{24,}` — Stripe live
@@ -67,7 +68,7 @@ High-value patterns:
 - `xox[baprs]-[A-Za-z0-9\-]{10,}` — Slack tokens
 - `firebaseio\.com` / `firebaseapp\.com` — then probe `.json` endpoints
 
-Validate before reporting (see `Cheatsheets/Keyhacks.md`).
+Validate before reporting (see `Cheatsheets/keyhacks.md`).
 
 ## Webpack tricks
 
@@ -86,7 +87,7 @@ Validate before reporting (see `Cheatsheets/Keyhacks.md`).
 
 - Endpoints → content-discovery + API checklists
 - Hostnames → back to subdomain enum
-- Keys → `Cheatsheets/Keyhacks.md` for validation
+- Keys → `Cheatsheets/keyhacks.md` for validation
 - Feature flags → ideas for hidden/beta routes
 
 ## References

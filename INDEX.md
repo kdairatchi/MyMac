@@ -116,29 +116,29 @@ Flat map of the workbench. Use `grep -rln <term>` across dirs for cross-cutting 
 - [Prototype pollution](Cheatsheets/prototype-pollution.md) — client/server-side, gadget chains
 - [Cache poisoning](Cheatsheets/cache-poisoning.md) — unkeyed input attacks, web cache deception
 - [WAF bypass](Cheatsheets/waf-bypass.md) — encoding, chunking, header tricks
-- [CORS](Cheatsheets/CORS.md) — misconfigured origins, null origin, trusted subdomain
-- [CRLF injection](Cheatsheets/CRLF%20Injection.md) — header injection, response splitting
-- [CSV injection](Cheatsheets/CSV%20Injection.md) — formula injection in exports
-- [Content injection](Cheatsheets/Content%20Injection.md) — reflected/stored content injection
-- [Crypto](Cheatsheets/Crypto.md) — weak crypto, padding oracle, IV reuse
-- [Template injection](Cheatsheets/Template%20Injection.md) — SSTI by engine (Jinja2, Twig, FreeMarker)
-- [XSLT injection](Cheatsheets/XSLT%20Injection.md) — XML/XSLT processor exploitation
-- [Open redirect](Cheatsheets/OR.md) — redirect parameter abuse, bypass techniques
+- [CORS](Cheatsheets/cors.md) — misconfigured origins, null origin, trusted subdomain
+- [CRLF injection](Cheatsheets/crlf-injection.md) — header injection, response splitting
+- [CSV injection](Cheatsheets/csv-injection.md) — formula injection in exports
+- [Content injection](Cheatsheets/content-injection.md) — reflected/stored content injection
+- [Crypto](Cheatsheets/crypto.md) — weak crypto, padding oracle, IV reuse
+- [Template injection](Cheatsheets/template-injection.md) — SSTI by engine (Jinja2, Twig, FreeMarker)
+- [XSLT injection](Cheatsheets/xslt-injection.md) — XML/XSLT processor exploitation
+- [Open redirect](Cheatsheets/open-redirect.md) — redirect parameter abuse, bypass techniques
 
 ## Cheatsheets — tech
 
-- [Apache](Cheatsheets/APACHE.md) — misconfig, .htaccess bypass, mod_rewrite tricks
-- [AWS](Cheatsheets/AWS.md) — CLI commands, IAM enum, exploitation patterns
-- [Azure](Cheatsheets/AZURE.md) — Az CLI, service principal abuse
-- [Cloudflare](Cheatsheets/CLOUDFLARE.md) — origin IP reveal, worker exploitation, WAF bypass
-- [Cisco](Cheatsheets/CISCO.md) — IOS vulns, SNMP, default creds
+- [Apache](Cheatsheets/apache.md) — misconfig, .htaccess bypass, mod_rewrite tricks
+- [AWS](Cheatsheets/aws.md) — CLI commands, IAM enum, exploitation patterns
+- [Azure](Cheatsheets/azure.md) — Az CLI, service principal abuse
+- [Cloudflare](Cheatsheets/cloudflare.md) — origin IP reveal, worker exploitation, WAF bypass
+- [Cisco](Cheatsheets/cisco.md) — IOS vulns, SNMP, default creds
 - [Firebase](Cheatsheets/firebase.md) — open rules, data exfil, auth bypass
-- [Jenkins](Cheatsheets/JENKINS.md) — script console RCE, credentials exposure
-- [Jira](Cheatsheets/JIRA.md) — SSRF, attachment exfil, user enum
-- [PostgreSQL](Cheatsheets/PostgreSQL.md) — SQLi specifics, COPY TO/FROM, extensions
-- [SharePoint](Cheatsheets/SharePoint.md) — endpoint abuse, anonymous access
-- [WordPress](Cheatsheets/WORDPRESS.md) — plugin/theme vulns, xmlrpc, user enum
-- [Keyhacks (API key validation)](Cheatsheets/Keyhacks.md) — per-service key validation commands
+- [Jenkins](Cheatsheets/jenkins.md) — script console RCE, credentials exposure
+- [Jira](Cheatsheets/jira.md) — SSRF, attachment exfil, user enum
+- [PostgreSQL](Cheatsheets/postgresql.md) — SQLi specifics, COPY TO/FROM, extensions
+- [SharePoint](Cheatsheets/sharepoint.md) — endpoint abuse, anonymous access
+- [WordPress](Cheatsheets/wordpress.md) — plugin/theme vulns, xmlrpc, user enum
+- [Keyhacks (API key validation)](Cheatsheets/keyhacks.md) — per-service key validation commands
 - [Tools index](Cheatsheets/tools-index.md) — categorized tool list
 - [Tools cheatsheet](Cheatsheets/tools.md) — quick-reference tool flags and usage
 - [Security arsenal](Cheatsheets/security-arsenal.md) — curated tool stack with usage notes
@@ -146,8 +146,8 @@ Flat map of the workbench. Use `grep -rln <term>` across dirs for cross-cutting 
 
 ## Dorks
 
-- [Google dorks](Dorks/google-dorks.md) — categorized dorks for bug bounty recon
-- [LFI passwd dork](Dorks/(LFI)passwrd.md) — LFI-specific search queries
+- [Google dorks](Recon/dorks/google-dorks.md) — categorized dorks for bug bounty recon
+- [LFI passwd dork](Recon/dorks/lfi-targets.md) — LFI-specific search queries
 
 ## Payloads
 
@@ -203,7 +203,7 @@ Flat map of the workbench. Use `grep -rln <term>` across dirs for cross-cutting 
 
 ## OWASP
 
-- [OWASP testing guide checklist](OWASP/Checklist/OWASP%20Web%20Application%20Security%20Testing.md) — full WSTG checklist
+- [OWASP testing guide checklist](Checklists/OWASP/Web-Application-Testing.md) — full WSTG checklist
 - [Top 10 README](OWASP/TOP10/README.md) — OWASP Top 10 summary
 - [Projects README](OWASP/Projects/README.md) — notable OWASP project links
 
@@ -220,12 +220,12 @@ Flat map of the workbench. Use `grep -rln <term>` across dirs for cross-cutting 
 
 ## Burp
 
-- [Burp readme](Burp/readme.md) — configs, match/replace rules, extension notes
+- [Burp readme](Cheatsheets/burp.md) — configs, match/replace rules, extension notes
 
 ## AI
 
-- [LLM security](AI/llm-security.md) — prompt injection, model abuse, MCP attack surface, CVEs
-- [AI links](AI/links/readme.md) — curated LLM/agent security links
+- [LLM security](Cheatsheets/llm-security.md) — prompt injection, model abuse, MCP attack surface, CVEs
+- [AI links](Cheatsheets/ai-tools-links.md) — curated LLM/agent security links
 
 ## Infosec
 
