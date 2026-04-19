@@ -20,6 +20,9 @@ httpx-results-*.txt
 nuclei-results-*.txt
 *.jsonl.bak
 
+# Claude skill dir — lives in ~/.claude/skills/, never committed here
+skills/
+
 # Big wordlists & archives
 Scripts/wordlists/rockyou.txt
 Scripts/wordlists/*.7z
