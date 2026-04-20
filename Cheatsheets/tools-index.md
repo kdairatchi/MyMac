@@ -4,62 +4,63 @@
 
 ## Contents
 
-- [Recon](#Recon)
-    - [Subdomain Enumeration](#Subdomain-Enumeration)
-    - [Port Scanning](#Port-Scanning)
-    - [Screenshots](#Screenshots)
-    - [Technologies](#Technologies)
-    - [Content Discovery](#Content-Discovery)
-    - [Content Filtering](#Content-Filtering)
-    - [Links](#Links)
-    - [Parameters](#Parameters)
-    - [Fuzzing](#Fuzzing)
-    - [Monitoring](#Monitoring)
-    - [Waf Evasion](#Waf-Evasion)
+- [Recon](#recon)
+  - [Subdomain Enumeration](#subdomain-enumeration)
+  - [Port Scanning](#port-scanning)
+  - [Screenshots](#screenshots)
+  - [Technologies](#technologies)
+  - [Content Discovery](#content-discovery)
+  - [Content Filtering](#content-filtering)
+  - [Links](#links)
+  - [Parameters](#parameters)
+  - [Fuzzing](#fuzzing)
+  - [Monitoring](#monitoring)
+  - [Waf Evasion](#waf-evasion)
 
-- [Exploitation](#Exploitation)
-    - [Command Injection](#Command-Injection)
-    - [CORS Misconfiguration](#CORS-Misconfiguration)
-    - [CRLF Injection](#CRLF-Injection)
-    - [CSRF Injection](#CSRF-Injection)
-    - [Directory Traversal](#Directory-Traversal)
-    - [File Inclusion](#File-Inclusion)
-    - [GraphQL Injection](#GraphQL-Injection)
-    - [Header Injection](#Header-Injection)
-    - [Insecure Deserialization](#Insecure-Deserialization)
-    - [Insecure Direct Object References](#Insecure-Direct-Object-References)
-    - [Open Redirect](#Open-Redirect)
-    - [Race Condition](#Race-Condition)
-    - [Request Smuggling](#Request-Smuggling)
-    - [Server Side Request Forgery](#Server-Side-Request-Forgery)
-    - [SQL Injection](#SQL-Injection)
-    - [XSS Injection](#XSS-Injection)
-    - [XXE Injection](#XXE-Injection)
-    - [Cache Poisoning](#Web-Cache-Poisoning)
+- [Exploitation](#exploitation)
+  - [Command Injection](#command-injection)
+  - [CORS Misconfiguration](#cors-misconfiguration)
+  - [CRLF Injection](#crlf-injection)
+  - [CSRF Injection](#csrf-injection)
+  - [Directory Traversal](#directory-traversal)
+  - [File Inclusion](#file-inclusion)
+  - [GraphQL Injection](#graphql-injection)
+  - [Header Injection](#header-injection)
+  - [Insecure Deserialization](#insecure-deserialization)
+  - [Insecure Direct Object References](#insecure-direct-object-references)
+  - [Open Redirect](#open-redirect)
+  - [Race Condition](#race-condition)
+  - [Request Smuggling](#request-smuggling)
+  - [Server Side Request Forgery](#server-side-request-forgery)
+  - [SQL Injection](#sql-injection)
+  - [XSS Injection](#xss-injection)
+  - [XXE Injection](#xxe-injection)
+  - [Cache Poisoning](#web-cache-poisoning)
 
-- [Miscellaneous](#Miscellaneous)
-    - [Passwords](#Passwords)
-    - [Secrets](#Secrets)
-    - [Git](#Git)
-    - [Buckets](#Buckets)
-    - [CMS](#CMS)
-    - [JSON Web Token](#JSON-Web-Token)
-    - [postMessage](#postMessage)
-    - [Subdomain Takeover](#Subdomain-Takeover)
-    - [Vulnerability Scanners](#Vulnerability-Scanners)
-    - [Forbidden Bypass](#Forbidden-Bypass)
-    - [Permutation](#Permutation)
-    - [Web Proxy and Traffic Interception](#Web-Proxy-and-Traffic-Interception)
-    - [Origin IP](#Origin-IP)
-    - [Useful](#Useful)
-    - [AI Agents](#AI-Agents)
-    - [Uncategorized](#Uncategorized)
+- [Miscellaneous](#miscellaneous)
+  - [Passwords](#passwords)
+  - [Secrets](#secrets)
+  - [Git](#git)
+  - [Buckets](#buckets)
+  - [CMS](#cms)
+  - [JSON Web Token](#json-web-token)
+  - [postMessage](#postmessage)
+  - [Subdomain Takeover](#subdomain-takeover)
+  - [Vulnerability Scanners](#vulnerability-scanners)
+  - [Forbidden Bypass](#Forbidden-Bypass)
+  - [Permutation](#permutation)
+  - [Web Proxy and Traffic Interception](#web-proxy-and-traffic-interception)
+  - [Origin IP](#origin-ip)
+  - [Useful](#useful)
+  - [AI Agents](#ai-agents)
+  - [Uncategorized](#uncategorized)
 
 ---
 
 ## Recon
 
 ### Subdomain Enumeration
+
 - [Sublist3r](https://github.com/aboul3la/Sublist3r) - Fast subdomains enumeration tool for penetration testers
 - [Amass](https://github.com/OWASP/Amass) - In-depth Attack Surface Mapping and Asset Discovery
 - [massdns](https://github.com/blechschmidt/massdns) - A high-performance DNS stub resolver for bulk lookups and reconnaissance (subdomain enumeration)
@@ -91,7 +92,7 @@
 - [VHostScan](https://github.com/codingo/VHostScan) - A virtual host scanner that performs reverse lookups
 - [scilla](https://github.com/edoardottt/scilla) - Information Gathering tool - DNS / Subdomains / Ports / Directories enumeration
 - [sub3suite](https://github.com/3nock/sub3suite) - A research-grade suite of tools for subdomain enumeration, intelligence gathering and attack surface mapping.
-- [cero](https://github.com/glebarez/cero) - Scrape domain names from SSL certificates of arbitrary hosts 
+- [cero](https://github.com/glebarez/cero) - Scrape domain names from SSL certificates of arbitrary hosts
 - [shosubgo](https://github.com/incogbyte/shosubgo) - Small tool to Grab subdomains using Shodan api
 - [haktrails](https://github.com/hakluke/haktrails) - Golang client for querying SecurityTrails API data
 - [bbot](https://github.com/blacklanternsecurity/bbot) - A recursive internet scanner for hackers
@@ -99,7 +100,7 @@
 - [github-subdomains](https://github.com/gwen001/github-subdomains) - This Go tool performs searches on GitHub and parses the results to find subdomains of a given domain.
 - [gitlab-subdomains](https://github.com/gwen001/gitlab-subdomains) - This Go tool performs searches on GitLab and parses the results to find subdomains of a given domain.
 - [subdominator](https://github.com/RevoltSecurities/Subdominator) - Fast and powerfull to enumerate subdomains (50+ passive results ).
-- [csprecon](https://github.com/edoardottt/csprecon) - Discover new target domains using Content Security Policy 
+- [csprecon](https://github.com/edoardottt/csprecon) - Discover new target domains using Content Security Policy
 - [related-domains](https://github.com/gwen001/related-domains) - Find related domains of a given domain. this tool search for domains that have been registered by the same peoples/companies.
 - [hakip2host](https://github.com/hakluke/hakip2host) - hakip2host takes a list of IP addresses via stdin, then does a series of checks to return associated domain names.
 
@@ -112,7 +113,7 @@
 - [sandmap](https://github.com/trimstray/sandmap) - Nmap on steroids. Simple CLI with the ability to run pure Nmap engine, 31 modules with 459 scan profiles.
 - [ScanCannon](https://github.com/johnnyxmas/ScanCannon) - Combines the speed of masscan with the reliability and detailed enumeration of nmap
 - [nrich](https://gitlab.com/shodan-public/nrich) - A command-line tool to quickly analyze all IPs in a file and see which ones have open ports/ vulnerabilities.
-- [NimScan](https://github.com/elddy/NimScan/) - Fast Port Scanner 🚀 
+- [NimScan](https://github.com/elddy/NimScan/) - Fast Port Scanner 🚀
 
 ### Screenshots
 
@@ -160,6 +161,7 @@
 - [uncover](https://github.com/projectdiscovery/uncover) - uncover is a go wrapper using APIs of well known search engines to quickly discover exposed hosts on the internet.
 
 ### Content Filtering
+
 - [Hacker-Scoper](https://github.com/ItsIgnacioPortal/Hacker-Scoper) - CLI tool for filtering a mixed list of targets (URLs/IPs) according to the bug-bounty program's scope. The scope can be supplied manually, or it can also be detected automatically by just giving hacker-scoper the name of the targeted company. Hacker-Scoper supports IPs, URLs, wildcards, CIDR ranges, Nmap octet ranges, and even full Regex scopes.
 
 ### Links
@@ -175,7 +177,7 @@
 - [getJS](https://github.com/003random/getJS) -  A tool to fastly get all javascript sources/files
 - [linx](https://github.com/riza/linx) - Reveals invisible links within JavaScript files
 - [waymore](https://github.com/xnl-h4ck3r/waymore) -  Find way more from the Wayback Machine!
-- [xnLinkFinder](https://github.com/xnl-h4ck3r/xnLinkFinder) -  A python tool used to discover endpoints, potential parameters, and a target specific wordlist for a given target 
+- [xnLinkFinder](https://github.com/xnl-h4ck3r/xnLinkFinder) -  A python tool used to discover endpoints, potential parameters, and a target specific wordlist for a given target
 - [URLFinder](https://github.com/projectdiscovery/urlfinder) - A high-speed tool for passively gathering URLs, optimized for efficient web asset discovery without active scanning.
 - [github-endpoints](https://github.com/gwen001/github-endpoints) - This Go tool performs searches on GitHub and parses the results to find endpoints of a given domain.
 - [jsleak](https://github.com/byt3hx/jsleak) - jsleak is a tool to find secret , paths or links in JavaScript files or source code.
@@ -399,7 +401,7 @@
 - [tplmap](https://github.com/epinna/tplmap) - Server-Side Template Injection and Code Injection Detection and Exploitation Tool
 - [SSTImap](https://github.com/vladko312/SSTImap) - Automatic SSTI detection tool with interactive interface
 
-### Web-Cache-Poisoning 
+### Web-Cache-Poisoning
 
 - [toxicache](https://github.com/xhzeem/toxicache) - Go scanner to find web cache poisoning vulnerabilities in a list of URLs .
 
@@ -454,7 +456,6 @@
 - [keyhacks](https://github.com/streaak/keyhacks) - KeyHacks shows methods to validate different API keys found on a Bug Bounty Program or a pentest.
 - [keyFinder](https://github.com/momenbasel/keyFinder) - A Chrome extension that passively scans web pages for API keys, tokens, and secrets using 80+ regex patterns and Shannon entropy analysis across 10 attack surfaces.
 
-
 ### Git
 
 - [GitTools](https://github.com/internetwache/GitTools) - A repository with 3 tools for pwn'ing websites with .git repositories available
@@ -462,8 +463,8 @@
 - [git-dumper](https://github.com/arthaud/git-dumper) - A tool to dump a git repository from a website
 - [GitHunter](https://github.com/digininja/GitHunter) - A tool for searching a Git repository for interesting content
 - [dvcs-ripper](https://github.com/kost/dvcs-ripper) - Rip web accessible (distributed) version control systems: SVN/GIT/HG...
-- [Gato (Github Attack TOolkit)](https://github.com/praetorian-inc/gato) - GitHub Self-Hosted Runner Enumeration and Attack Tool 
-- [zizmor](https://github.com/zizmorcore/zizmor) - Static analysis tool for GitHub Actions 
+- [Gato (Github Attack TOolkit)](https://github.com/praetorian-inc/gato) - GitHub Self-Hosted Runner Enumeration and Attack Tool
+- [zizmor](https://github.com/zizmorcore/zizmor) - Static analysis tool for GitHub Actions
 
 ### Buckets
 
@@ -484,7 +485,7 @@
 - [CloudBrute](https://github.com/0xsha/CloudBrute) - Awesome cloud enumerator
 - [s3cario](https://github.com/0xspade/s3cario) - This tool will get the CNAME first if it's a valid Amazon s3 bucket and if it's not, it will try to check if the domain is a bucket name.
 - [S3Cruze](https://github.com/JR0ch17/S3Cruze) - All-in-one AWS S3 bucket tool for pentesters.
-- [s3dns](https://github.com/olizimmermann/s3dns) - Passive DNS-based discovery of S3 (and other cloud) buckets by resolving CNAMEs and IPs during recon—ideal for stealthy and early identification of cloud storage exposures 
+- [s3dns](https://github.com/olizimmermann/s3dns) - Passive DNS-based discovery of S3 (and other cloud) buckets by resolving CNAMEs and IPs during recon—ideal for stealthy and early identification of cloud storage exposures
 
 ### CMS
 
@@ -497,7 +498,6 @@
 - [pyfiscan](https://github.com/fgeek/pyfiscan) - Free web-application vulnerability and version scanner
 - [aemhacker](https://github.com/0ang3el/aem-hacker) - Tools to identify vulnerable Adobe Experience Manager (AEM) webapps.
 - [aemscan](https://github.com/Raz0r/aemscan) - Adobe Experience Manager Vulnerability Scanner
-
 
 ### JSON Web Token
 
@@ -552,7 +552,6 @@
 - [SSTImap](https://github.com/vladko312/SSTImap) -  SSTImap is a penetration testing software that can check websites for Code Injection and Server-Side Template Injection vulnerabilities and exploit them, giving access to the operating system itself.
 - [Lonkero](https://github.com/bountyyfi/lonkero) - Enterprise-grade web vulnerability scanner with 60+ attack modules, built in Rust for penetration testing and security assessments.
 
-
 ### Permutation
 
 - [alterx](https://github.com/projectdiscovery/alterx) - Fast and customizable subdomain wordlist generator using DSL. alterx takes patterns as input and generates subdomain permutation wordlist based on that pattern.
@@ -573,21 +572,21 @@
 
 - [CloudRip](https://github.com/staxsum/CloudRip) - A tool that helps you find the real IP addresses hiding behind Cloudflare by checking subdomains.
 - [hakoriginfinder](https://github.com/hakluke/hakoriginfinder) - Tool for discovering the origin host behind a reverse proxy. Useful for bypassing WAFs and other reverse proxies.
- 
+
 ### Useful
 
-- [anew](https://github.com/tomnomnom/anew) -  A tool for adding new lines to files, skipping duplicates 
-- [gf](https://github.com/tomnomnom/gf) -  A wrapper around grep, to help you grep for things 
-- [uro](https://github.com/s0md3v/uro) -  declutters url lists for crawling/pentesting 
-- [unfurl](https://github.com/tomnomnom/unfurl) -  Pull out bits of URLs provided on stdin 
-- [qsreplace](https://github.com/tomnomnom/qsreplace) -  Accept URLs on stdin, replace all query string values with a user-supplied value 
+- [anew](https://github.com/tomnomnom/anew) -  A tool for adding new lines to files, skipping duplicates
+- [gf](https://github.com/tomnomnom/gf) -  A wrapper around grep, to help you grep for things
+- [uro](https://github.com/s0md3v/uro) -  declutters url lists for crawling/pentesting
+- [unfurl](https://github.com/tomnomnom/unfurl) -  Pull out bits of URLs provided on stdin
+- [qsreplace](https://github.com/tomnomnom/qsreplace) -  Accept URLs on stdin, replace all query string values with a user-supplied value
 - [interactsh](https://github.com/projectdiscovery/interactsh) - Interactsh is an open-source tool for detecting out-of-band interactions. It is a tool designed to detect vulnerabilities that cause external interactions.
 - [CyberChef](https://github.com/gchq/CyberChef) - The Cyber Swiss Army Knife - a web app for encryption, encoding, compression and data analysis
 - [notify](https://github.com/projectdiscovery/notify) - Notify is a Go-based assistance package that enables you to stream the output of several tools (or read from a file) and publish it to a variety of supported platforms.
 
 ### AI Agents
 
-- [shannon](https://github.com/KeygraphHQ/shannon) - Fully autonomous AI hacker to find actual exploits in your web apps. 
+- [shannon](https://github.com/KeygraphHQ/shannon) - Fully autonomous AI hacker to find actual exploits in your web apps.
 
 ---
 
@@ -607,7 +606,7 @@
 - [Bypass bot detection](https://github.com/portswigger/bypass-bot-detection) - Burp Suite extension that mutates ciphers to bypass TLS-fingerprint based bot detection.
 - [cvemap](https://github.com/projectdiscovery/cvemap) - Modern CLI for exploring vulnerability data with powerful search, filtering, and analysis capabilities.
 - [cut-cdn](https://github.com/ImAyrix/cut-cdn) - Removing CDN IPs from the list of IP addresses.
-- [ds_store_exp](https://github.com/lijiejie/ds_store_exp) - A .DS_Store file disclosure exploit. It parses .DS_Store file and downloads files recursively. 
+- [ds_store_exp](https://github.com/lijiejie/ds_store_exp) - A .DS_Store file disclosure exploit. It parses .DS_Store file and downloads files recursively.
 
 ---
 
@@ -627,6 +626,7 @@ related or neighboring rights to this work.
 ## 2026-04-16
 
 ### Nginx UI Broken Access Control — `CVE-2026-33032`
+
 - **Tags:** `#auth-bypass` `#web`
 - **Severity:** high · **Hunt:** 4/5 · **Score:** 42.0 · **Status:** poc · **Age:** 0d
 - **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/21042b7c28e9fcf8798886bba78b9e0199d2d4f0) · [2](https://github.com/projectdiscovery/nuclei-templates/commit/d1a5999447e019ece601c8ac6c5213538155dfaf)
@@ -637,6 +637,7 @@ This Nuclei template detects CVE-2026-33032, a critical broken access control vu
 *Clustered 2 sources for this item.*
 
 ### Odoo Login Redirect XSS
+
 - **Tags:** `#xss` `#web`
 - **Severity:** high · **Hunt:** 4/5 · **Score:** 42.0 · **Status:** poc · **Age:** 0d
 - **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/d9f00221d869b5d8c7a817bf1a42febf79d81ae2)
@@ -644,7 +645,9 @@ This Nuclei template detects CVE-2026-33032, a critical broken access control vu
 This Nuclei template detects reflected open redirect vulnerabilities in Odoo's login flow that can be chained into cross-site scripting (XSS) attacks. It should be deployed during authentication testing against Odoo systems to identify unsafe redirect parameters leading to client-side code execution.
 
 ---
+
 ### CVE-2026-4631 - Cockpit Web Console Pre-Auth RCE — `CVE-2026-4631`
+
 - **Tags:** `#rce` `#command-injection`
 - **Severity:** high · **Hunt:** 5/5 · **Score:** 35.0 · **Status:** theoretical · **Age:** 0d
 - **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/259a7393fd4bc37f554f80ac67cec9a4996036e9)
@@ -652,7 +655,9 @@ This Nuclei template detects reflected open redirect vulnerabilities in Odoo's l
 A Nuclei template to detect CVE-2026-4631, a pre-authentication remote code execution vulnerability in Cockpit Web Console versions below 360 via SSH option injection. Use in security assessments of critical infrastructure management systems exposed to the internet, especially for pentests of server administration interfaces.
 
 ---
+
 ### chore: sign templates 🤖
+
 - **Tags:** `#web`
 - **Severity:** unknown · **Hunt:** 1/5 · **Score:** 4.0 · **Status:** unknown · **Age:** 0d
 - **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/76748f26148f1e4f15f46c827d5126c9997f94d1) · [2](https://github.com/projectdiscovery/nuclei-templates/commit/944acb4099b9839569a5a28a799b1bd6c27295aa) · [3](https://github.com/projectdiscovery/nuclei-templates/commit/766a46edb48e47d61457dc928ef176c42adf0e3b) · [4](https://github.com/projectdiscovery/nuclei-templates/commit/3cdcc366b7573f061f73ea0e0aa49b6f389903df) · [5](https://github.com/projectdiscovery/nuclei-templates/commit/665bea28f6fdfa5e891120dcd68dae92ba014f76)
@@ -663,6 +668,7 @@ This commit introduces digital signing functionality for Nuclei templates to ver
 *Clustered 5 sources for this item.*
 
 ### Update odoo-login-redirect.yaml
+
 - **Tags:** `#auth-bypass` `#web`
 - **Severity:** unknown · **Hunt:** 1/5 · **Score:** 4.0 · **Status:** unknown · **Age:** 0d
 - **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/b50c2098e23df82ea0bfd08dd1d1a46d5d205b4d)
@@ -670,7 +676,9 @@ This commit introduces digital signing functionality for Nuclei templates to ver
 This template detects login redirect vulnerabilities in Odoo applications, potentially exposing users to phishing or unauthorized access. It should be used in security scans to identify misconfigured authentication flows that could lead to credential theft or session hijacking.
 
 ---
+
 ### Nginx OpenCloudOS Test Page Template
+
 - **Tags:** `#nginx` `#web`
 - **Severity:** unknown · **Hunt:** 1/5 · **Score:** 2.0 · **Status:** unknown · **Age:** 30d
 - **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/ad88555dd667eca235ee1b651d7abbd373417894)
@@ -678,7 +686,9 @@ This template detects login redirect vulnerabilities in Odoo applications, poten
 This commit adds a new Nuclei template targeting the Nginx test page on OpenCloudOS systems. It enables automated detection of misconfigurations or vulnerabilities specific to the default OpenCloudOS Nginx installation. Use this template during web app pentests or vulnerability scanning to check for OpenCloudOS-specific Nginx exposures.
 
 ---
+
 ### Nuclei Template Update Generator
+
 - **Tags:** `#web` `#scanner`
 - **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
 - **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/1fffe96f0867609476c51d8bfbc17fc7edef47f4)
@@ -686,7 +696,9 @@ This commit adds a new Nuclei template targeting the Nginx test page on OpenClou
 This update automates the generation of a new addition list for the Nuclei vulnerability scanner template repository, enabling maintainers to track newly added detection rules. The script is used periodically during maintenance to ensure the template catalog stays current and easily consumable for penetration testers and security teams.
 
 ---
+
 ### chore: sign templates 🤖
+
 - **Tags:** `#supply-chain` `#web`
 - **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
 - **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/a89211199fb7b561200ede97a3e74d55dbe0bbab)
@@ -728,6 +740,7 @@ sqry -q "apache" | grep -v "^10\." > public_ips.txt
 ## 2026-04-17
 
 ### Vendure Core SQL Injection Nuclei Template — `CVE-2026-40887`
+
 - **Tags:** `#sqli` `#web`
 - **Severity:** critical · **Hunt:** 4/5 · **Score:** 54.0 · **Status:** poc · **Age:** 0d
 - **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/252f71b4fb06f74b7ae3469ca87d92f1419fb445)
@@ -735,7 +748,9 @@ sqry -q "apache" | grep -v "^10\." > public_ips.txt
 This Nuclei template detects a SQL Injection vulnerability in Vendure Core via automated scanning. Use it during penetration tests and vulnerability assessments targeting Vendure e-commerce platforms to identify this critical flaw. Ideal for unauthenticated testing scenarios where PoC availability exists.
 
 ---
+
 ### Retool PostMessage XSS Template
+
 - **Tags:** `#xss` `#retool`
 - **Severity:** unknown · **Hunt:** 2/5 · **Score:** 8.0 · **Status:** unknown · **Age:** 0d
 - **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/ac66842d51612c0d67ca961e77a050a03fe26841)
@@ -743,7 +758,9 @@ This Nuclei template detects a SQL Injection vulnerability in Vendure Core via a
 This Nuclei template detects Cross-Site Scripting (XSS) vulnerabilities in Retool Self-Hosted applications through malicious custom component collections exploiting postMessage functionality. Use during vulnerability scans of Retool environments to identify this specific XSS attack vector in custom workflows or integrations.
 
 ---
+
 ### Browserless Swagger Detection Template
+
 - **Tags:** `#api` `#web`
 - **Severity:** info · **Hunt:** 4/5 · **Score:** 6.0 · **Status:** poc · **Age:** 0d
 - **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/664c594c45d92e1876ded9dd90e9e5f6f564c970)
@@ -751,7 +768,9 @@ This Nuclei template detects Cross-Site Scripting (XSS) vulnerabilities in Retoo
 This Nuclei template detects exposed Swagger UI in Browserless API services, enabling security testers to identify publicly accessible API documentation that might reveal sensitive endpoint structures and data flow details during reconnaissance or vulnerability assessments.
 
 ---
+
 ### Nuclei Templates Update Generator
+
 - **Tags:** `#tool` `#web` `#api`
 - **Severity:** unknown · **Hunt:** 1/5 · **Score:** 4.0 · **Status:** unknown · **Age:** 0d
 - **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/67f0c847aec8b78a71b51461bbc1214cb41eeef9) · [2](https://github.com/projectdiscovery/nuclei-templates/commit/02cb8a9e480843d54728f9d78664d8d0e7c0119f) · [3](https://github.com/projectdiscovery/nuclei-templates/commit/605aede1a91e004efb41f02940c6696a327c108c) · [4](https://github.com/projectdiscovery/nuclei-templates/commit/2d5cedac35482ac180b8fe39920db91f751f29bf)
@@ -762,6 +781,7 @@ This automated commit generates a new addition list for the Project Discovery nu
 *Clustered 4 sources for this item.*
 
 ### Vendure Detection Template
+
 - **Tags:** `#vendure` `#web`
 - **Severity:** unknown · **Hunt:** 1/5 · **Score:** 4.0 · **Status:** unknown · **Age:** 0d
 - **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/54c9eab549d9fb7421afc0113942da0cee44a90c)
@@ -769,7 +789,9 @@ This automated commit generates a new addition list for the Project Discovery nu
 This template adds detection capabilities for vulnerabilities in the Vendure e-commerce platform. It enables automated security scanning of Vendure installations using the Nuclei engine, helping identify misconfigurations or known weaknesses during vulnerability assessments. Use this during pentests or in security automation pipelines to proactively detect issues in Vendure deployments.
 
 ---
+
 ### Template Signing for Nuclei
+
 - **Tags:** `#tool` `#supply-chain`
 - **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
 - **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/b5c6d6d823d5cfba2b09014a7c9964b025f0fcba) · [2](https://github.com/projectdiscovery/nuclei-templates/commit/5706cf85bf69e1349f24ef5310b40ac5b4776dca)
@@ -792,11 +814,13 @@ This Nuclei template detects unfinished Chatwoot installations, which may expose
 ### CVE-2025-69411 Template — `CVE-2025-69411`
 - **Tags:** `#web` `#unknown`
 - **Severity:** unknown · **Hunt:** 3/5 · **Score:** 6.0 · **Status:** unknown · **Age:** 30d
-- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/1f76c8b44c5e9cfbe70774a49702184edf58f9b5)
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/1f76c8b44c5e9cfbe70774a49702184edf58f9b5) · [2](https://github.com/projectdiscovery/nuclei-templates/commit/96fe2d8f4521ea20524b9ff90f3724d891614785)
 
 This Nuclei template detects CVE-2025-69411, a vulnerability in an unspecified product, enabling automated scanning for this newly identified issue. It should be deployed in regular security assessments to identify exposure, particularly in environments where the affected product is deployed and patch status is unknown.
 
 ---
+*Clustered 2 sources for this item.*
+
 ### FortiSandbox Panel Detection Template
 - **Tags:** `#web` `#appliance`
 - **Severity:** unknown · **Hunt:** 1/5 · **Score:** 4.0 · **Status:** unknown · **Age:** 0d
@@ -808,13 +832,21 @@ This is a Nuclei template update targeting Fortinet's FortiSandbox web interface
 ### Chatwoot Installer Template Update
 - **Tags:** `#web` `#exposed`
 - **Severity:** unknown · **Hunt:** 1/5 · **Score:** 2.0 · **Status:** unknown · **Age:** 30d
-- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/1d49144fb8b1c89379470f9e8ed412302920e9ba) · [2](https://github.com/projectdiscovery/nuclei-templates/commit/21846230ccfb8cb87bd44ca2c176a72a48dbbe82) · [3](https://github.com/projectdiscovery/nuclei-templates/commit/7d7925d0b3518da9be1c68202792b6b2f9057553) · [4](https://github.com/projectdiscovery/nuclei-templates/commit/1a9421bc86cea497ad6b9d8819961ae048566624) · [5](https://github.com/projectdiscovery/nuclei-templates/commit/b54ade37c023c7795462e9c42157956f6319951f)
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/1d49144fb8b1c89379470f9e8ed412302920e9ba) · [2](https://github.com/projectdiscovery/nuclei-templates/commit/21846230ccfb8cb87bd44ca2c176a72a48dbbe82) · [3](https://github.com/projectdiscovery/nuclei-templates/commit/7d7925d0b3518da9be1c68202792b6b2f9057553) · [4](https://github.com/projectdiscovery/nuclei-templates/commit/808ee659f1265fac023b649ccd656173d2049017) · [5](https://github.com/projectdiscovery/nuclei-templates/commit/1a9421bc86cea497ad6b9d8819961ae048566624)
 
 This Nuclei template targets exposed Chatwoot installation artifacts, renaming and updating the template to detect misconfigured installer directories or scripts left publicly accessible. Use during web application scans to identify insecure deployments of Chatwoot that could lead to unauthorized access or information leakage.
 
 ---
-*Clustered 7 sources for this item.*
+*Clustered 8 sources for this item.*
 
+### Nuclei Templates Checksum Generator
+- **Tags:** `#tool` `#supply-chain`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/482ed6551c4ddc67dcefaeca8a68294bbaeace6e)
+
+Automated checksum generation for Nuclei templates to ensure integrity and supply chain security. Use when you need to verify template authenticity during security audits or incident response to detect unauthorized modifications to publicly available scanning templates.
+
+---
 ### FortiSandbox Detection Template
 - **Tags:** `#appliance` `#network`
 - **Severity:** info · **Hunt:** 1/5 · **Score:** 0.5 · **Status:** unknown · **Age:** 30d
@@ -823,11 +855,40 @@ This Nuclei template targets exposed Chatwoot installation artifacts, renaming a
 This nuclei template detects FortiSandbox instances, a network security appliance by Fortinet, to identify exposed sandbox services during reconnaissance scans. It should be used when mapping enterprise security infrastructure surfaces or verifying Fortinet deployment visibility in target networks.
 
 ---
-### Nuclei Templates Checksum Generator
-- **Tags:** `#nuclei` `#tool` `#supply-chain`
-- **Severity:** info · **Hunt:** 1/5 · **Score:** 0.5 · **Status:** unknown · **Age:** 30d
-- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/e643751346422302e8e4d080a2e980c8fd14492c)
 
-Automated checksum generation for Nuclei templates to ensure integrity and detect tampering during distribution. Use when verifying template authenticity or validating unmodified downloads in CI/CD pipelines.
+## 2026-04-20
+
+### apache-skywalking-dashboard-login-template
+- **Tags:** `#auth-bypass` `#web`
+- **Severity:** high · **Hunt:** 4/5 · **Score:** 42.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/f6b7ac68cc81bada89a2cb0edb2c8c1b669d9d13)
+
+This Nuclei template detects default login credentials in the Apache Skywalking dashboard, enabling unauthenticated access to administrative interfaces. It should be used during vulnerability scans of cloud-native deployments to identify misconfigured instances where default credentials remain exposed, which could lead to unauthorized monitoring or service disruption.
 
 ---
+### Apache SkyWalking Dashboard Template
+- **Tags:** `#web` `#dashboard`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/88769b3cf2589dfaad5200833aa6c378d08e1627)
+
+This Nuclei template targets Apache SkyWalking dashboard interfaces to detect potential security weaknesses in observability dashboards. It should be used during vulnerability scans of systems utilizing Apache SkyWalking for application monitoring and observability, particularly when evaluating web-based management interfaces for exposure risks.
+
+---
+### chore: sign templates 🤖
+- **Tags:** `#supply-chain`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 0.5 · **Status:** unknown · **Age:** 30d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/7c61695bbde81d827a6273aec598e5e4c216ec25)
+
+This commit introduces automatic template signing to ensure integrity and authenticity of Nuclei templates, preventing tampering or unauthorized modifications. Security professionals should enable this feature when running scans in untrusted environments to guarantee their templates remain unaltered, especially during automated or remote scanning operations.
+
+---
+### chore: generate templates checksum 🤖
+- **Tags:** `#web`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 0.5 · **Status:** unknown · **Age:** 30d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/a6d9aed7d964fdcea3a86baf6b261da24710f59c) · [2](https://github.com/projectdiscovery/nuclei-templates/commit/6fc601e9c48173391f5de186631d7f75755d2da8)
+
+This commit automates checksum generation for nuclei-templates, ensuring integrity tracking and change detection in the vulnerability scanning template library. It should be used for maintaining file integrity and verifying template authenticity in security scanning workflows.
+
+---
+*Clustered 2 sources for this item.*
+

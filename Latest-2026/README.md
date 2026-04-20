@@ -1,6 +1,6 @@
 # Latest-2026 — Rolling Attack Surface Tracker
 
-> **Last refresh:** 2026-04-15 · Maintainer: [@kdairatchi](https://github.com/kdairatchi)
+> **Last refresh:** 2026-04-20 · Maintainer: [@kdairatchi](https://github.com/kdairatchi)
 
 A rolling index of fresh attack surface, CVEs, and techniques that matter for bug bounty **right now**. Dated, evidence-labeled, no filler.
 
@@ -24,6 +24,21 @@ grep -rln "CVE-2025" Latest-2026/
 # Grep by class
 grep -rln "desync\|smuggling" Latest-2026/
 ```
+
+## Recent (last 10)
+
+| Date | Item | Class | Hunt |
+|---|---|---|---|
+| 2026-04-20 | CVE-2026-41242 protobufjs code injection | cve | 4/5 |
+| 2026-04-20 | Apache SkyWalking default-login template | tool | 4/5 |
+| 2026-04-20 | CVE-2026-40948 Airflow Keycloak OAuth CSRF | cve | 2/5 |
+| 2026-04-20 | CSS sanitizer bypasses × 4 (H1) | writeup | 3/5 |
+| 2026-04-20 | Race conditions — timing exploit guide | writeup | 3/5 |
+| 2026-04-20 | CVE-2026-0868 WP Calendly XSS | cve | 2/5 |
+| 2026-04-20 | CVE-2026-6559 Wavlink stored XSS | cve | 2/5 |
+| 2026-04-20 | OTP flaw → ATO writeup | writeup | 3/5 |
+| 2026-04-19 | CVE-2026-3464 WP Customer Area LFI/RCE | cve | 3/5 |
+| 2026-04-19 | CVE-2026-2434 WP Pz-LinkCard stored XSS | cve | 3/5 |
 
 ## Contribution
 
