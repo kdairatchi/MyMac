@@ -193,3 +193,70 @@ Scan with: `ppmap` — automated prototype pollution scanner.
 
 ---
 *Clustered 14 sources for this item.*
+
+
+## 2026-04-19 — H1 disclosures
+
+### SQL Injection Detection Bypass in AWS WAF Managed Rules (AWSManagedRulesSQLiRuleSet)
+
+- **2026-04-15** · sev: None · bounty: undisclosed
+- Source: [hackerone.com/3591725](https://hackerone.com/reports/3591725) · Reporter: [@killnet-edc](https://hackerone.com/killnet-edc) · Team: [AWS VDP](https://hackerone.com/aws_vdp)
+- CWE: SQL Injection
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### SSRF Filter Bypass via Unblocked NAT64 Local-Use IPv6 Prefix (64:ff9b:1::/48)
+
+- **2026-03-31** · sev: High · bounty: undisclosed
+- Source: [hackerone.com/3634400](https://hackerone.com/reports/3634400) · Reporter: [@tipsen](https://hackerone.com/tipsen) · Team: [arkadiyt-projects](https://hackerone.com/arkadiyt-projects)
+- CWE: Server-Side Request Forgery (SSRF)
+
+**What**
+
+A vulnerability was discovered in the `ssrf_filter` library version 1.3.0. The library failed to block the NAT64 local-use IPv6 prefix `64:ff9b:1::/48`, allowing such addresses to be treated as public. This enabled SSRF requests through `/fetch` to targets encoded under that prefix when routable in the deployment environment.
+
+**Hunt signal:** `curl --data-raw 'url=http://[64:ff9b:1::7f00:1]/' <target>/fetch` — test SSRF endpoints with the NAT64 local-use prefix `64:ff9b:1::` mapped to `127.0.0.1` (`7f00:1`).
+**Grep:** `rg -n 'ssrf|url.*parse|is_private|is_internal' --type ruby`
+**Nuclei:** `ssrf`
+**Pass-if:** Target has no URL-fetch/orchestration endpoints, or IPv6 is fully disabled on the server network.
+
+---
+
+### SQL Injection vulnerability found on ibm.com endpoint
+
+- **2026-03-12** · sev: Critical · bounty: undisclosed
+- Source: [hackerone.com/3578842](https://hackerone.com/reports/3578842) · Reporter: [@cr3ckerxploit](https://hackerone.com/cr3ckerxploit) · Team: [IBM](https://hackerone.com/ibm)
+- CWE: SQL Injection
+
+**What**
+
+A SQL injection vulnerability was found on an ibm.com endpoint. The vulnerability was reported to IBM, analyzed, and remediated.
+
+**Hunt signal:** pass — summary too thin.
+
+---
+
+
+## 2026-04-23 — H1 disclosures
+
+### Complete authentication bypass to admin permissions
+
+- **2026-04-22** · sev: Critical · bounty: undisclosed · cve: CVE-2026-29198
+- Source: [hackerone.com/3564655](https://hackerone.com/reports/3564655) · Reporter: [@npc](https://hackerone.com/npc) · Team: [Rocket.Chat](https://hackerone.com/rocket_chat)
+- CWE: SQL Injection
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-29198` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-29198.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---

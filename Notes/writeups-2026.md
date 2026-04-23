@@ -1992,3 +1992,22 @@ A vulnerability was discovered in Fastify versions 5.7.0 and later. The issue wa
 - **Rating:** novel
 
 ---
+
+
+## 2026-04-23
+
+### Complete authentication bypass to admin permissions
+
+- **2026-04-22** · sev: Critical · bounty: undisclosed · cve: CVE-2026-29198
+- Source: [hackerone.com/3564655](https://hackerone.com/reports/3564655) · Reporter: [@npc](https://hackerone.com/npc) · Team: [Rocket.Chat](https://hackerone.com/rocket_chat)
+- CWE: SQL Injection
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-29198` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-29198.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---

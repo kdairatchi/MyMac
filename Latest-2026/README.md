@@ -1,6 +1,6 @@
 # Latest-2026 — Rolling Attack Surface Tracker
 
-> **Last refresh:** 2026-04-20 · Maintainer: [@kdairatchi](https://github.com/kdairatchi)
+> **Last refresh:** 2026-04-23 · Maintainer: [@kdairatchi](https://github.com/kdairatchi)
 
 A rolling index of fresh attack surface, CVEs, and techniques that matter for bug bounty **right now**. Dated, evidence-labeled, no filler.
 
@@ -29,16 +29,16 @@ grep -rln "desync\|smuggling" Latest-2026/
 
 | Date | Item | Class | Hunt |
 |---|---|---|---|
+| 2026-04-23 | Firefox 150 batch — 7 CVEs (5× CRITICAL 9.8) | cve | 2/5 |
+| 2026-04-23 | Rocket.Chat SQLi → auth bypass (CVE-2026-29198) | cve | 4/5 |
+| 2026-04-23 | PostMessage origin bypass — full exploit guide | technique | 3/5 |
+| 2026-04-23 | Unicode overflow → WAF/blocklist bypass | technique | 4/5 |
 | 2026-04-20 | CVE-2026-41242 protobufjs code injection | cve | 4/5 |
 | 2026-04-20 | Apache SkyWalking default-login template | tool | 4/5 |
 | 2026-04-20 | CVE-2026-40948 Airflow Keycloak OAuth CSRF | cve | 2/5 |
 | 2026-04-20 | CSS sanitizer bypasses × 4 (H1) | writeup | 3/5 |
 | 2026-04-20 | Race conditions — timing exploit guide | writeup | 3/5 |
 | 2026-04-20 | CVE-2026-0868 WP Calendly XSS | cve | 2/5 |
-| 2026-04-20 | CVE-2026-6559 Wavlink stored XSS | cve | 2/5 |
-| 2026-04-20 | OTP flaw → ATO writeup | writeup | 3/5 |
-| 2026-04-19 | CVE-2026-3464 WP Customer Area LFI/RCE | cve | 3/5 |
-| 2026-04-19 | CVE-2026-2434 WP Pz-LinkCard stored XSS | cve | 3/5 |
 
 ## Contribution
 
