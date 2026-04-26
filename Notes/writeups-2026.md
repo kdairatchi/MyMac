@@ -2011,3 +2011,67 @@ _No H1 summary provided._
 **Hunt signal:** pass — summary too thin
 
 ---
+
+
+## 2026-04-26
+
+### Argument Injection in /manage/ssh/ via host parameter leads to sensitive file disclosure on Weblate
+
+- **2026-04-26** · sev: — · bounty: undisclosed · cve: CVE-2026-24126
+- Source: [hackerone.com/3518571](https://hackerone.com/reports/3518571) · Reporter: [@alexb_616](https://hackerone.com/alexb_616) · Team: [Weblate](https://hackerone.com/weblate)
+
+**What**
+
+A vulnerability was discovered in the SSH management interface of Weblate, a web-based translation tool. The vulnerability allowed an attacker with administrative privileges to inject command-line arguments into the host parameter, leading to sensitive file disclosure on the server. The vulnerable code was found in the ssh() function, where the host parameter was directly appended to a subprocess command without proper sanitization, enabling the attacker to read files like /etc/passwd, Django settings.py, and private SSH keys.
+
+**PoC refs:** search `github.com/search?q=CVE-2026-24126` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-24126.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** POST to SSH-related management endpoints with `host=-o ProxyCommand=cat /etc/passwd` (or `host=-F /etc/shadow`) → check response for file contents.
+**Grep:** `rg -n 'subprocess.*(ssh|scp)' src/ | rg -v 'shlex\.split|shell=False'`
+**Pass-if:** Endpoint requires non-admin roles OR host param is validated against IP/hostname regex before reaching subprocess.
+
+---
+
+### mruby-engine: UAF in MRubyEngine#initialize enables local RCE
+
+- **2026-04-24** · sev: None · bounty: undisclosed
+- Source: [hackerone.com/3679660](https://hackerone.com/reports/3679660) · Reporter: [@0xd0ff9](https://hackerone.com/0xd0ff9) · Team: [Shopify](https://hackerone.com/shopify)
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Incomplete fix for CVE-2026-21637: loadSNI() in _tls_wrap.js lacks try/catch leading to Remote DoS
+
+- **2026-04-23** · sev: High · bounty: undisclosed · cve: CVE-2026-21637
+- Source: [hackerone.com/3556769](https://hackerone.com/reports/3556769) · Reporter: [@mbarbs](https://hackerone.com/mbarbs) · Team: [Node.js](https://hackerone.com/nodejs)
+
+**What**
+
+A flaw was discovered in the Node.js TLS error handling that left SNICallback invocations unprotected against synchronous exceptions. This represented an incomplete fix of the prior CVE-2026-21637 vulnerability, where the equivalent ALPN and PSK callbacks were already addressed. The issue could lead to a Remote Denial of Service when an SNICallback threw synchronously on unexpected input, causing the exception to bypass TLS error handlers and propagate as an uncaught exception, crashing the Node.js process.
+
+**PoC refs:** search `github.com/search?q=CVE-2026-21637` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-21637.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — library-level CVE (Node.js core); no reusable app-layer probe beyond version fingerprinting.
+
+---
+
+### RBAC bypass on App log endpoints via `permissionRequired` typo — any authenticated user reads admin-only Enterprise App logs
+
+- **2026-04-23** · sev: Medium · bounty: undisclosed · cve: CVE-2026-29197
+- Source: [hackerone.com/3589551](https://hackerone.com/reports/3589551) · Reporter: [@arccode](https://hackerone.com/arccode) · Team: [Rocket.Chat](https://hackerone.com/rocket_chat)
+- CWE: Improper Access Control - Generic
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-29197` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-29197.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
