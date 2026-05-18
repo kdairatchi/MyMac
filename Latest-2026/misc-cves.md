@@ -1,6 +1,21 @@
 # misc-cves
 
 
+## 2026-05-17 — CVE-2026-42945
+
+### CVE-2026-42945 — NGINX Rift: 18-Year-Old Flaw Actively Exploited [unverified]
+
+- **Date:** 2026-05-17 · **Source:** [medium.com](https://medium.com/@saikiran9459/nginx-rift-cve-2026-42945-is-now-being-exploited-an-18-year-old-flaw-in-the-worlds-most-deployed-5005b5534721) · **Class:** cve
+- **Severity:** unknown (no NVD entry at time of writing) · **Hunt:** hold · **Status:** claimed active exploitation, unverified
+- **Tags:** `#nginx` `#web-server` `#unverified`
+
+- **What:** Medium blog claims CVE-2026-42945 is an 18-year-old bug in NGINX now being actively exploited. No NVD entry, no PortSwigger/watchTowr corroboration in today's feeds.
+- **Why it matters:** [inference] NGINX is the most-deployed web server globally — if real, this is extremely high-value. But Medium-only claims without an official advisory are often inaccurate or embellished. Track, don't act.
+- **Hunt signal:** hold — monitor nginx.org/en/security_advisories.html and PortSwigger/watchTowr for corroboration. If confirmed, every nginx-fronted web app in scope becomes a target.
+- **Evidence:** [source] https://medium.com/@saikiran9459/nginx-rift-cve-2026-42945 [title-only, unverified — check NVD before acting]
+
+---
+
 ## 2026-04-23
 
 ### Firefox 150 — Seven High/Critical CVEs (CVE-2026-6748, -6750, -6760, -6761, -6768, -6769, -6771)
