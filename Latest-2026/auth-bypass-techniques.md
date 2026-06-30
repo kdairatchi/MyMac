@@ -155,3 +155,12 @@ Cookie: __Host-session=attacker_value
 - **The Fragile Lock** · Ruby/PHP SAML attribute pollution + namespace confusion → full auth bypass, PoC published · https://portswigger.net/research/the-fragile-lock
 - **SAML Roulette (GitLab)** · `ruby-saml` XML signature bypass via namespace spoofing → unauthenticated admin access on GitLab Enterprise · https://portswigger.net/research/saml-roulette-the-hacker-always-wins
 - **CVE-2025-0108** · PAN-OS Nginx/Apache path confusion → pre-auth bypass to protected management API · https://www.assetnote.io/resources/research/nginx-apache-path-confusion-to-auth-bypass-in-pan-os
+
+## 2026-06-27 — Ubiquiti UniFi OS NGINX Path Confusion Chain
+
+### Ubiquiti UniFi OS — NGINX Prefix Bypass → Unauthenticated Root RCE (CVE-2026-34908/34909/34910)
+- **Date:** 2026-06-27 · **Source:** [bishopfox.com](https://bishopfox.com/blog/popping-root-on-unifi-os-server-unauthenticated-rce-chain-detection-analysis) · **Class:** cve
+- **What:** NGINX location-block prefix matching resolves an auth-exempt URL prefix to an authenticated internal backend route, bypassing access control; chained with path traversal (CVE-2026-34909) and input validation flaw (CVE-2026-34910) for unauthenticated root RCE on all UniFi OS devices.
+- **Why it matters:** CVSS 10.0, all three KEV'd 2026-06-23 with active exploitation; the NGINX prefix-bypass auth pattern generalizes to any NGINX reverse proxy with misconfigured location blocks — test any `/public/` or exempt prefix that forwards to an authenticated upstream.
+- **Hunt signal:** `curl -sv "https://TARGET/public/../api/v2/auth/me" 2>&1 | grep -E "< HTTP|200|403"` — mismatch vs direct `/api/v2/auth/me` indicates prefix bypass
+- **Evidence:** [NVD CVE-2026-34908](https://nvd.nist.gov/vuln/detail/CVE-2026-34908) · [BishopFox RCE chain](https://bishopfox.com/blog/popping-root-on-unifi-os-server-unauthenticated-rce-chain-detection-analysis) · [CISA KEV 2026-06-23](https://www.cisa.gov/news-events/alerts/2026/06/23/cisa-adds-four-known-exploited-vulnerabilities-catalog) · [Ubiquiti SA-064](https://community.ui.com/releases/Security-Advisory-Bulletin-064-064/84811c09-4cf4-42ab-bd61-cc994445963b)

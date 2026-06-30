@@ -2011,3 +2011,14 @@ _No H1 summary provided._
 **Hunt signal:** pass — summary too thin
 
 ---
+
+## 2026-06-27
+
+### I Made OpenID Connect Stop Checking Signatures
+- **Date:** 2026-06-25 · **Source:** [medium.com — title-only; direct URL blocked 403](https://github.com/rix4uni/medium-writeups) · **Class:** writeup
+- **What:** Researcher bypassed OIDC JWT signature verification on a real target using a JWS JWK header injection or `alg: none` technique against an Authlib-backed OIDC provider, achieving token forgery with no valid credentials.
+- **Why it matters:** Any Python app using Authlib ≤ 1.6.6 for OIDC is vulnerable; affects Flask/FastAPI SSO integrations and custom OAuth2 authorization servers — wide BB surface.
+- **Hunt signal:** `grep -r "authlib" requirements.txt pip freeze 2>/dev/null | grep authlib`; test by crafting JWT with `"alg":"none"` header and empty signature segment (`.`) and submitting to protected endpoint
+- **Evidence:** [Authlib GHSA-wvwj-cvrp-7pv5 JWK Header Injection](https://github.com/lepture/authlib/security/advisories/GHSA-wvwj-cvrp-7pv5) · [Authlib GHSA-7wc2-qxgw-g8gg alg:none](https://github.com/lepture/authlib/security/advisories/GHSA-7wc2-qxgw-g8gg) · [writeup title surfaced 2026-06-25 via medium-writeups tracker]
+
+---
