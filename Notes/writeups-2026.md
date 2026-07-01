@@ -3091,6 +3091,16 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Rating:** chain-worthy
 
 ---
+### Active Directory Unconstrained Delegation Attack
+- **Tags:** `#privesc` `#cloud`
+- **Severity:** high · **Hunt:** 2/5 · **Score:** 21.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@osec403/active-directory-attacks-unconstrained-delegation-attack-f7340ee4f4f7)
+
+- **Trick:** Compromise a server with unconstrained delegation enabled, then extract cached TGTs from LSASS memory to impersonate any authenticated user — including Domain Admins — across the domain.
+- **Why it matters:** Unconstrained delegation is a legacy misconfiguration that turns any delegated server into a credential-harvesting pivot point; finding one host with this setting can lead to full domain compromise with minimal post-exploitation effort.
+- **Rating:** chain-worthy
+
+---
 ### Intigriti LeakyJar Challenge — One-Click CSRF to Expose Private Data
 - **Tags:** `#csrf` `#web`
 - **Severity:** medium · **Hunt:** 2/5 · **Score:** 15.0 · **Status:** poc · **Age:** 0d
@@ -3098,6 +3108,16 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 
 - **Trick:** One-click CSRF that forces a victim to perform an authenticated action, leaking the "Master Baker's" private data through a crafted cross-origin request.
 - **Why it matters:** Demonstrates that even simple CSRF on non-state-changing endpoints can be weaponized for data exfiltration when combined with a leakage point — relevant for bug bounty programs that dismiss CSRF as low-impact.
+- **Rating:** variant
+
+---
+### 10 Vulnerabilities in One Flask App
+- **Tags:** `#web` `#ssti` `#xss` `#sqli` `#rce`
+- **Severity:** high · **Hunt:** 2/5 · **Score:** 14.0 · **Status:** patched · **Age:** 0d
+- **Sources:** [1](https://medium.com/@nilanjan.calculus/hacked-audited-fixed-10-vulnerabilities-in-one-flask-app-0dd829a55aee)
+
+- **Trick:** Audit of a Flask webapp uncovered 10 distinct vulnerabilities including likely SSTI (Jinja2), SQL injection, XSS, and auth issues — classic Flask misconfiguration and unsafe rendering patterns bundled together.
+- **Why it matters:** Demonstrates how Flask apps with Jinja2 templates and SQLAlchemy often cluster vulnerabilities; great reference for hunting similar stacks where SSTI-to-RCE chains are common.
 - **Rating:** variant
 
 ---
@@ -3151,6 +3171,18 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Rating:** variant
 
 ---
+### Open-Source Cyber Deception Canaries integrated with Wazuh
+- **Tags:** `#docker` `#data-exfil`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@termineandrea/open-source-cyber-deception-canaries-integrated-with-wazuh-5ec938c414ef?source=rss------infosec-5) · [2](https://medium.com/@termineandrea04/open-source-cyber-deception-canaries-integrated-with-wazuh-5ec938c414ef?source=rss------infosec-5)
+
+- **Trick:** Deploy a distroless Docker canary via HoneyWire that phones home on interaction and routes high-fidelity alerts straight into Wazuh for SIEM-level visibility.
+- **Why it matters:** Deception canaries give early warning of lateral movement or unauthorized access with near-zero false-positive rates; the Wazuh integration makes alerting and correlation actionable without custom plumbing.
+- **Rating:** variant
+
+---
+*Clustered 2 sources for this item.*
+
 ### Common Crypto Laundering Techniques & Infrastructure
 - **Tags:** `#data-exfil` `#web`
 - **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
@@ -3163,16 +3195,6 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 ---
 *Clustered 3 sources for this item.*
 
-### Open-Source Cyber Deception Canaries with Wazuh
-- **Tags:** `#docker` `#web`
-- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
-- **Sources:** [1](https://medium.com/@termineandrea04/open-source-cyber-deception-canaries-integrated-with-wazuh-5ec938c414ef?source=rss------infosec-5)
-
-- **Trick:** Deploy distroless Docker canary containers via HoneyWire and forward high-fidelity trip alerts into Wazuh SIEM for attacker detection.
-- **Why it matters:** Deception-based detection is a strong complement to traditional defenses; canary alerts are inherently low-noise, high-signal — useful for bug bounty hunters to understand how defenders catch recon and lateral movement.
-- **Rating:** variant
-
----
 ### Building with Terraform on AWS: Infrastructure as Code
 - **Tags:** `#aws` `#cloud`
 - **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
