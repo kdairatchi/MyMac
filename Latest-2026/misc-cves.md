@@ -56,3 +56,18 @@
 ---
 *Clustered 8 sources for this item.*
 
+
+## 2026-07-01
+
+### PoC-in-GitHub Auto Update 2026/06/30
+- **Tags:** `#web`
+- **Severity:** unknown · **Hunt:** 1/5 · **Score:** 6.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://github.com/nomi-sec/PoC-in-GitHub/commit/09eaa5539fe5d7dfa9ac5ab0bff8284f556d31b4) · [2](https://github.com/nomi-sec/PoC-in-GitHub/commit/a2edb85f07b975d45fa19caec36a73d301c4401d) · [3](https://github.com/nomi-sec/PoC-in-GitHub/commit/a40903d2d0b28f691cfe7f156c5c2b9c1bbb3bf3) · [4](https://github.com/nomi-sec/PoC-in-GitHub/commit/a8f2d7107c739e988386bee5b6ebba9b4f3a4665) · [5](https://github.com/nomi-sec/PoC-in-GitHub/commit/ffa1b608891d18fbdacd507a1560aac363d1f558)
+
+- **What:** Automated commit to the PoC-in-GitHub repository adding new proof-of-concept exploits; no specific CVE details provided in the payload.
+- **Why it matters:** Signals that one or more CVE PoCs were freshly indexed; worth checking the commit diff to identify which CVEs gained public exploits.
+- **Hunt signal:** Inspect the commit diff for newly added CVE directories, then cross-reference against your target scope for fresh exploitability.
+- **Evidence:** [source] Auto-update commit from nomi-sec/PoC-in-GitHub tracker · [opinion] Low signal without diff context — prioritize reviewing the actual CVE entries added.
+
+---
+*Clustered 18 sources for this item.*

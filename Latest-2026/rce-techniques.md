@@ -186,3 +186,34 @@ filename="shell.php%00.jpg"
 **[Patch Diffing Progress MOVEit Transfer RCE]** — A technique to discover RCE vulnerabilities in Progress MOVEit Transfer by analyzing patch differences. Hunt: Check for unpatched MOVEit Transfer instances and analyze patch diffs for RCE vectors. [src](https://www.assetnote.io/resources/research/patch-diffing-progress-moveit-transfer-rce-cve-2023-34362)
 
 ---
+
+
+## 2026-07-01 — H1 disclosures
+
+### Node --run POSIX positional argument escaping allows shell command injection
+
+- **2026-06-23** · sev: High · bounty: undisclosed
+- Source: [hackerone.com/3817602](https://hackerone.com/reports/3817602) · Reporter: [@yottt](https://hackerone.com/yottt) · Team: [Node.js](https://hackerone.com/nodejs)
+- CWE: OS Command Injection
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Command Injection via Unsanitized Bundling Options in `aws-cdk-lib/aws-lambda-nodejs`
+
+- **2026-06-11** · sev: High · bounty: undisclosed
+- Source: [hackerone.com/3558713](https://hackerone.com/reports/3558713) · Reporter: [@inkerton](https://hackerone.com/inkerton) · Team: [AWS VDP](https://hackerone.com/aws_vdp)
+- CWE: OS Command Injection
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---

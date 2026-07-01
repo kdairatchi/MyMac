@@ -169,3 +169,65 @@ content-length: 0
 - **HTTP/1.1 must die** · CL.TE/TE.CL vulnerabilities persist despite years of mitigations; defenses are bypassable, migration to HTTP/2+ is the only real fix · https://portswigger.net/research/http1-must-die
 - **HTTP Anomaly Rank** · Burp research tool using statistical deviation to auto-triage smuggling/desync responses in large-scale fuzzing · https://portswigger.net/research/introducing-http-anomaly-rank
 - **H2.CL smuggling (2023)** · HTTP/2 cleartext downgrade exploited in multiple CDN configurations; HAProxy + Nginx combinations particularly prone to H2.TE variants
+
+
+## 2026-04-19 — H1 disclosures
+
+### HTTP/1.1 Response Desynchronization via conflicting CL/TE headers in Proxy CONNECT
+
+- **2026-03-25** · sev: Low · bounty: undisclosed
+- Source: [hackerone.com/3623064](https://hackerone.com/reports/3623064) · Reporter: [@3lcarry](https://hackerone.com/3lcarry) · Team: [curl](https://hackerone.com/curl)
+- CWE: HTTP Request Smuggling
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+
+## 2026-07-01 — H1 disclosures
+
+### Improper Input Validation — HTTP Response Parser Unconditionally Accepts Bare CR in Status Line
+
+- **2026-07-01** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3648681](https://hackerone.com/reports/3648681) · Reporter: [@saif-01](https://hackerone.com/saif-01) · Team: [Node.js](https://hackerone.com/nodejs)
+- CWE: HTTP Request Smuggling
+
+**What**
+
+The llhttp HTTP response parser in Node.js up to version 24.14.1 (llhttp v9.3.0 and v9.3.1) was found to unconditionally accept a bare carriage return (CR) as a valid response status line terminator. This parsing asymmetry was present in the response path but not in the request parsing, enabling potential HTTP response queue poisoning attacks. The vulnerability was triggered in strict mode without requiring any lenient flags.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Incomplete Suppression of  Transfer-Encoding: chunked Header in HTTP/2 After Redirect From HTTP/1.1
+
+- **2026-06-15** · sev: Low · bounty: undisclosed
+- Source: [hackerone.com/3793495](https://hackerone.com/reports/3793495) · Reporter: [@unknowperson0212](https://hackerone.com/unknowperson0212) · Team: [curl](https://hackerone.com/curl)
+- CWE: HTTP Request Smuggling
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Duplicate chunked Transfer-Encoding lets a malicious origin smuggle a response across reused HTTP proxy connections
+
+- **2026-06-13** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3795615](https://hackerone.com/reports/3795615) · Reporter: [@violet12331](https://hackerone.com/violet12331) · Team: [curl](https://hackerone.com/curl)
+- CWE: HTTP Request Smuggling
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---

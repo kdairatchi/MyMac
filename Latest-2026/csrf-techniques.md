@@ -145,3 +145,22 @@ ws.onopen = function() { ws.send('{"action":"transfer","to":"attacker"}'); };
 - **`__Host-` / `__Secure-` prefix bypass** · Browser vs. server-side parsing discrepancy allows injecting cookies that spoof protected prefixes; undermines SameSite+prefix CSRF defenses · https://portswigger.net/research/cookie-chaos-how-to-bypass-host-and-secure-cookie-prefixes
 - **SameSite Lax bypass (2024)** · GET-based CSRF still works for top-level navigations under Lax; sites relying on SameSite without explicit CSRF tokens remain exploitable for account linking, OAuth flows
 - **WebSocket CSRF** · WebSocket upgrade lacks CSRF protection by design in many frameworks; origin check is often absent — check handshake for `Origin` validation
+
+
+## 2026-07-01 — H1 disclosures
+
+### CSRF in zone‑include.php allows unauthorized banner and campaign linking
+
+- **2026-06-25** · sev: Medium · bounty: undisclosed · cve: CVE-2026-50743
+- Source: [hackerone.com/3781691](https://hackerone.com/reports/3781691) · Reporter: [@an_gr_y](https://hackerone.com/an_gr_y) · Team: [Revive Adserver](https://hackerone.com/revive_adserver)
+- CWE: Cross-Site Request Forgery (CSRF)
+
+**What**
+
+The `zone-include.php` script in Revive Adserver 6.0.7 was vulnerable to a CSRF attack. Linking and unlinking banners or campaigns to zones could be triggered via crafted GET or POST requests without any verification of the CSRF token, allowing an attacker to perform these actions on behalf of an authenticated administrator.
+
+**PoC refs:** search `github.com/search?q=CVE-2026-50743` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-50743.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---

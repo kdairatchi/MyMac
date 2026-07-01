@@ -77,3 +77,17 @@ _pending enrichment_
 - **Evidence:** [source] WatchTowr Labs analysis ... [opinion] continues the trend of critical authentication bypasses in network appliances, requiring immediate isolation.
 
 ---
+
+## 2026-07-01
+
+### Ivanti Sentry Pre-Auth OS Command Injection (CVE-2026-10520) — `CVE-2026-10520`
+- **Tags:** `#command-injection` `#ivanti` `#appliance`
+- **Severity:** critical · **Hunt:** 4/5 · **Score:** 54.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://labs.watchtowr.com/more-evidence-that-words-dont-mean-what-we-thought-they-meant-ivanti-sentry-pre-auth-os-command-injection-cve-2026-10520/)
+
+- **What:** Pre-authenticated OS command injection in Ivanti Sentry, allowing unauthenticated remote attackers to execute arbitrary commands on the appliance.
+- **Why it matters:** Pre-auth RCE on a perimeter appliance that typically sits at the network edge — no credentials needed, full shell-level impact, classic high-value enterprise target.
+- **Hunt signal:** Probe Ivanti Sentry instances for the vulnerable endpoint via crafted HTTP requests matching the injection pattern; look for distinctive response timing or command output artifacts.
+- **Evidence:** [source] watchtowr labs published detailed analysis of the vulnerability · [opinion] Ivanti appliances remain consistently fertile ground for critical pre-auth bugs; prioritize patching and external-facing asset audits.
+
+---

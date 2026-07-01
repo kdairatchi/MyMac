@@ -155,3 +155,196 @@ Cookie: __Host-session=attacker_value
 - **The Fragile Lock** · Ruby/PHP SAML attribute pollution + namespace confusion → full auth bypass, PoC published · https://portswigger.net/research/the-fragile-lock
 - **SAML Roulette (GitLab)** · `ruby-saml` XML signature bypass via namespace spoofing → unauthenticated admin access on GitLab Enterprise · https://portswigger.net/research/saml-roulette-the-hacker-always-wins
 - **CVE-2025-0108** · PAN-OS Nginx/Apache path confusion → pre-auth bypass to protected management API · https://www.assetnote.io/resources/research/nginx-apache-path-confusion-to-auth-bypass-in-pan-os
+
+
+## 2026-04-19 — H1 disclosures
+
+### lib/http2.c: SSL connections accept non-HTTP push schemes (incomplete fix for 2e8c922a)
+
+- **2026-04-16** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3674275](https://hackerone.com/reports/3674275) · Reporter: [@hybirdss](https://hackerone.com/hybirdss) · Team: [curl](https://hackerone.com/curl)
+- CWE: Authentication Bypass by Primary Weakness
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Improper enforcement of CURLOPT_SOCKS5_AUTH due to missing reuse key validation in libcurl
+
+- **2026-04-07** · sev: Low · bounty: undisclosed
+- Source: [hackerone.com/3650435](https://hackerone.com/reports/3650435) · Reporter: [@cutiapretaa](https://hackerone.com/cutiapretaa) · Team: [curl](https://hackerone.com/curl)
+- CWE: Improper Authorization
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Missing server identity policy enforcement in SSH connection reuse allows host key verification bypass via pool poisoning
+
+- **2026-04-03** · sev: High · bounty: undisclosed · cve: CVE-2022-27782, CVE-2023-27538
+- Source: [hackerone.com/3640932](https://hackerone.com/reports/3640932) · Reporter: [@intrax71](https://hackerone.com/intrax71) · Team: [curl](https://hackerone.com/curl)
+- CWE: Authentication Bypass by Primary Weakness
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2022-27782` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2022-27782.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### HackerOne Vulnerability Report: libcurl SSL/TLS Identity Leakage via Insecure Connection Reuse
+
+- **2026-03-31** · sev: — · bounty: undisclosed
+- Source: [hackerone.com/3636244](https://hackerone.com/reports/3636244) · Reporter: [@ankitsingh131225](https://hackerone.com/ankitsingh131225) · Team: [curl](https://hackerone.com/curl)
+- CWE: Authentication Bypass by Primary Weakness
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### CVE-2026-3784: wrong proxy connection reuse with credentials
+
+- **2026-03-11** · sev: Low · bounty: undisclosed · cve: CVE-2026-3784
+- Source: [hackerone.com/3584903](https://hackerone.com/reports/3584903) · Reporter: [@nobcoder](https://hackerone.com/nobcoder) · Team: [curl](https://hackerone.com/curl)
+- CWE: Incorrect Authorization
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-3784` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-3784.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+
+## 2026-05-27 — H1 disclosures
+
+### Connection reuse ignores haproxyprotocol and HAPROXY_CLIENT_IP settings, allowing PROXY context to persist across transfers
+
+- **2026-05-19** · sev: None · bounty: undisclosed · cve: CVE-2026-4873, CVE-2026-5545, CVE-2026-5773, CVE-2026-6429, CVE-2026-6253, CVE-2026-7168, CVE-2026-3784, CVE-2026-3805
+- Source: [hackerone.com/3741135](https://hackerone.com/reports/3741135) · Reporter: [@7omoo](https://hackerone.com/7omoo) · Team: [curl](https://hackerone.com/curl)
+- CWE: Incorrect Authorization
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-4873` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-4873.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Negotiate connection reuse with wrong credentials when using CURLAUTH_ANY                                        
+
+- **2026-04-29** · sev: Medium · bounty: undisclosed · cve: CVE-2026-1965
+- Source: [hackerone.com/3646072](https://hackerone.com/reports/3646072) · Reporter: [@anonymous_237](https://hackerone.com/anonymous_237) · Team: [curl](https://hackerone.com/curl)
+- CWE: Authentication Bypass by Primary Weakness
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-1965` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-1965.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### CVE-2026-5545: wrong reuse of HTTP Negotiate connection
+
+- **2026-04-29** · sev: Medium · bounty: undisclosed · cve: CVE-2026-5545
+- Source: [hackerone.com/3642555](https://hackerone.com/reports/3642555) · Reporter: [@quaccws](https://hackerone.com/quaccws) · Team: [curl](https://hackerone.com/curl)
+- CWE: Authentication Bypass by Primary Weakness
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-5545` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-5545.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+
+## 2026-07-01 — H1 disclosures
+
+### ssh_config_matches is dead code: unauthorized SSH key reuse
+
+- **2026-06-30** · sev: Medium · bounty: undisclosed · cve: CVE-2022-27782, CVE-2023-27538
+- Source: [hackerone.com/3826843](https://hackerone.com/reports/3826843) · Reporter: [@bigsize](https://hackerone.com/bigsize) · Team: [curl](https://hackerone.com/curl)
+- CWE: Authentication Bypass by Primary Weakness
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2022-27782` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2022-27782.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### CVE-2026-8458: wrong reuse for different services
+
+- **2026-06-24** · sev: Low · bounty: undisclosed · cve: CVE-2026-8458, CVE-2026-5545
+- Source: [hackerone.com/3721183](https://hackerone.com/reports/3721183) · Reporter: [@areksaxyz](https://hackerone.com/areksaxyz) · Team: [curl](https://hackerone.com/curl)
+- CWE: Authentication Bypass by Primary Weakness
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-8458` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-8458.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Taskcluster web-server OAuth2 authorization codes are reusable and the exchange handler checks the wrong expiry column
+
+- **2026-06-23** · sev: Medium · bounty: $2,000
+- Source: [hackerone.com/3734676](https://hackerone.com/reports/3734676) · Reporter: [@anshuman_bh](https://hackerone.com/anshuman_bh) · Team: [Mozilla](https://hackerone.com/mozilla)
+- CWE: Authentication Bypass by Capture-replay
+
+**What**
+
+The Taskcluster web-server's OAuth2 token-exchange handler did not consume authorization codes and did not enforce the authorization-code expiry. A leaked authorization code could be replayed to mint additional bridge access tokens for the original user, past the 10-minute window required by the OAuth2 standard. The expiry check in the token-exchange handler and the bridge-token-to-credentials handler read the wrong expiry column, allowing expired codes to remain usable until the daily cleanup cron deleted them.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### SSH/SFTP connection reuse can bypass SSH key identity after ssh_config_matches removal
+
+- **2026-06-09** · sev: High · bounty: undisclosed · cve: CVE-2022-27782, CVE-2023-27538
+- Source: [hackerone.com/3788506](https://hackerone.com/reports/3788506) · Reporter: [@byteray_ltd](https://hackerone.com/byteray_ltd) · Team: [curl](https://hackerone.com/curl)
+- CWE: Authentication Bypass by Primary Weakness
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2022-27782` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2022-27782.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---

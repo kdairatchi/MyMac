@@ -75,3 +75,17 @@ _pending enrichment_
 - **Evidence:** [watchtowr_labs] Analysis confirms CVE-2025-12101 is distinct from CitrixBleed but valid, detailing the memory leak and RXSS mechanics.
 
 ---
+
+## 2026-07-01
+
+### Citrix NetScaler Pre-Auth Memory Overread (CVE-2026-8451) — `CVE-2026-8451`
+- **Tags:** `#data-exfil` `#citrix` `#appliance` `#auth-bypass`
+- **Severity:** critical · **Hunt:** 4/5 · **Score:** 54.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://labs.watchtowr.com/citrixbleed-to-infinity-and-beyond-citrix-netscaler-pre-auth-memory-overread-cve-2026-8451/)
+
+- **What:** Pre-authenticated memory overread in Citrix NetScaler that leaks sensitive process memory — a spiritual successor to CitrixBleed (CVE-2023-4966).
+- **Why it matters:** Unauthenticated attackers can exfiltrate session tokens, cookies, and other secrets from a globally widespread enterprise VPN/gateway appliance, enabling full session hijacking without credentials.
+- **Hunt signal:** Send a crafted request to NetScaler's VPN endpoint and inspect response body for abnormally large output containing 16-byte hex patterns or raw session cookies leaking past the expected HTTP response boundary.
+- **Evidence:** [source] watchtowr labs full technical disclosure · [opinion] History repeats — expect rapid mass-scanning and exploitation mirroring the original CitrixBleed campaign; prioritize patching and session revocation immediately.
+
+---

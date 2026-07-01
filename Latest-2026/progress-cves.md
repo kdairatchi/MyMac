@@ -77,3 +77,17 @@ _pending enrichment_
 - **Evidence:** [source] WatchTowr Labs analysis reveals a critical RCE chain (CVE-2026-2699 & CVE-2026-2701) allowing pre-auth system compromise.
 
 ---
+
+## 2026-07-01
+
+### Progress Kemp LoadMaster Pre-Auth RCE via Uninitialized Heap (CVE-2026-8037) — `CVE-2026-8037`
+- **Tags:** `#rce` `#appliance`
+- **Severity:** critical · **Hunt:** 4/5 · **Score:** 54.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://labs.watchtowr.com/enterprise-tech-in-shell-out-progress-kemp-loadmaster-uninitialized-heap-to-pre-auth-rce-cve-2026-8037/)
+
+- **What:** Uninitialized heap memory in Progress Kemp LoadMaster enables unauthenticated remote code execution from the network edge.
+- **Why it matters:** LoadMaster sits at the perimeter of enterprise networks — a pre-auth RCE on an edge load balancer gives attackers a beachhead into the internal network with no credentials required.
+- **Hunt signal:** Probe exposed LoadMaster web management interfaces (ports 80/443/API endpoints) for version fingerprints pre-patch; check `/access/` or login endpoint response headers for build version.
+- **Evidence:** [source] watchtowr Labs detailed write-up with exploitation path · [opinion] edge appliance pre-auth RCE is top-tier bug bounty territory — organizations frequently expose these management interfaces to the internet
+
+---

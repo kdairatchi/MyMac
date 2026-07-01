@@ -254,3 +254,82 @@ A vulnerability in Cloudflare Access involving the Browser Isolation email field
 **Hunt signal:** pass — summary too thin
 
 ---
+
+
+## 2026-07-01 — H1 disclosures
+
+### Reflected XSS via unsanitised refresh parameter in zone invocation tag
+
+- **2026-06-25** · sev: Medium · bounty: undisclosed · cve: CVE-2026-50740
+- Source: [hackerone.com/3780806](https://hackerone.com/reports/3780806) · Reporter: [@kanon4](https://hackerone.com/kanon4) · Team: [Revive Adserver](https://hackerone.com/revive_adserver)
+- CWE: Cross-site Scripting (XSS) - Reflected
+
+**What**
+
+A missing sanitization of user input in the zone-include.php script of Revive Adserver 6.0.7 and earlier was reported. This vulnerability allowed a low-privileged user to perform reflected XSS attacks by exploiting the refresh parameter of the iFrame invocation tag.
+
+**PoC refs:** search `github.com/search?q=CVE-2026-50740` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-50740.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Stored XSS in maintenance tools via unescaped entity names
+
+- **2026-06-25** · sev: Medium · bounty: undisclosed · cve: CVE-2026-50742
+- Source: [hackerone.com/3781311](https://hackerone.com/reports/3781311) · Reporter: [@an_gr_y](https://hackerone.com/an_gr_y) · Team: [Revive Adserver](https://hackerone.com/revive_adserver)
+- CWE: Cross-site Scripting (XSS) - Stored
+
+**What**
+
+A stored XSS vulnerability was discovered in the maintenance tools of Revive Adserver 6.0.7. The issue was caused by entity names being displayed without proper escaping when inconsistencies were detected in the `maintenance-acl-check.php` and `maintenance-banners-check.php` files.
+
+**PoC refs:** search `github.com/search?q=CVE-2026-50742` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-50742.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Reflected XSS in stats‑video.php via improperly encoded URL parameters
+
+- **2026-06-25** · sev: Medium · bounty: undisclosed · cve: CVE-2026-50745
+- Source: [hackerone.com/3793243](https://hackerone.com/reports/3793243) · Reporter: [@kanon4](https://hackerone.com/kanon4) · Team: [Revive Adserver](https://hackerone.com/revive_adserver)
+- CWE: Cross-site Scripting (XSS) - Reflected
+
+**What**
+
+A reflected XSS vulnerability was discovered in the stats‑video.php script due to improper encoding of user input in the URL parameters.
+
+**PoC refs:** search `github.com/search?q=CVE-2026-50745` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-50745.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Reflected XSS in AI Chat Bot Greetings at help.shopify.com via Markdown Image Rendering
+
+- **2026-06-18** · sev: Medium · bounty: $1,600
+- Source: [hackerone.com/2509022](https://hackerone.com/reports/2509022) · Reporter: [@saltymermaid](https://hackerone.com/saltymermaid) · Team: [Shopify](https://hackerone.com/shopify)
+- CWE: Cross-site Scripting (XSS) - Reflected
+
+**What**
+
+A reflected XSS vulnerability was reported in the AI chat bot greetings at help.shopify.com. The issue was caused by the rendering of a markdown image in the greeting, which allowed the attacker to inject a payload through the image URL. The vulnerability was addressed by removing the attacker-controlled greeting input path.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Reflected Cross-Site Scripting (XSS) found on IBM.com domain
+
+- **2026-06-15** · sev: — · bounty: undisclosed
+- Source: [hackerone.com/3664261](https://hackerone.com/reports/3664261) · Reporter: [@entrovyx](https://hackerone.com/entrovyx) · Team: [IBM](https://hackerone.com/ibm)
+- CWE: Cross-site Scripting (XSS) - Reflected
+
+**What**
+
+A reflected Cross-Site Scripting (XSS) vulnerability was found on the IBM.com domain. The vulnerability was reported to IBM, analyzed, and remediated. The external researcher who reported the issue was acknowledged.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---

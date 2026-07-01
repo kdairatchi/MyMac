@@ -892,3 +892,30 @@ This commit automates checksum generation for nuclei-templates, ensuring integri
 ---
 *Clustered 2 sources for this item.*
 
+
+## 2026-07-01
+
+### Nuclei Template Checksum Update
+- **Tags:** `#web` `#api`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/256e4cf151dd3cb5ddfd8ce0d1d0c76568223340)
+
+This repository commit updates the checksums for the Nuclei vulnerability scanning templates. It is used to maintain the integrity and versioning of the template collection, ensuring scanners reference the latest definitions. Use this when auditing the tool's update history or verifying template stability.
+
+---
+### Insomnia — AI-Driven Pentest Workflow Platform
+- **Tags:** `#api` `#web`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@ilyasamarsky/meet-insomnia-one-ai-driven-platform-for-the-whole-pentest-workflow-04d239e9aba9?source=rss------bug_bounty-5)
+
+Insomnia is an AI-driven platform that consolidates the entire penetration testing workflow—recon, scanning, exploitation, and reporting—into a single tool, replacing the need to juggle multiple disjointed security utilities. It's potentially useful for bug bounty hunters and pentesters looking to streamline their end-to-end workflow with AI assistance, though the article is primarily promotional and doesn't detail specific novel capabilities or techniques that would directly impact hunting strategy.
+
+---
+### ReconMaster — Open-Source Automated OSINT Dorking Tool
+- **Tags:** `#web` `#api`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 0.5 · **Status:** unknown · **Age:** 30d
+- **Sources:** [1](https://medium.com/@arthaanugerahheffendi/building-reconmaster-my-open-source-automated-osint-dorking-tool-073bf579ceba?source=rss------bug_bounty-5)
+
+ReconMaster is an open-source automated OSINT and Google dorking tool designed to streamline reconnaissance in bug bounty workflows. It aggregates multiple dorking queries and OSINT techniques into a single automated pipeline, useful during the initial recon phase to quickly discover exposed endpoints, sensitive files, misconfigurations, and subdomains across target assets before moving to manual testing.
+
+---

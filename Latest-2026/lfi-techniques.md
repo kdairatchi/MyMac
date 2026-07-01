@@ -178,3 +178,54 @@ Targets that accept video uploads and process HLS playlists server-side with FFm
 - **Flarum blind file oracle** · Unauthenticated blind LFI via file path param in forum software — file existence oracle via differential response · https://www.assetnote.io/resources/research/leaking-file-contents-with-a-blind-file-oracle-in-flarum
 - **PHP filter chain RCE** · `php://filter` chains can generate arbitrary PHP strings without a file — enables RCE even without log poisoning · https://www.ambionics.io/blog/php-filter-chains-file-read-to-rce
 - **CVE-2021-41773** · Apache path traversal + LFI → RCE in Apache 2.4.49/50, `%2e%2e%2f` bypass in `mod_cgi` — patched but still seen in the wild
+
+
+## 2026-04-19 — H1 disclosures
+
+### Path Traversal in writeFile via Unsafe Prefix Containment Check Allows Out-of-Directory Writes
+
+- **2026-03-31** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3634571](https://hackerone.com/reports/3634571) · Reporter: [@tipsen](https://hackerone.com/tipsen) · Team: [arkadiyt-projects](https://hackerone.com/arkadiyt-projects)
+- CWE: Path Traversal
+
+**What**
+
+A path traversal vulnerability was discovered in the `protodump` tool. The vulnerability allowed an attacker to influence the output filename construction and bypass the containment check, enabling writes outside the intended output directory. The vulnerability was caused by the use of descriptor-controlled paths in the output filename construction, along with an unsafe lexical prefix check for directory containment. This issue has been identified in the `protodump` tool.
+
+**Hunt signal:** pass — bug in a specific internal tool (`protodump`), no reusable endpoint or generic probe.
+
+---
+
+
+## 2026-05-27 — H1 disclosures
+
+### ActiveStorage Disk Service Path Traversal via Custom Blob Key Injection
+
+- **2026-05-07** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3580511](https://hackerone.com/reports/3580511) · Reporter: [@ksw9722](https://hackerone.com/ksw9722) · Team: [Ruby on Rails](https://hackerone.com/rails)
+- CWE: Path Traversal
+
+**What**
+
+A vulnerability was discovered in the ActiveStorage Disk Service component of Ruby on Rails. The vulnerability allowed an attacker to achieve arbitrary file write, read, and delete on the server's filesystem by injecting a malicious blob key. The vulnerability was due to insufficient validation of the blob key parameter before constructing file paths. This could be exploited by an attacker who could influence the hash passed to the `.attach()` method.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+
+## 2026-07-01 — H1 disclosures
+
+### Burp Suite Professional: browser-powered crawl can write attacker-controlled files through file input handling
+
+- **2026-06-14** · sev: High · bounty: $5,000
+- Source: [hackerone.com/3712279](https://hackerone.com/reports/3712279) · Reporter: [@kawakatz](https://hackerone.com/kawakatz) · Team: [PortSwigger Web Security](https://hackerone.com/portswigger)
+- CWE: Path Traversal
+
+**What**
+
+A vulnerability was discovered in Burp Suite Professional 2026.3.3 on Windows. When Burp Scanner's browser-powered crawler crawled an attacker-controlled website, the website could force Burp to write an attacker-controlled file to an attacker-controlled local path. The issue was caused by Burp's handling of file input fields, where Burp created a local upload file from page-controlled attributes but did not prevent path traversal in the generated filename.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---

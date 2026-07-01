@@ -202,3 +202,70 @@ Or `SELECT ... FOR UPDATE` inside a transaction.
 - **WebSocket Turbo Intruder** · WebSocket frames evade standard scanners; Turbo Intruder maintains persistent WS connection for concurrent race testing; also tests handshake for desync/cache poisoning · https://portswigger.net/research/websocket-turbo-intruder-unearthing-the-websocket-goldmine
 - **Single-packet attack (PortSwigger 2023)** · HTTP/2 multiplexing eliminates network jitter, enabling reliable sub-millisecond race exploitation — collapsed the race window for Limit Overrun attacks previously dismissed as unexploitable
 - **Parallels race (HackerOne 2024)** · Concurrent subscription API calls allowed 20x plan feature creation; read-modify-write without atomic transaction is the pattern — look in billing/plan management APIs
+
+
+## 2026-04-19 — H1 disclosures
+
+### Data race in Curl_dnscache_add_negative() corrupts shared DNS cache — heap corruption and double-free when using CURLOPT_SHARE with CURL_LOCK_DATA_DNS
+
+- **2026-04-04** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3645361](https://hackerone.com/reports/3645361) · Reporter: [@intrax](https://hackerone.com/intrax) · Team: [curl](https://hackerone.com/curl)
+- CWE: Concurrent Execution using Shared Resource with Improper Synchronization ('Race Condition')
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+
+## 2026-05-27 — H1 disclosures
+
+### Memory Corruption via TOCTOU Race in SharedArrayBuffer UTF-8 Decode (`StringBytes::Encode`)
+
+- **2026-05-23** · sev: High · bounty: undisclosed
+- Source: [hackerone.com/3752489](https://hackerone.com/reports/3752489) · Reporter: [@v1ct0rv0nd00m](https://hackerone.com/v1ct0rv0nd00m) · Team: [Node.js](https://hackerone.com/nodejs)
+- CWE: Time-of-check Time-of-use (TOCTOU) Race Condition
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### curl --skip-existing has a TOCTOU race that lets a post-check symlink redirect the later download write
+
+- **2026-05-20** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3747959](https://hackerone.com/reports/3747959) · Reporter: [@sdjasj](https://hackerone.com/sdjasj) · Team: [curl](https://hackerone.com/curl)
+- CWE: Time-of-check Time-of-use (TOCTOU) Race Condition
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+
+## 2026-07-01 — H1 disclosures
+
+### HTTP Response Queue Poisoning via TOCTOU Race Condition in `http.Agent`
+
+- **2026-06-25** · sev: Low · bounty: undisclosed · cve: CVE-2026-48931
+- Source: [hackerone.com/3582376](https://hackerone.com/reports/3582376) · Reporter: [@yushengchen](https://hackerone.com/yushengchen) · Team: [Node.js](https://hackerone.com/nodejs)
+- CWE: Time-of-check Time-of-use (TOCTOU) Race Condition
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-48931` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-48931.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---

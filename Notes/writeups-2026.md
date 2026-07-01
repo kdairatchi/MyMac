@@ -2075,3 +2075,1111 @@ _No H1 summary provided._
 **Hunt signal:** pass — summary too thin
 
 ---
+
+
+## 2026-05-27
+
+### Heap-OOB read in urlapi `redirect_url()` via `CURLU_GUESS_SCHEME` + `CURLU_NO_GUESS_SCHEME` flow
+
+- **2026-05-25** · sev: — · bounty: undisclosed
+- Source: [hackerone.com/3751715](https://hackerone.com/reports/3751715) · Reporter: [@giant_anteater](https://hackerone.com/giant_anteater) · Team: [curl](https://hackerone.com/curl)
+- CWE: Buffer Over-read
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### curl GnuTLS backend accepts a clientAuth-only certificate for HTTPS server authentication
+
+- **2026-05-25** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3752567](https://hackerone.com/reports/3752567) · Reporter: [@jingzhou](https://hackerone.com/jingzhou) · Team: [curl](https://hackerone.com/curl)
+- CWE: Improper Certificate Validation
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Autotranslate DDP Method Exposes Private Messages Without Authentication or Room Access Check
+
+- **2026-05-25** · sev: High · bounty: undisclosed
+- Source: [hackerone.com/3734326](https://hackerone.com/reports/3734326) · Reporter: [@deprrous](https://hackerone.com/deprrous) · Team: [Rocket.Chat](https://hackerone.com/rocket_chat)
+- CWE: Insecure Direct Object Reference (IDOR)
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### NULL pointer dereference in node:sqlite DatabaseSync#applyChangeset() via malformed SQLite changeset
+
+- **2026-05-23** · sev: High · bounty: undisclosed
+- Source: [hackerone.com/3736889](https://hackerone.com/reports/3736889) · Reporter: [@junius](https://hackerone.com/junius) · Team: [Node.js](https://hackerone.com/nodejs)
+- CWE: NULL Pointer Dereference
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Memory Corruption via TOCTOU Race in SharedArrayBuffer UTF-8 Decode (`StringBytes::Encode`)
+
+- **2026-05-23** · sev: High · bounty: undisclosed
+- Source: [hackerone.com/3752489](https://hackerone.com/reports/3752489) · Reporter: [@v1ct0rv0nd00m](https://hackerone.com/v1ct0rv0nd00m) · Team: [Node.js](https://hackerone.com/nodejs)
+- CWE: Time-of-check Time-of-use (TOCTOU) Race Condition
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Group restriction bypass via bearer token in user_oidc (SETTING_RESTRICT_LOGIN_TO_GROUPS not enforced in Backend::getCurrentUserId)
+
+- **2026-05-21** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3572848](https://hackerone.com/reports/3572848) · Reporter: [@msatz](https://hackerone.com/msatz) · Team: [Nextcloud](https://hackerone.com/nextcloud)
+- CWE: Improper Access Control - Generic
+
+**What**
+
+A security inconsistency was identified in the user_oidc app where group-based login restrictions were enforced in the browser OIDC flow but not in bearer token validation. This could have allowed users outside whitelisted groups to access the Nextcloud API with a valid bearer token.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### curl --skip-existing has a TOCTOU race that lets a post-check symlink redirect the later download write
+
+- **2026-05-20** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3747959](https://hackerone.com/reports/3747959) · Reporter: [@sdjasj](https://hackerone.com/sdjasj) · Team: [curl](https://hackerone.com/curl)
+- CWE: Time-of-check Time-of-use (TOCTOU) Race Condition
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Credentials forwarded to HTTP after HTTPS→HTTP same-port redirect — url_set_data_creds uses scheme-blind comparator
+
+- **2026-05-20** · sev: None · bounty: undisclosed · cve: CVE-2022-27774, CVE-2024-11053
+- Source: [hackerone.com/3733946](https://hackerone.com/reports/3733946) · Reporter: [@giant_anteater](https://hackerone.com/giant_anteater) · Team: [curl](https://hackerone.com/curl)
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2022-27774` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2022-27774.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### POST /api/bitcoinWithdrawalFees returns financial data without authentication despite being documented as a USER OPERATION (private endpoint)
+
+- **2026-05-20** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3676308](https://hackerone.com/reports/3676308) · Reporter: [@glferreira-devsecops](https://hackerone.com/glferreira-devsecops) · Team: [CoinMate.io](https://hackerone.com/coinmate)
+- CWE: Improper Authentication - Generic
+
+**What**
+
+A vulnerability was discovered in the CoinMate API where the POST /api/bitcoinWithdrawalFees endpoint was accessible without authentication, despite being documented as a private endpoint. The endpoint returned real-time Bitcoin withdrawal fee data without requiring any authentication, unlike other private endpoints which correctly rejected unauthenticated requests. The root cause was determined to be a misconfiguration in the authentication middleware that allowed the request to bypass HMAC-SHA256 signature verification. …
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### HMAC signature verification omits endpoint and payload allowing request forgery on CoinMate API
+
+- **2026-05-20** · sev: Low · bounty: undisclosed
+- Source: [hackerone.com/3670955](https://hackerone.com/reports/3670955) · Reporter: [@glferreira-devsecops](https://hackerone.com/glferreira-devsecops) · Team: [CoinMate.io](https://hackerone.com/coinmate)
+- CWE: Missing Required Cryptographic Step
+
+**What**
+
+A vulnerability was discovered in the HMAC signature verification process of the CoinMate API. The signature was calculated using only the nonce, client ID, and public key, omitting the HTTP endpoint and request payload. This allowed an attacker to hijack a valid signature intended for a read-only action and use it to execute a malicious action on a different endpoint, bypassing the cryptographic constraints.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### HTTP/3 paused transfer buffers incoming data without bound up to ~1 GiB
+
+- **2026-05-19** · sev: — · bounty: undisclosed
+- Source: [hackerone.com/3734947](https://hackerone.com/reports/3734947) · Reporter: [@giant_anteater](https://hackerone.com/giant_anteater) · Team: [curl](https://hackerone.com/curl)
+- CWE: Allocation of Resources Without Limits or Throttling
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Schannel custom-CA path skips Extended Key Usage enforcement
+
+- **2026-05-19** · sev: — · bounty: undisclosed
+- Source: [hackerone.com/3734992](https://hackerone.com/reports/3734992) · Reporter: [@giant_anteater](https://hackerone.com/giant_anteater) · Team: [curl](https://hackerone.com/curl)
+- CWE: Business Logic Errors
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Connection reuse ignores haproxyprotocol and HAPROXY_CLIENT_IP settings, allowing PROXY context to persist across transfers
+
+- **2026-05-19** · sev: None · bounty: undisclosed · cve: CVE-2026-4873, CVE-2026-5545, CVE-2026-5773, CVE-2026-6429, CVE-2026-6253, CVE-2026-7168, CVE-2026-3784, CVE-2026-3805
+- Source: [hackerone.com/3741135](https://hackerone.com/reports/3741135) · Reporter: [@7omoo](https://hackerone.com/7omoo) · Team: [curl](https://hackerone.com/curl)
+- CWE: Incorrect Authorization
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-4873` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-4873.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### SSL session-cache peer key omits signature_algorithms: strict-sigalg handle silently resumes a permissive sibling's session
+
+- **2026-05-19** · sev: — · bounty: undisclosed · cve: CVE-2020-8231
+- Source: [hackerone.com/3739561](https://hackerone.com/reports/3739561) · Reporter: [@hexproof](https://hackerone.com/hexproof) · Team: [curl](https://hackerone.com/curl)
+- CWE: Improper Certificate Validation
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2020-8231` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2020-8231.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### CURLOPT_PROXY_CAINFO_BLOB silently activates native CA store on Apple builds
+
+- **2026-05-19** · sev: None · bounty: undisclosed
+- Source: [hackerone.com/3735179](https://hackerone.com/reports/3735179) · Reporter: [@giant_anteater](https://hackerone.com/giant_anteater) · Team: [curl](https://hackerone.com/curl)
+- CWE: Business Logic Errors
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### TLS peer-verification bypass via mid-transfer ssl_config mutation
+
+- **2026-05-19** · sev: — · bounty: undisclosed
+- Source: [hackerone.com/3735276](https://hackerone.com/reports/3735276) · Reporter: [@giant_anteater](https://hackerone.com/giant_anteater) · Team: [curl](https://hackerone.com/curl)
+- CWE: Business Logic Errors
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### TLS verifyhost bypass in rustls, mbedTLS, and wolfSSL when verifypeer=0
+
+- **2026-05-19** · sev: — · bounty: undisclosed · cve: CVE-2013-4545, CVE-2014-0139
+- Source: [hackerone.com/3734095](https://hackerone.com/reports/3734095) · Reporter: [@giant_anteater](https://hackerone.com/giant_anteater) · Team: [curl](https://hackerone.com/curl)
+- CWE: Business Logic Errors
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2013-4545` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2013-4545.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### HTTP/2 proxy CONNECT tunnel unbounded 1xx chain (missing Curl_bump_headersize cap in cf-h2-proxy.c)
+
+- **2026-05-19** · sev: None · bounty: undisclosed · cve: CVE-2023-38039
+- Source: [hackerone.com/3734020](https://hackerone.com/reports/3734020) · Reporter: [@giant_anteater](https://hackerone.com/giant_anteater) · Team: [curl](https://hackerone.com/curl)
+- CWE: Allocation of Resources Without Limits or Throttling
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2023-38039` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2023-38039.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Cross-repository IDOR in `/settings/security_analysis/bypass_reviewers` allows unauthorized delegated bypass reviewer modification
+
+- **2026-05-19** · sev: Medium · bounty: undisclosed · cve: CVE-2026-3307
+- Source: [hackerone.com/3560256](https://hackerone.com/reports/3560256) · Reporter: [@ahacker1](https://hackerone.com/ahacker1) · Team: [GitHub](https://hackerone.com/github)
+- CWE: Insecure Direct Object Reference (IDOR)
+
+**What**
+
+A vulnerability was identified in GitHub Enterprise Server that allowed an attacker with admin access on one repository to modify the secret scanning push protection delegated bypass reviewer list on another repository. Authorization was verified against the repository in the URL, but the action was applied to a different repository specified in the request body. The vulnerability was limited to assigning existing trusted users as bypass reviewers and did not allow adding arbitrary external users. …
+
+**PoC refs:** search `github.com/search?q=CVE-2026-3307` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-3307.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### CURLOPT_HSTS_CTRL disables shared HSTS without share guard — use-after-free and double-free
+
+- **2026-05-18** · sev: — · bounty: undisclosed · cve: CVE-2018-16840, CVE-2023-27537
+- Source: [hackerone.com/3733934](https://hackerone.com/reports/3733934) · Reporter: [@giant_anteater](https://hackerone.com/giant_anteater) · Team: [curl](https://hackerone.com/curl)
+- CWE: Use After Free
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2018-16840` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2018-16840.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### cookie: case-insensitive path comparison in replace_existing() allows cookie eviction across distinct paths
+
+- **2026-05-18** · sev: — · bounty: undisclosed
+- Source: [hackerone.com/3735238](https://hackerone.com/reports/3735238) · Reporter: [@giant_anteater](https://hackerone.com/giant_anteater) · Team: [curl](https://hackerone.com/curl)
+- CWE: Business Logic Errors
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### libssh SFTP initialization ignores CURLOPT_TIMEOUT, hangs indefinitely
+
+- **2026-05-18** · sev: — · bounty: undisclosed
+- Source: [hackerone.com/3735080](https://hackerone.com/reports/3735080) · Reporter: [@giant_anteater](https://hackerone.com/giant_anteater) · Team: [curl](https://hackerone.com/curl)
+- CWE: Allocation of Resources Without Limits or Throttling
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### rustls backend silently ignores CURLOPT_CRLFILE when native CA store is active
+
+- **2026-05-18** · sev: — · bounty: undisclosed
+- Source: [hackerone.com/3734935](https://hackerone.com/reports/3734935) · Reporter: [@giant_anteater](https://hackerone.com/giant_anteater) · Team: [curl](https://hackerone.com/curl)
+- CWE: Business Logic Errors
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### HSTS multi-trailing-dot bypass-ish: possible incomplete fix for CVE-2022-30115
+
+- **2026-05-18** · sev: Medium · bounty: undisclosed · cve: CVE-2022-30115
+- Source: [hackerone.com/3733984](https://hackerone.com/reports/3733984) · Reporter: [@giant_anteater](https://hackerone.com/giant_anteater) · Team: [curl](https://hackerone.com/curl)
+- CWE: Cleartext Transmission of Sensitive Information
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2022-30115` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2022-30115.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Unauthenticated File Upload to CDN
+
+- **2026-05-18** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3589247](https://hackerone.com/reports/3589247) · Reporter: [@ph0r3nsic](https://hackerone.com/ph0r3nsic) · Team: [Enjin](https://hackerone.com/enjin)
+- CWE: Improper Access Control - Generic
+
+**What**
+
+An unauthenticated file upload vulnerability was discovered in the NFT.io platform. The vulnerability allowed an unauthenticated user to upload files to the platform's content delivery network. The issue was reported and promptly fixed by the Enjin team, despite the low-impact nature of the vulnerability.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### IDOR: autotranslate.translateMessage Full Message Content Leak
+
+- **2026-05-18** · sev: Medium · bounty: undisclosed · cve: CVE-2026-32994
+- Source: [hackerone.com/3713682](https://hackerone.com/reports/3713682) · Reporter: [@josan_george](https://hackerone.com/josan_george) · Team: [Rocket.Chat](https://hackerone.com/rocket_chat)
+- CWE: Insecure Direct Object Reference (IDOR)
+
+**What**
+
+The `/api/v1/autotranslate.translateMessage` endpoint allowed any authenticated user to retrieve the full content of any message from any room, including private groups, direct messages, and channels. The endpoint fetched the message without performing a room access check, returning the complete message object including the message text, sender information, room ID, timestamps, and markdown content.
+
+**PoC refs:** search `github.com/search?q=CVE-2026-32994` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-32994.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Trailing-dot IPv4 URL bypasses IP-address guard, allows wildcard DNS SAN match
+
+- **2026-05-17** · sev: None · bounty: undisclosed · cve: CVE-2022-30115
+- Source: [hackerone.com/3734921](https://hackerone.com/reports/3734921) · Reporter: [@giant_anteater](https://hackerone.com/giant_anteater) · Team: [curl](https://hackerone.com/curl)
+- CWE: Business Logic Errors
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2022-30115` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2022-30115.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### NULL pointer dereference in libcurl URL API redirect_url() with CURLU_DEFAULT_SCHEME
+
+- **2026-05-17** · sev: None · bounty: undisclosed
+- Source: [hackerone.com/3736234](https://hackerone.com/reports/3736234) · Reporter: [@mulan_dh](https://hackerone.com/mulan_dh) · Team: [curl](https://hackerone.com/curl)
+- CWE: NULL Pointer Dereference
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### SQL Injection in Column Type Parameter Allows Arbitrary SQL Execution
+
+- **2026-05-15** · sev: High · bounty: undisclosed · cve: CVE-2026-45545
+- Source: [hackerone.com/3462991](https://hackerone.com/reports/3462991) · Reporter: [@suul](https://hackerone.com/suul) · Team: [Nextcloud](https://hackerone.com/nextcloud)
+- CWE: SQL Injection
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-45545` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-45545.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Kerberos/SPNEGO Connection Reuse Vulnerability
+
+- **2026-05-14** · sev: — · bounty: undisclosed
+- Source: [hackerone.com/3725659](https://hackerone.com/reports/3725659) · Reporter: [@rootofpi_ramesh](https://hackerone.com/rootofpi_ramesh) · Team: [curl](https://hackerone.com/curl)
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### QuickSight Authorization Bypass: Chat Agents Accessible Despite Custom Permissions Denial
+
+- **2026-05-12** · sev: None · bounty: undisclosed
+- Source: [hackerone.com/3577145](https://hackerone.com/reports/3577145) · Reporter: [@jcow](https://hackerone.com/jcow) · Team: [AWS VDP](https://hackerone.com/aws_vdp)
+
+**What**
+
+A vulnerability was discovered in Amazon Quick Suite (formerly QuickSight) that allowed users to access and interact with AI chat agents, despite administrative restrictions being in place to disable this functionality. The vulnerability was caused by the lack of proper server-side authorization checks, which enabled users to bypass the configured custom permissions and access the AI chat agents.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### another liberapay member team twitter account broken Link Hijacking via Expired Twitter Account Link
+
+- **2026-05-09** · sev: None · bounty: undisclosed
+- Source: [hackerone.com/3723002](https://hackerone.com/reports/3723002) · Reporter: [@rox-11](https://hackerone.com/rox-11) · Team: [Liberapay](https://hackerone.com/liberapay)
+- CWE: Open Redirect
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Liberapay member team twitter account broken Link Hijacking via Expired Twitter Account Link
+
+- **2026-05-09** · sev: — · bounty: undisclosed
+- Source: [hackerone.com/3721519](https://hackerone.com/reports/3721519) · Reporter: [@rox-11](https://hackerone.com/rox-11) · Team: [Liberapay](https://hackerone.com/liberapay)
+- CWE: Open Redirect
+
+**What**
+
+The profile of a Liberapay team member contained a link to an expired Twitter account, creating a broken link hijacking vulnerability. The expired Twitter account link was displayed on the member's Liberapay profile and donation page, falsely confirming to donors that the account was legitimate and verified.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Private circle can be added to another circle via API despite visibility restriction
+
+- **2026-05-08** · sev: Low · bounty: $150 · cve: CVE-2026-45155
+- Source: [hackerone.com/3511998](https://hackerone.com/reports/3511998) · Reporter: [@vidang04](https://hackerone.com/vidang04) · Team: [Nextcloud](https://hackerone.com/nextcloud)
+- CWE: Insecure Direct Object Reference (IDOR)
+
+**What**
+
+A vulnerability was discovered where private circles could be added to other circles via the API, despite visibility restrictions.
+
+**PoC refs:** search `github.com/search?q=CVE-2026-45155` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-45155.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Files drop share links for end-to-end encrypted folders allowed to drop files into other folders of the share owner 
+
+- **2026-05-08** · sev: Low · bounty: undisclosed · cve: CVE-2026-45159
+- Source: [hackerone.com/3304830](https://hackerone.com/reports/3304830) · Reporter: [@0x0doteth](https://hackerone.com/0x0doteth) · Team: [Nextcloud](https://hackerone.com/nextcloud)
+- CWE: Insecure Direct Object Reference (IDOR)
+
+**What**
+
+Files drop share links for end-to-end encrypted folders allowed to drop files into other folders of the share owner.
+
+**PoC refs:** search `github.com/search?q=CVE-2026-45159` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-45159.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### View-only guests could see deleted Collectives pages in the trashbin
+
+- **2026-05-08** · sev: Low · bounty: undisclosed · cve: CVE-2026-45154
+- Source: [hackerone.com/3521434](https://hackerone.com/reports/3521434) · Reporter: [@yoyomiski](https://hackerone.com/yoyomiski) · Team: [Nextcloud](https://hackerone.com/nextcloud)
+- CWE: Improper Access Control - Generic
+
+**What**
+
+A vulnerability was discovered where view-only guests could see deleted Collectives pages in the trashbin.
+
+**PoC refs:** search `github.com/search?q=CVE-2026-45154` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-45154.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### mbedTLS private-key blob null-termination asymmetry in lib/vtls/mbedtls.c (mbed_load_privkey)
+
+- **2026-05-07** · sev: — · bounty: undisclosed
+- Source: [hackerone.com/3717365](https://hackerone.com/reports/3717365) · Reporter: [@shecantcode2](https://hackerone.com/shecantcode2) · Team: [curl](https://hackerone.com/curl)
+- CWE: Improper Null Termination
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### ActiveStorage Disk Service Path Traversal via Custom Blob Key Injection
+
+- **2026-05-07** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3580511](https://hackerone.com/reports/3580511) · Reporter: [@ksw9722](https://hackerone.com/ksw9722) · Team: [Ruby on Rails](https://hackerone.com/rails)
+- CWE: Path Traversal
+
+**What**
+
+A vulnerability was discovered in the ActiveStorage Disk Service component of Ruby on Rails. The vulnerability allowed an attacker to achieve arbitrary file write, read, and delete on the server's filesystem by injecting a malicious blob key. The vulnerability was due to insufficient validation of the blob key parameter before constructing file paths. This could be exploited by an attacker who could influence the hash passed to the `.attach()` method.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Critical Deadlock Vulnerability in Monero RPC Leading to Complete Node Paralysis
+
+- **2026-05-06** · sev: Critical · bounty: undisclosed
+- Source: [hackerone.com/3307874](https://hackerone.com/reports/3307874) · Reporter: [@rorkh](https://hackerone.com/rorkh) · Team: [Monero](https://hackerone.com/monero)
+- CWE: Uncontrolled Resource Consumption
+
+**What**
+
+A deadlock vulnerability was discovered in the Monero JSON-RPC interface that allowed a remote, unauthenticated attacker to completely paralyze any Monero node with a single HTTP request containing specific batch methods, leading to permanent denial of service. The vulnerability affected all releases of Monero up to version 0.18.4.2 and likely previous versions, across all operating systems. The vulnerability was rated as critical, with a CVSS 3.0 score of 10.0.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Connection Count Bug in Monero Node Enables Outbound Peer Reset Attack
+
+- **2026-05-06** · sev: — · bounty: undisclosed
+- Source: [hackerone.com/3185083](https://hackerone.com/reports/3185083) · Reporter: [@yulge](https://hackerone.com/yulge) · Team: [Monero](https://hackerone.com/monero)
+- CWE: Privacy Violation
+
+**What**
+
+A vulnerability was disclosed that could cause a Monero node's outbound connections to be dropped. The vulnerability was caused by a flaw in how the node incorrectly counted the number of current outbound connections. An attacker could exploit this flaw to trick the node into mistakenly believing it had exceeded the outbound connection maximum limit, prompting it to actively disconnect legitimate outbound connections.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### wcurl treats some URL operands after -- as curl options
+
+- **2026-05-06** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3708482](https://hackerone.com/reports/3708482) · Reporter: [@p4p3r_hak](https://hackerone.com/p4p3r_hak) · Team: [curl](https://hackerone.com/curl)
+- CWE: Improper Neutralization of Value Delimiters
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Out of scope: Improper Input Validation Order on /api-internal/login via password field leads to unnecessary resource consumption
+
+- **2026-05-05** · sev: Low · bounty: $200
+- Source: [hackerone.com/3625600](https://hackerone.com/reports/3625600) · Reporter: [@bereza4321](https://hackerone.com/bereza4321) · Team: [PortSwigger Web Security](https://hackerone.com/portswigger)
+
+**What**
+
+A security issue was discovered in the /api-internal/login authentication endpoint of the internal login interface of Burp Suite DAST (Enterprise). The issue was caused by improper input validation order, where the application processed user-supplied input before enforcing field-level validation. This allowed extremely large payloads in the password field to be buffered and parsed prior to rejection, resulting in unnecessary resource consumption. The application fully processed the requests before applying validation, violating the fail-fast principle.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Potential Resource Leak in tool_parsecfg.c at line 279 during fileerror
+
+- **2026-05-05** · sev: Low · bounty: undisclosed
+- Source: [hackerone.com/3710209](https://hackerone.com/reports/3710209) · Reporter: [@ravindrasl2026](https://hackerone.com/ravindrasl2026) · Team: [curl](https://hackerone.com/curl)
+- CWE: Uncontrolled Resource Consumption
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### libcurl 8.20.0 incomplete fix for CVE-2026-7168: changing only CURLOPT_PROXYPORT leaks stale Proxy Digest auth to a different proxy
+
+- **2026-05-05** · sev: Medium · bounty: undisclosed · cve: CVE-2026-7168
+- Source: [hackerone.com/3707747](https://hackerone.com/reports/3707747) · Reporter: [@codexxxx](https://hackerone.com/codexxxx) · Team: [curl](https://hackerone.com/curl)
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-7168` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-7168.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### MQTT CONNACK Packet Type Bypass leads to RCE via Malicious Broker
+
+- **2026-05-05** · sev: Critical · bounty: undisclosed
+- Source: [hackerone.com/3712343](https://hackerone.com/reports/3712343) · Reporter: [@orelbn7](https://hackerone.com/orelbn7) · Team: [curl](https://hackerone.com/curl)
+- CWE: ASI05: Unexpected Code Execution (RCE)
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Improper input validation On Exported deep-link handler crashes `FileDisplayActivity` on crafted external URL — Denial-of-Service
+
+- **2026-05-01** · sev: None · bounty: undisclosed
+- Source: [hackerone.com/3399016](https://hackerone.com/reports/3399016) · Reporter: [@khoof](https://hackerone.com/khoof) · Team: [Nextcloud](https://hackerone.com/nextcloud)
+- CWE: Improper Null Termination
+
+**What**
+
+A vulnerability was discovered in the Nextcloud Android client application where improper input validation in the exported deep-link handler caused a null dereference in the FileDisplayActivity component. This resulted in an unhandled NullPointerException and application crash when the deep-link was invoked. An attacker-controlled link or malicious app could trigger this behavior, leading to a denial-of-service incident.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Double fdrop on a socket through sys_netcontrol
+
+- **2026-05-01** · sev: High · bounty: $10,000
+- Source: [hackerone.com/3320669](https://hackerone.com/reports/3320669) · Reporter: [@slidybat](https://hackerone.com/slidybat) · Team: [PlayStation](https://hackerone.com/playstation)
+- CWE: Double Free
+
+**What**
+
+The netcontrol syscall in the kernel had a vulnerability where the socket file descriptor was not properly validated when removing a socket from a netevent structure. This allowed an attacker to cause a double fdrop on a socket, potentially leading to a use-after-free condition.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### MQTT state machine confusion: PINGRESP/DISCONNECT with non-zero remaining_length dispatches to stale nextstate
+
+- **2026-04-29** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3702718](https://hackerone.com/reports/3702718) · Reporter: [@fxv_ray_st](https://hackerone.com/fxv_ray_st) · Team: [curl](https://hackerone.com/curl)
+- CWE: Improper Input Validation
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Use-After-Free in SMB connection reuse (req->path dangling pointer after needle destruction)
+
+- **2026-04-29** · sev: High · bounty: undisclosed
+- Source: [hackerone.com/3591956](https://hackerone.com/reports/3591956) · Reporter: [@nadsec42](https://hackerone.com/nadsec42) · Team: [curl](https://hackerone.com/curl)
+- CWE: Use After Free
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Negotiate connection reuse with wrong credentials when using CURLAUTH_ANY                                        
+
+- **2026-04-29** · sev: Medium · bounty: undisclosed · cve: CVE-2026-1965
+- Source: [hackerone.com/3646072](https://hackerone.com/reports/3646072) · Reporter: [@anonymous_237](https://hackerone.com/anonymous_237) · Team: [curl](https://hackerone.com/curl)
+- CWE: Authentication Bypass by Primary Weakness
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-1965` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-1965.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Negotiate Authentication Premature on Connection Reuse
+
+- **2026-04-29** · sev: High · bounty: undisclosed
+- Source: [hackerone.com/3666576](https://hackerone.com/reports/3666576) · Reporter: [@sdainard](https://hackerone.com/sdainard) · Team: [curl](https://hackerone.com/curl)
+- CWE: Improper Authentication - Generic
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### CVE-2026-7168: cross-proxy Digest auth state leak
+
+- **2026-04-29** · sev: Medium · bounty: undisclosed · cve: CVE-2026-7168
+- Source: [hackerone.com/3697719](https://hackerone.com/reports/3697719) · Reporter: [@xkilua](https://hackerone.com/xkilua) · Team: [curl](https://hackerone.com/curl)
+- CWE: Exposure of Data Element to Wrong Session
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-7168` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-7168.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### CVE-2026-7009: OCSP stapling bypass with Apple SecTrust
+
+- **2026-04-29** · sev: Medium · bounty: undisclosed · cve: CVE-2024-8096, CVE-2024-0853, CVE-2026-7009
+- Source: [hackerone.com/3694390](https://hackerone.com/reports/3694390) · Reporter: [@3lcarry](https://hackerone.com/3lcarry) · Team: [curl](https://hackerone.com/curl)
+- CWE: Improper Certificate Validation
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2024-8096` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2024-8096.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### CVE-2026-6253: proxy credentials leak over redirect-to proxy
+
+- **2026-04-29** · sev: Medium · bounty: undisclosed · cve: CVE-2026-6253
+- Source: [hackerone.com/3669637](https://hackerone.com/reports/3669637) · Reporter: [@joesephdiver](https://hackerone.com/joesephdiver) · Team: [curl](https://hackerone.com/curl)
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-6253` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-6253.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### CVE-2026-5545: wrong reuse of HTTP Negotiate connection
+
+- **2026-04-29** · sev: Medium · bounty: undisclosed · cve: CVE-2026-5545
+- Source: [hackerone.com/3642555](https://hackerone.com/reports/3642555) · Reporter: [@quaccws](https://hackerone.com/quaccws) · Team: [curl](https://hackerone.com/curl)
+- CWE: Authentication Bypass by Primary Weakness
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-5545` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-5545.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### CVE-2026-6276: stale custom cookie host causes cookie leak
+
+- **2026-04-29** · sev: Low · bounty: undisclosed · cve: CVE-2026-6276
+- Source: [hackerone.com/3671818](https://hackerone.com/reports/3671818) · Reporter: [@arkss](https://hackerone.com/arkss) · Team: [curl](https://hackerone.com/curl)
+- CWE: Exposure of Data Element to Wrong Session
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-6276` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-6276.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### CVE-2026-6429: netrc credential leak with reused proxy connection
+
+- **2026-04-29** · sev: Medium · bounty: undisclosed · cve: CVE-2026-6429
+- Source: [hackerone.com/3677759](https://hackerone.com/reports/3677759) · Reporter: [@nobcoderr](https://hackerone.com/nobcoderr) · Team: [curl](https://hackerone.com/curl)
+- CWE: Information Exposure Through Sent Data
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-6429` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-6429.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### CVE-2026-4873: connection reuse ignores TLS requirement
+
+- **2026-04-29** · sev: Low · bounty: undisclosed · cve: CVE-2026-4873
+- Source: [hackerone.com/3621851](https://hackerone.com/reports/3621851) · Reporter: [@bonaire](https://hackerone.com/bonaire) · Team: [curl](https://hackerone.com/curl)
+- CWE: Cleartext Transmission of Sensitive Information
+
+**What**
+
+A vulnerability was discovered in libcurl's connection reuse for cleartext-upgrade mail protocols. The vulnerability was that the later transfer's CURLOPT_USE_SSL option was not properly included if a plaintext connection was already open and reusable. This affected the smtp://, pop3://, and imap:// protocols. The vulnerability could allow a later TLS-required mail transfer to be sent over a previously established plaintext connection, contrary to expectation.
+
+**PoC refs:** search `github.com/search?q=CVE-2026-4873` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-4873.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### CVE-2026-5773: wrong reuse of SMB connection
+
+- **2026-04-29** · sev: Low · bounty: undisclosed · cve: CVE-2026-5773
+- Source: [hackerone.com/3650689](https://hackerone.com/reports/3650689) · Reporter: [@osama-hamad](https://hackerone.com/osama-hamad) · Team: [curl](https://hackerone.com/curl)
+
+**What**
+
+A vulnerability was discovered in curl version 8.19.0 and earlier versions that support SMB. The vulnerability was due to the incorrect reuse of SMB connections across different shares on the same server. This led to data spoofing and access control bypass. The issue was caused by the lack of verification of the target share name when reusing an existing connection. As a result, the application could silently fetch data from an unintended share.
+
+**PoC refs:** search `github.com/search?q=CVE-2026-5773` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-5773.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Use-after-free in `curl_easy_ssls_export()` during callback re-entrancy
+
+- **2026-04-29** · sev: High · bounty: undisclosed
+- Source: [hackerone.com/3682666](https://hackerone.com/reports/3682666) · Reporter: [@m1llie](https://hackerone.com/m1llie) · Team: [curl](https://hackerone.com/curl)
+- CWE: Use After Free
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Heap-buffer-overflow in `Curl_ssl_push_certinfo_len()` — sole bounds check is `DEBUGASSERT`
+
+- **2026-04-29** · sev: High · bounty: undisclosed
+- Source: [hackerone.com/3684614](https://hackerone.com/reports/3684614) · Reporter: [@h3zh3z](https://hackerone.com/h3zh3z) · Team: [curl](https://hackerone.com/curl)
+- CWE: Out-of-bounds Read
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Stack exhaustion in MIME multipart reading with deeply nested subparts
+
+- **2026-04-29** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3684603](https://hackerone.com/reports/3684603) · Reporter: [@wi110w](https://hackerone.com/wi110w) · Team: [curl](https://hackerone.com/curl)
+- CWE: Uncontrolled Recursion
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### PS4 BD-J privilege escalation using nested JAR
+
+- **2026-04-29** · sev: Medium · bounty: $2,500
+- Source: [hackerone.com/3452696](https://hackerone.com/reports/3452696) · Reporter: [@gezine](https://hackerone.com/gezine) · Team: [PlayStation](https://hackerone.com/playstation)
+- CWE: Privilege Escalation
+
+**What**
+
+A PS4 vulnerability was discovered in the Blu-ray Disc Java (BD-J) privilege escalation using nested JAR files. The vulnerability was found in the PS4 system software versions 13.00 to the latest version 13.02. The vulnerability was caused by a discrepancy between the security policy's path canonicalization and the actual class loading path. The security policy granted AllPermission to code that appeared to be loaded from a trusted directory, while the actual code was loaded from an untrusted nested JAR on the Blu-ray disc. …
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### IBM Aspera HTTP Gateway stores sensitive information in clear text in easily obtainable files which can be read by an unauthenticated user.
+
+- **2026-04-27** · sev: High · bounty: undisclosed
+- Source: [hackerone.com/3340797](https://hackerone.com/reports/3340797) · Reporter: [@jhon1231248e](https://hackerone.com/jhon1231248e) · Team: [IBM](https://hackerone.com/ibm)
+- CWE: Information Disclosure
+
+**What**
+
+The IBM Aspera HTTP Gateway stored sensitive information in clear text in easily obtainable files, which could be read by an unauthenticated user. The issue was submitted to IBM, analyzed, and remediated.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Bypass of Restricted Keyword "Mozilla" in Display Name Field via Unicode Homoglyphs on addons.allizom.org
+
+- **2026-04-27** · sev: Low · bounty: $500
+- Source: [hackerone.com/3279441](https://hackerone.com/reports/3279441) · Reporter: [@icecream_23](https://hackerone.com/icecream_23) · Team: [Mozilla](https://hackerone.com/mozilla)
+- CWE: Improper Input Validation
+
+**What**
+
+A restricted keyword bypass vulnerability was discovered on the Firefox Add-ons platform that allowed an attacker to register a display name visually identical to "Mozilla" by using a Unicode homoglyph character. This circumvented the intended restriction and could have been used to impersonate official accounts.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Bypassing Inbox Privacy Settings and Enabling Spam on Pixiv.net
+
+- **2026-04-27** · sev: Low · bounty: $200
+- Source: [hackerone.com/3100570](https://hackerone.com/reports/3100570) · Reporter: [@aaqibhussain](https://hackerone.com/aaqibhussain) · Team: [pixiv](https://hackerone.com/pixiv)
+- CWE: Improper Access Control - Generic
+
+**What**
+
+A vulnerability was discovered in the messaging system of Pixiv.net. The vulnerability allowed any user to bypass the inbox privacy settings and send messages to another user who had disabled their inbox. The vulnerability was triggered by manipulating the id parameter in the message-sending POST request. Additionally, the lack of rate limiting or duplicate request validation allowed attackers to spam users by repeatedly sending the same or modified requests.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Non-premium user can disable Ads in japanese version of dic.pixiv.net
+
+- **2026-04-27** · sev: High · bounty: $3,000
+- Source: [hackerone.com/3183520](https://hackerone.com/reports/3183520) · Reporter: [@lainkusanagi](https://hackerone.com/lainkusanagi) · Team: [pixiv](https://hackerone.com/pixiv)
+- CWE: Business Logic Errors
+
+**What**
+
+A vulnerability was identified in the Japanese version of the pixiv dictionary website where non-premium users could disable advertisements. Normally, the ability to disable ads was restricted to premium users only. However, due to improper access control, any authenticated user could modify their ad display preferences without verification of premium status.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+
+## 2026-07-01
+
+### Server-Side Parameter Injection — $6,500 High-Severity Payout
+- **Tags:** `#ssrf` `#web` `#api`
+- **Severity:** high · **Hunt:** 3/5 · **Score:** 31.5 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@21bec131/how-an-unchecked-server-side-parameter-injection-earned-a-6-500-high-severity-payout-10abec521232)
+
+- **Trick:** Injecting parameters into server-side requests that pass between internal backend services, exploiting the assumption that backends operate as a unified black box rather than distinct components that may forward unchecked input to each other.
+- **Why it matters:** Demonstrates that internal service boundaries often lack input validation, and treating the backend as a monolith causes testers to miss parameter-level injection opportunities that yield high-severity findings.
+- **Rating:** chain-worthy
+
+---
+### Race Condition Breaking Organization Administration
+- **Tags:** `#race-condition` `#web` `#api`
+- **Severity:** high · **Hunt:** 3/5 · **Score:** 31.5 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@omaralgbry1/how-i-found-a-race-condition-that-broke-organization-administration-ea9bd9f914ab)
+
+- **Trick:** Exploiting a race condition in organization administration endpoints by sending concurrent requests to bypass intended authorization or state checks.
+- **Why it matters:** Race conditions in admin flows can allow privilege escalation, unauthorized role assignment, or bypassing business logic restrictions that are otherwise enforced sequentially.
+- **Rating:** chain-worthy
+
+---
+### Intigriti LeakyJar Challenge — One-Click CSRF to Expose Private Data
+- **Tags:** `#csrf` `#web`
+- **Severity:** medium · **Hunt:** 2/5 · **Score:** 15.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@shadowbugbounty32/how-i-solved-intigritis-leakyjar-challenge-one-click-csrf-to-expose-the-master-baker-s-private-fa19b99c4a2a?source=rss------bug_bounty-5)
+
+- **Trick:** One-click CSRF that forces a victim to perform an authenticated action, leaking the "Master Baker's" private data through a crafted cross-origin request.
+- **Why it matters:** Demonstrates that even simple CSRF on non-state-changing endpoints can be weaponized for data exfiltration when combined with a leakage point — relevant for bug bounty programs that dismiss CSRF as low-impact.
+- **Rating:** variant
+
+---
+### Auth Bypass via Session Token Reuse Leading to Account Takeover
+- **Tags:** `#auth-bypass` `#web` `#api`
+- **Severity:** high · **Hunt:** 2/5 · **Score:** 14.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@youssefawad1357/authentication-bypass-via-session-token-reuse-leading-to-account-takeover-9f24022c32ed)
+
+- **Trick:** Reusing or failing to invalidate a session token after authentication state changes (e.g., logout, password reset) allows an attacker to bypass auth and take over another user's account.
+- **Why it matters:** Session token reuse is a subtle logic flaw that can lead to full account takeover without needing credentials — highly impactful in bug bounty contexts, especially on platforms that don't strictly rotate tokens on privilege-boundary transitions.
+- **Rating:** variant
+
+---
+### PEB Corruption — A Remote Process Crash Technique
+- **Tags:** `#privesc`
+- **Severity:** medium · **Hunt:** 2/5 · **Score:** 10.0 · **Status:** theoretical · **Age:** 0d
+- **Sources:** [1](https://medium.com/@s12deff/peb-corruption-a-remote-process-crash-technique-4b25f8887678?source=rss------pentesting-5)
+
+- **Trick:** Corrupt the Process Environment Block (PEB) of a remote Windows process — overwriting critical runtime metadata like image base and heap pointers — to force an uncatchable crash.
+- **Why it matters:** Crashing a privileged or security process via PEB manipulation can clear the way for privilege escalation or defense evasion; useful as a chain link when you have write primitives but not full code exec.
+- **Rating:** chain-worthy
+
+---
+### MD2PDF — Markdown-to-PDF Conversion Vulnerability
+- **Tags:** `#xss` `#rce` `#web`
+- **Severity:** unknown · **Hunt:** 2/5 · **Score:** 8.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@shachinpr29/md2pdf-a57938883ccc?source=rss------pentesting-5)
+
+- **Trick:** Exploiting a markdown-to-PDF converter (details truncated in RSS feed — likely involves injecting malicious markdown/markup that gets rendered/executed during PDF generation).
+- **Why it matters:** MD2PDF tools are frequently exposed as web services and often use unsandboxed rendering engines (puppeteer, wkhtmltopdf, etc.), making them fertile ground for XSS-to-RCE or SSRF chains.
+- **Rating:** unknown — full writeup behind paywall; revisit if details surface
+
+---
+### NASA VDP Vulnerability Disclosure Recognition
+- **Tags:** `#web`
+- **Severity:** unknown · **Hunt:** 1/5 · **Score:** 4.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://abuhuzaifa768.medium.com/alhamdulillah-d110b013ae0d?source=rss------bug_bounty-5)
+
+- **Trick:** No technical details shared — post is a recognition/announcement only.
+- **Why it matters:** Confirms NASA VDP has attack surface worth probing, but provides zero actionable detail.
+- **Rating:** variant
+
+---
+### Web Hacking Part 5 — BurpSuite Basics
+- **Tags:** `#web`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@vorasmit22/web-hacking-part-5-32616fdd0a81?source=rss------infosec-5)
+
+- **Trick:** Basic introduction to BurpSuite for intercepting and testing web traffic.
+- **Why it matters:** Beginner-level tutorial covering BurpSuite fundamentals; no novel technique or vulnerability demonstrated.
+- **Rating:** variant
+
+---
+### Common Crypto Laundering Techniques & Infrastructure
+- **Tags:** `#data-exfil` `#web`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@iamabraham/part-2-common-laundering-techniques-and-laundering-infrastructure-df4fd7ccc81f?source=rss------infosec-5) · [2](https://amanisher.medium.com/windows-to-linux-5-file-transfer-techniques-for-pentesting-exams-8754e8b46c87?source=rss------pentesting-5) · [3](https://infosecwriteups.com/beyond-canarytokens-building-a-diy-document-tripwire-with-passive-os-fingerprinting-c39716d386f6?source=rss------pentesting-5)
+
+- **Trick:** Overview of common cryptocurrency money laundering methods and the infrastructure (mixers, nested exchanges, chain-hopping) that enables them.
+- **Why it matters:** Understanding laundering patterns helps identify suspicious transaction flows and misconfigured/exposed financial services that could be reported through bug bounty or VDP programs.
+- **Rating:** variant
+
+---
+*Clustered 3 sources for this item.*
+
+### Open-Source Cyber Deception Canaries with Wazuh
+- **Tags:** `#docker` `#web`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@termineandrea04/open-source-cyber-deception-canaries-integrated-with-wazuh-5ec938c414ef?source=rss------infosec-5)
+
+- **Trick:** Deploy distroless Docker canary containers via HoneyWire and forward high-fidelity trip alerts into Wazuh SIEM for attacker detection.
+- **Why it matters:** Deception-based detection is a strong complement to traditional defenses; canary alerts are inherently low-noise, high-signal — useful for bug bounty hunters to understand how defenders catch recon and lateral movement.
+- **Rating:** variant
+
+---
+### Building with Terraform on AWS: Infrastructure as Code
+- **Tags:** `#aws` `#cloud`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://meetcyber.net/part-2-building-with-terraform-on-aws-infrastructure-as-code-94da825851de?source=rss------bug_bounty-5)
+
+- **Trick:** Introductory Terraform IaC tutorial on AWS — no specific vulnerability or exploitation technique documented.
+- **Why it matters:** Familiarity with Terraform configurations can help identify misconfigured AWS resources (overly permissive IAM policies, exposed S3 buckets, unencrypted resources) in bug bounty targets that use IaC.
+- **Rating:** variant
+
+---
+### How CREST Pen Testing Helps Reduce Cyber Security Risks
+- **Tags:** `#api` `#cloud` `#web`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 0.5 · **Status:** unknown · **Age:** 30d
+- **Sources:** [1](https://medium.com/@Qualysec.Europe/how-crest-pen-testing-helps-reduce-cyber-security-risks-6993f9c20f5e?source=rss------pentesting-5)
+
+- **Trick:** None — this is a promotional overview of CREST-accredited penetration testing and its claimed benefits for reducing organizational cyber risk.
+- **Why it matters:** No actionable bug bounty intelligence; purely informational/marketing content about CREST certification standards with no specific technique or vulnerability detail.
+- **Rating:** variant
+
+---

@@ -260,3 +260,67 @@ _No H1 summary provided._
 **Hunt signal:** pass — summary too thin
 
 ---
+
+
+## 2026-05-27 — H1 disclosures
+
+### SQL Injection in Column Type Parameter Allows Arbitrary SQL Execution
+
+- **2026-05-15** · sev: High · bounty: undisclosed · cve: CVE-2026-45545
+- Source: [hackerone.com/3462991](https://hackerone.com/reports/3462991) · Reporter: [@suul](https://hackerone.com/suul) · Team: [Nextcloud](https://hackerone.com/nextcloud)
+- CWE: SQL Injection
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-45545` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-45545.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+
+## 2026-07-01 — H1 disclosures
+
+### SSRF via Improper Redirect Validation in Rocket.Chat oEmbed Function
+
+- **2026-06-11** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3383079](https://hackerone.com/reports/3383079) · Reporter: [@button142857](https://hackerone.com/button142857) · Team: [Rocket.Chat](https://hackerone.com/rocket_chat)
+- CWE: Server-Side Request Forgery (SSRF)
+
+**What**
+
+A vulnerability was discovered in Rocket.Chat version 7.10.1 where the oEmbed feature did not properly validate redirected URLs. This allowed an attacker to bypass SSRF protections and access internal network resources that would otherwise be unreachable.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### SSRF via improper validation after DNS name resolution in the link-preview feature
+
+- **2026-06-11** · sev: High · bounty: undisclosed
+- Source: [hackerone.com/3393664](https://hackerone.com/reports/3393664) · Reporter: [@button142857](https://hackerone.com/button142857) · Team: [Rocket.Chat](https://hackerone.com/rocket_chat)
+- CWE: Server-Side Request Forgery (SSRF)
+
+**What**
+
+The link-preview feature in Rocket.Chat version 7.11.0 did not properly validate the IP address after DNS resolution. This allowed an attacker to obtain a domain that pointed to an internal IP address, triggering SSRF and enabling access to internal hosts that would otherwise be unreachable.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### curl-ipv4-percent-normalization-SSRF
+
+- **2026-06-10** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3791168](https://hackerone.com/reports/3791168) · Reporter: [@monk17](https://hackerone.com/monk17) · Team: [curl](https://hackerone.com/curl)
+- CWE: Server-Side Request Forgery (SSRF)
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---

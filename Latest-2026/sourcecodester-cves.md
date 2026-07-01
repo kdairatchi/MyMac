@@ -234,3 +234,17 @@ _pending enrichment_
 - **Evidence:** [nvd] Vulnerability confirmed in v1.0 affecting the department management endpoint.
 
 ---
+
+## 2026-07-01
+
+### SQL Injection in Class and Exam Timetabling System preview4.php — `CVE-2026-13527`
+- **Tags:** `#sqli` `#web`
+- **Severity:** high · **Hunt:** 2/5 · **Score:** 21.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://nvd.nist.gov/vuln/detail/CVE-2026-13527)
+
+- **What:** Remote SQL injection via the `course_year_section` parameter in `/preview4.php` of SourceCodester Class and Exam Timetabling System 1.0.
+- **Why it matters:** Unauthenticated attackers can manipulate SQL queries to extract or modify database contents; public exploit is available.
+- **Hunt signal:** `pass` — niche educational project with minimal real-world deployment surface.
+- **Evidence:** [source] Public PoC disclosed and usable · [opinion] Low-value target for bug bounty; useful only as a reference pattern for similar `preview*.php` endpoints in other SourceCodester apps.
+
+---
