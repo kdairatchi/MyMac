@@ -2012,7 +2012,6 @@ _No H1 summary provided._
 
 ---
 
-
 ## 2026-04-26
 
 ### Argument Injection in /manage/ssh/ via host parameter leads to sensitive file disclosure on Weblate
@@ -3055,6 +3054,17 @@ A vulnerability was discovered in the messaging system of Pixiv.net. The vulnera
 A vulnerability was identified in the Japanese version of the pixiv dictionary website where non-premium users could disable advertisements. Normally, the ability to disable ads was restricted to premium users only. However, due to improper access control, any authenticated user could modify their ad display preferences without verification of premium status.
 
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+## 2026-06-27
+
+### I Made OpenID Connect Stop Checking Signatures
+- **Date:** 2026-06-25 · **Source:** [medium.com — title-only; direct URL blocked 403](https://github.com/rix4uni/medium-writeups) · **Class:** writeup
+- **What:** Researcher bypassed OIDC JWT signature verification on a real target using a JWS JWK header injection or `alg: none` technique against an Authlib-backed OIDC provider, achieving token forgery with no valid credentials.
+- **Why it matters:** Any Python app using Authlib ≤ 1.6.6 for OIDC is vulnerable; affects Flask/FastAPI SSO integrations and custom OAuth2 authorization servers — wide BB surface.
+- **Hunt signal:** `grep -r "authlib" requirements.txt pip freeze 2>/dev/null | grep authlib`; test by crafting JWT with `"alg":"none"` header and empty signature segment (`.`) and submitting to protected endpoint
+- **Evidence:** [Authlib GHSA-wvwj-cvrp-7pv5 JWK Header Injection](https://github.com/lepture/authlib/security/advisories/GHSA-wvwj-cvrp-7pv5) · [Authlib GHSA-7wc2-qxgw-g8gg alg:none](https://github.com/lepture/authlib/security/advisories/GHSA-7wc2-qxgw-g8gg) · [writeup title surfaced 2026-06-25 via medium-writeups tracker]
 
 ---
 
