@@ -172,3 +172,14 @@ ${T(java.lang.ProcessBuilder).new(new String[]{"id"}).start()}
 - **Pebble/Velocity SSTI in enterprise Java (2024-2025)** · Velocity and Pebble still widely used in internal tooling, JIRA plugins, and reporting frameworks; detection rate low because error pages are suppressed
 - **SSTI via AI prompt preprocessing** · emerging pattern in 2025 — user input passed to a prompt builder that uses Jinja2 templating before LLM submission; `{{7*7}}` evaluates in the template layer, not in the LLM
 - **CVE-2023-38646** · Metabase pre-auth SSTI/RCE via `setup-token` endpoint · Freemarker template injection without authentication · CVSS 9.8 · exploited in the wild within 48 hours of disclosure
+
+## 2026-07-02 — CVE-2026-25526: JinJava ForTag Sandbox Bypass → Arbitrary Java Execution (HubSpot)
+
+### CVE-2026-25526 — JinJava SSTI Sandbox Bypass (ForTag + Jackson ObjectMapper)
+- **Date:** 2026-07-02 · **Source:** [nvd.nist.gov](https://nvd.nist.gov/vuln/detail/CVE-2026-25526) · **Class:** cve
+- **What:** ForTag in JinJava < 2.7.6 / < 2.8.3 bypasses JinjavaBeanELResolver via Introspector.getBeanInfo(); chaining with Jackson ObjectMapper allows arbitrary class instantiation → file read / RCE.
+- **Why it matters:** HubSpot CMS exposes Jinjava templates to end users (customers writing HubL), making template injection a direct in-scope vector for HubSpot's bug bounty; any SaaS built on Jinjava is a candidate target.
+- **Hunt signal:** inject `{% for x in "".class.forName("java.io.File").getMethod("list","".class).invoke(null,"/") %}{{x}}{% endfor %}` in any HubL/Jinjava template field; also try ObjectMapper gadget: `{% set om = "".class.forName("com.fasterxml.jackson.databind.ObjectMapper").newInstance() %}{{om}}`
+- **Evidence:** [GitHub Advisory GHSA-gjx9-j8f8-7j74](https://github.com/advisories/GHSA-gjx9-j8f8-7j74) · [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-25526) · [researcher writeup](https://av4nth1ka.github.io/jinjava-rce-cve-2026-25526/) · [public PoC](https://github.com/advisories/GHSA-gjx9-j8f8-7j74)
+- **CVSS:** 9.8 · **KEV:** No · **PoC:** PUBLIC
+- **Scope:** HubSpot bug bounty; any SaaS/CMS using Jinjava for user-controlled templates
