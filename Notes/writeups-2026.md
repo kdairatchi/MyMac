@@ -3193,3 +3193,12 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Rating:** variant
 
 ---
+### watchTowr: Adobe ColdFusion APSB26-68 — Pre-Auth CVSS 10.0 File Upload + Path Traversal
+- **Date:** 2026-07-02 · **Source:** [labs.watchtowr.com](https://labs.watchtowr.com/its-37oc-and-all-we-can-think-about-is-coldfusion-adobe-coldfusion-security-bulletin-apsb26-68-cve-bonanza/) · **Class:** writeup
+- **Tags:** `#rce` `#file-upload` `#web` `#cloud`
+- **What:** Detailed analysis of 11 ColdFusion bugs in APSB26-68; four CVSS 10.0 pre-auth — unrestricted file upload RCE (CVE-2026-48276/48283), improper input validation RCE (CVE-2026-48277/48281/48316), and path traversal arbitrary read (CVE-2026-48282, CVSS 10.0 / CVE-2026-48313, CVSS 9.3).
+- **Why it matters:** Adobe's public HackerOne program credited two researchers from this bulletin; CVSS 10.0 pre-auth on a web application server with live H1 scope = immediate bounty target; variant bugs and bypass chains are open hunting territory post-patch.
+- **Hunt signal:** Fingerprint ColdFusion via `/CFIDE/administrator/` or `X-Powered-By: ColdFusion` header; probe `/CFIDE/wizards/` and RDS endpoint unauthenticated; test path traversal on file-read parameters.
+- **Rating:** high-signal
+
+---

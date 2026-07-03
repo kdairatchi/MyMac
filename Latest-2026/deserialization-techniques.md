@@ -220,3 +220,12 @@ print(base64.b64encode(pickle.dumps(RCE())).decode())
 - **CVE-2023-3519** · Citrix ADC/NetScaler unauthenticated deserialization via NSCIService/AAA XML API → full system RCE, affects 13.1-13.1-49.16 · https://www.assetnote.io/resources/research/analysis-of-cve-2023-3519-in-citrix-adc-and-netscaler-gateway
 - **CVE-2023-24489** · Citrix ShareFile pre-auth .NET XML deserialization in `UploadClientModule.asmx`, `ObjectDataProvider` gadget chain · https://www.assetnote.io/resources/research/advisory-sharefile-pre-auth-rce-cve-2023-24489
 - **CVE-2023-38646** · Metabase H2 JDBC INIT parameter — SQL-to-Java deserialization bridge, pre-auth on `/api/setup/validate` · https://www.assetnote.io/resources/research/chaining-our-way-to-pre-auth-rce-in-metabase-cve-2023-38646
+
+## 2026-07-03 — CVE-2026-45659: Microsoft SharePoint Server Deserialization RCE (CISA KEV)
+
+### CVE-2026-45659: SharePoint Server Authenticated RCE via Deserialization
+- **Date:** 2026-07-03 · **Source:** [thehackernews.com](https://thehackernews.com/2026/07/sharepoint-rce-cve-2026-45659-added-to.html) · **Class:** cve
+- **What:** SharePoint Server (Subscription Edition, 2019, Enterprise 2016) deserializes untrusted data in the SPListItem handling path; an authenticated Site Member achieves RCE — no admin privileges required.
+- **Why it matters:** Added to CISA KEV 2026-07-01 with a 72-hour federal patch deadline; public PoC confirmed live on GitHub; any org running unpatched on-prem SharePoint is an active exploitation target right now.
+- **Hunt signal:** Authenticate as low-priv Site Member; probe SPListItem API with a URLDNS ysoserial payload for OOB confirmation; check version headers against May 2026 patch threshold. `nuclei -t cves/2026/CVE-2026-45659.yaml` if template available.
+- **Evidence:** [PoC GitHub](https://github.com/mistbarbarianspot/CVE-2026-45659-SharePoint-RCE) · [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) · [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-45659)

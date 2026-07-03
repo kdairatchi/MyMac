@@ -217,3 +217,13 @@ _No H1 summary provided._
 **Hunt signal:** pass — summary too thin
 
 ---
+
+## 2026-07-03 — Adobe ColdFusion Pre-Auth Unrestricted File Upload → RCE (APSB26-68)
+
+### Adobe ColdFusion APSB26-68: Pre-Auth File Upload RCE (CVE-2026-48276/48283)
+- **Date:** 2026-07-03 · **Source:** [labs.watchtowr.com](https://labs.watchtowr.com/its-37oc-and-all-we-can-think-about-is-coldfusion-adobe-coldfusion-security-bulletin-apsb26-68-cve-bonanza/) · **Class:** technique
+- **What:** ColdFusion 2023/2025 fails to validate file types on upload endpoints (CWE-434); unauthenticated attackers upload `.cfm` or `.jsp` webshells and execute with server privileges. Four additional CVSS 10.0 bugs cover improper input validation → RCE; CVE-2026-48282 adds path traversal arbitrary read.
+- **Why it matters:** CVSS 10.0, pre-auth, no user interaction — Adobe HackerOne program actively credited two researchers from this bulletin; unpatched internet-facing ColdFusion is zero-click RCE.
+- **Hunt signal:** `shodan query 'http.html:"ColdFusion" OR http.headers:"JRun"'`; probe `/CFIDE/wizards/` and RDS endpoint (`/CFIDE/componentutils/`) unauthenticated; test file upload with `.cfm`, `.cfml`, `.jsp` extension variants; path traversal with `../` in file-read params. Kill criterion: ColdFusion 2025 Update ≥10 or ColdFusion 2023 Update ≥21 = patched, skip.
+- **Evidence:** [watchTowr July 2](https://labs.watchtowr.com/its-37oc-and-all-we-can-think-about-is-coldfusion-adobe-coldfusion-security-bulletin-apsb26-68-cve-bonanza/) · [Adobe APSB26-68](https://helpx.adobe.com/security/products/coldfusion/apsb26-68.html) · [Adobe H1](https://hackerone.com/adobe)
+
