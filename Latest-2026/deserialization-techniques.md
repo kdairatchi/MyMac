@@ -217,6 +217,7 @@ print(base64.b64encode(pickle.dumps(RCE())).decode())
 
 ## Recent Intel
 
+- **CVE-2026-45659** · Microsoft SharePoint Server authenticated deserialization RCE — Site Member perms sufficient; affects SharePoint 2016/2019/Subscription Edition; added CISA KEV 2026-07-01; patch May 2026 — https://nvd.nist.gov/vuln/detail/CVE-2026-45659
 - **CVE-2023-3519** · Citrix ADC/NetScaler unauthenticated deserialization via NSCIService/AAA XML API → full system RCE, affects 13.1-13.1-49.16 · https://www.assetnote.io/resources/research/analysis-of-cve-2023-3519-in-citrix-adc-and-netscaler-gateway
 - **CVE-2023-24489** · Citrix ShareFile pre-auth .NET XML deserialization in `UploadClientModule.asmx`, `ObjectDataProvider` gadget chain · https://www.assetnote.io/resources/research/advisory-sharefile-pre-auth-rce-cve-2023-24489
 - **CVE-2023-38646** · Metabase H2 JDBC INIT parameter — SQL-to-Java deserialization bridge, pre-auth on `/api/setup/validate` · https://www.assetnote.io/resources/research/chaining-our-way-to-pre-auth-rce-in-metabase-cve-2023-38646
