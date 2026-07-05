@@ -324,3 +324,15 @@ _No H1 summary provided._
 **Hunt signal:** pass — summary too thin
 
 ---
+
+## 2026-07-05 — CVE-2026-44578: Next.js WebSocket Upgrade SSRF
+
+### CVE-2026-44578 — Next.js WebSocket SSRF (Unauthenticated)
+- **Date:** 2026-07-05 · **Source:** [github.com/advisories/GHSA-c4j6-fc7j-m34r](https://github.com/advisories/GHSA-c4j6-fc7j-m34r) · **Class:** cve
+- **What:** Unauthenticated SSRF in self-hosted Next.js via crafted WebSocket Upgrade header; `normalizeRepeatedSlashes` sets a skip flag that `proxyRequest` ignores when `parsedUrl.protocol` is truthy — attacker-controlled absolute URI proxied to internal targets.
+- **Why it matters:** ~79,000 exposed self-hosted instances; reaches AWS IMDSv1 (169.254.169.254), GCP/Azure metadata, internal admin panels with no credentials; EPSS 38.7%.
+- **Hunt signal:** `nuclei -t cve/2026/CVE-2026-44578.yaml` or `python3 nextssrf.py -t <target> --cloud`; check for `Connection: Upgrade` + `Upgrade: websocket` pass-through on port 80/443.
+- **Evidence:** [GHSA-c4j6-fc7j-m34r](https://github.com/advisories/GHSA-c4j6-fc7j-m34r) · PoC: [github.com/ynsmroztas/nextssrf](https://github.com/ynsmroztas/nextssrf)
+- **Affected:** Next.js 13.4.13 – 15.5.15, 16.0.0 – 16.2.4 (self-hosted only; Vercel-hosted unaffected)
+- **Fixed:** 15.5.16, 16.2.5 (May 2026)
+- **CVSS:** 8.6 · **KEV:** No
