@@ -3193,3 +3193,11 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Rating:** variant
 
 ---
+
+---
+
+### Reversing CVE-2026-25526: From Patch Diff to File Read in HubSpot's Jinjava Template Engine
+- **Date:** 2026-07-02 · **Source:** [av4nth1ka.github.io](https://av4nth1ka.github.io/jinjava-rce-cve-2026-25526/) · **Class:** technique
+- **What:** Researcher reverse-engineers the CVE-2026-25526 patch diff to reconstruct the full exploit path — ForTag property enumeration via Introspector.getBeanInfo() bypasses sandbox resolver, then ObjectMapper deserialization instantiates restricted classes for arbitrary file read.
+- **Why it matters:** Demonstrates patch-diff methodology to find SSTI sandbox bypasses in Java template engines without source access; directly applicable to any CMS or SaaS exposing Jinja/Freemarker/Velocity rendering.
+- **Rating:** chain-worthy
