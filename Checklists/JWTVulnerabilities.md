@@ -1,26 +1,24 @@
 # JWT Vulnerabilities
 
-## Introduction
-JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object.
-
 ## How to exploit
-1. Modify the algorithm to "none" algorithm
+
+1. Set `alg` to `none`:
+
 ```
 {
   "alg": "none",
   "typ": "JWT"
 }
 ```
-2. Modify the algorithm RS256 to HS256
 
-If you change the algorithm from RS256 to HS256, the backend code uses the public key as the secret key and then uses the HS256 algorithm to verify the signature.
+2. Swap RS256 → HS256. If the backend blindly reuses the RS256 public key as the HS256 secret, you can forge a valid signature with it.
 
-3. Bruteforce HS256
-   
-the HS256 key strength is weak, it can be directly brute-forced, such as using the secret string as a key in the PyJWT library sample code.
+3. Brute-force a weak HS256 secret — PyJWT sample scripts do this directly against the token.
 
 ## Tools
+
 * [jwt-hack](https://github.com/hahwul/jwt-hack)
 
 ## Reference
-- [Hacking JSON Web Token (JWT)](https://medium.com/101-writeups/hacking-json-web-token-jwt-233fe6c862e6)
+
+* [Hacking JSON Web Token (JWT)](https://medium.com/101-writeups/hacking-json-web-token-jwt-233fe6c862e6)

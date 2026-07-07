@@ -1,5 +1,5 @@
 <h1 align="center">
-  <b>Awesome Hacker Search Engines</b> <img src="https://raw.githubusercontent.com/edoardottt/images/main/awesome-hacker-search-engines/awesome.svg"/>
+  <b>Awesome Hacker Search Engines</b> <img src="https://raw.githubusercontent.com/edoardottt/images/main/awesome-hacker-search-engines/awesome.svg" alt="Awesome"/>
 </h1>
 
 <p align="center">
@@ -104,7 +104,7 @@ A curated list of awesome search engines useful during Penetration testing, Vuln
 - [Wiz Vulnerability Database](https://www.wiz.io/vulnerability-database) - A comprehensive resource for monitoring high-profile vulnerabilities in cloud environments, tailored for security teams and cloud professionals
 - [Shodan CVEDB](https://cvedb.shodan.io/) - The CVEDB API offers a quick way to check information about vulnerabilities in a service
 - [Vulert](https://vulert.com/vuln-db) - Recent security issues found in open-source packages
-- [promptfoo.dev Language Model Security Database](https://www.promptfoo.dev/lm-security-db/) - A comprehensive collection of LLM vulnerabilities, curated from cutting-edge research papers and real-world discoveries
+- [promptfoo.dev Language Model Security Database](https://www.promptfoo.dev/lm-security-db/) - Collection of LLM vulnerabilities, curated from published research and real-world discoveries
 - [opencryptography.com](https://opencryptography.com/) - Free public database of 10,000+ unique Docker image scans for hidden cryptographic assets and critical implementation flaws
 - [pathfinding.cloud](https://pathfinding.cloud/paths/) - Comprehensive, community-maintained library documenting AWS IAM privilege escalation paths
 
@@ -557,7 +557,7 @@ These can be useful for osint and social engineering.
 - [OpenPhish](https://openphish.com/) - Actionable intelligence data on active phishing threats
 - [ThreatIntelligencePlatform.com](https://threatintelligenceplatform.com/) - Data, tool, and API provider that specializes in automated threat detection, security analysis and threat intelligence solutions
 - [Hunt.io](https://hunt.io/) - Service that provides threat intelligence data about observed network scanning and cyberattacks
-- [LOLC2](https://lolc2.github.io/) - Collection of C2 frameworks that leverage legitimate services to evade detection
+- [LOLC2](https://lolc2.github.io/) - Collection of C2 frameworks built on legitimate services to evade detection
 - [seized.fyi](https://seized.fyi/) - List of seized websites
 - [InfoTrail](https://infotrail.io/) - Advanced OSINT search engine helping security professionals and researchers uncover critical intelligence
 - [RuleHound](https://rulehound.com/rules) - An index of publicly available and open-source threat detection rulesets

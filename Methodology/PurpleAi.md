@@ -84,7 +84,7 @@ A comprehensive curated list of open-source tools, frameworks, and resources for
 
 - **[CyberSecEval](https://github.com/meta-llama/PurpleLlama)** - Meta's comprehensive cybersecurity evaluation suite with MITRE ATT&CK framework-based testing, prompt injection detection, and false refusal rate testing.
 
-- **[OWASP LLM Security Verification Standard (LLMSVS)](https://owasp.org/www-project-llm-verification-standard/)** - Open security standard providing comprehensive guidelines for designing, building, and testing robust LLM applications with penetration testing methodologies.
+- **[OWASP LLM Security Verification Standard (LLMSVS)](https://owasp.org/www-project-llm-verification-standard/)** - Open security standard with guidelines for designing, building, and testing LLM applications, including penetration testing methodologies.
 
 - **[garak](https://github.com/leondz/garak)** - Generative AI Red-teaming and Assessment Kit for structured vulnerability discovery with generators, probes, detectors, and buffs architecture.
 
@@ -160,28 +160,30 @@ A comprehensive curated list of open-source tools, frameworks, and resources for
 
 - **[Evidently AI GitHub Actions](https://github.com/evidentlyai/evidently)** - Native GitHub Actions integration for automated LLM testing with comprehensive reporting and real-time dashboard updates.
 
-- **[DeepEval CI/CD Framework](https://github.com/confident-ai/deepeval)** - Pytest integration for seamless testing with automated regression detection and comprehensive test reporting.
+- **[DeepEval CI/CD Framework](https://github.com/confident-ai/deepeval)** - Pytest integration for CI testing with automated regression detection and test reporting.
 
 ### Production Monitoring
 
 - **[Arize Phoenix](https://github.com/Arize-ai/phoenix)** - Open-source observability tool for LLM applications with trace logging, pre-configured evaluation templates, and community tool integration.
 
-
 ## Getting Started
 
 ### For Red Team Operations
+
 1. Start with **DeepTeam** or **PyRIT** for comprehensive attack frameworks
 2. Use **JailbreakBench** for standardized jailbreak evaluation
 3. Implement **promptmap2** for automated vulnerability scanning
-4. Leverage **Spikee** for specialized prompt injection testing
+4. Use **Spikee** for specialized prompt injection testing
 
 ### For Blue Team Defense
+
 1. Deploy **Guardrails AI** or **NeMo Guardrails** for real-time protection
 2. Implement **LLM Guard** for comprehensive security scanning
 3. Use **DeepEval** for ongoing safety evaluation
 4. Add **Rebuff** for prompt injection detection
 
 ### For Purple Team Integration
+
 1. Combine **PromptFoo** for adaptive red teaming with **DeepEval** for comprehensive evaluation
 2. Use **CyberSecEval** for standardized security benchmarking
 3. Implement continuous monitoring with **Arize Phoenix** or **Evidently AI**
@@ -199,6 +201,7 @@ We welcome contributions! Please see our [contributing guidelines](CONTRIBUTING.
 ### Contribution Criteria
 
 Tools and resources should meet the following criteria:
+
 - **Open Source**: Publicly available code or freely accessible resources
 - **LLM-Specific**: Designed specifically for LLM security (not general AI/ML security)
 - **Actively Maintained**: Updated within the last 12 months
@@ -211,7 +214,7 @@ This list is licensed under [CC0 1.0 Universal](https://creativecommons.org/publ
 
 ## Acknowledgments
 
-Special thanks to the security research community, OWASP LLM project contributors, and all the tool maintainers making LLM security more accessible and robust.
+Thanks to the security research community, OWASP LLM project contributors, and the tool maintainers making LLM security more accessible.
 
 ---
 

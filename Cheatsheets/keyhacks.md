@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/18099289/56750563-558a9400-6784-11e9-8175-ee2a19ee9d75.png" width="300px">
+  <img src="https://user-images.githubusercontent.com/18099289/56750563-558a9400-6784-11e9-8175-ee2a19ee9d75.png" alt="Keyhacks banner" width="300px">
 </p>
 </br>
 
@@ -9,107 +9,108 @@ KeyHacks shows methods to validate different API keys found on a Bug Bounty Prog
 
 # Table of Contents
 
-- [ABTasty API Key](#ABTasty-API-Key)
-- [Algolia API key](#Algolia-API-key)
-- [Amplitude API Keys](#Amplitude-API-Keys)
-- [Asana Access token](#Asana-Access-Token)
-- [AWS Access Key ID and Secret](#AWS-Access-Key-ID-and-Secret)
-- [Azure Application Insights APP ID and API Key](#Azure-Application-Insights-APP-ID-and-API-Key)
-- [Bazaarvoice Passkey](#Bazaarvoice-Passkey)
-- [Bing Maps API Key](#Bing-Maps-API-Key)
-- [Bit.ly Access token](#Bitly-Access-token)
-- [Branch.io Key and Secret](#BranchIO-Key-and-Secret)
-- [BrowserStack Access Key](#BrowserStack-Access-Key)
-- [Buildkite Access token](#Buildkite-Access-token)
-- [ButterCMS API Key](#ButterCMS-API-Key)
-- [Calendly API Key](#Calendly-API-Key)
-- [Contentful Access Token](#Contentful-access-token)
-- [CircleCI Access Token](#CircleCI-Access-Token)
+- [ABTasty API Key](#abtasty-api-key)
+- [Algolia API key](#algolia-api-key)
+- [Amplitude API Keys](#amplitude-api-keys)
+- [Asana Access token](#asana-access-token)
+- [AWS Access Key ID and Secret](#aws-access-key-id-and-secret)
+- [Azure Application Insights APP ID and API Key](#azure-application-insights-app-id-and-api-key)
+- [Bazaarvoice Passkey](#bazaarvoice-passkey)
+- [Bing Maps API Key](#bing-maps-api-key)
+- [Bit.ly Access token](#bitly-access-token)
+- [Branch.io Key and Secret](#branchio-key-and-secret)
+- [BrowserStack Access Key](#browserstack-access-key)
+- [Buildkite Access token](#buildkite-access-token)
+- [ButterCMS API Key](#buttercms-api-key)
+- [Calendly API Key](#calendly-api-key)
+- [Contentful Access Token](#contentful-access-token)
+- [CircleCI Access Token](#circleci-access-token)
 - [Cloudflare API key](#cloudflare-api-key)
-- [Cypress record key](#Cypress-record-key)
-- [DataDog API key](#DataDog-API-key)
-- [Delighted API key](#Delighted-api-key)
-- [Deviant Art Access Token](#Deviant-Art-Access-Token)
-- [Deviant Art Secret](#Deviant-Art-Secret)
-- [Dropbox API](#Dropbox-API)
-- [Facebook Access Token](#Facebook-Access-Token)
-- [Facebook AppSecret](#Facebook-AppSecret)
-- [Firebase](#Firebase)
-- [Firebase Cloud Messaging (FCM)](#Firebase-Cloud-Messaging)
-- [FreshDesk API Key](#FreshDesk-API-key)
-- [Github client id and client secret](#Github-client-id-and-client-secret)
-- [GitHub private SSH key](#GitHub-private-SSH-key)
-- [Github Token](#Github-Token)
-- [Gitlab personal access token](#Gitlab-personal-access-token)
-- [GitLab runner registration token](#Gitlab-runner-registration-token)
-- [Google Cloud Service Account credentials](#Google-Cloud-Service-Account-credentials)
-- [Google Maps API key](#Google-Maps-API-key)
-- [Google Recaptcha key](#Google-Recaptcha-key)
-- [Grafana Access Token](#Grafana-Access-Token)
-- [Help Scout OAUTH](#Help-Scout-OAUTH)
-- [Heroku API key](#Heroku-API-key)
-- [HubSpot API key](#Hubspot-API-key)
-- [Infura API key](#Infura-API-key)
+- [Cypress record key](#cypress-record-key)
+- [DataDog API key](#datadog-api-key)
+- [Delighted API key](#delighted-api-key)
+- [Deviant Art Access Token](#deviant-art-access-token)
+- [Deviant Art Secret](#deviant-art-secret)
+- [Dropbox API](#dropbox-api)
+- [Facebook Access Token](#facebook-access-token)
+- [Facebook AppSecret](#facebook-appsecret)
+- [Firebase](#firebase)
+- [Firebase Cloud Messaging (FCM)](#firebase-cloud-messaging)
+- [FreshDesk API Key](#freshdesk-api-key)
+- [Github client id and client secret](#github-client-id-and-client-secret)
+- [GitHub private SSH key](#github-private-ssh-key)
+- [Github Token](#github-token)
+- [Gitlab personal access token](#gitlab-personal-access-token)
+- [GitLab runner registration token](#gitlab-runner-registration-token)
+- [Google Cloud Service Account credentials](#google-cloud-service-account-credentials)
+- [Google Maps API key](#google-maps-api-key)
+- [Google Recaptcha key](#google-recaptcha-key)
+- [Grafana Access Token](#grafana-access-token)
+- [Help Scout OAUTH](#help-scout-oauth)
+- [Heroku API key](#heroku-api-key)
+- [HubSpot API key](#hubspot-api-key)
+- [Infura API key](#infura-api-key)
 - [Instagram Access Token](#Instagram-Access-Token)
-- [Instagram Basic Display API](#Instagram-Basic-Display-API-Access-Token)
-- [Instagram Graph API](#Instagram-Graph-Api-Access-Token)
-- [Ipstack API Key](#Ipstack-API-Key)
-- [Iterable API Key](#Iterable-API-Key)
-- [JumpCloud API Key](#JumpCloud-API-Key)
-- [Keen.io API Key](#Keenio-API-Key)
-- [LinkedIn OAUTH](#LinkedIn-OAUTH)
-- [Lokalise API Key](#Lokalise-API-Key)
-- [Loqate API Key](#Loqate-API-key)
-- [MailChimp API Key](#MailChimp-API-Key)
-- [MailGun Private Key](#MailGun-Private-Key)
-- [Mapbox API key](#Mapbox-API-Key)
-- [Microsoft Azure Tenant](#Microsoft-Azure-Tenant)
+- [Instagram Basic Display API](#instagram-basic-display-api-access-token)
+- [Instagram Graph API](#instagram-graph-api-access-token)
+- [Ipstack API Key](#ipstack-api-key)
+- [Iterable API Key](#iterable-api-key)
+- [JumpCloud API Key](#jumpcloud-api-key)
+- [Keen.io API Key](#keenio-api-key)
+- [LinkedIn OAUTH](#linkedin-oauth)
+- [Lokalise API Key](#lokalise-api-key)
+- [Loqate API Key](#loqate-api-key)
+- [MailChimp API Key](#mailchimp-api-key)
+- [MailGun Private Key](#mailgun-private-key)
+- [Mapbox API key](#mapbox-api-key)
+- [Microsoft Azure Tenant](#microsoft-azure-tenant)
 - [Microsoft Shared Access Signatures (SAS)](#Microsoft-Shared-Access-Signatures-(SAS))
-- [Microsoft Teams Webhook](#Microsoft-Teams-Webhook)
+- [Microsoft Teams Webhook](#microsoft-teams-webhook)
 - [New Relic Personal API Key (NerdGraph)](#New-Relic-Personal-API-Key-(NerdGraph))
-- [New Relic REST API](#New-Relic-REST-API)
-- [NPM token](#NPM-token)
-- [OpsGenie API Key](#OpsGenie-API-Key)
-- [Pagerduty API token](#Pagerduty-API-token)
-- [Paypal client id and secret key](#Paypal-client-id-and-secret-key)
-- [Pendo Integration Key](#Pendo-Integration-Key)
-- [PivotalTracker API Token](#PivotalTracker-API-Token)
+- [New Relic REST API](#new-relic-rest-api)
+- [NPM token](#npm-token)
+- [OpsGenie API Key](#opsgenie-api-key)
+- [Pagerduty API token](#pagerduty-api-token)
+- [Paypal client id and secret key](#paypal-client-id-and-secret-key)
+- [Pendo Integration Key](#pendo-integration-key)
+- [PivotalTracker API Token](#pivotaltracker-api-token)
 - [Razorpay API key and secret key](#Razorpay-keys)
-- [Salesforce API key](#Salesforce-API-key)
-- [SauceLabs Username and access Key](#SauceLabs-Username-and-access-Key)
-- [SendGrid API Token](#SendGrid-API-Token)
-- [Shodan.io](#Shodan-Api-Key)
-- [Slack API token](#Slack-API-token)
-- [Slack Webhook](#Slack-Webhook)
-- [Sonarcloud](#Sonarcloud-Token)
-- [Spotify Access Token](#Spotify-Access-Token)
-- [Square](#Square)
-- [Stripe Live Token](#Stripe-Live-Token)
-- [Telegram Bot API Token](#Telegram-Bot-API-Token)
-- [Travis CI API token](#Travis-CI-API-token)
-- [Twilio Account_sid and Auth token](#Twilio-Account_sid-and-Auth-token)
-- [Twitter API Secret](#Twitter-API-Secret)
-- [Twitter Bearer token](#Twitter-Bearer-token)
-- [Visual Studio App Center API Token](#Visual-Studio-App-Center-API-Token)
-- [WakaTime API Key](#WakaTime-API-Key)
+- [Salesforce API key](#salesforce-api-key)
+- [SauceLabs Username and access Key](#saucelabs-username-and-access-key)
+- [SendGrid API Token](#sendgrid-api-token)
+- [Shodan.io](#shodan-api-key)
+- [Slack API token](#slack-api-token)
+- [Slack Webhook](#slack-webhook)
+- [Sonarcloud](#sonarcloud-token)
+- [Spotify Access Token](#spotify-access-token)
+- [Square](#square)
+- [Stripe Live Token](#stripe-live-token)
+- [Telegram Bot API Token](#telegram-bot-api-token)
+- [Travis CI API token](#travis-ci-api-token)
+- [Twilio Account_sid and Auth token](#twilio-account_sid-and-auth-token)
+- [Twitter API Secret](#twitter-api-secret)
+- [Twitter Bearer token](#twitter-bearer-token)
+- [Visual Studio App Center API Token](#visual-studio-app-center-api-token)
+- [WakaTime API Key](#wakatime-api-key)
 - [WeGlot Api Key](#weglot-api-key)
-- [WPEngine API Key](#WPEngine-API-Key)
-- [YouTube API Key](#YouTube-API-Key)
-- [Zapier Webhook Token](#Zapier-Webhook-Token)
-- [Zendesk Access token](#Zendesk-Access-Token)
-- [Zendesk API key](#Zendesk-api-key)
-
+- [WPEngine API Key](#wpengine-api-key)
+- [YouTube API Key](#youtube-api-key)
+- [Zapier Webhook Token](#zapier-webhook-token)
+- [Zendesk Access token](#zendesk-access-token)
+- [Zendesk API key](#zendesk-api-key)
 
 # Detailed Information
 
 ## [Slack Webhook](https://api.slack.com/incoming-webhooks)
 
 If the below command returns `missing_text_or_fallback_or_attachments`, it means that the URL is valid, any other responses would mean that the URL is invalid.
+
 ```
 curl -s -X POST -H "Content-type: application/json" -d '{"text":""}' "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
 ```
 
 ## [Slack API token](https://api.slack.com/web)
+
 ```
 curl -sX POST "https://slack.com/api/auth.test?token=xoxp-TOKEN_HERE&pretty=1"
 ```
@@ -121,6 +122,7 @@ curl -sX POST "https://slack.com/api/auth.test" -H "Accept: application/json; ch
 ```
 
 ## [SauceLabs Username and access Key](https://wiki.saucelabs.com/display/DOCS/Account+Methods)
+
 ```
 curl -u USERNAME:ACCESS_KEY https://saucelabs.com/rest/v1/users/USERNAME
 ```
@@ -134,17 +136,20 @@ https://graph.facebook.com/oauth/access_token?client_id=ID_HERE&client_secret=SE
 ```
 
 ## Facebook Access Token  
+
 ```
 https://developers.facebook.com/tools/debug/accesstoken/?access_token=ACCESS_TOKEN_HERE&version=v3.2
 ```
 
 ## [Firebase](https://firebase.google.com/)
+
 Requires a **custom token**, and an **API key**.
 
 1. Obtain ID token and refresh token from custom token and API key: `curl -s -XPOST -H 'content-type: application/json' -d '{"token":":custom_token","returnSecureToken":True}' 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=:api_key'`
 2. Exchange ID token for auth token: `curl -s -XPOST -H 'content-type: application/json' -d '{"idToken":":id_token"}' https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyCustomToken?key=:api_key'`
 
 ## [Github Token](https://developer.github.com/v3/)
+
 ```
 curl -s -u "user:apikey" https://api.github.com/user
 curl -s -H "Authorization: token TOKEN_HERE" "https://api.github.com/users/USERNAME_HERE/orgs"
@@ -153,6 +158,7 @@ curl "https://api.github.com/rate_limit" -i -u "user:apikey" | grep "X-OAuth-Sco
 ```
 
 ## [Github client id and client secret](https://developer.github.com/v3/#oauth2-keysecret)
+
 ```
 curl 'https://api.github.com/users/whatever?client_id=xxxx&client_secret=yyyy'
 ```
@@ -175,16 +181,19 @@ Hi <username>! You've successfully authenticated, but GitHub does not provide sh
 ```
 
 ## [Twilio Account_sid and Auth token](https://www.twilio.com/docs/iam/api/account)
+
 ```
 curl -X GET 'https://api.twilio.com/2010-04-01/Accounts.json' -u ACCOUNT_SID:AUTH_TOKEN
 ```
 
 ## [Twitter API Secret](https://developer.twitter.com/en/docs/basics/authentication/guides/bearer-tokens.html)
+
 ```
 curl -u 'API key:API secret key' --data 'grant_type=client_credentials' 'https://api.twitter.com/oauth2/token'
 ```
 
 ## [Twitter Bearer token](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/api-reference/aaa-premium)
+
 ```
 curl --request GET --url https://api.twitter.com/1.1/account_activity/all/subscriptions/count.json --header 'authorization: Bearer TOKEN'
 ```
@@ -192,58 +201,70 @@ curl --request GET --url https://api.twitter.com/1.1/account_activity/all/subscr
 ## [HubSpot API key](https://developers.hubspot.com/docs/methods/owners/get_owners)
 
 Get all owners:
+
 ```
 https://api.hubapi.com/owners/v2/owners?hapikey={keyhere}
 ```
+
 Get all contact details:
+
 ```
 https://api.hubapi.com/contacts/v1/lists/all/contacts/all?hapikey={keyhere}
 
 ```
 
 ## [Infura API key](https://docs.infura.io/infura/networks/ethereum/how-to/secure-a-project/project-id)
+
 ```
 curl https://mainnet.infura.io/v3/<YOUR-API-KEY> -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"eth_accounts","params":[],"id":1}'
 ```
 
 ## [Deviant Art Secret](https://www.deviantart.com/developers/authentication)
+
 ```
 curl https://www.deviantart.com/oauth2/token -d grant_type=client_credentials -d client_id=ID_HERE -d client_secret=mysecret
 ```
 
 ## [Deviant Art Access Token](https://www.deviantart.com/developers/authentication)
+
 ```
 curl https://www.deviantart.com/api/v1/oauth2/placebo -d access_token=Alph4num3r1ct0k3nv4lu3
 ```
 
 ## [Pendo Integration Key](https://help.pendo.io/resources/support-library/api/index.html?bash#authentication)
+
 ```
 curl -X GET https://app.pendo.io/api/v1/feature -H 'content-type: application/json' -H 'x-pendo-integration-key:KEY_HERE'
 curl -X GET https://app.pendo.io/api/v1/metadata/schema/account -H 'content-type: application/json' -H 'x-pendo-integration-key:KEY_HERE'
 ```
 
 ## [SendGrid API Token](https://docs.sendgrid.com/api-reference)
+
 ```
 curl -X "GET" "https://api.sendgrid.com/v3/scopes" -H "Authorization: Bearer SENDGRID_TOKEN-HERE" -H "Content-Type: application/json"
 ```
 
 ## [Square](https://squareup.com/)
+
 **Detection:**
 
 App id/client secret:  `sq0[a-z]{3}-[0-9A-Za-z\-_]{22,43}`
 Auth token: `EAAA[a-zA-Z0-9]{60}`
 
 **Test App id & client secret:**
+
 ```
 curl "https://squareup.com/oauth2/revoke" -d '{"access_token":"[RANDOM_STRING]","client_id":"[APP_ID]"}'  -H "Content-Type: application/json" -H "Authorization: Client [CLIENT_SECRET]"
 ```
 
 Response indicating valid credentials:
+
 ```
 empty
 ```
 
 Response indicating invalid credentials:
+
 ```
 {
   "message": "Not Authorized",
@@ -252,25 +273,31 @@ Response indicating invalid credentials:
 ```
 
 **Test Auth token:**
+
 ```
 curl https://connect.squareup.com/v2/locations -H "Authorization: Bearer [AUHT_TOKEN]"
 ```
 
 Response indicating valid credentials:
+
 ```
 {"locations":[{"id":"CBASELqoYPXr7RtT-9BRMlxGpfcgAQ","name":"Coffee \u0026 Toffee SF","address":{"address_line_1":"1455 Market Street","locality":"San Francisco","administrative_district_level_1":"CA","postal_code":"94103","country":"US"},"timezone":"America/Los_Angeles"........
 ```
 
 Response indicating invalid credentials:
+
 ```
 {"errors":[{"category":"AUTHENTICATION_ERROR","code":"UNAUTHORIZED","detail":"This request could not be authorized."}]}
 ```
+
 ## [Contentful Access Token](https://www.contentful.com/developers/docs/references/authentication)
+
 ```
 curl -v https://cdn.contentful.com/spaces/SPACE_ID_HERE/entries\?access_token\=ACCESS_TOKEN_HERE
 ```
 
 ## [Dropbox API](https://www.dropbox.com/developers/documentation/http/documentation)
+
 ```
 curl -X POST https://api.dropboxapi.com/2/users/get_current_account --header "Authorization: Bearer TOKEN_HERE"
 ```
@@ -278,6 +305,7 @@ curl -X POST https://api.dropboxapi.com/2/users/get_current_account --header "Au
 ## [AWS Access Key ID and Secret](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
 
 Install [awscli](https://aws.amazon.com/cli/), set the [access key and secret to environment variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html), and execute the following command:
+
 ```
 AWS_ACCESS_KEY_ID=xxxx AWS_SECRET_ACCESS_KEY=yyyy aws sts get-caller-identity
 ```
@@ -292,25 +320,30 @@ cd  enumerate-iam
 ```
 
 ## [Lokalise API Key](https://app.lokalise.com/api2docs/curl/#resource-authentication)
+
 ```curl --request GET \
   --url https://api.lokalise.com/api2/projects/ \
   --header 'x-api-token: [API-KEY-HERE]'
 ```
 
 ## [MailGun Private Key](https://documentation.mailgun.com/en/latest/api_reference.html)
+
 ```
 curl --user 'api:YOUR_API_KEY' "https://api.mailgun.net/v3/domains"
 ```
 
 ## [FreshDesk API Key](https://developers.freshdesk.com/api/#getting-started)
+
 ```
 curl -v -u user@yourcompany.com:test -X GET 'https://domain.freshdesk.com/api/v2/groups/1'
 This requires the API key in 'user@yourcompany.com', pass in 'test' and 'domain.freshdesk.com' to be the instance url of the target. In case you get a 403, try the endpoint api/v2/tickets, which is accessible for all keys.
 
 ```
+
 ## [JumpCloud API Key](https://docs.jumpcloud.com/1.0/authentication-and-authorization/authentication-and-authorization-overview)
 
-#### [v1](https://docs.jumpcloud.com/1.0/systemusers)
+### [v1](https://docs.jumpcloud.com/1.0/systemusers)
+
 ```
 List systems:
 curl -H "x-api-key: APIKEYHERE" "https://console.jumpcloud.com/api/systems"
@@ -329,13 +362,17 @@ curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/memberof \
 ```
 
 ## Microsoft Azure Tenant
+
 Format:
+
 ```
 CLIENT_ID: [0-9a-z\-]{36}
 CLIENT_SECRET: [0-9A-Za-z\+\=]{40,50}
 TENANT_ID: [0-9a-z\-]{36}
 ```
+
 Verification:
+
 ```
 curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d 'client_id=<CLIENT_ID>&scope=https%3A%2F%2Fgraph.microsoft.com%2F.default&client_secret=<CLIENT_SECRET>&grant_type=client_credentials' 'https://login.microsoftonline.com/<TENANT_ID>/oauth2/v2.0/token'
 ```
@@ -343,6 +380,7 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d 'client_id=
 ## [Microsoft Shared Access Signatures (SAS)](https://github.com/MicrosoftDocs/azure-docs/blob/master/articles/storage/common/storage-dotnet-shared-access-signature-part-1.md)
 
 The following powershell can be used to test a Shared Access Signature Token:
+
 ```powershell
 static void UseAccountSAS(string sasToken)
 {
@@ -384,7 +422,9 @@ static void UseAccountSAS(string sasToken)
 ```
 
 ## [Microsoft Teams Webhook](https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/connectors-using)
+
 If the below command returns `Summary or Text is required.`, it means that the URL is valid. If it returns `Invalid webhook URL` or any other responses would mean that the URL is invalid.
+
 ```
 curl -H "Content-Type:application/json" -d "{'text':''}" "YOUR_WEBHOOK_URL"
 ```
@@ -408,9 +448,11 @@ curl -X GET 'https://api.newrelic.com/v2/applications.json' \
 If valid, test further to see if it's an [admin key](https://docs.newrelic.com/docs/apis/get-started/intro-apis/types-new-relic-api-keys#admin)
 
 ## [Heroku API key](https://devcenter.heroku.com/articles/platform-api-quickstart)
+
 ```
 curl -X POST https://api.heroku.com/apps -H "Accept: application/vnd.heroku+json; version=3" -H "Authorization: Bearer API_KEY_HERE"
 ```
+
 ## [Mapbox API key](https://docs.mapbox.com/api/)
 
 Mapbox secret keys start with `sk`, rest start with `pk` (public token), `sk` (secret token), or `tk` (temporary token).
@@ -426,6 +468,7 @@ curl "https://api.mapbox.com/tokens/v2/MAPBOX_USERNAME_HERE?access_token=YOUR_MA
 ```
 
 ## [Salesforce API key](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/quickstart_oauth.htm)
+
 ```
 curl https://instance_name.salesforce.com/services/data/v20.0/ -H 'Authorization: Bearer access_token_here'
 ```
@@ -433,6 +476,7 @@ curl https://instance_name.salesforce.com/services/data/v20.0/ -H 'Authorization
 ## [Algolia API key](https://www.algolia.com/doc/rest-api/search/#overview)
 
 If the key has the `listIndexes` permission, you can list indexes with:
+
 ```
 curl --request GET \
   --url https://<example-app-id>-1.algolianet.com/1/indexes/ \
@@ -442,6 +486,7 @@ curl --request GET \
 ```
 
 Otherwise you will have to know the name of an index (check the app source code or the requests it does). Then to enumerate its content:
+
 ```
 curl --request GET \
   --url https://<example-app-id>-1.algolianet.com/1/indexes/<example-index> \
@@ -462,16 +507,19 @@ curl --request PUT \
 ```
 
 ## [Zapier Webhook Token](https://zapier.com/help/how-get-started-webhooks-zapier/)
+
 ```
 curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"name":"streaak"}' "webhook_url_here"
 ```
 
 ## [Pagerduty API token](https://support.pagerduty.com/docs/using-the-api)
+
 ```
 curl -H "Accept: application/vnd.pagerduty+json;version=2"  -H "Authorization: Token token=TOKEN_HERE" -X GET  "https://api.pagerduty.com/schedules"
 ```
 
 ## [BrowserStack Access Key](https://www.browserstack.com/automate/rest-api)
+
 ```
 curl -u "USERNAME:ACCESS_KEY" https://api.browserstack.com/automate/plan.json
 ```
@@ -558,7 +606,7 @@ https://api2.branch.io/v1/app/KEY_HERE?branch_secret=SECRET_HERE
 
 ## [Bing Maps API Key](https://docs.microsoft.com/en-us/bingmaps/rest-services/locations/find-a-location-by-address)
 
-Visit this link to check for the key's validity. A valid key's response should start with `authenticationResultCode:	"ValidCredentials"`
+Visit this link to check for the key's validity. A valid key's response should start with `authenticationResultCode: "ValidCredentials"`
 
 ```
 https://dev.virtualearth.net/REST/v1/Locations?CountryRegion=US&adminDistrict=WA&locality=Somewhere&postalCode=98001&addressLine=100%20Main%20St.&key=API_KEY
@@ -573,34 +621,41 @@ https://api-ssl.bitly.com/v3/shorten?access_token=ACCESS_TOKEN&longUrl=https://w
 ```
 
 ## [Buildkite Access token](https://buildkite.com/docs/apis/rest-api)
+
 ```
 curl -H "Authorization: Bearer ACCESS_TOKEN" \
 https://api.buildkite.com/v2/access-token
 ```
 
 ## [ButterCMS-API-Key](https://buttercms.com/docs/api/#authentication)
+
 ```
 curl -X GET 'https://api.buttercms.com/v2/posts/?auth_token=your_api_token'
 ```
 
 ## [Asana Access token](https://asana.com/developers/documentation/getting-started/auth#personal-access-token)
+
 ```
 curl -H "Authorization: Bearer ACCESS_TOKEN" https://app.asana.com/api/1.0/users/me
 ```
 
 ## [Zendesk Access token](https://support.zendesk.com/hc/en-us/articles/203663836-Using-OAuth-authentication-with-your-application)
+
 ```
 curl https://{subdomain}.zendesk.com/api/v2/tickets.json \
   -H "Authorization: Bearer ACCESS_TOKEN"
 ```
 
 ## [Zendesk Api Key](https://developer.zendesk.com/api-reference/ticketing/introduction/)
+
 API tokens are different from OAuth tokens, API tokens are auto-generated passwords in the Support admin interface.
+
 ```
 curl https://{target}.zendesk.com/api/v2/users.json \  -u support@{target}.com/token:{here your token}
 ```
 
 ## [MailChimp API Key](https://developer.mailchimp.com/documentation/mailchimp/reference/overview/)
+
 ```
 curl --request GET --url 'https://<dc>.api.mailchimp.com/3.0/' --user 'anystring:<API_KEY>' --include
 ```
@@ -614,12 +669,15 @@ curl "https://api.wpengine.com/1.2/?method=site&account_name=ACCOUNT_NAME&wpe_ap
 ```
 
 ## [DataDog API key](https://docs.datadoghq.com/api/)
+
 ```
 curl "https://api.datadoghq.com/api/v1/dashboard?api_key=<api_key>&application_key=<application_key>"
 ```
 
 ## [Delighted API key](https://app.delighted.com/docs/api)
+
 Do not delete the `:` at the end.
+
 ```
 curl https://api.delighted.com/v1/metrics.json \
   -H "Content-Type: application/json" \
@@ -639,38 +697,47 @@ curl https://api.telegram.org/bot<TOKEN>/getMe
 ```
 
 ## [WakaTime API Key](https://wakatime.com/developers)
+
 ```
 curl "https://wakatime.com/api/v1/users/current?api_key=KEY_HERE"
 ```
 
 ## [Sonarcloud Token](https://sonarcloud.io/web_api)
+
 ```
 curl -u <token>: "https://sonarcloud.io/api/authentication/validate"
 ```
 
 ## [Spotify Access Token](https://developer.spotify.com/documentation/general/guides/authorization-guide/)
+
 ```
 curl -H "Authorization: Bearer <ACCESS_TOKEN>" https://api.spotify.com/v1/me
 ```
 
 ## [Instagram Basic Display API Access Token](https://developers.facebook.com/docs/instagram-basic-display-api/getting-started)
+
 E.g.: IGQVJ...
+
 ```
 curl -X GET 'https://graph.instagram.com/{user-id}?fields=id,username&access_token={access-token}'
 ```
 
 ## [Instagram Graph API Access Token](https://developers.facebook.com/docs/instagram-api/getting-started)
+
 E.g.: EAAJjmJ...
+
 ```
 curl -i -X GET 'https://graph.facebook.com/v8.0/me/accounts?access_token={access-token}'
 ```
 
 ## [Gitlab personal access token](https://docs.gitlab.com/ee/api/README.html#personal-access-tokens)
+
 ```
 curl "https://gitlab.example.com/api/v4/projects?private_token=<your_access_token>"
 ```
 
 ## [GitLab runner registration token](https://docs.gitlab.com/runner/register/)
+
 ```
 docker run --rm gitlab/gitlab-runner register \
   --non-interactive \
@@ -687,6 +754,7 @@ docker run --rm gitlab/gitlab-runner register \
 ```
 
 ## [Paypal client id and secret key](https://developer.paypal.com/docs/api/get-an-access-token-curl/)
+
 ```
 curl -v https://api.sandbox.paypal.com/v1/oauth2/token \
    -H "Accept: application/json" \
@@ -774,6 +842,7 @@ NPM token can be [CIDR-whitelisted](https://docs.npmjs.com/creating-and-viewing-
 P.S. Some companies [uses registries other than `registry.npmjs.org`](https://medium.com/bugbountywriteup/one-token-to-leak-them-all-the-story-of-a-8000-npm-token-79b13af182a3). If it's the case replace all `registry.npmjs.org` occurrences with domain name of company's NPM registry.
 
 ## [OpsGenie API Key](https://docs.opsgenie.com/docs/api-overview)
+
 ```
 curl https://api.opsgenie.com/v2/alerts -H 'Authorization: GenieKey API_KEY'
 ```
@@ -832,12 +901,12 @@ Yes, this request needs to be that big. It'll return `200 OK` with some informat
 Example of `projectId` is `1yxykz` and example of `recordKey` is `a216e7b4-4819-4713-b9c2-c5da60a1c48c`.
 
 ## [YouTube API Key](https://developers.google.com/youtube/v3/docs/)
+
 Fetch content details for a YouTube channel (The channelId in this case points to PewDiePie's channel).
 
 ```
 curl -iLk 'https://www.googleapis.com/youtube/v3/activities?part=contentDetails&maxResults=25&channelId=UC-lHJZR3Gqxm24_Vd_AJ5Yw&key={KEY_HERE}'
 ```
-
 
 ## [ABTasty API Key](https://developers.abtasty.com/server-side.html#authentication)
 
@@ -846,12 +915,15 @@ curl "api_endpoint_here" -H "x-api-key: your_api_key"
 ```
 
 ## [Iterable API Key](https://api.iterable.com/api/docs)
+
 Export campaign analytics data in JSON format, one entry per line. Use of either 'range' or 'startDateTime' and 'endDateTime' is required.
 
 ```
 curl -H "Api_Key: {API_KEY}" https://api.iterable.com/api/export/data.json?dataTypeName=emailSend&range=Today&onlyFields=List.empty
 ```
+
 ## [Amplitude API Keys](https://help.amplitude.com/hc/en-us/articles/205406637-Export-API-Export-Your-Project-s-Event-Data)
+
 The response is a zipped archive of JSON files, with potentially multiple files per hour. Note that events prior to 2014-11-12 will be grouped by day instead of by the hour. If you request data for a time range during which no data has been collected for the project, then you will receive a 404 response from the server.
 
 ```
@@ -859,15 +931,19 @@ curl -u API_Key:Secret_Key 'https://amplitude.com/api/2/export?start=20200201T5&
 ```
 
 ## [Visual Studio App Center API Token](https://docs.microsoft.com/en-us/appcenter/api-docs/)
-   
+
    1. List all the app projects for the API Token:
+
   ```
   curl -sX GET  "https://api.appcenter.ms/v0.1/apps" \
  -H "Content-Type: application/json" \
  -H "X-Api-Token: {your_api_token}"
   ```
-   2. Fetch the latest app build information for a particular project:
+
+   1. Fetch the latest app build information for a particular project:
+
    > Use the `name` and `owner.name` obtained in response in Step [1](#438).
+
   ```
   curl -sX GET  "https://api.appcenter.ms/v0.1/apps/{owner.name}/{name}/releases/latest" \
 -H "Content-Type: application/json" \
@@ -875,7 +951,6 @@ curl -u API_Key:Secret_Key 'https://amplitude.com/api/2/export?start=20200201T5&
   ```
 
 ## [WeGlot Api Key](https://weglot.com/)
-   
 
 ```
 curl -X POST \
@@ -895,25 +970,31 @@ curl -X POST \
 ## [PivotalTracker API Token](https://www.pivotaltracker.com/help/api/#top)
 
    1. List User Information with API Token:
+
    ```
    curl -X GET -H "X-TrackerToken: $TOKEN" "https://www.pivotaltracker.com/services/v5/me?fields=%3Adefault"
    ```
-   
+
    1. Obtain API Token with Valid User Credentials:
+
    ```
    curl -s -X GET --user 'USER:PASSWORD' "https://www.pivotaltracker.com/services/v5/me -o pivotaltracker.json"
    jq --raw-output .api_token pivotaltracker.json
    ```
+
 ## [LinkedIn OAUTH](https://docs.microsoft.com/en-us/linkedin/shared/authentication/client-credentials-flow?context=linkedin/context)
+
 A successful access token request returns a JSON object containing access_token, expires_in.
+
 ```
 curl -XPOST -H "Content-type: application/x-www-form-urlencoded" -d 'grant_type=client_credentials&client_id=<client-ID>&client_secret=<client-secret>' 'https://www.linkedin.com/oauth/v2/accessToken'
 
 ```
 
-
 ## [Help Scout OAUTH](https://developer.helpscout.com/mailbox-api/overview/authentication/)
+
 A successful access token request returns a JSON object containing token_type, access_token, expires_in.
+
 ```
 curl -X POST https://api.helpscout.net/v2/oauth2/token \
     --data "grant_type=client_credentials" \
@@ -921,26 +1002,31 @@ curl -X POST https://api.helpscout.net/v2/oauth2/token \
     --data "client_secret={application_secret}"
 ```
 
-
 ## [Shodan Api Key](https://developer.shodan.io/api/requirements)
+
 ```
 curl "https://api.shodan.io/shodan/host/8.8.8.8?key=TOKEN_HERE"
 ```
 
-
 ## [Bazaarvoice Passkey](https://developer.bazaarvoice.com/conversations-api/home)
+
 A Successful Passkey Request returns a JSON object containing company name
+
 ```
 curl 'https://which-cpv-api.bazaarvoice.com/clientInfo?conversationspasskey=<Passkey>' --insecure 
 
 ```
 
 ## [Grafana Access Token](https://grafana.com/docs/grafana/latest/developers/http_api/user/)
+
 Grafana API supports Bearer and Basic authorisation schemes. Bearer:
+
 ```
 curl -s -H "Authorization: Bearer your-api-key" http://your-grafana-server-url.com/api/user
 ```
+
 Basic:
+
 ```
 curl -u username:password http://your-grafana-server-url.com/api/user
 ```
@@ -949,13 +1035,13 @@ curl -u username:password http://your-grafana-server-url.com/api/user
 
 I welcome contributions from the public.
 
-### Using the issue tracker 💡
+## Using the issue tracker 💡
 
 The issue tracker is the preferred channel for bug reports and features requests.
 
 ### Issues and labels 🏷
 
-The bug tracker utilizes several labels to help organize and identify issues.
+The bug tracker uses labels to organize and identify issues.
 
 ### Guidelines for bug reports 🐛
 

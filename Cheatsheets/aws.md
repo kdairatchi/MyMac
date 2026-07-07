@@ -1,6 +1,7 @@
-AWS 
+AWS
 
-#Few Links to check it 
+# Few Links to check it
+
 1. https://3bodymo.medium.com/how-i-earned-by-amazon-s3-bucket-misconfigurations-29d51ee510de
 2. https://logicbomb.medium.com/a-bug-worth-1-75lacs-aws-ssrf-to-rce-8d43d5fda899
 3. https://notifybugme.medium.com/unveiling-a-critical-vulnerability-exposing-aws-credentials-in-a-penetration-test-2f7119a7c816
@@ -22,8 +23,6 @@ AWS
 19. https://akash-venky091.medium.com/aws-s3-bucket-misconfigurations-and-exploitations-6d89546eec54
 20. https://infosecwriteups.com/aws-s3-bucket-misconfiguration-exposes-pii-and-documents-of-job-seekers-7b1332b0ecf1?gi=9a8958be01c6
 
-
-
 You can find buckets by brute-forcing names related to the company you are pentesting:
 
 1. https://github.com/sa7mon/S3Scanner
@@ -36,17 +35,17 @@ You can find buckets by brute-forcing names related to the company you are pente
 8. https://github.com/Eilonh/s3crets_scanner
 9. https://github.com/belane/CloudHunter
 
+# Tips for Recon
 
-
-#Tips for Recon
-1. Enumerate AWS Services: Use tools to enumerate AWS-specific resources and endpoints (e.g., *.s3.amazonaws.com, *.execute-api.amazonaws.com).
-	Cloud_enum tool can be used
+1. Enumerate AWS Services: Use tools to enumerate AWS-specific resources and endpoints (e.g., *.s3.amazonaws.com,*.execute-api.amazonaws.com).
+ Cloud_enum tool can be used
 
 2. Inspect Subdomains & DNS Records: Look for DNS entries pointing to AWS resources, which might help in identifying attack vectors.
 
 3. Focus on Least Privilege & Least Exposure: Identify and exploit areas where least privilege or least exposure principles are not enforced.
 
-#Simple Checklist
+# Simple Checklist
+
 1. S3 Buckets
 Publicly Accessible Buckets: Identify misconfigured S3 buckets that allow unauthorized read or write access. Look for sensitive files or backups.
 Misconfigured ACLs and Policies: Ensure bucket policies don’t unintentionally expose data. Look for overly permissive ACL and IAM policies.
@@ -65,7 +64,7 @@ Environment Variable Leaks: Look for sensitive information (API keys, passwords)
 
 5. Amazon RDS (Relational Database Service)
 Database Exposure: Ensure RDS instances are not directly exposed to the internet unless absolutely necessary.
-Weak IAM and Security Group Configurations: Check if databases are protected by robust IAM roles and Security Groups.
+Weak IAM and Security Group Configurations: Check IAM roles and Security Groups aren't over-permissive.
 
 6. Amazon API Gateway
 Unauthorized Access: Test if APIs are secured with appropriate authentication and authorization. Look for open endpoints.
@@ -87,8 +86,8 @@ Hardcoded Credentials in Code: Inspect application code for hardcoded secrets th
 Logging Misconfigurations: Verify that CloudTrail is enabled across all regions to track unauthorized or malicious activity.
 Unrestricted Log Access: Ensure logs are not publicly accessible or over-permissive, revealing sensitive operations.
 
+# Here are few CVEs to Keep in Mind
 
-#Here are few CVEs to Keep in Mind
 1. CVE-2021-32704 - Misconfiguration leading to exposure of sensitive AWS metadata.
 2. CVE-2020-10148 - Amazon WorkSpaces: Unauthorized access vulnerability.
 3. CVE-2021-29203 - AWS CloudFormation vulnerability affecting template parsing.
