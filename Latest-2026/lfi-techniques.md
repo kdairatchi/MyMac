@@ -229,3 +229,15 @@ A vulnerability was discovered in Burp Suite Professional 2026.3.3 on Windows. W
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+
+## 2026-07-07
+
+### Adobe ColdFusion RDS Path Traversal → File Write/Read → Unauthenticated RCE (CVE-2026-48282)
+- **Date:** 2026-07-07 · **Source:** [nvd.nist.gov](https://nvd.nist.gov/vuln/detail/CVE-2026-48282) · **Class:** cve
+- **What:** Unauthenticated path traversal via ColdFusion's Remote Development Services (RDS) FILEIO handler allows arbitrary file write to web root → RCE, plus arbitrary file read for cred/source exfil. Affects ColdFusion 2023 ≤ 2023.20 and 2025 ≤ 2025.9. Patched: ColdFusion 2023 Update 21 / 2025 Update 10 (APSB26-68, June 30, 2026).
+- **Why it matters:** CVSS 10.0, CISA KEV (exploitation confirmed in wild July 2), still-unpatched ColdFusion servers are widespread in financial, healthcare, and .gov portals — high-value targets that often run legacy ColdFusion stacks. File-write-to-webshell is a reliable RCE path wherever the web root is writable.
+- **Hunt signal:** `curl -si https://target/CFIDE/main/ide.cfm` — 200/auth prompt = RDS exposed; then probe `GET /CFFileServlet/../../../../../etc/passwd` for traversal. Nuclei: `nuclei -t cves/2026/CVE-2026-48282.yaml -u https://target` (check template availability). Condition: RDS must be enabled + auth disabled (non-default but common in dev-left-on configs).
+- **Evidence:** [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-48282) · [BleepingComputer](https://www.bleepingcomputer.com/news/security/max-severity-adobe-coldfusion-flaw-now-exploited-in-attacks/) · [Resecurity analysis](https://www.resecurity.com/blog/article/cve-2026-48282-adobe-coldfusion-rds-path-traversal-leading-to-rce) · [Help Net Security](https://www.helpnetsecurity.com/2026/07/07/adobe-coldfusion-cve-2026-48282-exploitation-detected/) · [WatchTowr](https://labs.watchtowr.com/its-37oc-and-all-we-can-think-about-is-coldfusion-adobe-coldfusion-security-bulletin-apsb26-68-cve-bonanza/)
+
+---
