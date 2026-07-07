@@ -258,8 +258,8 @@
 - **Severity:** high · **Hunt:** 2/5 · **Score:** 14.0 · **Status:** patched · **Age:** 0d
 - **Sources:** [1](https://medium.com/@zishanfiroz/how-i-found-an-unauthenticated-post-endpoint-in-a-production-api-a-real-bug-bounty-story-f706957d0702) · [2](https://medium.com/@The4v1/%EF%B8%8F-01-authentication-bypass-via-oauth-implicit-flow-13e26b67e697?source=rss------bug_bounty-5)
 
-- **Trick:** Leveraged Swagger documentation reconnaissance to identify a POST endpoint that was missing authentication checks, allowing unauthenticated access to restricted functionality.
-- **Why it matters:** Broken Function Level Authorization (BFLA) can lead to privilege escalation or full system compromise by exposing sensitive administrative actions to public users.
+- **Trick:** Found the endpoint via Swagger docs — it was missing an auth check, so anyone could call it.
+- **Why it matters:** BFLA like this exposes admin-only actions to anyone; can chain into privilege escalation.
 - **Rating:** variant
 
 ---
@@ -496,7 +496,7 @@ A vulnerability was previously discovered on the HackerOne platform that allowed
 
 **What**
 
-The GraphQL API's 'verifyAccountRecoveryPhoneNumber' mutation was found to be vulnerable to denial-of-service attacks through mutation aliasing. The vulnerability allowed multiple aliases of the same mutation to be included in a single request, causing the server to process each mutation sequentially and increasing the response time linearly. This resource exhaustion issue could potentially have led to service disruption for legitimate users.
+The `verifyAccountRecoveryPhoneNumber` mutation has no alias dedup. Send N aliased copies in one GraphQL request and the server processes each sequentially — response time scales linearly with N until it falls over.
 
 **Hunt signal:** POST N aliased copies of a heavy/stateful mutation to `<graphql-endpoint>` in one request. If response time scales linearly with N, the server lacks alias deduplication and query complexity limits.
 **Grep:** `rg -n 'resolve|execute' src/graphql/ | rg -iv 'alias|dedup|complexity'`
@@ -632,7 +632,7 @@ A vulnerability was discovered in Cloudflare Access that could allow for unautho
 
 **What**
 
-The Brave Shields feature was observed to reorder domain names, leading to potential origin confusion. Specifically, the domain "1.attacker.com" was displayed as "attacker.com.1", and "1.1.1.1.attacker.com" was displayed as "attacker.com.1.1.1.1". This behavior could potentially mislead users about the actual source of the website.
+Brave Shields reorders domain labels for display — "1.attacker.com" shows as "attacker.com.1", "1.1.1.1.attacker.com" shows as "attacker.com.1.1.1.1". Misleads users about the actual source of the site.
 
 **Hunt signal:** pass — browser-UI display bug in Brave Shields, no server-side probe exists.
 
@@ -1977,8 +1977,8 @@ A vulnerability was discovered in Fastify versions 5.7.0 and later. The issue wa
 - **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
 - **Sources:** [1](https://medium.com/@mansheman/ai-driven-penetration-testing-integrating-kali-linux-arsenal-with-llms-through-mcp-4b8bd0c00392)
 
-- **Trick:** Implementing the Model Context Protocol (MCP) to create a bridge between LLMs and local Kali Linux tools, enabling the AI to execute commands and analyze results directly rather than merely generating shell scripts.
-- **Why it matters:** This integration moves beyond static script generation to dynamic, interactive penetration testing, allowing AI agents to autonomously navigate and utilize the full Kali arsenal within a unified workflow.
+- **Trick:** MCP bridges LLMs to local Kali tools — the agent runs commands and reads results directly instead of just spitting out a shell script.
+- **Why it matters:** Turns static script generation into interactive pentesting — the agent drives the full Kali toolset itself.
 - **Rating:** novel
 
 ---
@@ -3215,3 +3215,154 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Rating:** variant
 
 ---
+
+
+## 2026-07-07
+
+### Exfiltrate Data via AI Agent Prompt Injection
+- **Tags:** `#prompt-injection` `#data-exfil` `#llm`
+- **Severity:** high · **Hunt:** 3/5 · **Score:** 31.5 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://mukibas37.medium.com/exfiltrate-sensitive-information-by-exploiting-ai-agents-portswigger-lab-walkthrough-4cd75c189b8a)
+
+- **Trick:** Craft malicious prompts that instruct an AI agent to retrieve and exfiltrate sensitive information (e.g., private user data, internal APIs) from its accessible context or tool integrations.
+- **Why it matters:** AI agents with access to sensitive data and external communication channels are a growing attack surface; a single prompt-injection can bypass traditional access controls and leak data out-of-band.
+- **Rating:** chain-worthy
+
+---
+### Auth Bypass in Trilium Notes via Clipper API — `CVE-2026-39310`
+- **Tags:** `#auth-bypass` `#api` `#web`
+- **Severity:** high · **Hunt:** 3/5 · **Score:** 31.5 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@redpoc.team/cve-2026-39310-authentication-bypass-in-trilium-notes-via-clipper-api-full-knowledge-base-fece05db09c7)
+
+- **Trick:** The Clipper API endpoint in Trilium Notes fails to enforce authentication, allowing unauthenticated attackers to query and exfiltrate the entire knowledge base without credentials.
+- **Why it matters:** Trilium Notes is a popular self-hosted note-taking app often storing sensitive personal/org data; an auth bypass on an API meant for browser extensions gives full read access to all notes with zero authentication.
+- **Rating:** novel
+
+---
+### SSRF via Proxy Leads to Internal Server Access
+- **Tags:** `#ssrf` `#web`
+- **Severity:** high · **Hunt:** 3/5 · **Score:** 31.5 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@yogeshbhandage/when-a-proxy-becomes-a-spy-hunting-an-ssrf-that-led-straight-into-the-server-room-99445fd2f95f)
+
+- **Trick:** Abused a proxy/forwarding feature to send requests to internal server infrastructure, bypassing perimeter restrictions and reaching the server room directly.
+- **Why it matters:** Proxy-like endpoints are classic SSRF surface; this writeup demonstrates how they can pivot from an external user input straight into internal services, exposing sensitive server-side assets.
+- **Rating:** chain-worthy
+
+---
+### From Org Admin to ReadOnly — Still Downloading Sensitive Exports
+- **Tags:** `#idor` `#auth-bypass`
+- **Severity:** medium · **Hunt:** 3/5 · **Score:** 22.5 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@RootXSec/from-organizaton-admin-to-readonly-but-still-able-to-download-sensitive-exports-64fdade12ab9) · [2](https://blog.pentryx.ch/loose-lips-and-open-ears-chaining-api-bugs-to-full-access-7787a48ddca1) · [3](https://medium.com/@kenjisubagja/bug-bounty-the-upload-was-protected-but-the-file-was-public-fc02ed6b292a?source=rss------bug_bounty-5) · [4](https://medium.com/@lukewago/pentest-interview-001-a0505eee456d?source=rss------pentesting-5)
+
+- **Trick:** Downgrading a user from Organization Admin to ReadOnly doesn't fully revoke elevated capabilities — the restricted user can still trigger and download sensitive data exports meant for admins.
+- **Why it matters:** Role-downgrade logic often fails to clean up inherited permissions or API-level entitlements, creating a silent auth-bypass where a "demoted" account retains destructive/read-sensitive actions.
+- **Rating:** chain-worthy
+
+---
+*Clustered 4 sources for this item.*
+
+### Breaking AI Agents: Tool Abuse in Lakera CorpConnect Messenger
+- **Tags:** `#prompt-injection` `#llm` `#api` `#data-exfil`
+- **Severity:** medium · **Hunt:** 3/5 · **Score:** 22.5 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@paulocesarmsf/breaking-ai-agents-tool-abuse-in-lakera-corpconnect-messenger-4923a655c09b?source=rss------pentesting-5)
+
+- **Trick:** Manipulating an LLM-powered corporate messenger agent into abusing its own tool-calling capabilities — coercing the agent to invoke tools in unintended ways (e.g., data exfiltration, unauthorized actions) through crafted prompts that exploit the agent's trust in tool descriptions and execution flow.
+- **Why it matters:** AI agents with tool access are proliferating in enterprise products; tool abuse is an emerging class of vulnerability where the agent itself becomes the attack vector, bypassing traditional input validation since the agent *chooses* to call the tool "legitimately."
+- **Rating:** novel
+
+---
+### BOLA on SpicyChat Exposed Private AI Chat Messages
+- **Tags:** `#idor` `#api` `#llm`
+- **Severity:** medium · **Hunt:** 3/5 · **Score:** 22.5 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@kenjisubagja/bypassing-ai-chat-privacy-how-a-bola-vulnerability-exposed-private-messages-on-spicychat-700-040f4491c477?source=rss------bug_bounty-5)
+
+- **Trick:** Classic BOLA/IDOR — iterating over message/chat object IDs in the API without authorization checks let the author read other users' private AI chat conversations.
+- **Why it matters:** AI chat platforms store intimate, sensitive conversations; a simple IDOR exposing them is high-impact for privacy. Reinforces that BOLA remains a top finding on API-driven platforms, especially new AI products rushing to market.
+- **Rating:** variant
+
+---
+### npm install is the new phishing email
+- **Tags:** `#supply-chain` `#npm` `#web`
+- **Severity:** high · **Hunt:** 2/5 · **Score:** 14.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://stansecure.medium.com/npm-install-is-the-new-phishing-email-d599fce258a7)
+
+- **Trick:** 108 malicious packages and browser extensions seeded across npm, Golang, and Chrome stores as supply-chain phishing vectors tied to a North Korean campaign
+- **Why it matters:** Nation-state actors are pivoting from email phishing to poisoning package registries and extension stores — developers instinctively trust `npm install` more than a suspicious link
+- **Rating:** variant
+
+---
+### Breaking JWT Auth With Empty Signature
+- **Tags:** `#jwt` `#auth-bypass` `#web`
+- **Severity:** medium · **Hunt:** 2/5 · **Score:** 10.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@saikiranduppala07/i-became-admin-with-an-empty-signature-breaking-jwt-auth-on-a-ctf-d4281fbeacfd?source=rss------bug_bounty-5)
+
+- **Trick:** Stripping the JWT signature to just a dot (empty signature) while keeping the header and payload intact causes the server to accept the token as valid, granting admin access.
+- **Why it matters:** Many implementations fail to enforce signature verification strictly; an empty signature is a minimal, elegant bypass that still works in the wild on misconfigured servers.
+- **Rating:** variant
+
+---
+### How a $10 Fee Can Lock Thousands of Dollars Forever
+- **Tags:** `#race-condition` `#api` `#web`
+- **Severity:** medium · **Hunt:** 2/5 · **Score:** 8.83 · **Status:** patched · **Age:** 7d
+- **Sources:** [1](https://medium.com/@bvize.com/how-a-10-fee-can-lock-thousands-of-dollars-forever-76fa9b448062)
+
+- **Trick:** A minimal fee ($10) in a cross-chain bridge's transaction flow can be exploited via a four-step sequence to permanently lock up vastly larger sums of capital, creating an asymmetric griefing vector.
+- **Why it matters:** Demonstrates how seemingly trivial fee mechanisms in DeFi/bridge contracts can become denial-of-capital primitives — an attacker spends pennies to freeze thousands, breaking economic assumptions about cost-to-impact ratios.
+- **Rating:** novel
+
+---
+### Bolting Claude onto everything — the boring security question
+- **Tags:** `#llm` `#prompt-injection`
+- **Severity:** medium · **Hunt:** 1/5 · **Score:** 5.0 · **Status:** theoretical · **Age:** 0d
+- **Sources:** [1](https://eva-georgieva.medium.com/everyones-bolting-claude-onto-everything-nobody-s-asking-the-boring-question-d7428f96924e?source=rss------infosec-5) · [2](https://ingoroman.medium.com/pentesting-con-agentes-de-ia-adcb9b97f5ae) · [3](https://medium.com/@gokulsrini1983/how-we-secured-our-ai-startup-on-a-bootstrapped-budget-5a8d2d926855?source=rss------infosec-5)
+
+- **Trick:** The attack surface isn't the LLM itself — it's every tool, inbox, and workflow the model gets wired into, expanding prompt-injection and data-exfil paths exponentially.
+- **Why it matters:** Orgs are racing to integrate AI assistants everywhere without auditing the blast radius of what those assistants can reach and act on, creating systemic risk.
+- **Rating:** novel
+
+---
+*Clustered 3 sources for this item.*
+
+### Learning DevSecOps the Hard Way: Azure Infra Exercise
+- **Tags:** `#cloud` `#azure`
+- **Severity:** unknown · **Hunt:** 1/5 · **Score:** 4.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@marianoacostafc/learning-devsecops-the-hard-way-my-first-hands-on-security-exercise-67efcdd6dbe7?source=rss------pentesting-5) · [2](https://medium.com/@asah-cyber/measuring-detection-engineering-effectiveness-a-practical-scorecard-for-continuous-improvement-3dc4e3258914?source=rss------infosec-5)
+
+- **Trick:** Breaking, fixing, and automating security findings across a vulnerable Azure infrastructure environment
+- **Why it matters:** Walks through a hands-on DevSecOps loop on Azure — useful for understanding common cloud misconfigurations and how to detect/remediate them programmatically
+- **Rating:** variant
+
+---
+*Clustered 2 sources for this item.*
+
+### Seeing Vulnerabilities Like an Artist [AD Edition]
+- **Tags:** `#privesc` `#auth-bypass`
+- **Severity:** unknown · **Hunt:** 1/5 · **Score:** 4.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://pohackontas.medium.com/seeing-vulnerabilities-like-an-artist-ad-edition-744303e4f4ae)
+
+- **Trick:** Developing intuitive pattern recognition for Active Directory misconfigurations — learning to "feel" structural weaknesses (excessive permissions, nested groups, stale delegations) before you can articulate exactly why they're broken.
+- **Why it matters:** AD environments reward instinct honed by repetition; recognizing the shape of common misconfigurations faster speeds up enumeration-to-exploitation on internal assessments and bug bounties with AD attack surfaces.
+- **Rating:** variant
+
+---
+### SQL Injection: Web Uygulamalarının En Eski Düşmanı
+- **Tags:** `#sqli` `#web`
+- **Severity:** unknown · **Hunt:** 1/5 · **Score:** 4.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@yusufbarut210/sql-injection-web-uygulamalar%C4%B1n%C4%B1n-en-eski-ve-en-tehlikeli-d%C3%BC%C5%9Fman%C4%B1-f409e0736079)
+
+- **Trick:** General overview of SQL injection fundamentals and attack vectors in web applications (Turkish-language blog series part 2).
+- **Why it matters:** SQLi remains one of the most impactful and widespread vulnerability classes; foundational knowledge is prerequisite for spotting non-obvious instances.
+- **Rating:** variant
+
+---
+### Encryption Is Not Invisibility — Metadata Leakage in Encrypted Traffic
+- **Tags:** `#data-exfil` `#web`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@infoads.me/encryption-is-not-invisibility-3daf9d25426b?source=rss------infosec-5) · [2](https://medium.com/@neonmaxima/sdr-is-the-new-wireshark-sniffing-the-sub-ghz-spectrum-from-your-desk-95d4ca2bff82?source=rss------infosec-5)
+
+- **Trick:** Encrypted traffic still leaks metadata (packet sizes, timing, direction, DNS lookups) that Wireshark can capture and analyze to infer application behavior, user actions, and data flows without decrypting payload.
+- **Why it matters:** Reminds hunters that TLS-only defenses miss traffic analysis attacks; metadata patterns can reveal API endpoints, auth tokens lengths, and user activity — useful for recon or data-exfil detection in bug bounty contexts.
+- **Rating:** variant
+
+---
+*Clustered 2 sources for this item.*

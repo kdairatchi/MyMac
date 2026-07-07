@@ -71,3 +71,19 @@
 
 ---
 *Clustered 19 sources for this item.*
+
+## 2026-07-07
+
+### PoC-in-GitHub auto-update commit 2026-07-04
+- **Tags:** `#web`
+- **Severity:** unknown · **Hunt:** 2/5 · **Score:** 12.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://github.com/nomi-sec/PoC-in-GitHub/commit/27b4bda50bd0b8580d431f22cf455a4a6531686c) · [2](https://github.com/nomi-sec/PoC-in-GitHub/commit/77270c5c1e4c7d932225d16f087e6cc30aeb1ead) · [3](https://github.com/nomi-sec/PoC-in-GitHub/commit/953eed3ad3fe280d9f953a814bd3d44165aca407) · [4](https://github.com/nomi-sec/PoC-in-GitHub/commit/e70d7d957f00bbc6224a2630f828e832a2e5f3e3) · [5](https://github.com/nomi-sec/PoC-in-GitHub/commit/448a786639c17d1b59cbe667c3ed2f61f7b9d8ed)
+
+- **What:** Automated commit to the PoC-in-GitHub repository indexing new proof-of-concept exploits; specific CVE not extractable from commit metadata alone.
+- **Why it matters:** Signals that one or more CVE PoCs were published on this date — worth reviewing the commit diff to identify which CVEs now have public exploits.
+- **Hunt signal:** Inspect commit diff for newly added CVE IDs and cross-reference with exposed attack surface.
+- **Evidence:** [source] PoC-in-GitHub auto-update · [opinion] commit title lacks CVE detail — diff review required to determine target vulnerability
+
+---
+*Clustered 27 sources for this item.*
+

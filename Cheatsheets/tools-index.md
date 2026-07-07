@@ -775,7 +775,7 @@ This Nuclei template detects exposed Swagger UI in Browserless API services, ena
 - **Severity:** unknown · **Hunt:** 1/5 · **Score:** 4.0 · **Status:** unknown · **Age:** 0d
 - **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/67f0c847aec8b78a71b51461bbc1214cb41eeef9) · [2](https://github.com/projectdiscovery/nuclei-templates/commit/02cb8a9e480843d54728f9d78664d8d0e7c0119f) · [3](https://github.com/projectdiscovery/nuclei-templates/commit/605aede1a91e004efb41f02940c6696a327c108c) · [4](https://github.com/projectdiscovery/nuclei-templates/commit/2d5cedac35482ac180b8fe39920db91f751f29bf)
 
-This automated commit generates a new addition list for the Project Discovery nuclei-templates repository, maintaining an updated catalog of newly added vulnerability scanning templates. Security professionals don’t directly interact with this maintenance process, but it ensures nuclei users can leverage the latest detection rules for emerging vulnerabilities.
+Auto-generated changelog commit — nuclei-templates repo listing what got added. No new detection logic of its own, just tracks the upstream catalog.
 
 ---
 *Clustered 4 sources for this item.*
@@ -917,5 +917,24 @@ Insomnia is an AI-driven platform that consolidates the entire penetration testi
 - **Sources:** [1](https://medium.com/@arthaanugerahheffendi/building-reconmaster-my-open-source-automated-osint-dorking-tool-073bf579ceba?source=rss------bug_bounty-5)
 
 ReconMaster is an open-source automated OSINT and Google dorking tool designed to streamline reconnaissance in bug bounty workflows. It aggregates multiple dorking queries and OSINT techniques into a single automated pipeline, useful during the initial recon phase to quickly discover exposed endpoints, sensitive files, misconfigurations, and subdomains across target assets before moving to manual testing.
+
+---
+
+## 2026-07-07
+
+### Update openremote-detect.yaml
+- **Tags:** `#web` `#api`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/8df2a5d3a4e54b5794d16fa90b4b9b3a7dbdd7e0)
+
+This nuclei template update adds detection logic for OpenRemote platform vulnerabilities within the Nuclei scanner. It is designed for automated reconnaissance of home automation infrastructure to identify exposed OpenRemote instances and known misconfigurations. Security teams should include this template in their active scanning workflows to ensure coverage of emerging OpenRemote-specific attack vectors.
+
+---
+### Nuclei Templates CVE Metadata Generation
+- **Tags:** `#web`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 0.5 · **Status:** unknown · **Age:** 30d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/28fe2171a749fe140c16090e76998d72b01e7de2)
+
+This commit automates metadata generation for CVEs within the Nuclei vulnerability scanner template repository. It should be utilized when maintaining the Nuclei library to ensure accurate vulnerability identification and CVE tracking during automated scans.
 
 ---
