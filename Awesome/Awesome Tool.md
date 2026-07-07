@@ -34,26 +34,35 @@ Building custom tools for bug bounty or cybersecurity tasks is a skill that can 
 ## **2. Development Basics**
 
 ### **Languages to Learn**
+
 1. **Python**: Great for automation and scripting.
 2. **Bash**: Perfect for lightweight scripts and command-line tools.
 3. **Go**: Efficient and fast for building scalable tools.
 
 ### **Environment Setup**
+
 1. Install essential software:
+
    ```bash
    sudo apt update && sudo apt install -y git curl python3 python3-pip golang
    ```
+
 2. Set up a project structure:
+
    ```bash
    mkdir -p ~/tools/mytool/{src,docs,tests}
    ```
 
 ### **Version Control**
+
 1. Initialize Git:
+
    ```bash
    git init
    ```
+
 2. Use branches for new features:
+
    ```bash
    git checkout -b feature/my-feature
    ```
@@ -63,6 +72,7 @@ Building custom tools for bug bounty or cybersecurity tasks is a skill that can 
 ## **3. Pre-Built Templates**
 
 ### **CLI Tool Template**
+
 ```bash
 #!/bin/bash
 # MyTool: A simple CLI example
@@ -85,6 +95,7 @@ nmap -sV -oN $output_dir/nmap_$target.txt $target
 ```
 
 ### **Python Recon Script**
+
 ```python
 import subprocess
 import sys
@@ -114,20 +125,25 @@ if __name__ == "__main__":
 ## **4. Tool Design Checklist**
 
 ### **Basic Features**
+
 1. Accept input via command-line arguments.
 2. Include usage instructions (`--help` flag).
 3. Validate user input (e.g., ensure the domain is valid).
 
 ### **Structure**
+
 - **src/**: Codebase.
 - **docs/**: Documentation files (README, usage guides).
 - **tests/**: Unit and functional tests.
 
 ### **Error Handling**
+
 - Log errors to a file:
+
   ```bash
   command_here 2>> error.log
   ```
+
 - Exit on failure with meaningful messages.
 
 ---
@@ -135,6 +151,7 @@ if __name__ == "__main__":
 ## **5. Automation and Recon Scripting**
 
 ### **Recon Pipeline Example**
+
 ```bash
 #!/bin/bash
 
@@ -166,20 +183,26 @@ nuclei -l $output_dir/live_domains.txt -t ~/nuclei-templates -o $output_dir/nucl
 ## **6. User Interface Tips**
 
 ### **Command-Line Features**
+
 1. Add colorful output:
+
    ```bash
    echo -e "\033[0;32m[+] Task Completed\033[0m"
    ```
+
 2. Include a progress bar for long tasks.
 
 ### **Customizing Output**
+
 1. Use tables for clarity:
+
    ```bash
    printf "%-15s %-10s\n" "Domain" "Status"
    printf "%-15s %-10s\n" "example.com" "Live"
    ```
 
 2. Generate Markdown reports:
+
    ```bash
    echo "# Report for $target" > report.md
    echo "- Live Domains: $(wc -l live_domains.txt)" >> report.md
@@ -190,6 +213,7 @@ nuclei -l $output_dir/live_domains.txt -t ~/nuclei-templates -o $output_dir/nucl
 ## **7. DevOps and CI/CD Integration**
 
 ### **GitHub Actions Pipeline**
+
 ```yaml
 name: Tool Deployment
 
@@ -219,15 +243,18 @@ jobs:
 ## **8. Resources for Inspiration**
 
 ### **Tool Repositories**
+
 - [Subfinder](https://github.com/projectdiscovery/subfinder)
 - [Nuclei](https://github.com/projectdiscovery/nuclei)
 - [FFuF](https://github.com/ffuf/ffuf)
 
 ### **Cheatsheets**
+
 - [HackTricks](https://book.hacktricks.xyz/)
 - [PayloadAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings)
 
 ### **Books**
+
 - "Automate the Boring Stuff with Python" by Al Sweigart.
 - "Black Hat Python" by Justin Seitz.
 
@@ -235,9 +262,7 @@ jobs:
 
 This list is a starting point for building your tools and automating tasks. Feel free to customize and expand it for your needs. 🚀
 
-
 ---
-
 
 > Comprehensive guidelines for building effective, scalable, and user-friendly tools, focusing on bug bounty, cybersecurity, and automation.
 
@@ -267,16 +292,20 @@ Building tools isn't just about automating tasks; it's about creating reliable, 
 ## **2. Getting Started with Tool Development**
 
 ### **Languages to Learn**
+
 - **Python**: Ideal for rapid development and API integration.
 - **Bash**: Great for quick and lightweight automation scripts.
 - **Go (Golang)**: Perfect for building high-performance tools.
 - **JavaScript**: Use for browser automation and interacting with web apps.
 
 ### **Tools to Install**
+
 1. **Git** for version control:
+
    ```bash
    sudo apt install git
    ```
+
 2. **Package managers**:
    - Python: `pip` and `pipenv`
    - JavaScript: `npm` or `yarn`
@@ -291,6 +320,7 @@ Building tools isn't just about automating tasks; it's about creating reliable, 
 ## **3. Tool Design Fundamentals**
 
 ### **Key Design Principles**
+
 1. **User-friendly interface**:
    - Use clear command-line options (`-h`, `--help`).
    - Add error messages for incorrect inputs.
@@ -304,6 +334,7 @@ Building tools isn't just about automating tasks; it's about creating reliable, 
    - Generate reports in multiple formats (JSON, CSV, Markdown).
 
 ### **Directory Structure for Projects**
+
 ```plaintext
 mytool/
 ├── README.md          # Documentation
@@ -323,6 +354,7 @@ mytool/
 ## **4. Advanced Automation Scripts**
 
 ### **Full Recon Workflow**
+
 ```bash
 #!/bin/bash
 
@@ -348,11 +380,15 @@ nuclei -l $output_dir/live_hosts.txt -t ~/nuclei-templates -o $output_dir/nuclei
 ```
 
 ### **Scheduled Recon with Crontab**
+
 1. Edit the crontab:
+
    ```bash
    crontab -e
    ```
+
 2. Add a daily schedule:
+
    ```bash
    0 2 * * * /path/to/your/script.sh >> /path/to/logfile.log 2>&1
    ```
@@ -362,11 +398,15 @@ nuclei -l $output_dir/live_hosts.txt -t ~/nuclei-templates -o $output_dir/nuclei
 ## **5. Scripting Best Practices**
 
 ### **Bash**
+
 - **Set strict mode** to catch errors:
+
   ```bash
   set -euo pipefail
   ```
+
 - **Handle arguments**:
+
   ```bash
   while getopts "d:o:" opt; do
     case $opt in
@@ -378,7 +418,9 @@ nuclei -l $output_dir/live_hosts.txt -t ~/nuclei-templates -o $output_dir/nuclei
   ```
 
 ### **Python**
+
 - Use `argparse` for CLI tools:
+
   ```python
   import argparse
 
@@ -388,6 +430,7 @@ nuclei -l $output_dir/live_hosts.txt -t ~/nuclei-templates -o $output_dir/nuclei
   ```
 
 - Leverage virtual environments:
+
   ```bash
   python3 -m venv venv
   source venv/bin/activate
@@ -398,18 +441,24 @@ nuclei -l $output_dir/live_hosts.txt -t ~/nuclei-templates -o $output_dir/nuclei
 ## **6. Integrating APIs in Tools**
 
 ### **API Keys**
+
 - Store them in environment variables:
+
   ```bash
   export API_KEY="your_api_key"
   ```
+
 - Access in Python:
+
   ```python
   import os
   api_key = os.getenv("API_KEY")
   ```
 
 ### **Example API Call**
+
 Using Python's `requests` library:
+
 ```python
 import requests
 
@@ -425,6 +474,7 @@ print(response.json())
 ## **7. Report Generation**
 
 ### **Markdown Report Template**
+
 ```markdown
 # Recon Report: [Target]
 
@@ -443,6 +493,7 @@ print(response.json())
 ```
 
 ### **JSON Output**
+
 ```python
 import json
 
@@ -464,7 +515,9 @@ with open("report.json", "w") as f:
 ## **8. Testing and Debugging**
 
 ### **Unit Testing**
+
 - Use Python’s `unittest` module:
+
   ```python
   import unittest
 
@@ -480,8 +533,10 @@ with open("report.json", "w") as f:
   ```
 
 ### **Debugging Tips**
+
 1. Use `set -x` in Bash scripts for tracing.
 2. In Python, use `pdb`:
+
    ```python
    import pdb; pdb.set_trace()
    ```
@@ -491,14 +546,17 @@ with open("report.json", "w") as f:
 ## **9. Useful Libraries and Frameworks**
 
 ### **Bash**
+
 - [Httpx](https://github.com/projectdiscovery/httpx): Fast HTTP requests.
 - [Nuclei](https://github.com/projectdiscovery/nuclei): Vulnerability scanner.
 
 ### **Python**
+
 - [Requests](https://docs.python-requests.org/): Simplified HTTP requests.
 - [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/): Web scraping.
 
 ### **Go**
+
 - [Amass](https://github.com/owasp-amass): Subdomain enumeration.
 - [FFuF](https://github.com/ffuf/ffuf): Fast web fuzzer.
 
@@ -514,19 +572,20 @@ with open("report.json", "w") as f:
 
 This comprehensive guide should give you the confidence to start building, automating, and refining your own tools. 🚀
 
-Certainly! Here's an **expanded version** of the **Awesome List** with **additional tips, tools, workflows**, and techniques. 
+Certainly! Here's an **expanded version** of the **Awesome List** with **additional tips, tools, workflows**, and techniques.
 
 ---
 
 # **Extended Ultimate Awesome List for Tool Building and Automation**
 
-> Build faster, more efficient tools for bug bounty, cybersecurity, and recon tasks with this comprehensive guide. 
+> Build faster, more efficient tools for bug bounty, cybersecurity, and recon tasks with this comprehensive guide.
 
 ---
 
 ## **11. Advanced Recon Techniques**
 
 ### **Subdomain Enumeration**
+
 1. **Passive Techniques**:
    - Use `crt.sh` for Certificate Transparency Logs.
    - Tools: `subfinder`, `amass`, `assetfinder`, `dnsx`.
@@ -537,18 +596,22 @@ Certainly! Here's an **expanded version** of the **Awesome List** with **additio
 
 3. **DNS Data Gathering**:
    - Retrieve DNS records with `dig`, `host`, or `dnsx`:
+
      ```bash
      dnsx -d target.com -a -resp
      ```
 
 4. **Recursive Subdomain Search**:
    - Use tools like `dsieve` to recursively find deeper subdomains:
+
      ```bash
      dsieve -d target.com -r
      ```
 
 ### **URL Discovery**
+
 - Combine **Wayback Machine**, **Common Crawl**, and **gau** for maximum coverage:
+
   ```bash
   cat targets.txt | gau | sort -u > urls.txt
   waybackurls < target.txt >> urls.txt
@@ -560,18 +623,21 @@ Certainly! Here's an **expanded version** of the **Awesome List** with **additio
 
 1. **Generating Wordlists from JS Files**
    - Use `getjs` and `jsluice`:
+
      ```bash
      cat urls.txt | getjs | xargs -n 1 jsluice -u > wordlist.txt
      ```
 
 2. **Generate Password Lists**
    - Use `pydictor`:
+
      ```bash
      pydictor -base rule.txt -o passwords.txt
      ```
 
 3. **Custom Subdomain Lists**
    - Combine existing lists with `dnsvalidator`:
+
      ```bash
      cat resolvers.txt | dnsvalidator -tL subdomains.txt > valid.txt
      ```
@@ -581,13 +647,17 @@ Certainly! Here's an **expanded version** of the **Awesome List** with **additio
 ## **13. Advanced Scripting Tips**
 
 ### **Parallel Processing**
+
 - Use GNU Parallel for running commands on multiple cores:
+
   ```bash
   cat subdomains.txt | parallel -j 10 "curl -Is {}"
   ```
 
 ### **Tool Dependency Checker**
+
 - Ensure all required tools are installed before execution:
+
   ```bash
   tools=("nuclei" "amass" "subfinder")
   for tool in "${tools[@]}"; do
@@ -599,7 +669,9 @@ Certainly! Here's an **expanded version** of the **Awesome List** with **additio
   ```
 
 ### **Error Handling**
+
 - Redirect errors to a separate log file:
+
   ```bash
   command_here >> results.log 2>> errors.log
   ```
@@ -609,7 +681,9 @@ Certainly! Here's an **expanded version** of the **Awesome List** with **additio
 ## **14. Automation Pipelines**
 
 ### **GitHub Actions Pipeline**
+
 Automate recon with scheduled scans:
+
 ```yaml
 name: Automated Recon Pipeline
 
@@ -637,8 +711,10 @@ jobs:
 ```
 
 ### **Google Cloud Automation**
+
 - Schedule automated scans with Google Cloud Functions and Cloud Scheduler.
 - Example function for subdomain enumeration:
+
   ```python
   import subprocess
 
@@ -652,15 +728,19 @@ jobs:
 ## **15. Post-Processing and Data Visualization**
 
 ### **Filtering Unique URLs**
+
 - Deduplicate and sort URLs:
+
   ```bash
   cat urls.txt | sort -u > clean_urls.txt
   ```
 
 ### **Create Visual Maps**
+
 1. **Subdomain Graphs**
    - Use `amass` and `Maltego` for visualizing subdomain connections.
    - Export with:
+
      ```bash
      amass viz -d target.com -o output.json
      ```
@@ -669,7 +749,9 @@ jobs:
    - Use tools like `neo4j` or `Graphviz`.
 
 ### **HTML Reporting**
+
 - Use Python libraries like `BeautifulSoup` or `j2html` to generate reports:
+
   ```python
   from jinja2 import Template
 
@@ -682,6 +764,7 @@ jobs:
 ## **16. Tool Examples**
 
 ### **API Token Validator**
+
 ```python
 import requests
 
@@ -694,6 +777,7 @@ def check_api_key(api_key):
 ```
 
 ### **Port Scanning Automation**
+
 ```bash
 #!/bin/bash
 
@@ -711,7 +795,9 @@ nmap -sC -sV -oN $output_dir/ports.txt $target
 ## **17. Notifications**
 
 ### **Slack Integration**
+
 Send results to Slack:
+
 ```bash
 webhook_url="https://hooks.slack.com/services/your/webhook/url"
 message="Recon complete for $target"
@@ -720,7 +806,9 @@ curl -X POST -H 'Content-type: application/json' --data '{"text":"'"$message"'"}
 ```
 
 ### **Telegram Bot**
+
 Notify via Telegram:
+
 ```python
 import requests
 
@@ -736,11 +824,13 @@ requests.post(f"https://api.telegram.org/bot{bot_token}/sendMessage", data={"cha
 ## **18. Advanced Tools and Frameworks**
 
 ### **Recon Tools**
+
 - **katana**: Fast crawler for endpoints.
 - **waymore**: Wayback URLs with custom filtering.
 - **Interlace**: Automate tool chaining for multithreaded scans.
 
 ### **Fuzzing Tools**
+
 - **ffuf**: Fast web fuzzer for directories and parameters.
 - **GoFuzz**: Fuzzing Go applications.
 
@@ -749,12 +839,14 @@ requests.post(f"https://api.telegram.org/bot{bot_token}/sendMessage", data={"cha
 ## **19. Continuous Improvement**
 
 ### **Set Benchmarks**
+
 - Track metrics for improvement:
   - Time to find vulnerabilities.
   - Tool efficiency (false positives vs. true positives).
   - Automation speed.
 
 ### **Integrate Machine Learning**
+
 - Use AI-based tools like `ChatGPT` or `Weka` to analyze recon data patterns for hidden vulnerabilities.
 
 ---
@@ -762,14 +854,17 @@ requests.post(f"https://api.telegram.org/bot{bot_token}/sendMessage", data={"cha
 ## **20. Resources for Inspiration**
 
 ### **Books**
+
 - **"Black Hat Python"** by Justin Seitz.
 - **"Hacking APIs"** by Corey Ball.
 
 ### **Communities**
+
 - [Bugcrowd University](https://university.bugcrowd.com/)
 - [OWASP Slack](https://owasp.slack.com/)
 
 ### **Learning Platforms**
+
 - [HackerOne's Directory](https://hackerone.com/directory)
 - [TryHackMe Labs](https://tryhackme.com/)
 - [Hack The Box](https://hackthebox.com/)
@@ -784,7 +879,9 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
 ## **31. Web Scraping and Automation**
 
 ### **Python Web Scraping**
+
 1. **Scraping with `requests` and `BeautifulSoup`:**
+
    ```python
    import requests
    from bs4 import BeautifulSoup
@@ -798,6 +895,7 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
    ```
 
 2. **Scraping APIs**:
+
    ```python
    import requests
 
@@ -808,7 +906,9 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
    ```
 
 ### **Browser Automation**
+
 1. **Using Selenium for Dynamic Content:**
+
    ```python
    from selenium import webdriver
 
@@ -819,6 +919,7 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
    ```
 
 2. **Headless Browsing with Puppeteer:**
+
    ```javascript
    const puppeteer = require('puppeteer');
    (async () => {
@@ -835,18 +936,23 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
 ## **32. Advanced Network Scanning**
 
 ### **Bash Utilities**
+
 1. **Masscan for Fast Port Scanning**:
+
    ```bash
    masscan -p1-65535 192.168.1.0/24 --rate 10000 -oG masscan_results.txt
    ```
 
 2. **Custom Banner Grabbing**:
+
    ```bash
    nmap -sV --script=banner 192.168.1.1
    ```
 
 ### **Python Scanners**
+
 1. **Custom Port Scanner**:
+
    ```python
    import socket
 
@@ -868,18 +974,23 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
 ## **33. OSINT Automation**
 
 ### **OSINT Tools**
+
 1. **Email Enumeration with `holehe`:**
+
    ```bash
    holehe -l emails.txt
    ```
 
 2. **Search Leaked Credentials**:
+
    ```bash
    theharvester -d target.com -b all
    ```
 
 ### **Custom Scripts**
+
 1. **Automate Google Dorking:**
+
    ```bash
    dorks=("site:example.com inurl:admin" "site:example.com ext:sql")
    for dork in "${dorks[@]}"; do
@@ -889,6 +1000,7 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
    ```
 
 2. **LinkedIn Scraping for Employee Info:**
+
    ```python
    import requests
 
@@ -903,7 +1015,9 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
 ## **34. Advanced Vulnerability Exploitation**
 
 ### **Exploitation Scripts**
+
 1. **SQL Injection Exploitation with Python:**
+
    ```python
    import requests
 
@@ -915,6 +1029,7 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
    ```
 
 2. **XSS Automation:**
+
    ```bash
    echo "<script>alert(1)</script>" > payloads.txt
    cat urls.txt | while read url; do
@@ -927,7 +1042,9 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
 ## **35. API Security Testing**
 
 ### **Custom Scripts**
+
 1. **API Endpoint Testing**:
+
    ```python
    import requests
 
@@ -942,6 +1059,7 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
    ```
 
 2. **Automate Rate-Limiting Checks**:
+
    ```bash
    for i in {1..100}; do
        curl -X GET "https://api.example.com" &
@@ -953,12 +1071,15 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
 ## **36. Data Extraction**
 
 ### **Extract Key Info**
+
 1. **Find All IPs in a Log File**:
+
    ```bash
    grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' logs.txt | sort -u > ips.txt
    ```
 
 2. **Extract Emails**:
+
    ```bash
    grep -Eo "\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b" logs.txt > emails.txt
    ```
@@ -968,7 +1089,9 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
 ## **37. Continuous Monitoring Pipelines**
 
 ### **GitHub Actions for Automation**
+
 1. **Recon Automation:**
+
    ```yaml
    name: Recon Automation
    on:
@@ -984,6 +1107,7 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
    ```
 
 2. **Slack Alerts for Findings**:
+
    ```bash
    curl -X POST -H 'Content-type: application/json' --data '{"text":"Scan completed!"}' $SLACK_WEBHOOK
    ```
@@ -993,12 +1117,15 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
 ## **38. File Handling in Automation**
 
 ### **Parse and Process Large Files**
+
 1. **Bash: Split Large Files**:
+
    ```bash
    split -l 1000 large_file.txt small_
    ```
 
 2. **Python: Process JSON**:
+
    ```python
    import json
 
@@ -1013,8 +1140,10 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
 ## **39. Advanced Reporting**
 
 ### **Visualizations**
+
 1. **Graph Vulnerabilities:**
    - Use Python’s `matplotlib`:
+
      ```python
      import matplotlib.pyplot as plt
 
@@ -1027,6 +1156,7 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
      ```
 
 2. **Heatmaps for Severity**:
+
    ```python
    import seaborn as sns
    import matplotlib.pyplot as plt
@@ -1041,12 +1171,15 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
 ## **40. Quick Automation Ideas**
 
 ### **Instant Tools**
+
 1. **Certificate Transparency**:
+
    ```bash
    curl -s "https://crt.sh/?q=example.com" | grep "example.com"
    ```
 
 2. **Screenshot Script**:
+
    ```bash
    cat live.txt | while read url; do
        eyewitness -u $url
@@ -1054,6 +1187,7 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
    ```
 
 3. **Check for WAF**:
+
    ```bash
    wafw00f https://example.com
    ```
@@ -1062,14 +1196,14 @@ Here’s an extended **Awesome List** to further cover the essentials and advanc
 
 This expanded list includes **even more actionable insights** for scripting, automation, and creating tools with **over 40 unique sections**. Each item is tailored to help you **create effective, automated, and scalable bug bounty workflows**.
 
-
-
 ---
 
 ## **21. Advanced Recon Pipelines**
 
 ### **GitOps for Recon**
+
 1. **Use GitLab CI/CD** for recon pipelines:
+
    ```yaml
    stages:
      - recon
@@ -1092,6 +1226,7 @@ This expanded list includes **even more actionable insights** for scripting, aut
 
 3. **Axiom for Distributed Scanning**:
    - Create distributed pipelines using Axiom:
+
      ```bash
      axiom-scan live.txt -m nuclei -t ~/nuclei-templates/
      ```
@@ -1101,7 +1236,9 @@ This expanded list includes **even more actionable insights** for scripting, aut
 ## **22. Custom Scripting for Bug Bounty**
 
 ### **Enhanced Bash Utilities**
+
 1. **Retry Logic for Unstable Commands**:
+
    ```bash
    retry() {
        local n=1
@@ -1121,23 +1258,29 @@ This expanded list includes **even more actionable insights** for scripting, aut
        done
    }
    ```
+
    - Use as:
+
      ```bash
      retry curl -I https://example.com
      ```
 
 2. **Dynamic Wordlist Updates**:
+
    ```bash
    cat live_urls.txt | grep ".js" | cut -d '/' -f3 | sort -u > js_wordlist.txt
    ```
 
 3. **Automated Screenshot Script**:
+
    ```bash
    cat live.txt | aquatone -out screenshots
    ```
 
 ### **Python Recon Scripts**
+
 1. **HTTP Header Analyzer**:
+
    ```python
    import requests
 
@@ -1151,6 +1294,7 @@ This expanded list includes **even more actionable insights** for scripting, aut
    ```
 
 2. **Directory Brute-Forcer**:
+
    ```python
    import requests
 
@@ -1167,12 +1311,15 @@ This expanded list includes **even more actionable insights** for scripting, aut
 ## **23. Advanced Data Parsing**
 
 ### **Extract Domains from JS Files**
+
 1. **Using Bash**:
+
    ```bash
    grep -oP 'https?://[a-zA-Z0-9.-]+' *.js | sort -u > domains.txt
    ```
 
 2. **With Python**:
+
    ```python
    import re
 
@@ -1184,7 +1331,9 @@ This expanded list includes **even more actionable insights** for scripting, aut
    ```
 
 ### **Parse JSON Files for Sensitive Data**
+
 - Use `jq`:
+
   ```bash
   jq '.keys[] | select(.type=="AWS")' sensitive.json
   ```
@@ -1194,7 +1343,9 @@ This expanded list includes **even more actionable insights** for scripting, aut
 ## **24. Enhanced Vulnerability Detection**
 
 ### **Custom Scripts**
+
 1. **SSRF Testing**:
+
    ```python
    import requests
 
@@ -1204,6 +1355,7 @@ This expanded list includes **even more actionable insights** for scripting, aut
    ```
 
 2. **XSS Payload Testing**:
+
    ```bash
    cat urls.txt | while read url; do
        curl "$url?q=<script>alert(1)</script>"
@@ -1211,6 +1363,7 @@ This expanded list includes **even more actionable insights** for scripting, aut
    ```
 
 3. **SQL Injection Automation**:
+
    ```bash
    sqlmap -u "https://example.com?id=1" --batch --dbs
    ```
@@ -1220,18 +1373,23 @@ This expanded list includes **even more actionable insights** for scripting, aut
 ## **25. Workflow Optimization Tools**
 
 ### **Version Control**
+
 - Use Git hooks to enforce standards:
+
   ```bash
   # pre-commit hook
   echo "Running security checks..."
   ```
 
 ### **Linters and Formatters**
+
 - Python: `black`, `flake8`
 - Bash: `shellcheck`
 
 ### **Automated Deployment**
+
 - Use `Docker`:
+
   ```dockerfile
   FROM python:3.9
   WORKDIR /app
@@ -1245,7 +1403,9 @@ This expanded list includes **even more actionable insights** for scripting, aut
 ## **26. Best Practices for Tool Development**
 
 ### **Modularization**
+
 - Use reusable functions:
+
   ```python
   def subdomain_enum(domain):
       # Code here
@@ -1253,7 +1413,9 @@ This expanded list includes **even more actionable insights** for scripting, aut
   ```
 
 ### **Error Handling**
+
 - Provide detailed error messages:
+
   ```python
   try:
       response = requests.get("https://example.com")
@@ -1263,7 +1425,9 @@ This expanded list includes **even more actionable insights** for scripting, aut
   ```
 
 ### **Performance Optimization**
+
 - Multi-threading:
+
   ```python
   from concurrent.futures import ThreadPoolExecutor
 
@@ -1280,13 +1444,17 @@ This expanded list includes **even more actionable insights** for scripting, aut
 ## **27. Continuous Monitoring**
 
 ### **Scheduled Tasks**
+
 - Use `cron` for periodic scans:
+
   ```bash
   0 2 * * * /path/to/recon.sh >> /path/to/logs.txt
   ```
 
 ### **Real-Time Alerts**
+
 - Integrate Slack or Telegram for notifications:
+
   ```bash
   curl -X POST -H 'Content-type: application/json' --data '{"text":"Scan completed"}' $SLACK_WEBHOOK
   ```
@@ -1296,8 +1464,10 @@ This expanded list includes **even more actionable insights** for scripting, aut
 ## **28. GitHub Awesome List Templates**
 
 ### **Building Your Own List**
+
 - Use [GitHub Markdown Templates](https://github.com/topics/awesome-list):
   - **Structure**:
+
     ```
     # Awesome List
 
@@ -1309,7 +1479,9 @@ This expanded list includes **even more actionable insights** for scripting, aut
     ```
 
 ### **Automated Updates**
+
 - Use GitHub Actions to periodically update content:
+
   ```yaml
   on:
     schedule:
@@ -1321,7 +1493,9 @@ This expanded list includes **even more actionable insights** for scripting, aut
 ## **29. Advanced Reporting**
 
 ### **HTML Reports**
+
 - Create visually appealing reports using `ReportLab` or `Flask`:
+
   ```python
   from flask import Flask, render_template
 
@@ -1333,7 +1507,9 @@ This expanded list includes **even more actionable insights** for scripting, aut
   ```
 
 ### **Markdown Reports**
+
 1. **Script Example**:
+
    ```bash
    echo "# Recon Report" > report.md
    cat results.txt >> report.md
@@ -1341,12 +1517,12 @@ This expanded list includes **even more actionable insights** for scripting, aut
 
 2. **Export to PDF**:
    - Use `pandoc`:
+
      ```bash
      pandoc report.md -o report.pdf
      ```
 
 ---
-
 
 ## GitHub has blocked your push because it detected a secret (like a GitHub Personal Access Token) in your repository. To resolve this and safeguard your repository:
 
@@ -1355,10 +1531,12 @@ This expanded list includes **even more actionable insights** for scripting, aut
 ### **Steps to Fix and Prevent Issues**
 
 #### 1. **Remove Secrets from History**
-   - **Identify the Secret:**
+
+- **Identify the Secret:**
      GitHub tells you where the secret is located, e.g., `MyMac/Automated-Scanner/tools/.tokens:1`. Open the file and remove the secret.
-   - **Amend the Commit:**
+- **Amend the Commit:**
      After removing the secret, re-commit the changes:
+
      ```bash
      git rm --cached MyMac/Automated-Scanner/tools/.tokens
      git commit --amend --no-edit
@@ -1366,17 +1544,24 @@ This expanded list includes **even more actionable insights** for scripting, aut
      ```
 
 #### 2. **Use `git filter-repo` to Remove Secrets from Entire History**
+
    If the secret exists in older commits:
-   - **Install `git-filter-repo`:**
+
+- **Install `git-filter-repo`:**
+
      ```bash
      pip install git-filter-repo
      ```
-   - **Remove the Secret:**
+
+- **Remove the Secret:**
      Replace `<path>` with the file path containing the secret:
+
      ```bash
      git filter-repo --path <path> --invert-paths
      ```
-   - **Force Push Clean History:**
+
+- **Force Push Clean History:**
+
      ```bash
      git push origin main --force
      ```
@@ -1386,18 +1571,24 @@ This expanded list includes **even more actionable insights** for scripting, aut
 ### **Set Up Best Practices to Prevent Future Issues**
 
 #### 3. **Enable GitHub Push Protection**
+
    GitHub will block pushes containing sensitive information by default if push protection is enabled. Ensure it's active in your repository settings:
+
    1. Go to **Settings > Code Security and Analysis > Push Protection**.
    2. Enable **Push Protection**.
 
 #### 4. **Use `.gitignore` to Prevent Secrets from Being Committed**
+
    Add paths of sensitive files to a `.gitignore` file:
+
    ```plaintext
    # Ignore token files
    *.tokens
    *.env
    ```
+
    Then stage and commit the `.gitignore` file:
+
    ```bash
    git add .gitignore
    git commit -m "Add .gitignore to prevent committing sensitive files"
@@ -1405,22 +1596,30 @@ This expanded list includes **even more actionable insights** for scripting, aut
    ```
 
 #### 5. **Scan for Secrets Locally**
+
    Use tools like [GitGuardian CLI](https://www.gitguardian.com/ggshield) to scan your commits for secrets before pushing:
+
    ```bash
    ggshield secret scan pre-commit
    ```
 
 #### 6. **Replace Existing Tokens**
+
    If a token was exposed, revoke it and create a new one:
-   - **Revoke the token** via GitHub's **Settings > Developer Settings > Personal Access Tokens**.
-   - **Create a new token** and securely store it in environment variables or secret management tools like AWS Secrets Manager or HashiCorp Vault.
+
+- **Revoke the token** via GitHub's **Settings > Developer Settings > Personal Access Tokens**.
+- **Create a new token** and securely store it in environment variables or secret management tools like AWS Secrets Manager or HashiCorp Vault.
 
 #### 7. **Use `.env` Files for Secrets**
+
    Store secrets in `.env` files and load them dynamically into your scripts using tools like `dotenv`. Example `.env` file:
+
    ```plaintext
    GITHUB_TOKEN=your_token_here
    ```
+
    Add `.env` to `.gitignore`:
+
    ```plaintext
    .env
    ```
@@ -1428,10 +1627,13 @@ This expanded list includes **even more actionable insights** for scripting, aut
 ---
 
 ### **Push Again After Fixing Issues**
-   - After cleaning the history and ensuring no secrets remain, retry your push:
+
+- After cleaning the history and ensuring no secrets remain, retry your push:
+
      ```bash
      git push origin main
      ```
+
 ### **Comprehensive GitHub Solutions and Best Practices**
 
 Here’s a detailed guide to handling common Git issues, maintaining repository hygiene, securing your code, and improving workflows for professional-grade repositories.
@@ -1441,17 +1643,20 @@ Here’s a detailed guide to handling common Git issues, maintaining repository 
 ### **1. General Git and GitHub Commands**
 
 #### **Clone a Repository**
+
 ```bash
 git clone https://github.com/username/repo.git
 ```
 
 #### **Create and Push a New Branch**
+
 ```bash
 git checkout -b feature-branch
 git push origin feature-branch
 ```
 
 #### **Merge Branches**
+
 ```bash
 git checkout main
 git merge feature-branch
@@ -1459,6 +1664,7 @@ git push origin main
 ```
 
 #### **Stash Uncommitted Changes**
+
 ```bash
 git stash
 # Apply the stash later
@@ -1470,29 +1676,36 @@ git stash pop
 ### **2. Fixing Common Git Issues**
 
 #### **Remove Untracked Files**
+
 ```bash
 git clean -f -d
 ```
 
 #### **Undo the Last Commit**
+
 ```bash
 git reset --soft HEAD~1  # Keeps changes staged
 git reset --hard HEAD~1  # Discards changes completely
 ```
 
 #### **Resolve Merge Conflicts**
+
 1. Open conflicted files.
 2. Edit the conflict markers (`<<<<<<`, `======`, `>>>>>>`).
 3. Stage the resolved files:
+
    ```bash
    git add <file>
    ```
+
 4. Continue the merge:
+
    ```bash
    git commit
    ```
 
 #### **Fix Detached HEAD**
+
 ```bash
 git checkout <branch>
 ```
@@ -1502,7 +1715,9 @@ git checkout <branch>
 ### **3. Managing Secrets**
 
 #### **Prevent Secrets in Commits**
+
 Add sensitive files to `.gitignore`:
+
 ```plaintext
 .env
 *.key
@@ -1511,19 +1726,26 @@ Add sensitive files to `.gitignore`:
 ```
 
 #### **Scan Commits for Secrets**
+
 Use tools like [TruffleHog](https://github.com/trufflesecurity/trufflehog):
+
 ```bash
 trufflehog --regex --entropy=True https://github.com/username/repo.git
 ```
 
 #### **Replace Leaked Secrets**
+
 If a secret is exposed:
+
 1. **Revoke the token** immediately.
 2. Use `git filter-repo` to remove it:
+
    ```bash
    git filter-repo --path-sensitive-file --invert-paths
    ```
+
 3. Push the cleaned history:
+
    ```bash
    git push origin main --force
    ```
@@ -1533,10 +1755,12 @@ If a secret is exposed:
 ### **4. Improving Repository Security**
 
 #### **Enable 2FA for Your GitHub Account**
+
 1. Go to **Settings > Security > Two-factor authentication**.
 2. Follow the prompts to set up 2FA.
 
 #### **Set Up Branch Protection**
+
 1. Go to **Settings > Branches > Add branch protection rule**.
 2. Enable:
    - Require pull request reviews.
@@ -1544,6 +1768,7 @@ If a secret is exposed:
    - Restrict who can push.
 
 #### **Enable Secret Scanning**
+
 1. Go to **Settings > Security & Analysis**.
 2. Enable **Secret Scanning** and **Push Protection**.
 
@@ -1552,7 +1777,9 @@ If a secret is exposed:
 ### **5. Automating Workflows**
 
 #### **Using GitHub Actions**
+
 Create a `.github/workflows/main.yml` file:
+
 ```yaml
 name: CI/CD Pipeline
 
@@ -1576,7 +1803,9 @@ jobs:
 ```
 
 #### **Schedule Automated Tasks**
+
 Run a workflow daily:
+
 ```yaml
 on:
   schedule:
@@ -1588,7 +1817,9 @@ on:
 ### **6. Commit Hygiene**
 
 #### **Write Descriptive Commit Messages**
+
 Follow the conventional commit format:
+
 ```plaintext
 <type>(<scope>): <short summary>
 
@@ -1596,14 +1827,18 @@ Follow the conventional commit format:
 
 [optional footer(s)]
 ```
+
 Example:
+
 ```plaintext
 feat(auth): add login endpoint
 fix(auth): resolve token expiration issue
 ```
 
 #### **Sign Commits**
+
 Enable GPG signing for commits:
+
 ```bash
 git config --global user.signingkey <GPG_KEY_ID>
 git config --global commit.gpgsign true
@@ -1614,13 +1849,16 @@ git config --global commit.gpgsign true
 ### **7. Version Control Best Practices**
 
 #### **Tagging Releases**
+
 ```bash
 git tag -a v1.0.0 -m "Initial release"
 git push origin v1.0.0
 ```
 
 #### **Changelog Automation**
+
 Use [Conventional Changelog](https://github.com/conventional-changelog):
+
 ```bash
 npx conventional-changelog-cli -p angular
 ```
@@ -1630,13 +1868,17 @@ npx conventional-changelog-cli -p angular
 ### **8. Collaboration**
 
 #### **Create a Pull Request**
+
 1. Push changes:
+
    ```bash
    git push origin feature-branch
    ```
+
 2. Go to the repository on GitHub and create a PR.
 
 #### **Review PRs**
+
 - Use GitHub’s review tools to add comments.
 - Mark a PR as approved or request changes.
 
@@ -1645,14 +1887,18 @@ npx conventional-changelog-cli -p angular
 ### **9. Repository Hygiene**
 
 #### **Archive Old Branches**
+
 Delete merged branches:
+
 ```bash
 git branch -d feature-branch
 git push origin --delete feature-branch
 ```
 
 #### **Clean Up Commit History**
+
 Use rebase for a cleaner history:
+
 ```bash
 git rebase -i HEAD~<number-of-commits>
 ```
@@ -1662,21 +1908,25 @@ git rebase -i HEAD~<number-of-commits>
 ### **10. Advanced Git Commands**
 
 #### **Revert a Specific Commit**
+
 ```bash
 git revert <commit-hash>
 ```
 
 #### **Cherry-Pick a Commit**
+
 ```bash
 git cherry-pick <commit-hash>
 ```
 
 #### **View Commit History**
+
 ```bash
 git log --oneline --graph --decorate
 ```
 
 #### **Show Changes Between Branches**
+
 ```bash
 git diff branch1..branch2
 ```
@@ -1686,11 +1936,13 @@ git diff branch1..branch2
 ### **11. Backup and Restore**
 
 #### **Backup a Repository**
+
 ```bash
 git bundle create repo.bundle --all
 ```
 
 #### **Restore from Backup**
+
 ```bash
 git clone repo.bundle
 ```
@@ -1700,17 +1952,20 @@ git clone repo.bundle
 ### **12. Troubleshooting**
 
 #### **Fix Corrupted Repositories**
+
 ```bash
 git fsck --full
 ```
 
 #### **Rebuild the Index**
+
 ```bash
 rm -f .git/index
 git reset
 ```
 
 #### **Recover Lost Commits**
+
 ```bash
 git reflog
 git reset --hard <commit-hash>
@@ -1719,6 +1974,7 @@ git reset --hard <commit-hash>
 ---
 
 ### **13. Resources for Learning**
+
 - [Pro Git Book](https://git-scm.com/book/en/v2)
 - [GitHub Docs](https://docs.github.com/)
 - [Git Cheatsheet](https://education.github.com/git-cheat-sheet-education.pdf)
@@ -1728,19 +1984,21 @@ git reset --hard <commit-hash>
 This list ensures you have everything covered, from basic Git operations to advanced GitHub features, to help you create efficient, secure, and collaborative workflows.
 If you still encounter issues, GitHub’s documentation [here](https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push) provides more details on resolving blocked pushes.
 
-
 ## **30. Learning Resources**
 
 ### **Tutorials**
+
 1. [The Bug Hunter’s Methodology](https://hackerone.com/blog/bug-hunter-methodology)
 2. [OWASP Top 10 Vulnerabilities](https://owasp.org/www-project-top-ten/)
 
 ### **Videos**
+
 - YouTube Channels:
   - [LiveOverflow](https://www.youtube.com/c/LiveOverflow)
   - [NahamSec](https://www.youtube.com/c/NahamSec)
 
 ### **Books**
+
 1. **"The Web Application Hacker's Handbook"** by Dafydd Stuttard.
 2. **"Practical Binary Analysis"** by Dennis Andriesse.
 

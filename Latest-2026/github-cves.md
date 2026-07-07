@@ -61,7 +61,6 @@ _pending enrichment_
 ## 2026-04-19
 
 ### GitHub PoC-in-GitHub Update 2026-04-19
-
 - **Tags:** `#web`
 - **Severity:** unknown · **Hunt:** 3/5 · **Score:** 12.0 · **Status:** unknown · **Age:** 0d
 - **Sources:** [1](https://github.com/nomi-sec/PoC-in-GitHub/commit/514a01093d0ffc48b24223c57695539aba44bfbc)

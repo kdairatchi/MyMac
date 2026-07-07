@@ -4,6 +4,7 @@ description: Hunter mindset, recon setup, and target scoring for Web3 bug bounty
 ---
 
 # WEB3 HUNT FOUNDATION
+>
 > Mindset + Recon + Setup. Read this before touching any new target's code.
 > Replaces: 01-mindset, 02-recon-setup, 20-chain-complete
 
@@ -132,6 +133,7 @@ forge coverage              # Untested code = priority review target
 ### Step 3 — Read ALL Prior Audit Reports (15 min)
 
 For each finding, note its status:
+
 - **Fixed:** Skip
 - **Acknowledged / Risk Accepted:** ⚡ **START HERE** ⚡
   - Developer knows about it but chose not to fix it
@@ -145,6 +147,7 @@ Find audits: GitHub repo, protocol docs, Immunefi page, Google "[protocol] audit
 Ask: **"Worst thing an attacker could do to users of this protocol?"**
 
 Work backward from impact to code:
+
 - "Steal deposits" → find: withdrawal functions, access control on transfer
 - "Mint infinite tokens" → find: mint functions, who calls them, what checks
 - "Freeze all funds" → find: emergency functions, time locks, role assignments
@@ -153,6 +156,7 @@ Work backward from impact to code:
 ### Step 5 — Architecture + Fund Flow (3 min)
 
 Draw the money flow (even mentally):
+
 ```
 User USDC
    ↓ deposit()
@@ -164,6 +168,7 @@ User USDC
 Find WHERE VALUE ACCUMULATES. That contract = highest priority.
 
 Key state variables to map:
+
 - Total deposited / total assets / total shares
 - Per-user balance tracking (how is it updated?)
 - Reward accumulator (index, per-share, per-second?)

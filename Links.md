@@ -1,4 +1,5 @@
 # Links
+>
 > Curated resources — tools, writeups, references.
 
 ## [↑](./#-content) 🛠️ Tools
@@ -1156,7 +1157,7 @@
 
 * If you have some tool, resource or course that you want to share, [contact me](https://github.com/brunoooost) or create an pull request.
 
-![](https://contrib.rocks/image?repo=brunoooost/cybersources)
+![contributors](https://contrib.rocks/image?repo=brunoooost/cybersources)
 
 ## [↑](./#-content) 🪪 Credits
 
@@ -1171,39 +1172,23 @@
 
 [ReadMe Templates](https://www.readme-templates.com/)
 
-
 [ReadMe Genrator](https://www.repolaunch.com/create)
-
 
 [DevTools 1](https://www.gitdevtool.com/)
 
 [The OWASP Top 10 - HHS.gov](https://www.hhs.gov/sites/default/files/owasp-top-10.pdf)
 
-
-[Api Sec Top 10 ](https://apisecurity.io/encyclopedia/content/owasp-api-security-top-10-cheat-sheet-a4.pdf)
-
-
+[Api Sec Top 10](https://apisecurity.io/encyclopedia/content/owasp-api-security-top-10-cheat-sheet-a4.pdf)
 
 [owasp](https://owasp.org/Top10/)
 
-
-
-
-
 [url tools](https://bulkurltools.com/)
 
-
-
 [Blog1](https://exploit.kitploit.com/#google_vignette)
-
-
-
-
 
 ## Github Links
 
 [git1](https://github.com/paulveillard)
-
 
 [git2](https://github.com/kdairatchi/h4cker)
 
@@ -1212,7 +1197,6 @@
 [git3](https://github.com/kdairatchi/CheatSheetSeries/tree/master)
 
 [git4](https://github.com/kdairatchi/CyberSecNotes)
-
 
 [Targets](https://github.com/kdairatchi/targets/tree/default)
 
@@ -1230,38 +1214,22 @@
 
 [TakSec](https://github.com/TakSec?tab=repositories)
 
-
 [dreadnode](https://github.com/dreadnode0)
-
-
 
 ----------
 
-
-
-
 [linux](https://www.kitploit.com/search/label/Linux)
-
-
 
 [mac](https://www.kitploit.com/search/label/Mac)
 
-
-
 [ipsearch 1](https://www.ipvoid.com/)
-
 
 [web check](https://web-check.as93.net/)
 
-
 [scam look up](https://www.bbb.org/scamtracker/lookupscam)
-
-
 
 [censy](https://gpt.censys.io/)
 
 [subdomain finder](https://osint.sh/subdomain/)
-
-
 
 [xss reports](https://xss.report/dashboard#payloads)

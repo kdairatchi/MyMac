@@ -1,6 +1,6 @@
 # CTF Tools
-A curated list of Capture The Flag (CTF) frameworks, libraries, resources and softwares.
 
+A curated list of Capture The Flag (CTF) frameworks, libraries, resources and softwares.
 
 # Awesome CTF [![Build Status](https://travis-ci.org/apsdehal/awesome-ctf.svg?branch=master)](https://travis-ci.org/apsdehal/awesome-ctf) [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
@@ -15,7 +15,6 @@ Please take a quick look at the [contribution guidelines](https://github.com/aps
 ### Why?
 
 It takes time to build up collection of tools used in ctf and remember them all. This repo helps to keep all these scattered tools at one place.
-
 
 ### Contents
 
@@ -44,38 +43,37 @@ It takes time to build up collection of tools used in ctf and remember them all.
 
 # Create
 
-*Tools used for creating CTF challenges*
+_Tools used for creating CTF challenges_
 
 ## Forensics
 
-*Tools used for creating Forensics challenges*
+_Tools used for creating Forensics challenges_
 
 - [Registry Dumper](http://www.kahusecurity.com/tools/RegistryDumper_v0.1.zip) - Dump your registry
 
 ## Web
 
-*Tools used for creating Web challenges*
+_Tools used for creating Web challenges_
 
-*JavaScript Obfustcators*
+_JavaScript Obfustcators_
 
 - [Metasploit JavaScript Obfustcator](https://github.com/rapid7/metasploit-framework/wiki/How-to-obfuscate-JavaScript-in-Metasploit)
 - [Uglify](http://marijnhaverbeke.nl//uglifyjs)
 
-
 # Solve
 
-*Tools used for solving CTF challenges*
+_Tools used for solving CTF challenges_
 
 ## Attacks
 
-*Tools used for performing various kinds of attacks*
+_Tools used for performing various kinds of attacks_
 
 - [Bettercap](https://github.com/evilsocket/bettercap) - Framework to perform MITM (Man in the Middle) attacks.
 - [Layer 2 attacks](https://github.com/tomac/yersinia) - Attack various protocols on layer 2
 
 ## Crypto
 
-*Tools used for solving Crypto challenges*
+_Tools used for solving Crypto challenges_
 
 - [PkCrack](https://www.unix-ag.uni-kl.de/~conrad/krypto/pkcrack.html) - A tool for Breaking PkZip-encryption
 - [RSATool](https://github.com/ius/rsatool) - Generate private key with knowledge of p and q
@@ -83,7 +81,7 @@ It takes time to build up collection of tools used in ctf and remember them all.
 
 ## Bruteforcers
 
-*Tools used for various kind of bruteforcing (passwords etc.)*
+_Tools used for various kind of bruteforcing (passwords etc.)_
 
 - [John The Jumbo](https://github.com/magnumripper/JohnTheRipper) - Community enhanced version of John the Ripper
 - [John The Ripper](http://www.openwall.com/john/) - Password Cracker
@@ -91,7 +89,7 @@ It takes time to build up collection of tools used in ctf and remember them all.
 
 ## Exploits
 
-*Tools used for solving Exploits challenges*
+_Tools used for solving Exploits challenges_
 
 - [binjitsu](https://github.com/binjitsu/binjitsu/) - CTF framework and exploit development library
 - [Metasploit](http://www.metasploit.com/) - Penetration testing software
@@ -101,7 +99,7 @@ It takes time to build up collection of tools used in ctf and remember them all.
 
 ## Forensics
 
-*Tools used for solving Forensics challenges*
+_Tools used for solving Forensics challenges_
 
 - [Aircrack-Ng](http://www.aircrack-ng.org/) - Crack 802.11 WEP and WPA-PSK keys
   - `apt-get install aircrack-ng`
@@ -127,13 +125,14 @@ It takes time to build up collection of tools used in ctf and remember them all.
 - [Wireshark](https://www.wireshark.org/) - Analyze the network dumps
   - `apt-get install wireshark`
 
-*Registry Viewers*
+_Registry Viewers_
+
 - [RegistryViewer](http://www.gaijin.at/en/getitpage.php?id=regview) - Used to view windows registries
 - [Windows Registry Viewers](http://www.forensicswiki.org/wiki/Windows_Registry) - More registry viewers
 
 ## Reversing
 
-*Tools used for solving Reversing challenges*
+_Tools used for solving Reversing challenges_
 
 - [Androguard](https://github.com/androguard/androguard) - Reverse engineer Android applications
 - [Apk2Gold](https://github.com/lxdvs/apk2gold) - Yet another Android decompiler
@@ -150,26 +149,27 @@ It takes time to build up collection of tools used in ctf and remember them all.
 - [WinDbg](http://www.windbg.org/) - Windows debugger distributed by Microsoft
 - [z3](https://github.com/Z3Prover/z3) - a theorem prover from Microsoft Research
 
-*JavaScript Deobfustcators*
+_JavaScript Deobfustcators_
 
 - [Detox](http://relentless-coding.org/projects/jsdetox/install) - A Javascript malware analysis tool
 - [Revelo](http://www.kahusecurity.com/tools/Revelo_v0.6.zip) - Analyze obfuscated Javascript code
 
-*SWF Analyzers*
+_SWF Analyzers_
+
 - [RABCDAsm](https://github.com/CyberShadow/RABCDAsm) - Collection of utilities including an ActionScript 3 assembler/disassembler.
 - [swftools](http://www.swftools.org/) - Collection of utilities to work with SWF files
 - [xxxswf](https://bitbucket.org/Alexander_Hanel/xxxswf) -  A Python script for analyzing Flash files.
 
 ## Services
 
-*Various kind of useful services available around the internet*
+_Various kind of useful services available around the internet_
 
 - [CSWSH](http://ironwasp.org/cswsh.html) - Cross-Site WebSocket Hijacking Tester
 - [Request Bin](http://requestb.in/) - Lets you inspect http requests to a particular url
 
 ## Stegano
 
-*Tools used for solving Steganography challenges*
+_Tools used for solving Steganography challenges_
 
 - [pngtools](http://www.stillhq.com/pngtools/) - For various analysis related to PNGs
   - `apt-get install pngtools`
@@ -180,26 +180,25 @@ It takes time to build up collection of tools used in ctf and remember them all.
 
 ## Web
 
-*Tools used for solving Web challenges*
+_Tools used for solving Web challenges_
 
 - [SQLMap](https://github.com/sqlmapproject/sqlmap) - Automatic SQL injection and database takeover tooli
 - [w3af](https://github.com/andresriancho/w3af) -  Web Application Attack and Audit Framework.
 - [XSSer](http://xsser.sourceforge.net/) - Automated XSS testor
 
-
 # Resources
 
-*Where to discover about CTF*
+_Where to discover about CTF_
 
 ## Starter Packs
 
-*Collections of installer scripts, useful tools*
+_Collections of installer scripts, useful tools_
 
 - [CTF Tools](https://github.com/zardus/ctf-tools) - Collection of setup scripts to install various security research tools.
 
 ## Tutorials
 
-*Tutorials to learn how to play CTFs*
+_Tutorials to learn how to play CTFs_
 
 - [CTF Field Guide](https://trailofbits.github.io/ctf/) - Field Guide by Trails of Bits
 - [CTF Resources](http://ctfs.github.io/resources/) -  Start Guide maintained by community
@@ -208,7 +207,7 @@ It takes time to build up collection of tools used in ctf and remember them all.
 
 ## Wargames
 
-*Always online CTFs*
+_Always online CTFs_
 
 - [Backdoor](https://backdoor.sdslabs.co/) - Security Platform by SDSLabs.
 - [Ctfs.me](http://ctfs.me) - CTF All the time
@@ -222,21 +221,21 @@ It takes time to build up collection of tools used in ctf and remember them all.
 
 ## Websites
 
-*Various general websites about and on ctf*
+_Various general websites about and on ctf_
 
 - [CTF Time](https://ctftime.org/) - General information on CTF occuring around the worlds
 - [Reddit Security CTF](http://www.reddit.com/r/securityctf) - Reddit CTF category
 
 ## Wikis
 
-*Various Wikis available for learning about CTFs*
+_Various Wikis available for learning about CTFs_
 
 - [Bamboofox](https://bamboofox.torchpad.com/) - Chinese resources to learn CTF
 - [ISIS Lab](https://github.com/isislab/Project-Ideas/wiki) - CTF Wiki by Isis lab
 
 ## Writeups Collections
 
-*Collections of CTF write-ups*
+_Collections of CTF write-ups_
 
 - [Captf](http://captf.com/) - Dumped CTF challenges and materials by psifertex
 - [CTF write-ups (community)](https://github.com/ctfs/) - CTF challenges + write-ups archive maintained by the community

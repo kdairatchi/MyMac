@@ -1,5 +1,7 @@
 ## Books
+
 **Web and browser**
+
 - [Web Hacking 101](https://leanpub.com/web-hacking-101) by Peter Yaworski.
 - [Breaking into Information Security: Learning the Ropes 101](https://leanpub.com/ltr101-breaking-into-infosec) by Andy Gill.
 - [The Web Application Hacker’s Handbook: Finding and Exploiting Security Flaws](https://www.amazon.com/Web-Application-Hackers-Handbook-Exploiting/dp/1118026470/) by Dafydd Stuttard and Marcus Pinto.
@@ -7,13 +9,16 @@
 - [OWASP Testing Guide v4](https://www.owasp.org/images/1/19/OTGv4.pdf) by OWASP Breakers community.
 
 **Mobile**
+
 - [The Mobile Application Hacker's Handbook](https://www.amazon.com/Mobile-Application-Hackers-Handbook/dp/1118958500) by Dominic Chell et al.
 - [iOS Application Security: The Definitive Guide for Hackers and Developers](https://www.nostarch.com/iossecurity) by David Thiel.
 
 **Cryptography**
+
 - [Crypto 101](https://www.crypto101.io/) by Laurens Van Houtven.
 
 **Penetration Testing**
+
 - [The Art of Exploitation by Jon Erickson, 2008](https://www.nostarch.com/hacking2.htm)
 - [Metasploit: The Penetration Tester's Guide by David Kennedy et al., 2011](https://www.nostarch.com/metasploit)
 - [Penetration Testing: A Hands-On Introduction to Hacking by Georgia Weidman, 2014](https://www.nostarch.com/pentesting)

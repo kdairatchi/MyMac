@@ -12,7 +12,6 @@
 - [Hackerhive](https://hackerhive.io/)
 - [Hackenproof](https://hackenproof.com/)
 
-
 **Invite based Platforms**
 
 - [Synack](https://www.synack.com/red-team/)

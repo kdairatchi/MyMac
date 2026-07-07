@@ -1,6 +1,8 @@
 # Awesome-web3-Security ![awesome](https://awesome.re/badge.svg)
+
 ![](/image/banner.jpg)
 ---
+
 A curated list of web3 Security materials and resources For Pentesters and Bug Hunters.
 ---
 
@@ -20,14 +22,17 @@ A curated list of web3 Security materials and resources For Pentesters and Bug H
 - [Web3Pwn - Web3 Security Training Platform](https://www.web3pwn.com/)
 
 # Common Vulnerabilities in Smart contracts MindMap
+
 Open the mindmap in [Xmind](https://www.xmind.net/m/2zbPP7/)
 ![](/image/Vulnerabilities_in_Smart_contracts.png)
 
 # How to become a smart contract auditor?
+
 Open the [MindMap](https://coggle.it/diagram/YqLzaiSABzXD4UnZ/t/smart-contract-auditor)
 ![](/image/Smart_Contract_Auditor.png)
 
 # Web3 Security Tools
+
 Open the [MindMap](https://xmind.works/share/zfdeD07U)
 ![](https://user-images.githubusercontent.com/44763564/207535347-6c3e3a67-486c-489c-8363-87146083ca59.png)
 Check the [Quillhash Web3-Security-Tools](https://github.com/Quillhash/Web3-Security-Tools) Repo for more details
@@ -36,6 +41,7 @@ Check Remix Ethereum project here: https://remix-project.org/
 (The Remix Project is a rich toolset which can be used for the entire journey of contract development by users of any knowledge level, and as a learning lab for teaching and experimenting with Ethereum.)
 
 # Web3 blogs and postmortem reports
+
 - [Immunefi Medium](https://medium.com/immunefi)
 - [Openzeppelin Blogs](https://blog.openzeppelin.com/security-audits/)
 - [QuillAudits Blogs](https://quillaudits.medium.com/)
@@ -47,6 +53,7 @@ Check Remix Ethereum project here: https://remix-project.org/
 - [mouse-run](https://mouse-run.beehiiv.com)
 
 # Crypto Bug Bounty Platforms
+
 - [Immunefi](https://immunefi.com/)
 - [Hackenproof](https://hackenproof.com/programs)
 - [Code4rena](https://code4rena.com/)
@@ -57,18 +64,19 @@ Check Remix Ethereum project here: https://remix-project.org/
 - [The Saloon](https://saloon.finance/)
 - [Hats Finance](https://hats.finance/)
 
-
 # Web3 Security Newsletter
+
 - [Blockchain Threat Intelligence](https://newsletter.blockthreat.io/)
 - [REKT](https://rekt.news/)
 - [Week in Ethereum News](https://weekinethereumnews.com/)
 - [HashingBits Newsletter](https://quillaudits.substack.com/)
 
 # Complete Collection of Hacks, Trends, Resources
+
 - [Web3sec.news](https://web3sec.news)
 
-
 # Web3 Security Conference Talks and Videos
+
 - [Overview of Web3 Smart Contract Hacking | IWCON-S22 Talk by Duncan Townsend](https://www.youtube.com/watch?v=lJQwuyW4t-k)
 - [hat Ethereum Smart Contract Hacking Looks Like by LiveOverFlow](http://www.youtube.com/watch?v=P8LXLoTUJ5g)
 - [The Web3 Security Mindset with Corey Petty](https://www.youtube.com/watch?v=zcJmWr5_GOc)
@@ -82,6 +90,7 @@ Check Remix Ethereum project here: https://remix-project.org/
 // To be updated!
 
 # Resources to learn Solidity
+
 - https://cryptozombies.io/
 - https://www.learnweb3.io/
 - https://www.smartcontract.engineer/
@@ -90,6 +99,7 @@ Check Remix Ethereum project here: https://remix-project.org/
 - https://www.useweb3.xyz/
 
 # Smart Contract Security Audit Reports
+
 - [Chainsulting](https://github.com/chainsulting/Smart-Contract-Security-Audits)
 - [Code4rena Audit Reports](https://code4rena.com/reports)
 - [Consensys Audit Reports](https://consensys.net/diligence/audits/)
@@ -108,7 +118,8 @@ Check Remix Ethereum project here: https://remix-project.org/
 - [Complete List of Security Audit Reports](https://github.com/0xNazgul/Blockchain-Security-Audit-List)
 
 # Smart Contract Security Certifications
-- [Certified Blockchain Practitioner (CBP)](https://secops.group/certified-blockchain-practitioner) 
+
+- [Certified Blockchain Practitioner (CBP)](https://secops.group/certified-blockchain-practitioner)
 Use the coupon code **100-OFF** to get 100% discount
 - [Certified Blockchain Security Professional (CBSP)](https://blockchaintrainingalliance.com/products/cbsp))
 

@@ -14,6 +14,7 @@ Before reporting, decide: severity, impact statement, reproducibility.
 | C/I/A  | None / Low / High |
 
 Cheatsheet:
+
 - **Critical (9–10)** — pre-auth RCE, unauth SQLi w/ dump, auth bypass to admin.
 - **High (7–8.9)** — auth RCE, stored XSS in admin context, SSRF to cloud metadata, IDOR across tenants.
 - **Medium (4–6.9)** — reflected XSS, CSRF on sensitive action, limited IDOR, open redirect in OAuth flow.
@@ -38,6 +39,7 @@ Example: "As an unauthenticated user, an attacker can trigger SSRF against `api.
 Single low-sev → chain with another for medium+.
 
 Common chains:
+
 - Open redirect + OAuth → account takeover
 - Self-XSS + CSRF login → stored XSS
 - IDOR (read) + IDOR (write) → full account overwrite

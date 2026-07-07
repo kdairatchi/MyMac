@@ -1,4 +1,5 @@
 # Awesome Bug Bounty Tips [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
+
 A curated list of amazingly bug bounty tips from security researchers around the world.
 Here’s a detailed **Awesome Scripting and Automation Tools** list designed to focus on bug bounty automation. It's GitHub-ready, beginner-friendly, and curated with actionable scripts and tools for effective automation.
 
@@ -37,18 +38,23 @@ This list focuses on tools and scripts that streamline automation while keeping 
 ## **2. Environment Setup**
 
 ### Install Essential Tools
+
 Install core tools for scripting and automation:
+
 ```bash
 sudo apt update && sudo apt install -y git curl jq python3 python3-pip golang
 ```
 
 ### Directory Structure
+
 Organize your workspace:
+
 ```bash
 mkdir -p ~/bugbounty/{scripts,tools,results,reports}
 ```
 
 ### Install Common Tools
+
 ```bash
 # Subdomain Enumeration
 go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
@@ -65,16 +71,19 @@ go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
 ## **3. Automation Tools**
 
 ### **Recon Tools**
+
 1. **[Subfinder](https://github.com/projectdiscovery/subfinder)** - Passive subdomain enumeration.
 2. **[Amass](https://github.com/OWASP/Amass)** - Active reconnaissance.
 3. **[Httpx](https://github.com/projectdiscovery/httpx)** - Probe live hosts.
 
 ### **Vulnerability Scanning Tools**
+
 1. **[Nuclei](https://github.com/projectdiscovery/nuclei)** - Template-based scanning.
 2. **[Dalfox](https://github.com/hahwul/dalfox)** - XSS scanning tool.
 3. **[SQLMap](https://github.com/sqlmapproject/sqlmap)** - SQL injection automation.
 
 ### **Content Discovery**
+
 1. **[FFuF](https://github.com/ffuf/ffuf)** - Fuzzing tool.
 2. **[Dirsearch](https://github.com/maurosoria/dirsearch)** - Directory brute-forcing.
 
@@ -83,6 +92,7 @@ go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
 ## **4. Essential Scripts**
 
 ### **Template for a Recon Script**
+
 ```bash
 #!/bin/bash
 # Recon Automation Script
@@ -103,6 +113,7 @@ nuclei -l $output_dir/live_subdomains.txt -t vulnerabilities/ -o $output_dir/vul
 ```
 
 ### **Git Sync Automation**
+
 ```bash
 #!/bin/bash
 # Auto-sync a GitHub repository
@@ -123,6 +134,7 @@ git push origin main
 ```
 
 ### **Health Check Script**
+
 ```bash
 #!/bin/bash
 # Server Health Check
@@ -143,6 +155,7 @@ done
 ## **5. Automated Recon**
 
 ### **Full Recon Pipeline**
+
 ```bash
 #!/bin/bash
 # Full Recon Automation Script
@@ -171,6 +184,7 @@ nuclei -l $output_dir/live_hosts.txt -t vulnerabilities/ -o $output_dir/vulnerab
 ## **6. Reporting Automation**
 
 ### **Generate Markdown Report**
+
 ```bash
 #!/bin/bash
 # Markdown Report Generator
@@ -192,10 +206,12 @@ cat recon_results/$target/vulnerabilities.txt >> $output_file
 ## **7. Learning Resources**
 
 ### **Documentation**
+
 - [ProjectDiscovery Docs](https://docs.projectdiscovery.io/)
 - [OWASP Testing Guide](https://owasp.org/www-project-web-security-testing-guide/)
 
 ### **Practice Labs**
+
 - [PortSwigger Web Security Academy](https://portswigger.net/web-security)
 - [TryHackMe](https://tryhackme.com/)
 - [HackTheBox](https://hackthebox.com/)
@@ -203,15 +219,19 @@ cat recon_results/$target/vulnerabilities.txt >> $output_file
 ---
 
 ### **Contribute**
+
 Feel free to fork this repo, add your custom scripts, and submit pull requests!
 
 ---
 
 This **Awesome Scripting and Automation Tools** list is designed to grow and adapt. Suggestions and contributions are always welcome! 🚀
+
 ## Why?
+
 It is hard to look for Bug Bounty Tips from different social media websites. This repo helps to keep all these scattered tips at one place.
 
 ## Contents
+
 - [Website](#website)
 - [Mobile](#mobile)
 - [Tools](#tools)

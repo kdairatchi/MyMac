@@ -10,6 +10,7 @@ description: Complete reference for all 10 DeFi smart contract bug classes. Use 
 ---
 
 ## 1. ACCOUNTING STATE DESYNCHRONIZATION
+>
 > #1 Critical bug class — 28% of all Criticals on Immunefi.
 > Real protocols: Yeet, Alchemix V3, Folks Finance, ResupplyFi, MetaPool
 
@@ -45,6 +46,7 @@ yieldAmount = aToken.balanceOf(this) - totalSupply;
 ### Variants
 
 **Variant 1: Phantom Yield** — totalSupply decremented before transfer
+
 ```solidity
 // Yeet protocol (35 duplicate reports):
 function startUnstake(uint256 amount) external {
@@ -54,6 +56,7 @@ function startUnstake(uint256 amount) external {
 ```
 
 **Variant 2: Fast Path Skips State Update** — early return bypasses critical updates
+
 ```solidity
 // Alchemix V3 claimRedemption:
 function claimRedemption(uint256 tokenId) external {
@@ -68,6 +71,7 @@ function claimRedemption(uint256 tokenId) external {
 ```
 
 **Variant 3: Rewards Accrue to Wrong Accumulator**
+
 ```solidity
 // Folks Finance Liquid Staking:
 function addRewards(uint256 amount) external {
@@ -81,6 +85,7 @@ function withdraw(uint256 shares) external {
 ```
 
 **Variant 4: Update Happens in Wrong Order**
+
 ```solidity
 // Alchemix:
 function deposit(uint256 amount) external {
@@ -91,6 +96,7 @@ function deposit(uint256 amount) external {
 ```
 
 ### Grep Patterns
+
 ```bash
 # List all balance/supply variables
 grep -rn "totalSupply\|totalShares\|totalAssets\|totalDebt\|totalCollateral\|cumulativeReward\|rewardPerShare" contracts/ | grep -v "//\|test"
@@ -105,6 +111,7 @@ grep -rn "\breturn\b" contracts/ -B3 | grep -B3 "if\b"
 ```
 
 ### Kill Signals
+
 - Only one variable is involved (no pair to desync)
 - Both paths update all state vars identically
 - Transfer happens AFTER state update in every path (correct CEI)
@@ -123,6 +130,7 @@ grep -rn "\breturn\b" contracts/ -B3 | grep -B3 "if\b"
 ---
 
 ## 2. ACCESS CONTROL
+>
 > #2 Critical bug class — 19% of all Criticals. $953M lost in 2024 alone.
 > Real protocols: Wormhole ($10M), ZeroLend, Flare FAssets, Parity ($150M frozen)
 
@@ -133,6 +141,7 @@ A function that should be restricted is callable by anyone. Or a function checks
 ### Root Cause Patterns
 
 **Variant 1: Missing Modifier on Sibling Function**
+
 ```solidity
 function vote(uint256 tokenId) external onlyNewEpoch(tokenId) {  // guarded
 function reset(uint256 tokenId) external onlyNewEpoch(tokenId) { // guarded
@@ -143,6 +152,7 @@ function poke(uint256 tokenId) external {                         // NO GUARD
 ```
 
 **Variant 2: Wrong Check — Existence vs. Ownership**
+
 ```solidity
 // ZeroLend split() — anyone can steal victim's tokens:
 function split(uint256 tokenId, uint256 amount) external {
@@ -153,6 +163,7 @@ function split(uint256 tokenId, uint256 amount) external {
 ```
 
 **Variant 3: Tautology in Require**
+
 ```solidity
 // Flare FAssets — proof validation always passes:
 require(
@@ -162,6 +173,7 @@ require(
 ```
 
 **Variant 4: Silent Modifier (if vs require)**
+
 ```solidity
 // VULNERABLE — non-admin silently gets through:
 modifier onlyAdmin() {
@@ -179,6 +191,7 @@ modifier onlyAdmin() {
 ```
 
 **Variant 5: Uninitialized Proxy — initialize() Callable by Anyone**
+
 ```solidity
 contract Vault {
     address public owner;
@@ -190,6 +203,7 @@ contract Vault {
 ```
 
 ### Grep Patterns
+
 ```bash
 # Find sibling function families — do ALL have the same modifier set?
 grep -rn "function vote\|function poke\|function reset\|function update\|function claim\|function harvest" contracts/ -A2
@@ -209,6 +223,7 @@ grep -rn "function mint\b\|function burn\b\|function emergencyWithdraw\b\|functi
 ```
 
 ### Roles Audit Checklist
+
 ```
 For every privileged role:
 □ Who can GRANT this role?
@@ -221,6 +236,7 @@ For every privileged role:
 ```
 
 ### Kill Signals
+
 - Function has correct modifier AND modifier uses `require` (not silent `if`)
 - Upgrade functions have `onlyOwner` or role check in `_authorizeUpgrade`
 - `_disableInitializers()` is present in implementation constructor
@@ -239,6 +255,7 @@ For every privileged role:
 ---
 
 ## 3. INCOMPLETE CODE PATH
+>
 > #3 Critical bug class — 17% of Criticals.
 > Real protocols: Plume, Puffer, ThunderNFT, Alchemix V3, MetaPool, LI.FI
 
@@ -249,6 +266,7 @@ The happy path (deposit, create, place) handles tokens correctly. An alternate p
 ### Root Cause Patterns
 
 **Variant 1: Update Function Missing Refund**
+
 ```solidity
 // ThunderNFT — place_order takes tokens, update_order doesn't refund:
 function place_order(OrderInput calldata order) external {
@@ -265,6 +283,7 @@ function update_order(OrderInput calldata updatedOrder) external {
 ```
 
 **Variant 2: Partial Fill — Token Stuck**
+
 ```solidity
 // Plume — refund handles ETH only, not ERC20:
 function swapForETH(uint256 amountIn) external {
@@ -276,6 +295,7 @@ function swapForETH(uint256 amountIn) external {
 ```
 
 **Variant 3: Queue Entry Deleted on Failure**
+
 ```solidity
 // Puffer — delete happens before execution, in batch where one failure corrupts all:
 function executeTransaction(bytes32 txHash) external {
@@ -287,6 +307,7 @@ function executeTransaction(bytes32 txHash) external {
 ```
 
 **Variant 4: safeApprove Without Cleanup**
+
 ```solidity
 // Plume — residual approval blocks second swap:
 function executeSwap(uint256 amount) external {
@@ -299,6 +320,7 @@ function executeSwap(uint256 amount) external {
 ```
 
 **Variant 5: mint() Skips Receipt Check That deposit() Has**
+
 ```solidity
 // MetaPool — mint() bypasses the check enforced by _deposit():
 function deposit(uint256 assets, address receiver) public override returns (uint256 shares) {
@@ -315,6 +337,7 @@ function mint(uint256 shares, address receiver) public override returns (uint256
 ### The Function Family Comparison Test
 
 For every pair of functions that do similar things:
+
 ```
 1. List all state changes in function A (deposit/place/create)
 2. List all state changes in function B (withdraw/update/cancel)
@@ -325,6 +348,7 @@ If A does X but B doesn't do the reverse of X → BUG.
 ```
 
 ### Grep Patterns
+
 ```bash
 # Find create/place/add vs update/modify function pairs
 grep -rn "function place_\|function create_\|function add_\|function open_" contracts/ -A5
@@ -344,6 +368,7 @@ grep -rn "function deposit\|function mint\|function withdraw\|function redeem" c
 ```
 
 ### Kill Signals
+
 - update/cancel functions explicitly handle token transfers in all cases
 - Partial fills refund both ETH and ERC20 paths
 - `safeApprove(router, 0)` present before every `safeApprove(router, amount)`
@@ -363,6 +388,7 @@ grep -rn "function deposit\|function mint\|function withdraw\|function redeem" c
 ---
 
 ## 4. OFF-BY-ONE & BOUNDARY CONDITIONS
+>
 > #4 High bug class — 22% of Highs. Single character change. Massive impact.
 > Real protocols: VeChain Stargate, Alchemix, Flare, Shardeum
 
@@ -393,12 +419,14 @@ function _claimableDelegationPeriods(address delegator) internal view returns (u
 ### The 6 Boundary Locations to Check
 
 **1. Period / Epoch Boundaries**
+
 ```bash
 grep -rn "period\|epoch\|round" contracts/ -i | grep "[<>][^=]"
 # Every > should be questioned: should it be >=?
 ```
 
 **2. Time-Based Locks**
+
 ```solidity
 // Question: is the exact moment of expiry locked or unlocked?
 return block.timestamp < users[user].depositTimestamp + lockPeriod;
@@ -406,6 +434,7 @@ return block.timestamp < users[user].depositTimestamp + lockPeriod;
 ```
 
 **3. Loop Break Conditions**
+
 ```solidity
 // Alchemix — processes yield per week:
 for (uint256 t = weekStart; t <= weekEnd; t += WEEK) {
@@ -414,22 +443,26 @@ for (uint256 t = weekStart; t <= weekEnd; t += WEEK) {
     // → caches supply at wrong timestamp → division by zero in claims
 }
 ```
+
 ```bash
 grep -rn "\bbreak\b" contracts/ -B5
 # For each break: should it also break when equal?
 ```
 
 **4. Array Index Boundaries**
+
 ```solidity
 for (uint256 i = 0; i <= array.length; i++) {  // should be i < array.length
     process(array[i]);  // array[array.length] = out of bounds → revert
 }
 ```
+
 ```bash
 grep -rn "\.length\s*-\s*1\|i\s*<=\s*.*\.length\b" contracts/
 ```
 
 **5. Amount / Balance Boundaries**
+
 ```solidity
 require(balanceOf(msg.sender) >= amount);  // allows exact full withdrawal
 // vs:
@@ -437,6 +470,7 @@ require(balanceOf(msg.sender) > amount);   // can't withdraw last wei
 ```
 
 **6. Rounding and Precision Boundaries**
+
 ```solidity
 // Can any input amount produce exactly 0 output that should be non-zero?
 uint256 shares = (amount * totalSupply) / totalAssets;
@@ -449,6 +483,7 @@ For every `if (A > B)` found: "What happens when A == B?" Which branch? Is that 
 For every `if (A < B)` found: "What happens when A == B?"
 
 ### Grep Patterns
+
 ```bash
 # Variables that represent boundaries
 grep -rn "Period\|Epoch\|Round\|Index\|Timestamp\|Deadline" contracts/ -A3 | grep "[<>][^=]"
@@ -459,6 +494,7 @@ grep -rn "\bbreak\b\|\bcontinue\b" contracts/ -B10
 ```
 
 ### Kill Signals
+
 - Both `>=` and `>` are present with clear, distinct intent in comments
 - Unit tests explicitly cover the equal-case boundary
 - No period/epoch system in the contract (can't have epoch boundary bug)
@@ -474,6 +510,7 @@ grep -rn "\bbreak\b\|\bcontinue\b" contracts/ -B10
 ---
 
 ## 5. ORACLE / PRICE MANIPULATION
+>
 > 12% of all reports, largest individual payouts. $117M Mango, $70M Curve.
 > Real protocols: Swaylend, ZeroLend, Chainlink integrations, Pyth, Uniswap V2/V3
 
@@ -484,6 +521,7 @@ If a protocol reads a wrong price, it can be tricked into accepting undercollate
 ### Chainlink Bugs
 
 **Bug A — Missing Staleness Check (most common)**
+
 ```solidity
 // VULNERABLE:
 (, int256 price,,,) = priceFeed.latestRoundData();
@@ -498,6 +536,7 @@ return uint256(price);
 ```
 
 **Bug B — Missing Sequencer Uptime Check (L2 only)**
+
 ```solidity
 // On Arbitrum, Optimism: if sequencer goes down, prices can be stale
 (, int256 answer, uint256 startedAt,,) = sequencerUptimeFeed.latestRoundData();
@@ -506,6 +545,7 @@ require(block.timestamp - startedAt >= GRACE_PERIOD, "Grace period active");
 ```
 
 **Bug C — Using latestAnswer() (deprecated)**
+
 ```solidity
 int256 price = priceFeed.latestAnswer();  // doesn't return timestamp → no staleness check possible
 ```
@@ -513,6 +553,7 @@ int256 price = priceFeed.latestAnswer();  // doesn't return timestamp → no sta
 ### Pyth Bugs
 
 **Bug A — Confidence Not Subtracted**
+
 ```solidity
 // VULNERABLE: uses price directly without confidence interval
 PythStructs.Price memory p = pyth.getPriceNoOlderThan(priceId, MAX_AGE);
@@ -523,6 +564,7 @@ return amount * uint256(int256(p.price - int64(p.conf))) / 1e8;
 ```
 
 **Bug B — Hardcoded Global Confidence Threshold**
+
 ```solidity
 uint256 public constant ORACLE_MAX_CONF_WIDTH = 20;  // BPS — may fail for volatile assets
 ```
@@ -530,6 +572,7 @@ uint256 public constant ORACLE_MAX_CONF_WIDTH = 20;  // BPS — may fail for vol
 ### AMM Spot Price (Most Dangerous)
 
 **Uniswap V2 — getReserves() Attack**
+
 ```solidity
 // VULNERABLE: reading price from getReserves() in same block as action
 (uint112 reserve0, uint112 reserve1,) = pair.getReserves();
@@ -539,6 +582,7 @@ return reserve1 * 1e18 / reserve0;  // spot price — manipulable via flash loan
 ```
 
 **Uniswap V3 — slot0() Attack**
+
 ```solidity
 // VULNERABLE: slot0 is manipulable within one block
 (uint160 sqrtPriceX96,,,,,,) = pool.slot0();
@@ -552,6 +596,7 @@ secondsAgos[1] = 0;
 ```
 
 **Protocol-Internal (balanceOf) Donation Attack**
+
 ```solidity
 // VULNERABLE:
 function totalAssets() public view returns (uint256) {
@@ -561,6 +606,7 @@ function totalAssets() public view returns (uint256) {
 ```
 
 ### Grep Patterns
+
 ```bash
 grep -rn "latestRoundData()" contracts/ -A5
 # Is updatedAt captured? Is block.timestamp - updatedAt <= MAX checked?
@@ -576,6 +622,7 @@ grep -rn "latestAnswer()" contracts/
 ```
 
 ### Oracle Checklist
+
 ```
 □ Chainlink: updatedAt staleness check present?
 □ Chainlink: price > 0 check present?
@@ -591,6 +638,7 @@ grep -rn "latestAnswer()" contracts/
 ```
 
 ### Kill Signals
+
 - Protocol has no lending/borrowing (yield-only protocols like simple staking vaults can't be oracle-drained)
 - DEX swap is operational only (not used for security-critical collateral valuation)
 - All AMM price reads use TWAP with >= 30 minute window
@@ -599,6 +647,7 @@ grep -rn "latestAnswer()" contracts/
 ---
 
 ## 6. ERC4626 VAULT BUGS
+>
 > Found repeatedly in 2024-2025: Belong, ResupplyFi, Napier, Astaria, Smilee Finance, FlatMoney
 
 ### What It Is
@@ -674,6 +723,7 @@ function totalAssets() public view override returns (uint256) {
 ```
 
 ### Grep Patterns
+
 ```bash
 # First depositor check
 grep -rn "convertToShares\|_convertToShares\|previewDeposit" contracts/ -A5
@@ -693,6 +743,7 @@ grep -rn "/ totalAssets\|/ totalSupply\|/ reserves" contracts/
 ```
 
 ### Vault Checklist
+
 ```
 □ First depositor: does convertToShares use +1 virtual offset?
 □ Is there a "dead shares" mechanism or minimum deposit?
@@ -705,6 +756,7 @@ grep -rn "/ totalAssets\|/ totalSupply\|/ reserves" contracts/
 ```
 
 ### Kill Signals
+
 - OpenZeppelin ERC4626 v4.9+ with `_decimalsOffset()` override present
 - Protocol is NOT ERC4626 — uses simpler 1:1 share model (inflation attack doesn't apply)
 - Transfers disabled entirely (TransferLocked pattern) prevents stake migration bug
@@ -713,6 +765,7 @@ grep -rn "/ totalAssets\|/ totalSupply\|/ reserves" contracts/
 ---
 
 ## 7. REENTRANCY (ALL VARIANTS)
+>
 > $300M+ losses since Jan 2024. Penpie $27M, Curve $70M.
 > Classic + Cross-function + Read-only + Cross-contract. All 4 must be checked.
 
@@ -778,6 +831,7 @@ But Protocol A's computation depends on Protocol B's state (which is inconsisten
 ```
 
 ### Grep Patterns
+
 ```bash
 # Step 1: Find all external calls
 grep -rn "\.call(\|\.call{value\|safeTransfer\|safeTransferFrom\|\.transfer(\|\.send(" contracts/
@@ -796,6 +850,7 @@ grep -rn "\.call{value\|\.call(" contracts/ -B20 -A5
 ```
 
 ### Kill Signals
+
 - All `_processYield` / `_claim` functions follow CEI: state updated before transfer
 - Reward token is not ERC777 (no tokensReceived hook)
 - `nonReentrant` present on all external-call-containing functions
@@ -813,6 +868,7 @@ grep -rn "\.call{value\|\.call(" contracts/ -B20 -A5
 ---
 
 ## 8. FLASH LOAN ATTACKS
+>
 > Used in 83% of eligible exploits. $0 capital required.
 > Real protocols: Beanstalk $182M, Mango $117M, Euler $197M
 
@@ -823,13 +879,16 @@ Flash loans give unlimited capital for 1 block with no collateral. Any check tha
 ### The 3 Attack Patterns
 
 **Pattern 1: Oracle Manipulation**
+
 ```
 1. Flash borrow 100,000 ETH
 2. Dump 100,000 ETH → TARGET_TOKEN on Uniswap (price crashes)
 3. Liquidate TARGET_TOKEN positions at crashed price → steal collateral
 4. Repay flash loan
 ```
+
 OR (pump version):
+
 ```
 1. Flash borrow USDC
 2. Buy TARGET_TOKEN → price pumps
@@ -840,6 +899,7 @@ OR (pump version):
 ```
 
 **Pattern 2: Governance Attack**
+
 ```
 1. Flash borrow governance tokens (no collateral needed)
 2. Vote on malicious proposal (if no snapshot delay)
@@ -850,6 +910,7 @@ Defense: snapshot voting power at proposal creation block
 ```
 
 **Pattern 3: Liquidity Manipulation**
+
 ```
 1. Flash borrow LP tokens
 2. Remove liquidity → temporarily drain pool
@@ -878,6 +939,7 @@ address constant AAVE_POOL = 0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2;
 ```
 
 ### Flash Loan Vulnerability Checklist
+
 ```
 □ Does any function read an AMM spot price (getReserves/slot0)?
   → Can be manipulated in same block with flash loan
@@ -892,6 +954,7 @@ address constant AAVE_POOL = 0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2;
 ```
 
 ### Kill Signals
+
 - Protocol has no lending/borrowing, oracle pricing, or governance (flash loan has nothing to exploit)
 - Early withdrawal fee makes flash deposit/withdraw unprofitable (0.1% fee > 1-block yield steal)
 - Harvest requires whitelisted caller (attacker can't trigger harvest to abuse it)
@@ -900,12 +963,14 @@ address constant AAVE_POOL = 0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2;
 ---
 
 ## 9. SIGNATURE REPLAY
+>
 > High payout potential $5K-$500K. Cross-chain opportunity.
 > Real protocols: Polygon $2.2M, zkSync $200K, Alchemix, EIP-2612 permit
 
 ### The 3 Variants
 
 **Variant 1: Cross-Chain Signature Replay**
+
 ```solidity
 // VULNERABLE: signature doesn't include chainId
 function claimRewards(address user, uint256 amount, bytes memory signature) external {
@@ -925,6 +990,7 @@ bytes32 DOMAIN_SEPARATOR = keccak256(abi.encode(
 ```
 
 **Variant 2: Missing Nonce (Same-Chain Replay)**
+
 ```solidity
 // VULNERABLE: no nonce → same signature reusable indefinitely
 function executePermit(address user, uint256 amount, bytes memory sig) external {
@@ -937,6 +1003,7 @@ bytes32 hash = keccak256(abi.encodePacked(user, amount, nonces[user]++, address(
 ```
 
 **Variant 3: EIP-2612 Permit Frontrun DoS**
+
 ```solidity
 // Victim submits: permitAndDeposit(owner, spender, value, deadline, v, r, s)
 // Attacker sees in mempool, frontruns: token.permit(owner, spender, value, deadline, v, r, s)
@@ -951,6 +1018,7 @@ function permitAndDeposit(uint256 amount, uint256 deadline, uint8 v, bytes32 r, 
 ```
 
 **ECDSA Malleability**
+
 ```solidity
 // VULNERABLE: signatures used as mapping keys (bytes not address)
 mapping(bytes => bool) public usedSignatures;
@@ -962,6 +1030,7 @@ function claim(bytes memory sig) external {
 ```
 
 ### Grep Patterns
+
 ```bash
 grep -rn "ecrecover\|ECDSA\.recover" contracts/
 grep -rn "chainId\|block\.chainid\|DOMAIN_SEPARATOR" contracts/
@@ -976,6 +1045,7 @@ grep -rn "try.*permit\|catch.*permit" contracts/
 ```
 
 ### Signature Checklist
+
 ```
 □ Does signature include: chainId? (cross-chain replay protection)
 □ Does signature include: contract address? (replay between contracts)
@@ -988,6 +1058,7 @@ grep -rn "try.*permit\|catch.*permit" contracts/
 ```
 
 ### Kill Signals
+
 - Protocol has no off-chain signature mechanism at all
 - DOMAIN_SEPARATOR includes both `block.chainid` and `address(this)`
 - All signature uses have nonces with `nonces[user]++` pattern
@@ -996,6 +1067,7 @@ grep -rn "try.*permit\|catch.*permit" contracts/
 ---
 
 ## 10. PROXY / UPGRADE BUGS
+>
 > $10M Wormhole, $150M Parity. Uninitialized impl = anyone becomes admin.
 > Patterns: UUPS, Transparent Proxy, Beacon Proxy, Storage Collision
 
@@ -1058,6 +1130,7 @@ function initializeV2() public reinitializer(2) {
 ```
 
 ### Grep Patterns
+
 ```bash
 grep -rn "function initialize\b" contracts/ -A3
 # Does it have: initializer modifier? _disableInitializers() in constructor?
@@ -1074,6 +1147,7 @@ grep -rn "slot\|__gap\|ERC1967Storage" contracts/
 ```
 
 ### Proxy Checklist
+
 ```
 □ Is the implementation contract upgradeable? (UUPS/Transparent/Beacon?)
 □ Is implementation's initialize() protected by initializer modifier?
@@ -1086,6 +1160,7 @@ grep -rn "slot\|__gap\|ERC1967Storage" contracts/
 ```
 
 ### Kill Signals
+
 - Contract is NOT upgradeable (no proxy pattern, no `upgradeTo`, no `initialize`)
 - Implementation constructor calls `_disableInitializers()`
 - `_authorizeUpgrade` has `onlyOwner` or equivalent

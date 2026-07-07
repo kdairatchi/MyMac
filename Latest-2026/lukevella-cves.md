@@ -63,7 +63,6 @@ _pending enrichment_
 ## 2026-04-19
 
 ### Rallly Reset Password RedirectTo XSS — `CVE-2026-6493`
-
 - **Tags:** `#xss` `#web`
 - **Severity:** high · **Hunt:** 4/5 · **Score:** 42.0 · **Status:** poc · **Age:** 0d
 - **Sources:** [1](https://nvd.nist.gov/vuln/detail/CVE-2026-6493)

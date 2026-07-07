@@ -63,7 +63,6 @@ _pending enrichment_
 ## 2026-04-19
 
 ### Windows Driver Signature Enforcement Bypass — `CVE-2026-21709`
-
 - **Tags:** `#privesc` `#auth-bypass`
 - **Severity:** medium · **Hunt:** 2/5 · **Score:** 10.0 · **Status:** unknown · **Age:** 0d
 - **Sources:** [1](https://nvd.nist.gov/vuln/detail/CVE-2026-21709)

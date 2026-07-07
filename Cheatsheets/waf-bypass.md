@@ -37,11 +37,13 @@ Peel / add layers until WAF and origin disagree.
 ## Header tricks
 
 Origin IP discovery (bypass WAF entirely):
+
 - Censys / Shodan for SSL cert SAN + `target.com` outside Cloudflare ranges.
 - Historical DNS (SecurityTrails, dnshistory), SPF records, MX records, subdomain leaks pointing to origin.
 - `Host: target.com` on the discovered IP → bypass CDN.
 
 Cache-level:
+
 - `X-Forwarded-For: 127.0.0.1` — some origins trust → rate-limit / authz bypass.
 - `X-Original-URL`, `X-Rewrite-URL` — path override past WAF.
 - `X-Forwarded-Host` — host-header injection past WAF.

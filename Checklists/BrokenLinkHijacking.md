@@ -10,6 +10,7 @@
 ## Discovery
 
 - [ ] Crawl the target and extract all external links:
+
   ```bash
   # Using katana
   katana -u https://target.com -d 3 -jc | grep -oP 'https?://[^\s"<>]+' | grep -v target.com
@@ -17,24 +18,32 @@
   # Using waybackurls for historical links
   waybackurls target.com | grep -oP 'https?://[^\s"<>]+' | grep -v target.com | sort -u
   ```
+
 - [ ] Run [broken-link-checker](https://github.com/stevenvachon/broken-link-checker):
+
   ```bash
   blc https://target.com -ro --exclude target.com
   ```
+
 - [ ] Install and use [Check My Links](https://chrome.google.com/webstore/detail/check-my-links/ojkcdipcgfaekbeaelaapakgnjflfglf) Chrome extension
 
 ## Verify a Link is Claimable
 
 - [ ] Confirm the external domain resolves (NXDOMAIN = expired/available):
+
   ```bash
   dig +short expired-domain.com
   # No response = available
   ```
+
 - [ ] Check domain availability:
+
   ```bash
   whois expired-domain.com | grep -i "no match\|not found\|available"
   ```
+
 - [ ] Check if a GitHub/npm/social handle linked on target is unclaimed:
+
   ```bash
   curl -s -o /dev/null -w "%{http_code}" https://github.com/unclaimed-org
   # 404 = claimable

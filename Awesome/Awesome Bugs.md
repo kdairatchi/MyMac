@@ -6,7 +6,6 @@ This repository contains a collection of "awesome", funny, obscure or unfortunat
 
 Some day it may become a talk. Or perhaps a blarg post.
 
-
 The Bugs
 --------
 
@@ -28,11 +27,11 @@ The Bugs
 
 * `MacBook Pro Runs Hot When Charged On the Right Side and Not Left <https://apple.stackexchange.com/questions/363337/how-to-find-cause-of-high-kernel-task-cpu-usage/363933#363933>`_
 
-* `Python 2 Can't Compile Bytecode Past 2038 <https://bugs.python.org/issue34990>`_ (The `Year 2038 Problem <https://en.wikipedia.org/wiki/Year_2038_problem>`_)
+* `Python 2 Can't Compile Bytecode Past 2038 <https://bugs.python.org/issue34990>`_(The `Year 2038 Problem <https://en.wikipedia.org/wiki/Year_2038_problem>`_)
 
 * `IRS Site Only Delivers Stimulus Status When COERCED <https://www.latimes.com/business/story/2020-04-27/irs-website-hack-coronavirus-stimulus-checks-all-caps>`_
 
-* `Reboot Your Boeing 787 Every 248 Days <https://ioactive.com/reverse-engineers-perspective-on-the-boeing-787-51-days-airworthiness-directive/>`_ (and maybe `reboot your Windows 98 <https://web.archive.org/web/20060623143454/http://support.microsoft.com/default.aspx?scid=KB;EN-US;Q216641&>`_ too).
+* `Reboot Your Boeing 787 Every 248 Days <https://ioactive.com/reverse-engineers-perspective-on-the-boeing-787-51-days-airworthiness-directive/>`_(and maybe `reboot your Windows 98 <https://web.archive.org/web/20060623143454/http://support.microsoft.com/default.aspx?scid=KB;EN-US;Q216641&>`_ too).
 
 * `Tay, The Racist AI Bot <https://en.wikipedia.org/wiki/Tay_(bot)>`_
 
@@ -50,7 +49,7 @@ The Bugs
 
 * A Haskell Compiler, Albeit a Dev Version, `Really Really Wants Your Code to Type Check <https://gitlab.haskell.org/ghc/ghc/-/issues/163>`_
 
-* Dwarf Fortress `kills cats <https://www.youtube.com/watch?v=6yWf6BHqiWM>`_ (`creator interview here <https://www.youtube.com/watch?v=VAhHkJQ3KgY>`_)
+* Dwarf Fortress `kills cats <https://www.youtube.com/watch?v=6yWf6BHqiWM>`_(`creator interview here <https://www.youtube.com/watch?v=VAhHkJQ3KgY>`_)
 
 * `A strangely long second on 1927-12-31 in Shanghai <https://stackoverflow.com/questions/6841333/why-is-subtracting-these-two-times-in-1927-giving-a-strange-result/>`_
 
@@ -60,7 +59,7 @@ The Bugs
 
 * `All you need for Russell's paradox is a big enough universe <https://github.com/agda/agda/issues/5706>`_
 
-* `Janet Jackson had the power to crash laptop computers <https://devblogs.microsoft.com/oldnewthing/20220816-00/?p=106994>`_ (with a `CVE <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-38392>`_, an `Adam Neely video <https://www.youtube.com/watch?v=-y3RGeaxksY>`_ and a `follow-up by 99% Invisible <https://99percentinvisible.org/episode/mini-stories-volume-15/3/>`_)
+* `Janet Jackson had the power to crash laptop computers <https://devblogs.microsoft.com/oldnewthing/20220816-00/?p=106994>`_(with a `CVE <https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-38392>`_, an `Adam Neely video <https://www.youtube.com/watch?v=-y3RGeaxksY>`_ and a `follow-up by 99% Invisible <https://99percentinvisible.org/episode/mini-stories-volume-15/3/>`_)
 
 * `One pixel to make a bus look like a bear? <https://arxiv.org/abs/1710.08864>`_
 
@@ -90,7 +89,6 @@ Other Kind-of-Similar Lists
 * `Russell Davidson's Specification Gaming Examples in AI <https://docs.google.com/spreadsheets/u/2/d/e/2PACX-1vRPiprOaC3HsCf5Tuum8bRfzYUiKLRqJmbOoC-32JorNdfyTiRRsR7Ea5eWtvsWzuxo8bjOxCG84dAg/pubhtml>`_
 
 * `Adversarial Machine Learning <https://en.wikipedia.org/wiki/Adversarial_machine_learning>`_
-
 
 Contributing
 ------------

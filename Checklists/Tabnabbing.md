@@ -3,17 +3,20 @@
 ## Find Vulnerable Links
 
 - [ ] Search page source for `target="_blank"` without `rel="noopener noreferrer"`:
+
   ```bash
   # In Burp — search response body
   # CLI on downloaded HTML
   grep -n 'target="_blank"' page.html | grep -v 'noopener'
   ```
+
 - [ ] Check user-submitted content areas that render links (profiles, comments, bio fields)
 - [ ] Check the application's own outbound links in navigation/footers
 
 ## Confirm window.opener is Not Null
 
 - [ ] Open the linked page in a new tab — in the browser console run:
+
   ```javascript
   console.log(window.opener);
   // null = patched, object = vulnerable
@@ -22,6 +25,7 @@
 ## PoC — Exploit Reverse Tabnabbing
 
 - [ ] Host this on attacker-controlled domain:
+
   ```html
   <html>
   <script>
@@ -32,6 +36,7 @@
   <body>Legitimate-looking content here</body>
   </html>
   ```
+
 - [ ] Get the target app to link to your page with `target="_blank"` (e.g. submit link in profile)
 - [ ] Click the link, observe background tab redirected to attacker domain
 

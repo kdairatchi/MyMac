@@ -1,34 +1,31 @@
 ![hippo](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3hhem9mNjU2Y2lhcm9ydjljN2F5Nmc5eWpkMjM4ZGZobWprOTRlZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/12W5Sg2koWYnwA/giphy.gif)
 
-
-
 ![hippo](https://hackersec.com/wp-content/uploads/2023/10/hackersec-logo-min.png)
 
 [HackerSec](https://hackersec.com/en/has/)
 
-
-
 ![image](https://github.com/user-attachments/assets/1cebf651-daf3-467b-a304-9b73547c374b)
-
 
 <h1 align="center">
   <br>
   <br>
   <br>
-	<img width="500" src="https://cdn.rawgit.com/Annsec/awesome-cybersecurity/master/media/logo.svg" alt="Awesome cybersecurity">
-	<br>
+ <img width="500" src="https://cdn.rawgit.com/Annsec/awesome-cybersecurity/master/media/logo.svg" alt="Awesome cybersecurity">
+ <br>
   <br>
-	<br>
+ <br>
 </h1>
 <br>
 Curated list of awesome cybersecurity companies and solutions.
 <br>
 
 ## Security intelligence
+
 - [Exabeam](https://www.exabeam.com/)
 - [IBM](http://www-03.ibm.com/software/products/en/category/security-intelligence)
 
 ## Threat intelligence
+
 - [Recorded future](https://www.recordedfuture.com/)
 - [Webroot Brightcloud](http://www.brightcloud.com/)
 - [Checkpoint ThreatCloud](https://www.checkpoint.com/products/threatcloud-intellistore/)
@@ -36,10 +33,12 @@ Curated list of awesome cybersecurity companies and solutions.
 - [Crowdstrike](https://www.crowdstrike.com/products/falcon-intelligence/)
 
 ## Network Security
+
 - [Clavister](https://www.clavister.com/)
 - [root9b](https://www.root9b.com/)
 
 ## Malware protection
+
 - [Endgame](https://www.endgame.com/)
 - [Heimdal Security](https://heimdalsecurity.com)
 - [Cybereason](https://www.cybereason.com/)
@@ -57,15 +56,18 @@ Curated list of awesome cybersecurity companies and solutions.
 - [Cyphort](https://www.cyphort.com/)
 
 ## Vulnerability management
+
 - [Defensecode](https://defensecode.com)
 - [Tenable](http://www.tenable.com/)
 
 ## Application protection
+
 - [Wallarm](https://wallarm.com)
 - [Akamai](https://www.akamai.com/)
 - [Alertlogic](https://www.alertlogic.com/)
 
 ## DDOS Protection
+
 - [Akamai](https://www.akamai.com/)
 - [Incapsula](https://www.incapsula.com/)
 - [Arbor Networks](https://www.arbornetworks.com/)
@@ -105,114 +107,114 @@ Curated list of awesome cybersecurity companies and solutions.
 [onyphe](https://www.onyphe.io/)
 
 # Awesome Cyber Security
-A curated list of cyber security resources and tools. 
+
+A curated list of cyber security resources and tools.
 
 ## Awesome lists
 
-* [Awesome Security](https://github.com/sbilly/awesome-security/) - A collection of awesome software, libraries, documents, books, resources and cool stuff about security.
+- [Awesome Security](https://github.com/sbilly/awesome-security/) - A collection of awesome software, libraries, documents, books, resources and cool stuff about security.
 
-* [Awesome Web Security](https://github.com/qazbnm456/awesome-web-security) -  A curated list of Web Security materials and resources for learning cutting edge penetration techniques.
+- [Awesome Web Security](https://github.com/qazbnm456/awesome-web-security) -  A curated list of Web Security materials and resources for learning cutting edge penetration techniques.
 
-* [Awesome Machine Learning for Cyber Security](https://github.com/jivoi/awesome-ml-for-cybersecurity) - A curated list of amazingly awesome tools and resources related to the use of machine learning for cyber security.
+- [Awesome Machine Learning for Cyber Security](https://github.com/jivoi/awesome-ml-for-cybersecurity) - A curated list of amazingly awesome tools and resources related to the use of machine learning for cyber security.
 
-* [awesome-web-hacking](https://github.com/infoslack/awesome-web-hacking) - This list is for anyone wishing to learn about web application security but do not have a starting point.
+- [awesome-web-hacking](https://github.com/infoslack/awesome-web-hacking) - This list is for anyone wishing to learn about web application security but do not have a starting point.
 
-* [awesome-mobile-security](https://github.com/vaib25vicky/awesome-mobile-security) - Maintained by @vaib25vicky with contributions from the security and developer communities.
+- [awesome-mobile-security](https://github.com/vaib25vicky/awesome-mobile-security) - Maintained by @vaib25vicky with contributions from the security and developer communities.
 
-* [awesome-threat-intelligence](https://github.com/hslatman/awesome-threat-intelligence) - A curated list of awesome Threat Intelligence resources.
+- [awesome-threat-intelligence](https://github.com/hslatman/awesome-threat-intelligence) - A curated list of awesome Threat Intelligence resources.
 
-* [awesome-security-hardening](https://github.com/decalage2/awesome-security-hardening) -  collection of awesome security hardening guides, best practices, checklists, benchmarks, tools and other resources.
+- [awesome-security-hardening](https://github.com/decalage2/awesome-security-hardening) -  collection of awesome security hardening guides, best practices, checklists, benchmarks, tools and other resources.
 
-* [Awesome Cyber Security](https://github.com/fabionoth/awesome-cyber-security) - A collection of awesome software, libraries, documents, books, resources and cool stuff about security.
+- [Awesome Cyber Security](https://github.com/fabionoth/awesome-cyber-security) - A collection of awesome software, libraries, documents, books, resources and cool stuff about security.
 
-* [Awesome Malware Analysis](https://github.com/rshipp/awesome-malware-analysis) - A curated list of awesome malware analysis tools and resources.
+- [Awesome Malware Analysis](https://github.com/rshipp/awesome-malware-analysis) - A curated list of awesome malware analysis tools and resources.
 
 ## Threat databases and alerts
 
-* [ATT&CK](https://attack.mitre.org/) - ATT&CK is a knowledge base of cyber adversary behavior and taxonomy for adversarial actions across their lifecycle. ATT&CK has two parts: ATT&CK for Enterprise, which covers behavior against enterprise IT networks and cloud, and ATT&CK for Mobile, which focuses on behavior against mobile devices.
+- [ATT&CK](https://attack.mitre.org/) - ATT&CK is a knowledge base of cyber adversary behavior and taxonomy for adversarial actions across their lifecycle. ATT&CK has two parts: ATT&CK for Enterprise, which covers behavior against enterprise IT networks and cloud, and ATT&CK for Mobile, which focuses on behavior against mobile devices.
 
-* [NHS Digital Cyber Alerts](https://digital.nhs.uk/cyber-alerts) - We issue cyber security alert notifications to health and care organisations, ranging from weekly threat bulletins to immediate high-severity alerts.
+- [NHS Digital Cyber Alerts](https://digital.nhs.uk/cyber-alerts) - We issue cyber security alert notifications to health and care organisations, ranging from weekly threat bulletins to immediate high-severity alerts.
 
-* [cve-search](https://cve.circl.lu/) - cve-search is accessible via a web interface and an HTTP API. cve-search is an interface to search publicly known information from security vulnerabilities in software and hardware along with their corresponding exposures.
+- [cve-search](https://cve.circl.lu/) - cve-search is accessible via a web interface and an HTTP API. cve-search is an interface to search publicly known information from security vulnerabilities in software and hardware along with their corresponding exposures.
 
-* [VULDB](https://vuldb.com/?) - Number one vulnerability database documenting and explaining security vulnerabilities, threats, and exploits since 1970.
+- [VULDB](https://vuldb.com/?) - Number one vulnerability database documenting and explaining security vulnerabilities, threats, and exploits since 1970.
 
-* [The Exploit Database](https://www.exploit-db.com/) - The Exploit Database is maintained by Offensive Security, an information security training company that provides various Information Security Certifications as well as high end penetration testing services.
+- [The Exploit Database](https://www.exploit-db.com/) - The Exploit Database is maintained by Offensive Security, an information security training company that provides various Information Security Certifications as well as high end penetration testing services.
 
-* [0day.today](https://en.0day.today/) - 0day.today - Biggest Exploits Database and 0day market - The Underground, is one of the world's most popular and comprehensive computer security web sites.
+- [0day.today](https://en.0day.today/) - 0day.today - Biggest Exploits Database and 0day market - The Underground, is one of the world's most popular and comprehensive computer security web sites.
 
-* [RAPID7](https://www.rapid7.com/db/) - A curated repository of vetted computer software exploits and exploitable vulnerabilities.
+- [RAPID7](https://www.rapid7.com/db/) - A curated repository of vetted computer software exploits and exploitable vulnerabilities.
 
-* [National Vulnerability Database](https://nvd.nist.gov/vuln/search) - The NVD is the U.S. government repository of standards based vulnerability management data represented using the Security Content Automation Protocol (SCAP).
+- [National Vulnerability Database](https://nvd.nist.gov/vuln/search) - The NVD is the U.S. government repository of standards based vulnerability management data represented using the Security Content Automation Protocol (SCAP).
 
-* [CXSecurity](https://cxsecurity.com/exploit/) - (WLB2) World Laboratory of Bugtraq is a huge collection of information on data communications safety. Its main objective is to inform about errors in various applications.
+- [CXSecurity](https://cxsecurity.com/exploit/) - (WLB2) World Laboratory of Bugtraq is a huge collection of information on data communications safety. Its main objective is to inform about errors in various applications.
 
-* [China National Vulnerability Database (CNNVD)](http://www.cnnvd.org.cn/) - Chinese government-run vulnerability database analoguous to the United States’s CVE database hosted by Mitre Corporation.
+- [China National Vulnerability Database (CNNVD)](http://www.cnnvd.org.cn/) - Chinese government-run vulnerability database analoguous to the United States’s CVE database hosted by Mitre Corporation.
 
-* [Vulnerability Assessment Platform](https://vulners.com/) - Largest correlated database of vulnerabilities and exploits
+- [Vulnerability Assessment Platform](https://vulners.com/) - Largest correlated database of vulnerabilities and exploits
 
-* [GitHub Advisory Database](https://github.com/advisories/) - The latest security vulnerabilities from the world of open source software.
+- [GitHub Advisory Database](https://github.com/advisories/) - The latest security vulnerabilities from the world of open source software.
 
-* [OSV](https://osv.dev/) - OSV is a vulnerability database and triage infrastructure for open source projects aimed at helping both open source maintainers and consumers of open source.
+- [OSV](https://osv.dev/) - OSV is a vulnerability database and triage infrastructure for open source projects aimed at helping both open source maintainers and consumers of open source.
 
-* [Snyk Vulnerability DB](https://snyk.io/vuln/) - Detailed information and remediation guidance for known vulnerabilities.
+- [Snyk Vulnerability DB](https://snyk.io/vuln/) - Detailed information and remediation guidance for known vulnerabilities.
 
-* [Vulnerability Notes Database](https://www.kb.cert.org/vuls/) - The Vulnerability Notes Database provides information about software vulnerabilities. Vulnerability notes include summaries, technical details, remediation information, and lists of affected vendors.
+- [Vulnerability Notes Database](https://www.kb.cert.org/vuls/) - The Vulnerability Notes Database provides information about software vulnerabilities. Vulnerability notes include summaries, technical details, remediation information, and lists of affected vendors.
 
-* [Intelligence X](https://intelx.io/) - Intelligence X is a search engine and data archive. The company is based in Prague, Czech Republic. Its mission is to develop and maintain the search engine and data archive.
-* [Stellastra TLS Cipher Suite Database](https://stellastra.com/cipher-suite) - List of hundreds of TLS cipher suites alongside their security rating and vulnerability/deprecation status. 
+- [Intelligence X](https://intelx.io/) - Intelligence X is a search engine and data archive. The company is based in Prague, Czech Republic. Its mission is to develop and maintain the search engine and data archive.
+- [Stellastra TLS Cipher Suite Database](https://stellastra.com/cipher-suite) - List of hundreds of TLS cipher suites alongside their security rating and vulnerability/deprecation status.
 
 ## Security advice and guidance
 
-* [The National Cyber Security Centre](https://www.ncsc.gov.uk/section/advice-guidance/all-topics) - Helping to make the UK the safest place to live and work online.
+- [The National Cyber Security Centre](https://www.ncsc.gov.uk/section/advice-guidance/all-topics) - Helping to make the UK the safest place to live and work online.
 
-* [End user device (EUD) security guidance](https://www.ncsc.gov.uk/collection/end-user-device-security/) - Guidance for organisations deploying a range of end user device platforms as part of a remote working solution
+- [End user device (EUD) security guidance](https://www.ncsc.gov.uk/collection/end-user-device-security/) - Guidance for organisations deploying a range of end user device platforms as part of a remote working solution
 
-* [Políticas de seguridad para la pyme](https://www.incibe.es/protege-tu-empresa/herramientas/politicas) - Para ayudar a la pyme a poner en marcha los procesos internos con los que mejorar su ciberseguridad presentamos una serie de documentos que hemos denominado como «políticas de seguridad».
+- [Políticas de seguridad para la pyme](https://www.incibe.es/protege-tu-empresa/herramientas/politicas) - Para ayudar a la pyme a poner en marcha los procesos internos con los que mejorar su ciberseguridad presentamos una serie de documentos que hemos denominado como «políticas de seguridad».
 
 ## Lits of cyber security resources
 
-* [50+ Cybersecurity Resources](https://darkcubed.com/cybersecurity-resources) - Dark Cubed’s cybersecurity resources page provides links to dozens of 100% free resources you can use for your own business or for your customers.
+- [50+ Cybersecurity Resources](https://darkcubed.com/cybersecurity-resources) - Dark Cubed’s cybersecurity resources page provides links to dozens of 100% free resources you can use for your own business or for your customers.
 
-* [SANS](https://www.sans.org/security-resources/) - The most trusted source for cyber security training, certification, and research.
+- [SANS](https://www.sans.org/security-resources/) - The most trusted source for cyber security training, certification, and research.
 
-* [The Uber List of Cybersecurity Resources](https://www.cyberdegrees.org/resources/the-big-list/) - We’ve subtitled this list: “Everything you want to know about cyber security and are too tired to search for.” Whatever you may be interested in — from DEF CON to SANS — you will find on this page.
+- [The Uber List of Cybersecurity Resources](https://www.cyberdegrees.org/resources/the-big-list/) - We’ve subtitled this list: “Everything you want to know about cyber security and are too tired to search for.” Whatever you may be interested in — from DEF CON to SANS — you will find on this page.
 
-* [Cybersecurity resource center](https://cybersecurityguide.org/resources/) - This guide is intended to provide actionable resources for everyone looking to learn more about the field.
+- [Cybersecurity resource center](https://cybersecurityguide.org/resources/) - This guide is intended to provide actionable resources for everyone looking to learn more about the field.
 
-* [US Homeland Security - Cybersecurity Resources](https://www.dhs.gov/science-and-technology/cybersecurity-resources) - DHS Science and Technology Directorate (S&T) published documents and other cybersecurity references and links can be found on this page.
+- [US Homeland Security - Cybersecurity Resources](https://www.dhs.gov/science-and-technology/cybersecurity-resources) - DHS Science and Technology Directorate (S&T) published documents and other cybersecurity references and links can be found on this page.
 
-* [Cyber Security Education](https://www.cybersecurityeducation.org/resources/) - This page is devoted to helping cyber security experts find the resources they need to grow and thrive.
+- [Cyber Security Education](https://www.cybersecurityeducation.org/resources/) - This page is devoted to helping cyber security experts find the resources they need to grow and thrive.
 
-* [NATIONAL INITIATIVE FOR CYBERSECURITY CAREERS AND STUDIES](https://niccs.cisa.gov/workforce-development/cybersecurity-resources) - The premier online resource for cybersecurity training. NICCS connects Government employees, students, educators, and industry with cybersecurity training providers throughout the Nation.
+- [NATIONAL INITIATIVE FOR CYBERSECURITY CAREERS AND STUDIES](https://niccs.cisa.gov/workforce-development/cybersecurity-resources) - The premier online resource for cybersecurity training. NICCS connects Government employees, students, educators, and industry with cybersecurity training providers throughout the Nation.
 
+- [25 Free Cybersecurity Resources, Courses, and Tools](https://www.springboard.com/blog/cybersecurity/free-cybersecurity-resources/) -  A plethora of free cybersecurity courses and resources on all topics related to the field.
 
-* [25 Free Cybersecurity Resources, Courses, and Tools](https://www.springboard.com/blog/cybersecurity/free-cybersecurity-resources/) -  A plethora of free cybersecurity courses and resources on all topics related to the field.
+- [Top Cybersecurity Sites and Blogs](https://www.purdueglobal.edu/blog/information-technology/cybersecurity-industry-resources/) - Here are some of the best top cybersecurity blogs and sites.
 
-* [Top Cybersecurity Sites and Blogs](https://www.purdueglobal.edu/blog/information-technology/cybersecurity-industry-resources/) - Here are some of the best top cybersecurity blogs and sites.
+- [Cybersecurity Related Websites](https://www.csiac.org/resources/cybersecurity-related-websites/) - The listing of related sites provide additional sources to pursue the topic of Cybersecurity. The sites include Government organizations, including federal agencies, Department of Defense and military service agencies, commercial organizations, and academic institutions.
 
-* [Cybersecurity Related Websites](https://www.csiac.org/resources/cybersecurity-related-websites/) - The listing of related sites provide additional sources to pursue the topic of Cybersecurity. The sites include Government organizations, including federal agencies, Department of Defense and military service agencies, commercial organizations, and academic institutions.
+- [COMPUTER SECURITY RESOURCE CENTER](https://csrc.nist.gov/) - For 20 years, the Computer Security Resource Center (CSRC) has provided access to NIST's cybersecurity- and information security-related projects, publications, news and events.   CSRC supports stakeholders in government, industry and academia—both in the U.S. and internationally.
 
-* [COMPUTER SECURITY RESOURCE CENTER](https://csrc.nist.gov/) - For 20 years, the Computer Security Resource Center (CSRC) has provided access to NIST's cybersecurity- and information security-related projects, publications, news and events.   CSRC supports stakeholders in government, industry and academia—both in the U.S. and internationally.
+- [Secureworks Resources & Research](https://www.secureworks.com/resources) - Cybersecurity thought leadership resources & Counter Threat Unit™ research.
 
-* [Secureworks Resources & Research](https://www.secureworks.com/resources) - Cybersecurity thought leadership resources & Counter Threat Unit™ research.
+- [IEEE](https://innovationatwork.ieee.org/cyber-security/) - IEEE is the world's largest technical professional organization dedicated to advancing technology for the benefit of humanity.
 
-* [IEEE](https://innovationatwork.ieee.org/cyber-security/) - IEEE is the world's largest technical professional organization dedicated to advancing technology for the benefit of humanity.
+- [The best resources to learn cybersecurity online in 2021](https://www.mygreatlearning.com/blog/the-best-resources-to-learn-cybersecurity-online/) - his list of free and paid cybersecurity resources, courses, books, blogs, tools and cheat codes will help both freshers and professionals to stay updated.
 
-* [The best resources to learn cybersecurity online in 2021](https://www.mygreatlearning.com/blog/the-best-resources-to-learn-cybersecurity-online/) - his list of free and paid cybersecurity resources, courses, books, blogs, tools and cheat codes will help both freshers and professionals to stay updated.
+- [Sifma Cybersecurity Resources](https://www.sifma.org/resources/cybersecurity-resources/) - Here are resources for the financial industry to address critical cyber threats and improve the industry’s overall cybersecurity.
 
-* [Sifma Cybersecurity Resources](https://www.sifma.org/resources/cybersecurity-resources/) - Here are resources for the financial industry to address critical cyber threats and improve the industry’s overall cybersecurity.
+- [Internet Safety 101SM](https://internetsafety101.org/CyberSecurityResources) - Internet Safety 101SM is a digitally-based internet safety resource designed to educate, equip and empower parents, educators and other adults with the knowledge and resources needed to protect children from Internet dangers including pornography, predators, cyberbullies and threats related to online gaming, social networking and mobile devices.
 
-* [Internet Safety 101SM](https://internetsafety101.org/CyberSecurityResources) - Internet Safety 101SM is a digitally-based internet safety resource designed to educate, equip and empower parents, educators and other adults with the knowledge and resources needed to protect children from Internet dangers including pornography, predators, cyberbullies and threats related to online gaming, social networking and mobile devices.
+- [Security Acronyms](https://github.com/cloudsecurelab/security-acronyms) - Curated list of security related acronyms and terms.
 
-* [Security Acronyms](https://github.com/cloudsecurelab/security-acronyms) - Curated list of security related acronyms and terms.
-
-* [vnaya - Cybersecurity For Your Kids](https://www.vnaya.com/these-top-educational-cyber-security-resources-will-help-your-kids-to-stay-safe-from-cyber-crime/) - These Top Educational Cyber Security Resources Will Help Your Kids To Stay Safe From Cyber Crime.
-* [Gracker AI](https://gracker.ai/) - AI Cybersecurity Marketing Tool
-
+- [vnaya - Cybersecurity For Your Kids](https://www.vnaya.com/these-top-educational-cyber-security-resources-will-help-your-kids-to-stay-safe-from-cyber-crime/) - These Top Educational Cyber Security Resources Will Help Your Kids To Stay Safe From Cyber Crime.
+- [Gracker AI](https://gracker.ai/) - AI Cybersecurity Marketing Tool
 
 ## Must Read
-- [RTFM: Red Team Field Manual v2](https://amzn.to/3IZXVj2) by Ben Clark, Nick Downer 
+
+- [RTFM: Red Team Field Manual v2](https://amzn.to/3IZXVj2) by Ben Clark, Nick Downer
 - [The Web Application Hacker's Handbook: Finding and Exploiting Security Flaws](https://amzn.to/3F5H9xT) by Dafydd Stuttard, and Marcus Pinto
 - [The Hacker Playbook 3: Practical Guide To Penetration Testing](https://amzn.to/3mwdDLt) by Peter Kim
 - [Bug Bounty Bootcamp](https://amzn.to/3l1a8fn) by Vickie Li
@@ -220,6 +222,7 @@ A curated list of cyber security resources and tools.
 - [Black Hat Go](https://amzn.to/3mvzh2f) by Tom Steele, Chris Patten, and Dan Kottmann
   
 ## Fundamental Books
+
 - [Ethical Hacking](https://amzn.to/41TLu12) by Daniel G. Graham
 - [Foundations of Information Security](https://amzn.to/41VOPga) by Jason Andress
 - [Penetration Testing](https://amzn.to/3mweg7N) by Georgia Weidman
@@ -227,10 +230,12 @@ A curated list of cyber security resources and tools.
 - [The Tangled Web: A Guide to Securing Modern Web Applications](https://amzn.to/3yhgv14) by Michal Zalewski
   
 ## Web Hacking & Bug Bounty
+
 - [Hacking APIs](https://amzn.to/3F3M1Dw) by Corey Ball
 - [Real-World Bug Hunting](https://amzn.to/3ZLqc3F) by Peter Yaworski
 
 ## Platforms to learn cyber security
+
 - [TryHackMe](https://tryhackme.com)
 - [Hackthebox](https://hackthebox.com)
 - [Blueteamlabs](https://blueteamlabs.online)
@@ -251,13 +256,13 @@ A curated list of cyber security resources and tools.
 - [TCM academy](https://academy.tcm-sec.com/)
 - [Hacking Articles - Raj Chandel's Blog](https://www.hackingarticles.in/)
 - [Active Directory Security](https://adsecurity.org/)
-- [HackTricks](https://book.hacktricks.xyz/welcome/readme) 
-- hadess.io 
-- [Home | RedTeamRecipe](https://redteamrecipe.com/) 
+- [HackTricks](https://book.hacktricks.xyz/welcome/readme)
+- hadess.io
+- [Home | RedTeamRecipe](https://redteamrecipe.com/)
 - [PentesterLab](https://pentesterlab.com/)
 - [LetsDefend](https://letsdefend.io/)
-- [SECURITY BLUE TEAM](https://securityblue.team/training/) 
-- [The Red Canary Blog](https://redcanary.com/blog/) 
+- [SECURITY BLUE TEAM](https://securityblue.team/training/)
+- [The Red Canary Blog](https://redcanary.com/blog/)
 - [Explore Atomic Red Team](https://atomicredteam.io/)
 - [Projectdiscovery.io](https://chaos.projectdiscovery.io/#/)
 - [BugBountyHunting.com](https://www.bugbountyhunting.com/)
@@ -276,18 +281,16 @@ A curated list of cyber security resources and tools.
 - [CyberPython](https://pythoncyber.go.ro)
 
 ## Certifications
+
 - [Security Certification Roadmap - Paul Jerimy Media](https://pauljerimy.com/security-certification-roadmap/)
 
-
 ## Contributions welcome
+
 If you wish to contribute to this list, just fork, make your changes and send me a pull request, I'll be happy to review all of your suggestions :)
 
 ## Check out also
 
-* [Awesome Storage](https://github.com/okhosting/awesome-storage/) - A curated list of storage open source tools. Backups, redundancy, sharing, distribution, encryption, etc.
-
-
-
+- [Awesome Storage](https://github.com/okhosting/awesome-storage/) - A curated list of storage open source tools. Backups, redundancy, sharing, distribution, encryption, etc.
 
 ## Non-links Knowledge
 
@@ -305,11 +308,6 @@ Cloud Security
 Data and Information Security
 IT Governance
 
-
-
-
-
-
 A new year opens to both fresh and persistent cybersecurity challenges. These key projects should be at the top of your 2025 to-do list.
 Male and Female Programmers Talking, Solving Problem, Using Computers, Doing High Five After Success. Software Development / Code Writing / Website Design / Database Architecture. Technical Department
 Credit: Gorodenkoff / Shutterstock
@@ -324,11 +322,11 @@ Over the past year, AI has transformed entire industries. For organizations to b
 
 “While traditional security measures focus on data at rest and in transit, the growing reliance on AI and the desire for secure collaboration reinforces the critical need to protect data in use,” she observes. “By prioritizing secure AI initiatives, organizations can safeguard their most sensitive data and build trust in AI models overall.”
 
-As organizations move toward agentic AI, which empowers AI systems to help users accomplish complex tasks that require planning, research, content generation, and actions, the need for robust security measures becomes even more critical. Without secure AI and accurate data, enterprises risk not only operational failures, but also major security incidents. 
+As organizations move toward agentic AI, which empowers AI systems to help users accomplish complex tasks that require planning, research, content generation, and actions, the need for robust security measures becomes even more critical. Without secure AI and accurate data, enterprises risk not only operational failures, but also major security incidents.
 
 To effectively secure AI workloads, security teams should first gain an understanding of AI use within their enterprise, as well as the data and models used to power their business. “Next, assemble a cross-functional team to assess risks and develop a comprehensive security strategy,” Ramamoorthy advises. “Following best practices and adopting a secure AI framework will help to enable a strong security foundation and ensure that when AI models are implemented, they are secure by default.”
 
-2. Adopt third-party risk management
+1. Adopt third-party risk management
 Third-party risk management (TPRM) is now a top cybersecurity approach, says Ben Saine, principal consultant at technology research and advisory firm ISG. TPRM identifies, assesses, and mitigates risks associated with outsourcing tasks to third-party vendors or service providers. “TPRM’s value is impossible to overestimate,” he states. “Making TPRM the top priority will be essential to protecting your company against the many threats presented by outside vendors and partners.”
 
 With a successful TPRM project, your enterprise will have a better security posture, with fewer vulnerabilities and proactive control over outside hazards, Saine says. TPRM, backed by real-time monitoring and the ability to quickly respond to developing hazards, can also ensure compliance with pertinent laws, reducing the risk of fines and legal headaches. “Compliance will also help your enterprise project credibility and dependability to clients and partners,” he says.
@@ -350,12 +348,12 @@ Third-party AI tools are reshaping multiple business processes. Yet without robu
 
 Glass advises IT leaders to assess how enterprise data is accessed and used across third-party AI tools. “Then prioritize investments in encryption, access controls, and monitoring to secure these workflows.”
 
-4. Strengthen compliance with a unified risk management strategy
+1. Strengthen compliance with a unified risk management strategy
 CISOs have the most at stake if cited for noncompliance, so they will play a key role in carrying out compliance plans, says Michael Fanning, CISO at Splunk, which specializes in operational intelligence software. “In this regard, they may take an inherently conservative approach, such as limiting where company data is stored.” Yet CISOs shouldn’t try handling this project alone, he warns. “CISOs and CIOs need the help of general counsels to sponsor policy and programmatic approaches and set the organization’s priorities.”
 
 “Together, not only will CISOs, CIOs, and general counsels develop a unified risk management strategy and collaborate on policy, they’ll form cross-functional task forces to monitor regulatory shifts, assess impacts, and implement necessary changes across an organization,” Fanning predicts. “They will also have to work closely on investment strategies, infrastructure decisions, and vendor selection to remain compliant with where certain data can reside,” he says. “These successful partnerships will leverage shared dashboards and reporting tools, which will help everyone stay up to date on compliance and respond quickly to new governance issues.”
 
-5. Establish asset visibility and strong cloud governance
+1. Establish asset visibility and strong cloud governance
 As has been the case for the past several years, a core challenge for CISOs has been achieving comprehensive asset visibility and effective cloud governance, states Jim Broome, CTO at cybersecurity services firm DirectDefense.
 
 “Many organizations still struggle to know the location of all of their assets and data, as well as ensuring that those resources are properly managed and protected,” he says. “Looking ahead, prioritizing asset discovery, inventory management, and a robust cloud security posture should be the central focus.”
@@ -366,36 +364,31 @@ Broome recommends building success in progressive, attainable steps that align w
 
 The ultimate goal should be establishing a continuous improvement cycle that leads to comprehensive oversight, reduced risk, and a more resilient security posture.
 
-6. Commit to trust-by-design methodologies
+1. Commit to trust-by-design methodologies
 In 2025, organizations should prioritize trust-by-design principles, particularly when building AI-powered systems, says Vikram Kunchala, Deloitte’s US cyber solutions and platforms leader. Trust by design facilitates the proactive integration of security into every phase of development, thereby mitigating the risk of security breaches and protecting critical assets and data.
 
 Trust by design ensures security is embedded early in development, rather than as an afterthought, Kunchala explains. By anticipating threats and safeguarding data, trust by design strengthens trust, resilience, and ethical integrity in AI solutions. “This approach not only protects sensitive information, but also helps AI systems better withstand evolving risks and maintain compliance with regulatory standards.”
 
 When implementing trust-by-design principles with AI-powered systems, security leaders should align their goals with overall enterprise objectives while obtaining buy-in from key executives and stakeholders. Additionally, conducting thorough assessments of the development processes can help identify vulnerabilities while prioritizing remediation and controls. “One of the most critical phases in a trust-by-design approach is involving both security and development teams from initial design to deployment and maintenance,” Kunchala adds.
 
-7. Build an integrated cyber-storage foundation
+1. Build an integrated cyber-storage foundation
 Instead of treating storage as a passive repository, create an advanced cyber-storage platform that integrates active security features, such as honeypots designed to detect and misdirect attackers, says Aron Brand, CTO at network security firm CTERA.
 
 Brand also suggests using AI-based anomaly detection to identify threats early, using immutability to protect backups from tampering, and active disaster recovery to ensure rapid restoration. “Reimagining storage in this way simplifies operations, reduces gaps, and strengthens resilience against increasingly sophisticated threats,” he says. “Investing in cyber-storage is not just about reducing risk; it ensures that data systems can defend themselves and recover effectively when under attack.”
 
 Cyber-storage offers an integrated, self-defending system centered around data, fully aligned with the demands of today’s security challenges, Brand says. “It’s a necessary addition to our strategies.”
 
+Awesome Security https://github.com/sbilly/awesome-security A curated list of awesome cybersecurity resources, including tools, frameworks, libraries, and more.  
 
-Awesome Security	https://github.com/sbilly/awesome-security	A curated list of awesome cybersecurity resources, including tools, frameworks, libraries, and more.	 
+Awesome Hacking https://github.com/carpedm20/awesome-hacking A curated list of awesome hacking tools, resources, and libraries.  
 
+Awesome Malware Analysis https://github.com/rshipp/awesome-malware-analysis A curated list of awesome malware analysis tools, resources, and libraries.  
 
-Awesome Hacking	https://github.com/carpedm20/awesome-hacking	A curated list of awesome hacking tools, resources, and libraries.	 
+Awesome Incident Response https://github.com/meirwah/awesome-incident-response A curated list of awesome incident response tools, resources, and libraries.  
 
+Awesome Threat Intelligence https://github.com/hslatman/awesome-threat-intelligence A curated list of awesome threat intelligence tools, resources, and libraries.  
 
-Awesome Malware Analysis	https://github.com/rshipp/awesome-malware-analysis	A curated list of awesome malware analysis tools, resources, and libraries.	 
-
-
-Awesome Incident Response	https://github.com/meirwah/awesome-incident-response	A curated list of awesome incident response tools, resources, and libraries.	 
-
-Awesome Threat Intelligence	https://github.com/hslatman/awesome-threat-intelligence	A curated list of awesome threat intelligence tools, resources, and libraries.	 
-
-
-Awesome CTF	https://github.com/apsdehal/awesome-ctf
+Awesome CTF https://github.com/apsdehal/awesome-ctf
 Now let's get started with my Top 10 GitHub repositories list:
 
 1 — Securing Android: A Comprehensive Guide — This repository, Android Security, provides a wealth of resources for securing Android applications, including tools, libraries, and articles.
@@ -437,10 +430,7 @@ Awesome Embedded and IoT Security GitHub
 10 — Exploit Development: The Art of Exploitation"— The Development of exploits repository is a collection of resources for learning about exploit development.
 Palo Alto Networks: Advanced threat prevention and AI-driven analytics.
 
-
-
 Checkpoint Software: Comprehensive security across network, cloud, and mobile.
-
 
 Akamai Cyber Security: Leader in content delivery and cloud security.
 
@@ -470,106 +460,55 @@ Nord Security: Known for its VPN and secure internet access.
 
 Cloudflare: DDoS protection and secure content delivery.
 
-
 SentinelOne: Autonomous endpoint protection and EDR solutions.
 
 Carbon Black: Cloud-native endpoint security and threat hunting.
 
-
 Trustwave: Managed security services and threat detection.
-
 
 Forcepoint: Behavioral-based security and data protection.
 
-
 RSA Security: Comprehensive identity and access management solutions.
-
 
 Fortinet: Unified threat management and next-gen firewall solutions.
 
-
 Varonis: Data security and insider threat detection.
-
 
 Splunk: Security information and event management (SIEM).
 
-
 Bitdefender: Advanced threat intelligence and antivirus solutions.
-
-
-
 
 Cisco Security: Network security, firewall, and threat intelligence.
 
-
-
 Zscaler: Cloud security and secure internet access.
-
-
-
 
 IBM Security: Comprehensive cybersecurity solutions and services.
 
-
 KnowBe4: Security awareness training and phishing simulation.
-
-
 
 Offensive Security: Penetration testing and cybersecurity training.
 
-
-
-
-
 Gen Digital: Consumer security solutions, including Norton and Avira.
-
-
 
 Microsoft Security: Integrated security solutions for Microsoft products.
 
-
-
-
-
-
 Guardicore: Micro-segmentation and data center security.
-
-
-
 
 Sophos: Endpoint protection and firewall solutions.
 
-
-
 Qualys: Cloud-based security and compliance solutions.
-
-
-
-
-
 
 Barracuda: Email, network, and application security.
 
-
 F-Secure: Antivirus, endpoint protection, and threat detection.
-
-
-
 
 Malwarebytes: Malware removal and endpoint protection.
 
-
-
 Avast Antivirus: Comprehensive antivirus and security software.
-
 
 Spiceworks: IT management and security solutions.
 
-
-
-
 Comodo Security: Endpoint security and threat intelligence.
-
 
 Sucuri: Website security and protection.
 
@@ -577,19 +516,11 @@ Blackberry: Mobile security and endpoint management.
 
 Webroot: Cloud-based antivirus and threat intelligence.
 
-
-
 Acronis: Backup, recovery, and cybersecurity solutions.
-
 
 Cybereason: Endpoint detection and response (EDR).
 
-
 Duo Security: Multi-factor authentication and secure access.
-
-
-
-
 
 Netskope: Cloud security and data protection.
 
@@ -599,22 +530,19 @@ Pentera: Automated penetration testing and vulnerability management.
 
 ![Random Joke](https://readme-jokes.vercel.app/api)
 
-
-
-
-
 Best 41 Cybersecurity Companies Worldwide
-Features	Category	No. of Employees	Headquarters	Market Cap
-Microsoft Security	Cybersecurity testing, SIEM, threat identification, and access management	10,001+	Washington, USA	$3.182 Trillion
-Cisco	Holistic cybersecurity protection suite for various assets from cloud to networks	10,001+	California, USA	$222.44B
-Palo Alto Networks	AI-driven data protection with threat intel and incident response	10,001+	California, USA	$119.31 B
-CrowdStrike	Endpoint Security, Threat Intelligence & Extended Detection and Response (XDR)	7,500+	Texas, USA	$73.36 Billion
-Astra Security	PTaaS Platform	11 - 50	Delaware, USA	<$5 Million
-Fortinet	Secure Networking & Security Operations, Endpoint, Intrusion Detection	13,500+ 	California, USA	$61.47 Billion
-Zscaler	Cloud security platform with VPN, ZTA, and cyber threat protection	5,001-10,000	California, USA	$28.20 Billion
-Check Point	Complete Cybersecurity (Network Security, Endpoint Security, Cloud Security)	6,000+	Tel Aviv, Israel	$22.78 Billion
-SentinelOne	Next-Generation Endpoint Protection Platform (NG-EPP), Machine Learning for Threat Prevention	2,400+	California, USA	$8.01 Billion
-Tenable (Nessus)	Vulnerability Management	1,900+	Maryland, USA	$4.95 Billion
+Features Category No. of Employees Headquarters Market Cap
+Microsoft Security Cybersecurity testing, SIEM, threat identification, and access management 10,001+ Washington, USA $3.182 Trillion
+Cisco Holistic cybersecurity protection suite for various assets from cloud to networks 10,001+ California, USA $222.44B
+Palo Alto Networks AI-driven data protection with threat intel and incident response 10,001+ California, USA $119.31 B
+CrowdStrike Endpoint Security, Threat Intelligence & Extended Detection and Response (XDR) 7,500+ Texas, USA $73.36 Billion
+Astra Security PTaaS Platform 11 - 50 Delaware, USA <$5 Million
+Fortinet Secure Networking & Security Operations, Endpoint, Intrusion Detection 13,500+  California, USA $61.47 Billion
+Zscaler Cloud security platform with VPN, ZTA, and cyber threat protection 5,001-10,000 California, USA $28.20 Billion
+Check Point Complete Cybersecurity (Network Security, Endpoint Security, Cloud Security) 6,000+ Tel Aviv, Israel $22.78 Billion
+SentinelOne Next-Generation Endpoint Protection Platform (NG-EPP), Machine Learning for Threat Prevention 2,400+ California, USA $8.01 Billion
+Tenable (Nessus) Vulnerability Management 1,900+ Maryland, USA $4.95 Billion
+
 1. Microsoft Security
 As one of the most well-established cyber security companies, Microsoft effectively leverages endpoint protection, threat detection, and advanced security analytics to ensure the safety of your infrastructure.
 
@@ -647,7 +575,7 @@ Allows segmentation of security issues by either device type or vulnerability.
 Palo Alto cybersecurity companies
 Powered by AI and automation, Palo Alto Networks unifies your cybersecurity. Its next-generation firewalls shield your network, while Prisma Cloud protects cloud applications, and Cortex XDR uses AI to find and fight threats across everything from your network to the cloud.
 
-The Cortex XSOAR automates tasks and integrates security tools, streamlining your operations while its threat intel unit, Unit 42, keeps you ahead of attackers with actionable insights. 
+The Cortex XSOAR automates tasks and integrates security tools, streamlining your operations while its threat intel unit, Unit 42, keeps you ahead of attackers with actionable insights.
 
 Founded year: 2001
 Best For: AI-driven data protection with threat intel and incident response
@@ -659,7 +587,7 @@ Pros:
 Offers a reliable VPN with relatively low downtime.
 Supports MFA via third-party apps such as Okta.
 4. CrowdStrike
-CrowdStrike specializes in extended detection and response (XDR), threat hunting, and endpoint security. Their Falcon platform uses a cloud-native architecture to deliver endpoint protection and threat detection. 
+CrowdStrike specializes in extended detection and response (XDR), threat hunting, and endpoint security. Their Falcon platform uses a cloud-native architecture to deliver endpoint protection and threat detection.
 
 They also feature a GenAI platform called Charlotte AI, which creates smarter and faster AI workflows. CrowdStrike’s cloud-based approach allows for rapid deployment and scalability, making it a popular choice for large enterprises.
 
@@ -680,21 +608,21 @@ needs & get started today!
 Schedule your call
 character
 5. Fortinet
-Fortinet’s core concept is providing a complete security fabric that secures the entire IT infrastructure, including network, endpoint, cloud, and operational technology (OT). 
+Fortinet’s core concept is providing a complete security fabric that secures the entire IT infrastructure, including network, endpoint, cloud, and operational technology (OT).
 
 Fortinet offers a wide range of security products, including firewalls, network access control appliances, intrusion prevention systems (IPS), endpoint protection, and secure access service edge (SASE) solutions. Their primary focus is secure networking and fortifying the entire security operating system.
 
 Founded Year: 2000
 Best For: Secure Networking & Security Operations, Endpoint, Intrusion Detection
-Number of Employees: 13,500+ 
+Number of Employees: 13,500+
 Headquarters: California, USA
 Customers and Accolades: Toyota Material Handling, IHG Hotels, Carrefour
 Market Cap: $61.47 Billion
 Pros
-Uses GenAI and AI-powered threat intelligence to enable automation that is free from error. 
+Uses GenAI and AI-powered threat intelligence to enable automation that is free from error.
 It provides various products, including firewalls, SASE, endpoint protection, NOC management, and automated security operations.
 6. Zscaler
-Zscaler secures organizations with a cloud-native security platform that integrates SASE, ransomware protection, data loss prevention, and cloud security services. 
+Zscaler secures organizations with a cloud-native security platform that integrates SASE, ransomware protection, data loss prevention, and cloud security services.
 
 Leveraging AI and a massive global security cloud to defend against evolving cyber threats proactively, it offers features like zero-trust access, browser isolation, and advanced threat intelligence to combat existing threats and emerging zero days proactively.
 
@@ -702,13 +630,13 @@ Founded year: 2008
 Best For: Cloud security platform with VPN, ZTA, and cyber threat protection
 Number of Employees: 5,001-10,000
 Headquarters: California, USA
-Customers and Accolades: USMC, Eramet, Dairy Crest 
+Customers and Accolades: USMC, Eramet, Dairy Crest
 Market Cap: $28.20 Billion
 Pros:
 Seamless internet access management.
 Quick turnaround on customer support.
 7. Check Point
-Check Point Software Technologies is a leading provider of cybersecurity solutions, offering a vast suite of products for network security, endpoint security, and cloud security. Its flagship product, Check Point Firewall, is a market leader in network security. 
+Check Point Software Technologies is a leading provider of cybersecurity solutions, offering a vast suite of products for network security, endpoint security, and cloud security. Its flagship product, Check Point Firewall, is a market leader in network security.
 
 Check Point provides AI-powered solutions delivered via the cloud to protect your workspace end-to-end.
 
@@ -718,17 +646,17 @@ Number of Employees: 6,000+
 Headquarters: Tel Aviv, Israel
 Customers and Accolades: Hallmark, Clarks, Alkem, StrongPoint, Leader in Gartner Magic Quadrant for Network Firewalls
 Market Cap: $22.78 Billion
-Pros 
+Pros
 AI-powered threat intelligence is used across channels, such as the network, cloud, and applications.
 Offers advanced threat prevention capabilities with unique features like its SandBlast technology, which utilizes threat emulation and sandboxing to stop zero-day attacks, malware, etc.
 8. SentinelOne
-SentinelOne provides holistic security solutions for enterprise-wide protection. Their Singularity platform leverages artificial intelligence and machine learning to detect, prevent, respond to, and remediate cyber threats in real time. 
+SentinelOne provides holistic security solutions for enterprise-wide protection. Their Singularity platform leverages artificial intelligence and machine learning to detect, prevent, respond to, and remediate cyber threats in real time.
 
-This complete security solution protects endpoint, cloud, and identity. The platform ingests and analyzes data from all sources, such as email, SASE, web, sandbox, firewall, log, etc. 
+This complete security solution protects endpoint, cloud, and identity. The platform ingests and analyzes data from all sources, such as email, SASE, web, sandbox, firewall, log, etc.
 
 Founded Year: 2013
 Best For: Next-Generation Endpoint Protection Platform (NG-EPP), Machine Learning for Threat Prevention
-Number of Employees: 2,400+ 
+Number of Employees: 2,400+
 Headquarters: California, USA
 Customers and Accolades: Samsung, EA, Hitachi, Pandora
 Market Cap: $8.01 Billion
@@ -749,9 +677,9 @@ Customers and Accolades: 65% of Fortune 500 companies, Siemens, G2 Top 50 Securi
 Market Cap: $4.95 Billion
 Pros
 Uses six-sigma accuracy to provide the lowest false-positive rate in the industry.
-It provides continuous vulnerability assessment, updating businesses on their security posture. 
+It provides continuous vulnerability assessment, updating businesses on their security posture.
 10. McAfee
-With multiple accolades and certifications, including SELabs AAA Certification, McAfee, as a cyber security company, safeguards PCs, Macs, Android, and iOS devices from viruses, malware, and other cyber threats. 
+With multiple accolades and certifications, including SELabs AAA Certification, McAfee, as a cyber security company, safeguards PCs, Macs, Android, and iOS devices from viruses, malware, and other cyber threats.
 
 It goes beyond antivirus protection, offering identity monitoring and a robust firewall under its Business Protection plans to secure your home and office networks against unauthorized access.
 
@@ -759,11 +687,11 @@ Founded year: 1987
 Best For: Antivirus, mobile security, and identity monitoring solutions
 Number of Employees: 1,001-5,000
 Headquarters: California, USA
-Customers and Accolades: Best Protection and Best Advanced Protection awards by AV-Test 
+Customers and Accolades: Best Protection and Best Advanced Protection awards by AV-Test
 Market Cap: $4.89 Billion
 Pros:
 Easy to use Antivirus for personal and business use.
-Offers a web advisor plugin for Chrome. 
+Offers a web advisor plugin for Chrome.
 Best Penetration Testing Companies
 11. Astra Security
 Astra Security - Pentest Dashboard
@@ -785,13 +713,12 @@ Scans behind logged-in pages.
 Guarantees zero false positives with vetted scans.
 Astra Pentest is built by the team of experts that helped secure Microsoft, Adobe, Facebook, and Buffer
 
-
 Book a Demo
 View Pricing
 character
 12. Acunetix by Invicti
 Acunetix Dashboard - cybersecurity companies
-Acunetix, as one of the top 10 cybersecurity companies offers a powerful web application security scanner to identify and fix vulnerabilities (SQL injection, XSS, etc.) across websites and APIs. It automates scans, assesses server-side code, and integrates with developer tools for faster patching. 
+Acunetix, as one of the top 10 cybersecurity companies offers a powerful web application security scanner to identify and fix vulnerabilities (SQL injection, XSS, etc.) across websites and APIs. It automates scans, assesses server-side code, and integrates with developer tools for faster patching.
 
 With Acunetix, you can gain a complete view of your web security for virtual patching for web application firewalls and seamless integration with issue trackers, CI/CD systems, and developer tools to streamline remediation.
 
@@ -805,9 +732,9 @@ Minimizes false positives in automated penetration testing.
 Offers OWASP scans and reports.
 13. BurpSuite
 Burp Suite dashboard cybersecurity companies
-Burp Suite’s PTaaS platform equips your company with a powerful proxy for in-depth traffic analysis. Scanning for vulnerabilities like SQL injection and XSS, it automates attacks to pinpoint CVEs, maps hidden pages and generates detailed reports. 
+Burp Suite’s PTaaS platform equips your company with a powerful proxy for in-depth traffic analysis. Scanning for vulnerabilities like SQL injection and XSS, it automates attacks to pinpoint CVEs, maps hidden pages and generates detailed reports.
 
-With extensive remediation guidance and manual penetration testing services, Burp Suite’s extensibility with BApps allows customization catering to specific testing needs and proactively identifies vulnerabilities. 
+With extensive remediation guidance and manual penetration testing services, Burp Suite’s extensibility with BApps allows customization catering to specific testing needs and proactively identifies vulnerabilities.
 
 Founded year: 2008
 Best For: Cybersecurity testing and asset mapping
@@ -824,26 +751,26 @@ Further, their penetration testing services help identify application CVEs, whil
 
 Founded year: 2000
 Best For: Managed cybersecurity detection and response with skill development for professionals
-Number of Employees: 1,001-5,000 
+Number of Employees: 1,001-5,000
 Headquarters: Massachusetts, USA
 Customers and Accolades: Discovery, Dominos, Bloomberg
 Pros:
 Reports provide in-depth visibility into the vulnerabilities and threats.
 Offers easy-to-navigate dashboards.
 Network Security Companies
-15. Cybereason 
+15. Cybereason
 Cybereason’s Extended Detection and Response (XDR) platform uses real-time behavioral analytics to identify and respond to cyberattacks. They provide incident response, security risk assessment, threat intelligence, and complete MDR services.
 
 The platform prevents malicious attacker behaviors, regardless of the specific malware or exploits used.
 
 Founded Year: 2012
 Best For: Endpoint Detection & Response, Antivirus, Networks
-Number of Employees: 1,500+ 
+Number of Employees: 1,500+
 Headquarters: Massachusetts, USA
 Customers and Accolades: CNBC’s 10th Annual CNBC Disruptor 50, Forbes 2022 Cloud 100
 Pros
 They provide automated remediation, which reduces the manual errors involved in expert intervention for multiple alerts.
-It uses behavior-based detection, which studies the different chains of behaviors that led to the attack. It also uses an operation-centric MalOps approach, which looks at the root cause of the attack rather than flagging individual alerts. 
+It uses behavior-based detection, which studies the different chains of behaviors that led to the attack. It also uses an operation-centric MalOps approach, which looks at the root cause of the attack rather than flagging individual alerts.
 16. Sophos
 Sophos MDR cybersecurity companies
 Sophos protects organizations with a unified security suite as a top cybersecurity company. It safeguards devices (Endpoint Security), networks (advanced firewalls), and cloud environments with its 24/7 MDR service to provide constant threat monitoring and response.
@@ -852,9 +779,9 @@ Powered by Sophos X-Ops intelligence and managed via Sophos Central, it offers c
 
 Founded year: 1985
 Best For: Managed security services, compliance with IT protection, and security awareness training
-Number of Employees: 1,001-5,000 
+Number of Employees: 1,001-5,000
 Headquarters: Abingdon, UK
-Customers and Accolades: Norman’s Hallmark, Shutterfly, Diana Holdings 
+Customers and Accolades: Norman’s Hallmark, Shutterfly, Diana Holdings
 Pros:
 Delivers round-the-clock continuous monitoring.
 Simplify integration with existing tech stack.
@@ -872,12 +799,12 @@ Get Started
 cto
 17. Symantec
 
-Recently acquired by Accenture, Symantec’s cyber security software safeguards businesses and shields networks, data, and devices like PCs, Macs, and mobiles from viruses and malware. 
+Recently acquired by Accenture, Symantec’s cyber security software safeguards businesses and shields networks, data, and devices like PCs, Macs, and mobiles from viruses and malware.
 
 With advanced solutions like Endpoint Protection, ProxySG for web gateways, DLP for data security, and SiteMinder for access control, its DeepSight Intelligence provides threat insights, while managed security services offer 24/7 security expertise.
 
 Founded year: 1982
-Best For: Endpoint, network, information, and email security solutions 
+Best For: Endpoint, network, information, and email security solutions
 Number of Employees: 10,001+
 Headquarters: Arizona, USA
 Customers and Accolades: Threatscape, Makro, Finastra
@@ -911,7 +838,7 @@ Founded year: 2012
 Best For: Managed detection, risk, security, and awareness services platform
 Number of Employees: 1,001-5,000
 Headquarters: Minnesota, USA
-Customers and Accolades: Oracle Red Bull Racing, Minnesota Vikings, Taaleri 
+Customers and Accolades: Oracle Red Bull Racing, Minnesota Vikings, Taaleri
 Pros:
 Offers exhaustive weekly reports.
 Offers a user-friendly and intuitive dashboard.
@@ -922,7 +849,7 @@ As a cybersecurity firm for advanced defense, Avast provides IT professionals wi
 
 Founded year: 1988
 Best For: Antivirus, MSP, and data protection
-Number of Employees: 1,001-5,000 
+Number of Employees: 1,001-5,000
 Headquarters: Prague
 Customers and Accolades: Charity Digital, Southern Imaginations, Citynet
 Pros:
@@ -948,7 +875,7 @@ Their products include antivirus for individuals, endpoint protection, and netwo
 
 Founded Year: 2001
 Best For: Antivirus, Endpoint Protection, Network Security
-Number of Employees: 1,800+ 
+Number of Employees: 1,800+
 Headquarters: Bucharest, Romania
 Customers and Accolades: Ferrari, Blaze Networks, The Forrester Wave: Extended Detection And Response Platforms – Q2 2024
 Pros
@@ -957,9 +884,9 @@ Provides scalable solutions for businesses of all sizes, from small and medium-s
 Data Security Companies
 23. Alert Logic
 Alert Logic cybersecurity companies
-AlertLogic is a vulnerability management provider that provides managed threat detection and response (MDR), SOC-as-a-service, compliance services, and web application firewall (WAF) services. 
+AlertLogic is a vulnerability management provider that provides managed threat detection and response (MDR), SOC-as-a-service, compliance services, and web application firewall (WAF) services.
 
-The platform analyzes over 140 billion log messages daily, providing unique threat intelligence. It is also an AWS Partner. Its services include 24/7 threat monitoring, incident validation, remediation, log management, and more. 
+The platform analyzes over 140 billion log messages daily, providing unique threat intelligence. It is also an AWS Partner. Its services include 24/7 threat monitoring, incident validation, remediation, log management, and more.
 
 Founded Year: 2011
 Best For: Managed Security Services across targets
@@ -971,13 +898,13 @@ Leadership in cloud vulnerability management.
 Scalable, customized pricing plan.
 24. Qualys
 qualys cybersecurity companies
-With expertise in cyber security, Qualys secures hybrid IT with a unified cloud platform that continuously discovers, prioritizes, and patches vulnerabilities across all devices with its VMDR and Threat Protection. 
+With expertise in cyber security, Qualys secures hybrid IT with a unified cloud platform that continuously discovers, prioritizes, and patches vulnerabilities across all devices with its VMDR and Threat Protection.
 
-As the name suggests, Cloud Inventory & Assessment handles inventory and misconfiguration detection, while Cloud Agent handles real-time unmanaged device discovery to ensure complete visibility. Thus, the integrated vulnerability scanning, web application firewalls (WAF), and compliance automation under Qualys Policy & PCI Compliance fortify your defenses. 
+As the name suggests, Cloud Inventory & Assessment handles inventory and misconfiguration detection, while Cloud Agent handles real-time unmanaged device discovery to ensure complete visibility. Thus, the integrated vulnerability scanning, web application firewalls (WAF), and compliance automation under Qualys Policy & PCI Compliance fortify your defenses.
 
 Founded year: 1999
 Best For: Managed vulnerability detection, compliance, and protection for IT systems
-Number of Employees: 1,001-5,000 
+Number of Employees: 1,001-5,000
 Headquarters: California, USA
 Customers and Accolades: CapitalOne, Edinburgh Airport, Home Depot
 Pros:
@@ -991,9 +918,9 @@ curated SaaS security checklist.
 Download Checklist
 character
 25. Cobalt Iron
-Cobalt Iron’s Compass goes beyond backup with built-in cybersecurity (Cyber Shield) to actively safeguard your enterprise data against unauthorized access, misuse, and contamination with strong authentication and data control. 
+Cobalt Iron’s Compass goes beyond backup with built-in cybersecurity (Cyber Shield) to actively safeguard your enterprise data against unauthorized access, misuse, and contamination with strong authentication and data control.
 
-Powered by analytics, it continuously monitors for threats and automates mitigation, eliminating vulnerabilities in traditional backups. Cobalt Iron offers comprehensive protection for ransomware attacks, including readiness, detection, impact analysis, and rapid recovery –  adapting to real-time threats. 
+Powered by analytics, it continuously monitors for threats and automates mitigation, eliminating vulnerabilities in traditional backups. Cobalt Iron offers comprehensive protection for ransomware attacks, including readiness, detection, impact analysis, and rapid recovery –  adapting to real-time threats.
 
 Founded year: 2013
 Best For: Cloud backup SaaS with ransomware protection services
@@ -1004,26 +931,26 @@ Pros:
 Offers unified data protection management.
 SaaS delivery eliminates the security exposures common in traditional backup environments.
 26. CyberOps
-CyberOps is a VAPT company based in India that offers pentesting services and vulnerability assessment for an end-to-end workspace, including networks, cloud, and applications. They also provide digital forensics, incident response, and compliance testing for SOC2. PCI DSS, and ISO 27001. 
+CyberOps is a VAPT company based in India that offers pentesting services and vulnerability assessment for an end-to-end workspace, including networks, cloud, and applications. They also provide digital forensics, incident response, and compliance testing for SOC2. PCI DSS, and ISO 27001.
 
 CyberOps offers managed security services (MSS), including 24/7 security monitoring and threat detection expertise.
 
-Founded Year: 2016 
+Founded Year: 2016
 Best For: Vulnerability Assessment & Pentesting (VAPT)
-Number of Employees: 30+ 
+Number of Employees: 30+
 Headquarters: Jaipur, India
 Customers and Accolades: Law enforcement agencies, financial institutions, educational institutions
 Pros
 CyberOps’ XDR platform provides an overall view of security data across all digital functions.
 Continuous monitoring to identify emerging threats.
 27. Darktrace
-Darktrace leverages self-learning AI that adapts to the customer environment for threat detection, investigation, and response across channels like endpoint, cloud, network, application, and e-mail security. 
+Darktrace leverages self-learning AI that adapts to the customer environment for threat detection, investigation, and response across channels like endpoint, cloud, network, application, and e-mail security.
 
 Their Enterprise Immune System platform uses self-learning algorithms to analyze network traffic, user behavior, and system activity to identify and respond to cyber threats in real-time. Darktrace’s AI uses anomaly detection to identify and isolate even unknown threats.
 
 Founded Year: 2013
 Best For: AI-Powered Threat Detection & Extended Detection and Response (XDR)
-Number of Employees: 2,300+ 
+Number of Employees: 2,300+
 Headquarters: Cambridge, UK
 Customers and Accolades: Steve Madden, Aston Martin, KPMG, McLaren, 2022 Global InfoSec Cutting-Edge Cyber Security – Artificial Intelligence
 Pros
@@ -1043,26 +970,26 @@ Pros
 It provides businesses 24/7 security monitoring and integration into the CI/CD pipeline.
 A customizable dashboard that facilitates communication and security transparency across teams to enable stress-free remediation.
 29. Deloitte
-Deloitte is a professional services network that offers several cybersecurity consulting services. Their Cyber Risk program provides a complete list of services to help organizations identify, assess, manage, and mitigate cybersecurity risks. 
+Deloitte is a professional services network that offers several cybersecurity consulting services. Their Cyber Risk program provides a complete list of services to help organizations identify, assess, manage, and mitigate cybersecurity risks.
 
 Deloitte’s cybersecurity consultants can help businesses develop and implement a cybersecurity strategy, conduct security assessments, respond to security incidents, and improve their overall security posture.
 
 Founded Year: 1845
 Best For: Cybersecurity Consulting Services
 Number of Employees: 415,000+
-Headquarters: London, UK 
+Headquarters: London, UK
 Customers and Accolades: Metlife, Morgan Stanley, Berkshire Hathaway, Microsoft, GM, Procter & Gamble
 Pros
 Deloitte’s deep industry expertise and range of services allow them to offer tailored cybersecurity consulting solutions for businesses of all sizes.
 Deloitte’s global reach and established reputation in cybersecurity consulting evoke trust and ensure consistent security practices.
 30. Guidepoint Security
-Guidepoint Security offers tailor-made cybersecurity solutions and consulting across mediums like networks, cloud, applications, endpoints, email, etc. It helps organizations identify and manage digital risks associated with cyber threats, fraud, and misconduct. 
+Guidepoint Security offers tailor-made cybersecurity solutions and consulting across mediums like networks, cloud, applications, endpoints, email, etc. It helps organizations identify and manage digital risks associated with cyber threats, fraud, and misconduct.
 
 The company is known for its Cloud Governance plan, which completely secures the cloud. It also offers specialized services such as incident response, forensic investigations, security assessments, and digital intelligence gathering.
 
 Founded Year: 2011
 Best For: Cybersecurity Consulting
-Number of Employees: 870+ 
+Number of Employees: 870+
 Headquarters: Florida, USA
 Customers and Accolades: Nuance, Follett, GPC, 2024 Splunk AMER Regional Partner of the Year, 2021 Cyber Company of the Year by NVTC
 Pros
@@ -1071,7 +998,7 @@ Acts as a team of advisories/partners rather than an external service provider.
 31. HackerOne
 Founded Year: 2012
 Best For: Bug Bounty & Vulnerability Management Platform
-Number of Employees: 350+ 
+Number of Employees: 350+
 Headquarters: California, USA
 Customers and Accolades: Google, Uber, PayPal, The United States Department of Homeland Security, General Motors
 Pros
@@ -1082,7 +1009,7 @@ They also offer a vulnerability management platform that helps businesses stream
 HackerOne connects businesses with the world’s largest community of ethical hackers, providing access to diverse security expertise worldwide.
 Bug bounties can help businesses patch security holes faster and reduce cyberattack exposure by incentivizing rapid vulnerability reporting.
 32. iboss
-iboss empowers secure remote and hybrid workforces with a cloud platform that enables access to cloud applications and the Internet. Its robust SASE solution seamlessly blends security (web filtering, cloud access control, firewalls, zero-trust) with network optimization. 
+iboss empowers secure remote and hybrid workforces with a cloud platform that enables access to cloud applications and the Internet. Its robust SASE solution seamlessly blends security (web filtering, cloud access control, firewalls, zero-trust) with network optimization.
 
 Built on a powerful, patented cloud architecture, iboss tackles large encrypted traffic volumes while safeguarding users with remote browser isolation, data loss prevention, and advanced threat intelligence to combat cyberattacks proactively.
 
@@ -1098,7 +1025,6 @@ Lock down your security with our 10,000+ AI-powered test cases.
 
 Discuss your security needs
 & get started today!
-
 
 View Pricing
 Schedule a call
@@ -1118,7 +1044,7 @@ Pros:
 Facilitates with asset discovery.
 Has a shallow learning curve.
 34. KnowBe4
-KnowBe4 is the world’s first and largest new-school platform that provides security awareness training and real-world phishing simulations. Its mission is to educate and empower users to make smarter security decisions, ultimately creating a human firewall against cyberattacks. 
+KnowBe4 is the world’s first and largest new-school platform that provides security awareness training and real-world phishing simulations. Its mission is to educate and empower users to make smarter security decisions, ultimately creating a human firewall against cyberattacks.
 
 They’re known for their great customer support, which has earned them several awards and recognition. They offer a variety of training modules and simulations that cover a wide range of security topics, including phishing attacks, social engineering, and malware threats.
 
@@ -1126,7 +1052,7 @@ Founded Year: 2010
 Best For: Security Awareness Training & Phishing Simulations
 Number of Employees: 1,200+
 Headquarters: Florida, USA
-Customers and Accolades: Forrester 2022 Wave Leader – Security Awareness Training, G2 Spring 2024 Leader, 
+Customers and Accolades: Forrester 2022 Wave Leader – Security Awareness Training, G2 Spring 2024 Leader,
 Pros
 A dedicated customer success team that works with you very closely.
 The only training platform that offers real-world phishing simulations.
@@ -1139,11 +1065,11 @@ Founded year: 2015
 Best For: Data-driven cloud-native application protection platform
 Number of Employees: 1,001-5,000
 Headquarters: California, USA
-Customers and Accolades: Clari, Snowflake, TSB 
+Customers and Accolades: Clari, Snowflake, TSB
 Pros:
 Offers easy traceback capabilities for threat alerts.
-Leverages AI-driven reporting for quality insights. 
-36. NordLayer 
+Leverages AI-driven reporting for quality insights.
+36. NordLayer
 As one of the leading companies for cyber security, Nordlayer empowers your business with a unified cloud-based cybersecurity platform that protects your network and data with remote access configurations, IAM controls, and threat mitigation features.
 
 Moreover, its segmentation and compliance tools simplify adherence to industrial regulations, while the activity monitoring provides real-time detection.
@@ -1157,7 +1083,7 @@ Pros:
 UI/UX is quite user-friendly.
 Necessitates device posture checks.
 37. Orca Security
-Orca Security is a platform that safeguards your entire cloud environment from data breaches and misconfigurations. Leveraging agentless technology, Orca provides complete visibility and simplifies security for cloud workloads across multi-cloud deployments. 
+Orca Security is a platform that safeguards your entire cloud environment from data breaches and misconfigurations. Leveraging agentless technology, Orca provides complete visibility and simplifies security for cloud workloads across multi-cloud deployments.
 
 Trusted by industry leaders like SAP, Orca enables businesses to identify and address cloud security risks like misconfigurations, data security, and API exposure.
 
@@ -1165,16 +1091,16 @@ Founded Year: 2019
 Best For: Cloud Security Platform (CNAPP)
 Number of Employees: 400+
 Headquarters: Oregon, USA
-Customers and Accolades: Autodesk, SAP, Forbes Cloud 100, 2023 GigaOm Radar for CSPM, Global AWS Security Partner 
-Pros 
+Customers and Accolades: Autodesk, SAP, Forbes Cloud 100, 2023 GigaOm Radar for CSPM, Global AWS Security Partner
+Pros
 Achieve compliance with over 100 frameworks being utilized to test multiple cloud environments.
 Use a combination of API testing, shift left security, and cloud detection for thorough cloud security.
 38. Proofpoint
-Proofpoint specializes in email security and cloud-based threat protection. Their solutions protect organizations from email-borne threats such as phishing attacks, malware, and business email compromise (BEC). 
+Proofpoint specializes in email security and cloud-based threat protection. Their solutions protect organizations from email-borne threats such as phishing attacks, malware, and business email compromise (BEC).
 
 Proofpoint offers various products related to digital security awareness, cloud security, email protection, and compliance. It also offers on-call personal assistance.
 
-Founded Year: 2002 
+Founded Year: 2002
 Best For: Email Security & Cloud-Based Email Protection
 Number of Employees: 4,200+
 Headquarters: California, USA
@@ -1197,7 +1123,7 @@ Pros:
 Gives robust access control features.
 Simplifies managing the RBAC in the system.
 40. Trellix (Formerly McAfee Enterprise)
-Trellix offers a unified endpoint security and extended detection and response (XDR) platform and has recently introduced Trellix Wise. This product uses over ten years of AI modeling and machine learning to produce GenAI. 
+Trellix offers a unified endpoint security and extended detection and response (XDR) platform and has recently introduced Trellix Wise. This product uses over ten years of AI modeling and machine learning to produce GenAI.
 
 Their endpoint security platform combines endpoint protection, detection and response (EDR), and vulnerability management capabilities in a single solution. Trellix also offers a cloud-native XDR Engine that provides security teams a central location to manage and investigate security incidents across their entire IT infrastructure.
 
@@ -1246,12 +1172,5 @@ The need and demand for cybersecurity are on the rise since cybercrime and attac
 What do cybersecurity companies do?
 Cybersecurity companies provide various products like malware and virus scanners, VAPT services, firewalls, ransomware, anti-virus, and more to ensure the safety and security of your organization’s assets.
 
-
-
-
-
-
-
-
-###Blogs/notes
+### Blogs/notes
 [blog 1](https://www.getastra.com/blog/security-audit/best-cybersecurity-companies/)

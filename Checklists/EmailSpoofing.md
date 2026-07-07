@@ -29,10 +29,12 @@ done
 ## Test Sending (authorized environments only)
 
 - [ ] Use [emkei.cz](https://emkei.cz) or `swaks` to send spoofed email to a test inbox
+
   ```bash
   swaks --to test@yourdomain.com --from ceo@target.com \
     --server mail.target.com --body "spoofing test"
   ```
+
 - [ ] Check if spoofed email lands in inbox vs spam — inbox = confirmed vulnerable
 
 ## Impact Mapping

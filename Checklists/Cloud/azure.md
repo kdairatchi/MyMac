@@ -43,6 +43,7 @@ curl "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-
 ```
 
 Returns bearer token scoped to the VM's managed identity. Use against:
+
 - `https://management.azure.com/subscriptions?api-version=2020-01-01`
 - `https://graph.microsoft.com/v1.0/me`
 - `https://vault.azure.net/secrets/...?api-version=7.3`

@@ -819,7 +819,6 @@ Linux Security Expert</b></a> - trainings, howtos, checklists, security tools an
 &nbsp;&nbsp;:small_orange_diamond: <a href="https://github.com/OWASP/owasp-mstg"><b>MSTG</b></a> - The Mobile Security Testing Guide (MSTG) is a comprehensive manual for mobile app security testing.<br>
 </p>
 
-
 ##### :black_small_square: Wordlists and Weak passwords
 
 <p>
@@ -1001,58 +1000,58 @@ Linux Security Expert</b></a> - trainings, howtos, checklists, security tools an
 ##### Table of Contents
 
 - **[System](#system)**
-  * [terminal](#tool-terminal)
-  * [mount](#tool-mount)
-  * [fuser](#tool-fuser)
-  * [ps](#tool-ps)
-  * [top](#tool-top)
-  * [strace](#tool-strace)
-  * [kill](#tool-kill)
-  * [find](#tool-find)
-  * [diff](#tool-diff)
-  * [tail](#tool-tail)
-  * [cpulimit](#tool-cpulimit)
-  * [pwdx](#tool-pwdx)
-  * [tr](#tool-tr)
-  * [chmod](#tool-chmod)
-  * [who](#tool-who)
-  * [last](#tool-last)
-  * [screen](#tool-screen)
-  * [script](#tool-script)
-  * [du](#tool-du)
-  * [inotifywait](#tool-inotifywait)
-  * [openssl](#tool-openssl)
-  * [secure-delete](#tool-secure-delete)
-  * [dd](#tool-dd)
-  * [gpg](#tool-gpg)
-  * [system-other](#tool-system-other)
+  - [terminal](#tool-terminal)
+  - [mount](#tool-mount)
+  - [fuser](#tool-fuser)
+  - [ps](#tool-ps)
+  - [top](#tool-top)
+  - [strace](#tool-strace)
+  - [kill](#tool-kill)
+  - [find](#tool-find)
+  - [diff](#tool-diff)
+  - [tail](#tool-tail)
+  - [cpulimit](#tool-cpulimit)
+  - [pwdx](#tool-pwdx)
+  - [tr](#tool-tr)
+  - [chmod](#tool-chmod)
+  - [who](#tool-who)
+  - [last](#tool-last)
+  - [screen](#tool-screen)
+  - [script](#tool-script)
+  - [du](#tool-du)
+  - [inotifywait](#tool-inotifywait)
+  - [openssl](#tool-openssl)
+  - [secure-delete](#tool-secure-delete)
+  - [dd](#tool-dd)
+  - [gpg](#tool-gpg)
+  - [system-other](#tool-system-other)
 - **[HTTP/HTTPS](#http-https)**
-  * [curl](#tool-curl)
-  * [httpie](#tool-httpie)
+  - [curl](#tool-curl)
+  - [httpie](#tool-httpie)
 - **[Network](#network)**
-  * [ssh](#tool-ssh)
-  * [linux-dev](#tool-linux-dev)
-  * [tcpdump](#tool-tcpdump)
-  * [tcpick](#tool-tcpick)
-  * [ngrep](#tool-ngrep)
-  * [hping3](#tool-hping3)
-  * [nmap](#tool-nmap)
-  * [netcat](#tool-netcat)
-  * [socat](#tool-socat)
-  * [p0f](#tool-p0f)
-  * [gnutls-cli](#tool-gnutls-cli)
-  * [lsof](#tool-lsof)
-  * [netstat](#tool-netstat)
-  * [rsync](#tool-rsync)
-  * [host](#tool-host)
-  * [dig](#tool-dig)
-  * [certbot](#tool-certbot)
-  * [network-other](#tool-network-other)
+  - [ssh](#tool-ssh)
+  - [linux-dev](#tool-linux-dev)
+  - [tcpdump](#tool-tcpdump)
+  - [tcpick](#tool-tcpick)
+  - [ngrep](#tool-ngrep)
+  - [hping3](#tool-hping3)
+  - [nmap](#tool-nmap)
+  - [netcat](#tool-netcat)
+  - [socat](#tool-socat)
+  - [p0f](#tool-p0f)
+  - [gnutls-cli](#tool-gnutls-cli)
+  - [lsof](#tool-lsof)
+  - [netstat](#tool-netstat)
+  - [rsync](#tool-rsync)
+  - [host](#tool-host)
+  - [dig](#tool-dig)
+  - [certbot](#tool-certbot)
+  - [network-other](#tool-network-other)
 - **[Programming](#programming)**
-  * [git](#tool-git)
-  * [awk](#tool-awk)
-  * [sed](#tool-sed)
-  * [grep](#tool-grep)
+  - [git](#tool-git)
+  - [awk](#tool-awk)
+  - [sed](#tool-sed)
+  - [grep](#tool-grep)
 
 <a name="system"><b>System</b></a>
 
@@ -1204,8 +1203,8 @@ ___
 mount -t tmpfs tmpfs /mnt -o size=64M
 ```
 
-  * `-t` - filesystem type
-  * `-o` - mount options
+- `-t` - filesystem type
+- `-o` - mount options
 
 ###### Remount a filesystem as read/write
 
@@ -1339,7 +1338,7 @@ ___
 top -p $(pgrep -d , <str>)
 ```
 
-  * `<str>` - process containing str (eg. nginx, worker)
+- `<str>` - process containing str (eg. nginx, worker)
 
 ___
 
@@ -1842,8 +1841,8 @@ ___
 gpg --export --armor "<username>" > username.pkey
 ```
 
-  * `--export` - export all keys from all keyrings or specific key
-  * `-a|--armor` - create ASCII armored output
+- `--export` - export all keys from all keyrings or specific key
+- `-a|--armor` - create ASCII armored output
 
 ###### Encrypt file
 
@@ -1851,8 +1850,8 @@ gpg --export --armor "<username>" > username.pkey
 gpg -e -r "<username>" dump.sql
 ```
 
-  * `-e|--encrypt` - encrypt data
-  * `-r|--recipient` - encrypt for specific <username>
+- `-e|--encrypt` - encrypt data
+- `-r|--recipient` - encrypt for specific <username>
 
 ###### Decrypt file
 
@@ -1860,8 +1859,8 @@ gpg -e -r "<username>" dump.sql
 gpg -o dump.sql -d dump.sql.gpg
 ```
 
-  * `-o|--output` - use as output file
-  * `-d|--decrypt` - decrypt data (default)
+- `-o|--output` - use as output file
+- `-d|--decrypt` - decrypt data (default)
 
 ###### Search recipient
 
@@ -1869,8 +1868,8 @@ gpg -o dump.sql -d dump.sql.gpg
 gpg --keyserver hkp://keyserver.ubuntu.com --search-keys "<username>"
 ```
 
-  * `--keyserver` - set specific key server
-  * `--search-keys` - search for keys on a key server
+- `--keyserver` - set specific key server
+- `--search-keys` - search for keys on a key server
 
 ___
 
@@ -1896,23 +1895,23 @@ exec /sbin/init
 curl -Iks https://www.google.com
 ```
 
-  * `-I` - show response headers only
-  * `-k` - insecure connection when using ssl
-  * `-s` - silent mode (not display body)
+- `-I` - show response headers only
+- `-k` - insecure connection when using ssl
+- `-s` - silent mode (not display body)
 
 ```bash
 curl -Iks --location -X GET -A "x-agent" https://www.google.com
 ```
 
-  * `--location` - follow redirects
-  * `-X` - set method
-  * `-A` - set user-agent
+- `--location` - follow redirects
+- `-X` - set method
+- `-A` - set user-agent
 
 ```bash
 curl -Iks --location -X GET -A "x-agent" --proxy http://127.0.0.1:16379 https://www.google.com
 ```
 
-  * `--proxy [socks5://|http://]` - set proxy server
+- `--proxy [socks5://|http://]` - set proxy server
 
 ###### Check DNS and HTTP trace with headers for specific domains
 
@@ -1961,25 +1960,25 @@ ___
 http -p Hh https://www.google.com
 ```
 
-  * `-p` - print request and response headers
-    * `H` - request headers
-    * `B` - request body
-    * `h` - response headers
-    * `b` - response body
+- `-p` - print request and response headers
+  - `H` - request headers
+  - `B` - request body
+  - `h` - response headers
+  - `b` - response body
 
 ```bash
 http -p Hh --follow --max-redirects 5 --verify no https://www.google.com
 ```
 
-  * `-F, --follow` - follow redirects
-  * `--max-redirects N` - maximum for `--follow`
-  * `--verify no` - skip SSL verification
+- `-F, --follow` - follow redirects
+- `--max-redirects N` - maximum for `--follow`
+- `--verify no` - skip SSL verification
 
 ```bash
 http -p Hh --follow --max-redirects 5 --verify no --proxy http:http://127.0.0.1:16379 https://www.google.com
 ```
 
-  * `--proxy [http:]` - set proxy server
+- `--proxy [http:]` - set proxy server
 
 <a name="network"><b>Network</b></a>
 
@@ -2109,9 +2108,9 @@ host1> ssh -nNT -L 9051:db.d.x:5432 node.d.y
 host1> psql -U db_user -d db_dev -p 9051 -h localhost
 ```
 
-  * `-n` - redirects stdin from `/dev/null`
-  * `-N` - do not execute a remote command
-  * `-T` - disable pseudo-terminal allocation
+- `-n` - redirects stdin from `/dev/null`
+- `-N` - do not execute a remote command
+- `-T` - disable pseudo-terminal allocation
 
 ###### SSH remote port forwarding
 
@@ -2133,9 +2132,9 @@ ___
 timeout 1 bash -c "</dev/<proto>/<host>/<port>" >/dev/null 2>&1 ; echo $?
 ```
 
-  * `<proto` - set protocol (tcp/udp)
-  * `<host>` - set remote host
-  * `<port>` - set destination port
+- `<proto` - set protocol (tcp/udp)
+- `<host>` - set remote host
+- `<port>` - set destination port
 
 ###### Read and write to TCP or UDP sockets with common bash tools
 
@@ -2153,13 +2152,13 @@ ___
 tcpdump -ne -i eth0 -Q in host 192.168.252.1 and port 443
 ```
 
-  * `-n` - don't convert addresses (`-nn` will not resolve hostnames or ports)
-  * `-e` - print the link-level headers
-  * `-i [iface|any]` - set interface
-  * `-Q|-D [in|out|inout]` - choose send/receive direction (`-D` - for old tcpdump versions)
-  * `host [ip|hostname]` - set host, also `[host not]`
-  * `[and|or]` - set logic
-  * `port [1-65535]` - set port number, also `[port not]`
+- `-n` - don't convert addresses (`-nn` will not resolve hostnames or ports)
+- `-e` - print the link-level headers
+- `-i [iface|any]` - set interface
+- `-Q|-D [in|out|inout]` - choose send/receive direction (`-D` - for old tcpdump versions)
+- `host [ip|hostname]` - set host, also `[host not]`
+- `[and|or]` - set logic
+- `port [1-65535]` - set port number, also `[port not]`
 
 ###### Filter incoming (on interface) traffic (specific <ip:port>) and write to a file
 
@@ -2167,8 +2166,8 @@ tcpdump -ne -i eth0 -Q in host 192.168.252.1 and port 443
 tcpdump -ne -i eth0 -Q in host 192.168.252.1 and port 443 -c 5 -w tcpdump.pcap
 ```
 
-  * `-c [num]` - capture only num number of packets
-  * `-w [filename]` - write packets to file, `-r [filename]` - reading from file
+- `-c [num]` - capture only num number of packets
+- `-w [filename]` - write packets to file, `-r [filename]` - reading from file
 
 ###### Capture all ICMP packets
 
@@ -2224,8 +2223,8 @@ tcpdump -ei eth0 -s 0 -v -n -l | egrep -i "POST /|GET /|Host:"
 tcpdump -ei eth0 -w /tmp/capture-%H.pcap -G 3600 -C 200
 ```
 
-  * `-G <num>` - pcap will be created every `<num>` seconds
-  * `-C <size>` - close the current pcap and open a new one if is larger than `<size>`
+- `-G <num>` - pcap will be created every `<num>` seconds
+- `-C <size>` - close the current pcap and open a new one if is larger than `<size>`
 
 ###### Top hosts by packets
 
@@ -2251,39 +2250,39 @@ ___
 ngrep -d eth0 "www.google.com" port 443
 ```
 
-  * `-d [iface|any]` - set interface
-  * `[domain]` - set hostname
-  * `port [1-65535]` - set port number
+- `-d [iface|any]` - set interface
+- `[domain]` - set hostname
+- `port [1-65535]` - set port number
 
 ```bash
 ngrep -d eth0 "www.google.com" (host 10.240.20.2) and (port 443)
 ```
 
-  * `(host [ip|hostname])` - filter by ip or hostname
-  * `(port [1-65535])` - filter by port number
+- `(host [ip|hostname])` - filter by ip or hostname
+- `(port [1-65535])` - filter by port number
 
 ```bash
 ngrep -d eth0 -qt -O ngrep.pcap "www.google.com" port 443
 ```
 
-  * `-q` - quiet mode (only payloads)
-  * `-t` - added timestamps
-  * `-O [filename]` - save output to file, `-I [filename]` - reading from file
+- `-q` - quiet mode (only payloads)
+- `-t` - added timestamps
+- `-O [filename]` - save output to file, `-I [filename]` - reading from file
 
 ```bash
 ngrep -d eth0 -qt 'HTTP' 'tcp'
 ```
 
-  * `HTTP` - show http headers
-  * `tcp|udp` - set protocol
-  * `[src|dst] host [ip|hostname]` - set direction for specific node
+- `HTTP` - show http headers
+- `tcp|udp` - set protocol
+- `[src|dst] host [ip|hostname]` - set direction for specific node
 
 ```bash
 ngrep -l -q -d eth0 -i "User-Agent: curl*"
 ```
 
-  * `-l` - stdout line buffered
-  * `-i` - case-insensitive search
+- `-l` - stdout line buffered
+- `-i` - case-insensitive search
 
 ___
 
@@ -2293,34 +2292,34 @@ ___
 hping3 -V -p 80 -s 5050 <scan_type> www.google.com
 ```
 
-  * `-V|--verbose` - verbose mode
-  * `-p|--destport` - set destination port
-  * `-s|--baseport` - set source port
-  * `<scan_type>` - set scan type
-    * `-F|--fin` - set FIN flag, port open if no reply
-    * `-S|--syn` - set SYN flag
-    * `-P|--push` - set PUSH flag
-    * `-A|--ack` - set ACK flag (use when ping is blocked, RST response back if the port is open)
-    * `-U|--urg` - set URG flag
-    * `-Y|--ymas` - set Y unused flag (0x80 - nullscan), port open if no reply
-    * `-M 0 -UPF` - set TCP sequence number and scan type (URG+PUSH+FIN), port open if no reply
+- `-V|--verbose` - verbose mode
+- `-p|--destport` - set destination port
+- `-s|--baseport` - set source port
+- `<scan_type>` - set scan type
+  - `-F|--fin` - set FIN flag, port open if no reply
+  - `-S|--syn` - set SYN flag
+  - `-P|--push` - set PUSH flag
+  - `-A|--ack` - set ACK flag (use when ping is blocked, RST response back if the port is open)
+  - `-U|--urg` - set URG flag
+  - `-Y|--ymas` - set Y unused flag (0x80 - nullscan), port open if no reply
+  - `-M 0 -UPF` - set TCP sequence number and scan type (URG+PUSH+FIN), port open if no reply
 
 ```bash
 hping3 -V -c 1 -1 -C 8 www.google.com
 ```
 
-  * `-c [num]` - packet count
-  * `-1` - set ICMP mode
-  * `-C|--icmptype [icmp-num]` - set icmp type (default icmp-echo = 8)
+- `-c [num]` - packet count
+- `-1` - set ICMP mode
+- `-C|--icmptype [icmp-num]` - set icmp type (default icmp-echo = 8)
 
 ```bash
 hping3 -V -c 1000000 -d 120 -S -w 64 -p 80 --flood --rand-source <remote_host>
 ```
 
-  * `--flood` - sent packets as fast as possible (don't show replies)
-  * `--rand-source` - random source address mode
-  * `-d --data` - data size
-  * `-w|--win` - winsize (default 64)
+- `--flood` - sent packets as fast as possible (don't show replies)
+- `--rand-source` - random source address mode
+- `-d --data` - data size
+- `-w|--win` - winsize (default 64)
 
 ___
 
@@ -2408,28 +2407,28 @@ ___
 nc -kl 5000
 ```
 
-  * `-l` - listen for an incoming connection
-  * `-k` - listening after client has disconnected
-  * `>filename.out` - save receive data to file (optional)
+- `-l` - listen for an incoming connection
+- `-k` - listening after client has disconnected
+- `>filename.out` - save receive data to file (optional)
 
 ```bash
 nc 192.168.0.1 5051 < filename.in
 ```
 
-  * `< filename.in` - send data to remote host
+- `< filename.in` - send data to remote host
 
 ```bash
 nc -vz 10.240.30.3 5000
 ```
 
-  * `-v` - verbose output
-  * `-z` - scan for listening daemons
+- `-v` - verbose output
+- `-z` - scan for listening daemons
 
 ```bash
 nc -vzu 10.240.30.3 1-65535
 ```
 
-  * `-u` - scan only udp ports
+- `-u` - scan only udp ports
 
 ###### Transfer data file (archive)
 
@@ -2491,7 +2490,7 @@ nc -l -p 5000 \
 ; done
 ```
 
-  * `-p` - port number
+- `-p` - port number
 
 ###### Simple HTTP Proxy (single connection)
 
@@ -2586,10 +2585,10 @@ ___
 socat - TCP4:10.240.30.3:22
 ```
 
-  * `-` - standard input (STDIO)
-  * `TCP4:<params>` - set tcp4 connection with specific params
-    * `[hostname|ip]` - set hostname/ip
-    * `[1-65535]` - set port number
+- `-` - standard input (STDIO)
+- `TCP4:<params>` - set tcp4 connection with specific params
+  - `[hostname|ip]` - set hostname/ip
+  - `[1-65535]` - set port number
 
 ###### Redirecting TCP-traffic to a UNIX domain socket under Linux
 
@@ -2597,15 +2596,15 @@ socat - TCP4:10.240.30.3:22
 socat TCP-LISTEN:1234,bind=127.0.0.1,reuseaddr,fork,su=nobody,range=127.0.0.0/8 UNIX-CLIENT:/tmp/foo
 ```
 
-  * `TCP-LISTEN:<params>` - set tcp listen with specific params
-    * `[1-65535]` - set port number
-    * `bind=[hostname|ip]` - set bind hostname/ip
-    * `reuseaddr` - allows other sockets to bind to an address
-    * `fork` - keeps the parent process attempting to produce more connections
-    * `su=nobody` - set user
-    * `range=[ip-range]` - ip range
-  * `UNIX-CLIENT:<params>` - communicates with the specified peer socket
-    * `filename` - define socket
+- `TCP-LISTEN:<params>` - set tcp listen with specific params
+  - `[1-65535]` - set port number
+  - `bind=[hostname|ip]` - set bind hostname/ip
+  - `reuseaddr` - allows other sockets to bind to an address
+  - `fork` - keeps the parent process attempting to produce more connections
+  - `su=nobody` - set user
+  - `range=[ip-range]` - ip range
+- `UNIX-CLIENT:<params>` - communicates with the specified peer socket
+  - `filename` - define socket
 
 ___
 
@@ -2617,10 +2616,10 @@ ___
 p0f -i enp0s25 -p -d -o /dump/enp0s25.log
 ```
 
-  * `-i` - listen on the specified interface
-  * `-p` - set interface in promiscuous mode
-  * `-d` - fork into background
-  * `-o` - output file
+- `-i` - listen on the specified interface
+- `-p` - set interface in promiscuous mode
+- `-d` - fork into background
+- `-o` - output file
 
 ___
 

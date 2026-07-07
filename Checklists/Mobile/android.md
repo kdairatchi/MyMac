@@ -26,6 +26,7 @@ docker run -it --rm -p 8000:8000 opensecurity/mobile-security-framework-mobsf
 ```
 
 Look for:
+
 - Hardcoded secrets, API keys, Firebase DBs (`*.firebaseio.com` without auth).
 - Exported components in `AndroidManifest.xml` (`android:exported="true"` on activities/services/receivers).
 - Backup allowed (`android:allowBackup="true"`).
@@ -41,6 +42,7 @@ Look for:
 ```
 
 Test:
+
 ```bash
 adb shell am start -W -a android.intent.action.VIEW -d "target://open?url=https://evil.com"
 ```

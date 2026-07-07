@@ -25,6 +25,7 @@ allintext:username password        # all terms in body
 ## Exposed Files and Configurations
 
 ### Configuration Files
+
 ```
 site:example.com filetype:env
 site:example.com filetype:config
@@ -42,6 +43,7 @@ site:example.com "AWS_ACCESS_KEY_ID" | "AWS_SECRET_ACCESS_KEY"
 ```
 
 ### Backup Files
+
 ```
 site:example.com filetype:bak
 site:example.com filetype:old
@@ -55,6 +57,7 @@ site:example.com inurl:backup
 ```
 
 ### Log Files
+
 ```
 filetype:log
 filetype:syslog
@@ -70,6 +73,7 @@ intitle:index.of filetype:log
 ```
 
 ### Sensitive Document Extensions
+
 ```
 site:example.com (ext:doc OR ext:docx OR ext:odt OR ext:pdf OR ext:rtf OR ext:ppt OR ext:pptx OR ext:csv OR ext:xls OR ext:xlsx OR ext:txt OR ext:xml OR ext:json OR ext:zip OR ext:rar OR ext:md OR ext:log OR ext:bak OR ext:conf OR ext:sql)
 
@@ -77,6 +81,7 @@ site:example.com ext:txt | ext:pdf | ext:xml | ext:xls | ext:xlsx | ext:ppt | ex
 ```
 
 ### Source Code Files
+
 ```
 site:example.com ext:log | ext:txt | ext:conf | ext:cnf | ext:ini | ext:env | ext:sh | ext:bak | ext:backup | ext:swp | ext:old | ext:~ | ext:git | ext:svn | ext:htpasswd | ext:htaccess | ext:json
 
@@ -134,6 +139,7 @@ site:example.com filetype:js "password"
 ```
 
 ### Government/Corporate Credential Dorks
+
 ```
 "*.gov" send_keys
 "*.gov" password
@@ -152,6 +158,7 @@ site:example.com filetype:js "password"
 ## Vulnerable Parameter Hunting
 
 ### XSS-Prone Parameters
+
 ```
 inurl:q= | inurl:s= | inurl:search= | inurl:query= | inurl:keyword= | inurl:lang= inurl:& site:example.com
 inurl:& inurl:test
@@ -162,6 +169,7 @@ inurl:& inurl:search
 ```
 
 ### SQLi-Prone Parameters
+
 ```
 inurl:id= | inurl:pid= | inurl:category= | inurl:cat= | inurl:action= | inurl:sid= | inurl:dir= inurl:& site:example.com
 site:example.com ext:php inurl:?
@@ -173,6 +181,7 @@ site:example.com ext:php inurl:?
 ```
 
 ### SQL Error Messages
+
 ```
 intext:"sql syntax near"
 intext:"syntax error"
@@ -184,22 +193,26 @@ intext:"OLE DB Provider for SQL Server"
 ```
 
 ### Open Redirect-Prone Parameters
+
 ```
 inurl:url= | inurl:return= | inurl:next= | inurl:redirect= | inurl:redir= | inurl:ret= | inurl:r2= | inurl:page= inurl:& inurl:http site:example.com
 inurl:url OR inurl:continue OR inurl:returnto OR inurl:redirect OR inurl:return OR inurl:target
 ```
 
 ### SSRF-Prone Parameters
+
 ```
 inurl:http | inurl:url= | inurl:path= | inurl:dest= | inurl:html= | inurl:data= | inurl:domain= | inurl:page= inurl:& site:example.com
 ```
 
 ### LFI-Prone Parameters
+
 ```
 inurl:include | inurl:dir | inurl:detail= | inurl:file= | inurl:folder= | inurl:inc= | inurl:locate= | inurl:doc= | inurl:conf= inurl:& site:example.com
 ```
 
 ### RCE-Prone Parameters
+
 ```
 inurl:cmd | inurl:exec= | inurl:query= | inurl:code= | inurl:do= | inurl:run= | inurl:read= | inurl:ping= inurl:& site:example.com
 ```
@@ -209,6 +222,7 @@ inurl:cmd | inurl:exec= | inurl:query= | inurl:code= | inurl:do= | inurl:run= | 
 ## Documentation and Debug Pages
 
 ### API Documentation
+
 ```
 site:example.com inurl:docs | inurl:documentation
 site:example.com inurl:apidocs | inurl:api-docs
@@ -218,6 +232,7 @@ site:example.com inurl:swagger | inurl:openapi
 ```
 
 ### Debug and Error Pages
+
 ```
 site:example.com "debug" | "test" | "staging"
 site:example.com "syntax error" | "fatal error"
@@ -229,6 +244,7 @@ inurl:"error" | intitle:"exception" | intitle:"failure" | intitle:"server at" si
 ```
 
 ### Development Environments
+
 ```
 site:example.com inurl:test | inurl:env | inurl:dev | inurl:staging | inurl:sandbox | inurl:debug | inurl:temp | inurl:internal | inurl:demo
 site:example.com inurl:staging | inurl:dev | inurl:test
@@ -241,6 +257,7 @@ site:example.com "development only" | "testing environment"
 ## Exposed Databases and Directories
 
 ### Database Exposure
+
 ```
 site:example.com filetype:sql | filetype:db | filetype:bak
 site:example.com "backup" | "database" | "dump"
@@ -248,6 +265,7 @@ site:example.com "index of" "database"
 ```
 
 ### Directory Listings
+
 ```
 intitle:"index of"
 intitle:"index of" site:example.com
@@ -266,6 +284,7 @@ intext:"Index of /" +.htaccess
 ## Site-Specific Dorks
 
 ### Government Domains
+
 ```
 site:*.gov ext:asp
 site:*.gov ext:jsp
@@ -277,6 +296,7 @@ site:*.gov "server error" | "database error" | "error occurred"
 ```
 
 ### WordPress
+
 ```
 site:example.com inurl:wp- | inurl:wp-content | inurl:wp-config
 site:example.com inurl:wp-login
@@ -284,12 +304,14 @@ site:example.com inurl:"/wp-login.php?action=lostpassword"
 ```
 
 ### Joomla
+
 ```
 "Joomla! Administration Login" inurl:"/index.php"
 intext:Joomla 1.6 inurl:index.php/login
 ```
 
 ### Adobe Experience Manager (AEM)
+
 ```
 inurl:/content/usergenerated | inurl:/content/dam | inurl:/jcr:content | inurl:/libs/granite | inurl:/etc/clientlibs | inurl:/content/geometrixx | inurl:/bin/wcm | inurl:/crx/de site:example.com
 ```
@@ -317,6 +339,7 @@ site:example.com "username" "password" filetype:xls | filetype:csv | filetype:do
 ## Cloud Storage
 
 ### Amazon S3
+
 ```
 site:s3.amazonaws.com "example.com"
 site:amazonaws.com inurl:.s3.amazonaws.com
@@ -326,6 +349,7 @@ site:amazonaws.com inurl:index.html
 ```
 
 ### Google Cloud
+
 ```
 site:googleapis.com "example.com"
 site:drive.google.com "example.com"
@@ -333,6 +357,7 @@ site:docs.google.com inurl:"/d/" "example.com"
 ```
 
 ### Microsoft Azure
+
 ```
 site:blob.core.windows.net "example.com"
 site:onedrive.live.com "example.com"
@@ -341,6 +366,7 @@ site:dev.azure.com "example.com"
 ```
 
 ### Other Cloud
+
 ```
 site:digitaloceanspaces.com "example.com"
 site:dropbox.com/s "example.com"

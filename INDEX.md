@@ -4,6 +4,22 @@ Flat map of the workbench. Use `grep -rln <term>` across dirs for cross-cutting 
 
 **New here?** Read [`START-HERE.md`](START-HERE.md) first.
 
+---
+
+## 🎯 ACTIVE SPRINT — 2026-05-14 → 2026-05-28
+
+**Goal: $2,000+ June bounties** (May = $890 baseline · 2x→$1.8k · 3x→$2.7k · 4x→$3.6k). College tuition path.
+
+- **Mission Control HTML:** `~/claude-bug-bounty/docs/MISSION_CONTROL.html` (mirrored to vault `00 - Dashboard/MISSION_2026-05-14.html`)
+- **14-Day Sprint Plan:** `~/claude-bug-bounty/docs/sprint/SPRINT_2026-05-14.md`
+- **OWASP Top 10 cheatsheets:** `~/claude-bug-bounty/docs/owasp/A01..A10` (mirrored to vault `06 - Knowledge Base/OWASP/`)
+- **Agent + Skill Audit:** `~/claude-bug-bounty/docs/audit/AGENT_SKILL_AUDIT.md` (kill 5 agents · merge 5 skill groups · archive 28 `/p-*` commands)
+- **Active queue (priority):** xvideos > chaturbate billing > eero (resume) > smtp2go (after H1 scope clarification) > mobilevikings (OpenVPN-AS side-quest)
+- **Workhorse class:** A10 SSRF ($843 avg / $31k max from journal) — bias every session toward SSRF candidates first
+- **Discipline rules:** ONE primary target/day · 4h budget · validate before report · honest park beats soft report · PoC or it doesn't exist
+
+---
+
 ## Latest-2026 — CVE trackers
 
 - [Tracker README](Latest-2026/README.md) — rolling attack surface index, tags, update log

@@ -432,6 +432,7 @@ contract OracleManipulationExploit is Test {
     }
 }
 ```
+
 **Grep:** `getReserves()\|slot0()\|latestAnswer()`
 
 ---
@@ -469,6 +470,7 @@ function testReentrancy() public {
     assertEq(TARGET.balance, 0, "Drain failed");
 }
 ```
+
 **Grep:** `\.call{value:` without `nonReentrant`
 
 ---
@@ -497,6 +499,7 @@ contract NFTReentrancyExploit {
     }
 }
 ```
+
 **Grep:** `onERC721Received\|onERC1155Received\|safeTransferFrom` without `nonReentrant`
 
 ---
@@ -516,6 +519,7 @@ function testArithmeticUnderflow() public {
     target.withdraw(bigNumber);
 }
 ```
+
 **Grep:** `unchecked {` — read every block, verify a < b is impossible
 
 ---
@@ -536,6 +540,7 @@ function testArbitraryCall() public {
     assertGt(IERC20(USDC).balanceOf(address(this)), 0);
 }
 ```
+
 **Real example:** LI.FI $10.7M (2024) — `_swapData` passed to library bypassing whitelist.
 **Grep:** `\.call(\|delegatecall(` where target/data come from user input
 
@@ -557,6 +562,7 @@ function testMissingAccessControl() public {
     }
 }
 ```
+
 **Grep:** `function initialize\|function setOwner\|function upgrade\|function mint` — does each have `onlyOwner`/`initializer`?
 
 ---
@@ -593,6 +599,7 @@ function testDonationAttack() public {
     assertGt(IERC20(USDC).balanceOf(address(this)), 1_000_000e6);
 }
 ```
+
 **Grep:** `balanceOf(address(this))\|totalAssets()` — is price derived from raw balance?
 
 ---
@@ -622,6 +629,7 @@ function testFeeOnTransfer() public {
     target.withdraw(target.balanceOf(address(this)));
 }
 ```
+
 **Grep:** `transferFrom(msg.sender, address(this), amount)` without `balanceBefore/balanceAfter` check
 
 ---
@@ -646,6 +654,7 @@ contract ERC777AttackHook is IERC777Recipient {
     }
 }
 ```
+
 **Grep:** ERC777-accepting protocols → check `nonReentrant` on all token-accepting functions
 
 ---
@@ -668,6 +677,7 @@ function testGovernanceFlashLoan() public {
     // balanceOf(account) at vote time → VULNERABLE
 }
 ```
+
 **Grep:** `balanceOf\|getCurrentVotes` vs `getPastVotes\|getVotes(account, block)` in voting logic
 
 ---
@@ -692,6 +702,7 @@ function testSignatureReplay() public {
     target.withdrawWithSignature(100e6, sig);  // replay — BUG if succeeds
 }
 ```
+
 **Grep:** `ecrecover\|ECDSA.recover` → check for `nonces[signer]++` and `block.chainid`
 
 ---
@@ -726,6 +737,7 @@ function testFirstDepositorInflation() public {
     assertGt(IERC20(USDC).balanceOf(address(this)), 1_500_000e6);
 }
 ```
+
 **Defense to look for:** `_decimalsOffset()` override, or `totalAssets() + 1` in denominator.
 
 ---
@@ -848,6 +860,7 @@ function testPermitFrontrun() public {
     target.permitAndDeposit(1000e6, block.timestamp + 3600, v, r, s);
 }
 ```
+
 **Check:** Does `permitAndDeposit` use `try/catch` for the permit call? If not → DoS vector.
 
 ---
@@ -869,7 +882,9 @@ function testTautologyCheck() public {
     assertTrue(result, "Tautology: verify always returns true — bug confirmed");
 }
 ```
+
 **Grep:**
+
 ```bash
 grep -rn "require\|assert" contracts/ | python3 -c "
 import sys, re

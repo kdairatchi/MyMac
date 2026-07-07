@@ -21,11 +21,13 @@
 ```
 
 ### Default / weak creds to try
+
 - Tomcat Manager: `tomcat:tomcat`, `admin:admin`, `admin:`, `tomcat:s3cret`
 - Axis2: `admin:axis2`
 - OFBiz: `admin:ofbiz`
 
 ### Version fingerprinting
+
 ```bash
 curl -I https://target.com/ | grep -i server
 nmap -sV -p 80,443,8080,8443 target.com
@@ -33,6 +35,7 @@ httpx -u https://target.com -title -server -status-code
 ```
 
 ### Quick checks
+
 ```bash
 # mod_status (exposes live request data and source IPs)
 curl http://target.com/server-status?auto
@@ -54,6 +57,7 @@ curl -u tomcat:tomcat -T shell.war \
 ```
 
 ### Wordlists for Apache fuzzing
+
 1. https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/Apache.fuzz.txt
 2. SecLists/Discovery/Web-Content/tomcat.txt
 3. SecLists/Discovery/Web-Content/CommonBackdoors-PHP.fuzz.txt
@@ -62,15 +66,18 @@ curl -u tomcat:tomcat -T shell.war \
 
 ## CVE Reference (no exploit commands — verify version before testing)
 
-#FUZZ the Apache urls :
+# FUZZ the Apache urls :
+
 Wordlist:
+
 1. https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/Apache.fuzz.txt
 2. https://fossies.org/linux/honggfuzz/examples/apache-httpd/README.md
 3. https://github.com/random-robbie/bruteforce-lists/blob/master/honey.txt
 
-#Always check the Plugins and Misconfiguration in them there might be few more endpointsg etting disclosed
+# Always check the Plugins and Misconfiguration in them there might be few more endpointsg etting disclosed
 
-#Here are few CVEs to Check and make Notes
+# Here are few CVEs to Check and make Notes
+
 CVE-2021-44228 - Log4Shell: Remote Code Execution in Apache Log4j
 CVE-2021-45046 - Apache Log4j Security Bypass
 CVE-2021-41773 - Path Traversal in Apache HTTP Server 2.4.49
@@ -102,8 +109,8 @@ CVE-2019-10086 - Memory Corruption in Apache Thrift
 CVE-2021-31805 - XSS in Apache Struts2
 CVE-2019-0199 - Apache HTTP Server Vulnerability Leading to DoS
 
+# Few Links to Explore
 
-#Few Links to Explore
 1. https://hackerone.com/reports/520903
 2. https://activemq.apache.org/components/artemis/documentation/hacking-guide/
 3. https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/apache

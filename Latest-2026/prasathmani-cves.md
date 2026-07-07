@@ -63,7 +63,6 @@ _pending enrichment_
 ## 2026-04-19
 
 ### TinyFileManager <= 2.6 Path Traversal via file[] — `CVE-2026-6496`
-
 - **Tags:** `#path-traversal` `#web`
 - **Severity:** high · **Hunt:** 4/5 · **Score:** 42.0 · **Status:** poc · **Age:** 0d
 - **Sources:** [1](https://nvd.nist.gov/vuln/detail/CVE-2026-6496)

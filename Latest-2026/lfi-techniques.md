@@ -229,3 +229,20 @@ A vulnerability was discovered in Burp Suite Professional 2026.3.3 on Windows. W
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+
+## 2026-07-07 — H1 disclosures
+
+### jitsi-call-analytics: Unauthenticated arbitrary file write via path traversal in `/api/v1/uploads/analyze`
+
+- **2026-07-02** · sev: Low · bounty: $100
+- Source: [hackerone.com/3485343](https://hackerone.com/reports/3485343) · Reporter: [@r1skr1der](https://hackerone.com/r1skr1der) · Team: [8x8](https://hackerone.com/8x8-bounty)
+- CWE: Path Traversal
+
+**What**
+
+A path traversal vulnerability was discovered in the `/api/v1/uploads/analyze` endpoint of the jitsi-call-analytics backend. The vulnerability allowed unauthenticated users to write files within the configured `RTCSTATS_DOWNLOADS_PATH` directory. The issue was caused by the upload handler using user-controlled `file.originalname` directly in `path.join()` without sanitization, enabling attackers to include `../` sequences to escape the intended per-session UUID directory and write or overwrite files anywhere under the configured root path. …
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---

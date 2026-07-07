@@ -1,25 +1,28 @@
 # OWASP Web Application Security Testing Checklist
+
 - Available in [PDF](OWASP/OWASP%20Web%20Application%20Security%20Testing%20Checklist.pdf) or [Docx](OWASP/OWASP%20Web%20Application%20Security%20Testing%20Checklist.docx) for printing
--  [Trello Board to copy yours](https://trello.com/b/zTSkJPkL/owasp-web-checklist)
+- [Trello Board to copy yours](https://trello.com/b/zTSkJPkL/owasp-web-checklist)
 
 ## Table of Contents
 
-* [Information Gathering](#Information)
-* [Configuration Management](#Configuration)
-* [Secure Transmission](#Transmission)
-* [Authentication](#Authentication)
-* [Session Management](#Session)
-* [Authorization](#Authorization)
-* [Data Validation](#Validation)
-* [Denial of Service](#Denial)
-* [Business Logic](#Business)
-* [Cryptography](#Cryptography)
-* [Risky Functionality - File Uploads](#File)
-* [Risky Functionality - Card Payment](#Card)
-* [HTML 5](#HTML)
+- [Information Gathering](#Information)
+- [Configuration Management](#Configuration)
+- [Secure Transmission](#Transmission)
+- [Authentication](#Authentication)
+- [Session Management](#Session)
+- [Authorization](#Authorization)
+- [Data Validation](#Validation)
+- [Denial of Service](#Denial)
+- [Business Logic](#Business)
+- [Cryptography](#Cryptography)
+- [Risky Functionality - File Uploads](#File)
+- [Risky Functionality - Card Payment](#Card)
+- [HTML 5](#HTML)
 
 -------
+
 ### <a name="Information">Information Gathering</a>
+
 - [ ] Manually explore the site
 - [ ] Spider/crawl for missed or hidden content
 - [ ] Check for files that expose content, such as robots.txt, sitemap.xml, .DS_Store
@@ -35,7 +38,6 @@
 - [ ] Identify all hostnames and ports
 - [ ] Identify third-party hosted content
 
-
 ### <a name="Configuration">Configuration Management</a>
 
 - [ ] Check for commonly used application and administrative URLs
@@ -47,7 +49,6 @@
 - [ ] Test for non-production data in live environment, and vice-versa
 - [ ] Check for sensitive data in client-side code (e.g. API keys, credentials)
 
-
 ### <a name="Transmission">Secure Transmission</a>
 
 - [ ] Check SSL Version, Algorithms, Key length
@@ -57,9 +58,8 @@
 - [ ] Check session tokens only delivered over HTTPS
 - [ ] Check if HTTP Strict Transport Security (HSTS) in use
 
-
-
 ### <a name="Authentication">Authentication</a>
+
 - [ ] Test for user enumeration
 - [ ] Test for authentication bypass
 - [ ] Test for bruteforce protection
@@ -77,9 +77,8 @@
 - [ ] Test for out-of channel notification of account lockouts and successful password changes
 - [ ] Test for consistent authentication across applications with shared authentication schema / SSO
 
-
-
 ### <a name="Session">Session Management</a>
+
 - [ ] Establish how session management is handled in the application (eg, tokens in cookies, token in URL)
 - [ ] Check session tokens for cookie flags (httpOnly and secure)
 - [ ] Check session cookie scope (path and domain)
@@ -94,17 +93,16 @@
 - [ ] Test for session puzzling
 - [ ] Test for CSRF and clickjacking
 
-
-
 ### <a name="Authorization">Authorization</a>
+
 - [ ] Test for path traversal
 - [ ] Test for bypassing authorization schema
 - [ ] Test for vertical Access control problems (a.k.a. Privilege Escalation)
 - [ ] Test for horizontal Access control problems (between two users at the same privilege level)
 - [ ] Test for missing authorization
 
-
 ### <a name="Validation">Data Validation</a>
+
 - [ ] Test for Reflected Cross Site Scripting
 - [ ] Test for Stored Cross Site Scripting
 - [ ] Test for DOM based Cross Site Scripting
@@ -138,29 +136,30 @@
 - [ ] Test for NULL/Invalid Session Cookie
 
 ### <a name="Denial">Denial of Service</a>
+
 - [ ] Test for anti-automation
 - [ ] Test for account lockout
 - [ ] Test for HTTP protocol DoS
 - [ ] Test for SQL wildcard DoS
 
-
 ### <a name="Business">Business Logic</a>
+
 - [ ] Test for feature misuse
 - [ ] Test for lack of non-repudiation
 - [ ] Test for trust relationships
 - [ ] Test for integrity of data
 - [ ] Test segregation of duties
 
-
 ### <a name="Cryptography">Cryptography</a>
+
 - [ ] Check if data which should be encrypted is not
 - [ ] Check for wrong algorithms usage depending on context
 - [ ] Check for weak algorithms usage
 - [ ] Check for proper use of salting
 - [ ] Check for randomness functions
 
-
 ### <a name="File">Risky Functionality - File Uploads</a>
+
 - [ ] Test that acceptable file types are whitelisted
 - [ ] Test that file size limits, upload frequency and total file counts are defined and are enforced
 - [ ] Test that file contents match the defined file type
@@ -170,8 +169,8 @@
 - [ ] Test that uploaded files are not served on the same hostname/port
 - [ ] Test that files and other media are integrated with the authentication and authorisation schemas
 
-
 ### <a name="Card">Risky Functionality - Card Payment</a>
+
 - [ ] Test for known vulnerabilities and configuration issues on Web Server and Web Application
 - [ ] Test for default or guessable password
 - [ ] Test for non-production data in live environment, and vice-versa
@@ -184,8 +183,8 @@
 - [ ] Test for Authentication and Authorization issues
 - [ ] Test for CSRF
 
-
 ### <a name="HTML">HTML 5</a>
+
 - [ ] Test Web Messaging
 - [ ] Test for Web Storage SQL injection
 - [ ] Check CORS implementation

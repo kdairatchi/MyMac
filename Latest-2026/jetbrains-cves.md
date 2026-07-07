@@ -63,7 +63,6 @@ _pending enrichment_
 ## 2026-04-19
 
 ### JetBrains Junie RCE via Project File — `CVE-2026-41153`
-
 - **Tags:** `#rce`
 - **Severity:** critical · **Hunt:** 4/5 · **Score:** 54.0 · **Status:** poc · **Age:** 0d
 - **Sources:** [1](https://nvd.nist.gov/vuln/detail/CVE-2026-41153)

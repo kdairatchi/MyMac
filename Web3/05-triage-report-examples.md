@@ -19,6 +19,7 @@ ONE wrong answer = STOP and move on.
 #### Q1: Can an attacker use this RIGHT NOW, step by step?
 
 Complete this template:
+
 ```
 1. Setup:   [what I need]
 2. Call:    [exact function, exact params]
@@ -37,6 +38,7 @@ Go to the Immunefi program page. Find "Impacts in Scope."
 Match your bug to one of these EXACTLY.
 
 Example impact tiers:
+
 - "Direct theft of any user funds" — Critical
 - "Permanent freezing of funds" — Critical
 - "Protocol insolvency" — Critical
@@ -65,6 +67,7 @@ If the bug is in Aave, Uniswap, OpenZeppelin, or any external dependency: **KILL
 "Admin can set parameter X which under condition Y creates DoS" = borderline.
 
 Salvage path: can the bug trigger WITHOUT the admin doing anything unusual?
+
 - If yes: valid
 - If no: likely invalid (requires admin mistake — almost always out of scope)
 
@@ -90,6 +93,7 @@ If profit < cost: KILL IT.
 ```
 
 Example:
+
 - DoS via dust harvest: costs 1 wei USDC + gas, disables yield for $81K TVL → VIABLE.
 - Withdraw-fee arbitrage: fee (0.1%) > diluted yield from attack → NOT profitable → KILL IT.
 
@@ -260,11 +264,13 @@ remainder, creating a silent fund loss on every harvest.
 
 **Root Cause:**
 The `- 1` subtraction creates a permanent accounting gap. The 1 wei:
+
 - Is NOT sent to the protocol fee recipient (owner)
 - Is NOT distributed to users via `cumulativeRewardPerShare`
 - Remains locked in the contract indefinitely with no recovery mechanism
 
 **Attack Path (numbered, each step is a specific function call):**
+
 1. Owner sets `minYieldAmount` to minimum (1 * 10^6 = 1 USDC)
 2. `harvestTimePeriod` passes (24 hours by default)
 3. Yield accrued: 1 wei of aUSDC above totalSupply
@@ -284,6 +290,7 @@ The `- 1` subtraction creates a permanent accounting gap. The 1 wei:
 **Category:** Temporary freezing of funds
 
 **Quantified Impact:**
+
 - ernUSDC TVL: $69,300
 - ernUSDT TVL: $12,000
 - All accrued wBTC yield frozen for all depositors
@@ -301,6 +308,7 @@ The `- 1` subtraction creates a permanent accounting gap. The 1 wei:
 [Must compile and pass cleanly]
 
 **Expected Output:**
+
 ```
 [PASS] testHarvestDoS()
 Logs:
@@ -315,6 +323,7 @@ Logs:
 ## Recommended Fix
 
 **Option 1 — Remove the unexplained `-1`:**
+
 ```solidity
 // Before:
 uint256 userRewards = rewardReceived - protocolFee - 1;
@@ -324,6 +333,7 @@ uint256 userRewards = rewardReceived - protocolFee;
 ```
 
 **Option 2 — Guard against zero rewardReceived:**
+
 ```solidity
 if (rewardReceived == 0) {
     lastHarvest = block.timestamp;
@@ -338,6 +348,7 @@ if (rewardReceived == 0) {
 - Vulnerable code: `ContractName.sol` line X (deployed at `0x...`)
 - Related prior audit finding (if relevant): [explain why yours is DIFFERENT]
 - CWE/weakness class: [e.g., CWE-191: Integer Underflow]
+
 ```
 
 ---
@@ -345,7 +356,9 @@ if (rewardReceived == 0) {
 ### TITLE FORMULA
 
 ```
+
 [ROOT CAUSE] in [function name] allows [WHO] to [IMPACT]
+
 ```
 
 Examples:
@@ -455,6 +468,7 @@ grep -rn "_disableInitializers()" contracts/
 **Key insight:** `_requireOwned` ≠ `_checkAuthorized`. Always verify what the access control function ACTUALLY validates, not just what its name implies.
 
 **Grep:**
+
 ```bash
 grep -rn "_requireOwned\|ownerOf\b" contracts/ -B5 -A5
 # Read the implementation: does it check msg.sender == owner? Or just: does owner exist?
@@ -473,6 +487,7 @@ grep -rn "_requireOwned\|ownerOf\b" contracts/ -B5 -A5
 **Key insight:** When you see a modifier on 2 out of 3 sibling functions, the 3rd is the bug. This is the "missing guard on sibling function" pattern — one of the most common Critical findings.
 
 **Grep:**
+
 ```bash
 grep -rn "function vote\|function poke\|function reset" contracts/ -A2
 # Compare: do all have the same set of modifiers?
@@ -491,6 +506,7 @@ grep -rn "function vote\|function poke\|function reset" contracts/ -A2
 **Key insight:** Always trace what `balanceOf(this) - totalSupply` equals in each state transition.
 
 **Grep:**
+
 ```bash
 grep -rn "balanceOf(address(this)).*-.*total\|total.*-.*balanceOf(address(this))" contracts/
 # Then: does totalSupply change without balanceOf changing?
@@ -509,6 +525,7 @@ grep -rn "balanceOf(address(this)).*-.*total\|total.*-.*balanceOf(address(this))
 **Key insight:** Check that array push operations have amount validation BEFORE the push — not after.
 
 **Grep:**
+
 ```bash
 grep -rn "\.push(" contracts/ -B5
 # Is there: require(amount > 0) or if (amount == 0) return; BEFORE the push?
@@ -527,6 +544,7 @@ grep -rn "\.push(" contracts/ -B5
 **Key insight:** At EVERY `>` comparison, ask "what when equal?" Boundary conditions are the most common source of off-by-one criticals.
 
 **Grep:**
+
 ```bash
 grep -rn "endPeriod\|exitPeriod\|lastPeriod" contracts/ | grep "[<>][^=]"
 # For every strict comparison on period/epoch boundaries: test the equal case
@@ -545,6 +563,7 @@ grep -rn "endPeriod\|exitPeriod\|lastPeriod" contracts/ | grep "[<>][^=]"
 **Key insight:** Run a tautology check on every codebase. Any variable compared against itself is a critical bypass.
 
 **Grep:**
+
 ```bash
 grep -rn "require\|assert" contracts/ | python3 -c "
 import sys, re
@@ -581,6 +600,7 @@ for l in sys.stdin:
 **Key insight:** Always test ecrecover with an invalid signature. The return value must be compared against `address(0)` and must revert.
 
 **Grep:**
+
 ```bash
 grep -rn "ecrecover\|ECDSA\.recover" contracts/ -A5
 # Is the return value compared against address(0)?
@@ -612,6 +632,7 @@ grep -rn "ecrecover\|ECDSA\.recover" contracts/ -A5
 **Key insight:** `safeApprove` is deprecated for a reason — it fails if there's a non-zero existing approval. Must call `safeApprove(spender, 0)` after every swap.
 
 **Grep:**
+
 ```bash
 grep -rn "safeApprove\b" contracts/ -A8
 # Is there: safeApprove(spender, 0) cleanup after the swap?
@@ -630,6 +651,7 @@ grep -rn "safeApprove\b" contracts/ -A8
 **Key insight:** On Solana, every `remaining_accounts[n]` must be validated with ownership check, discriminator check, or constraint attribute.
 
 **Grep (Solana):**
+
 ```bash
 grep -rn "remaining_accounts\[" src/ --include="*.rs" -A5
 # Is there: AccountInfo constraint, owner check, discriminator check?
@@ -648,6 +670,7 @@ grep -rn "remaining_accounts\[" src/ --include="*.rs" -A5
 **Key insight:** Any counter that increases per-signature must check for duplicate signers. `if (seen.has(signer)) continue; seen.add(signer)` is the fix pattern.
 
 **Grep:**
+
 ```bash
 grep -rn "validSignatures++\|signatureCount++" src/ -B5
 # Is there: if (seen.has(signer)) continue; seen.add(signer)?
@@ -666,6 +689,7 @@ grep -rn "validSignatures++\|signatureCount++" src/ -B5
 **Key insight:** For any non-standard decimal token (2, 4, 6 decimals), test edge cases near 0. Division truncates toward zero, which creates deposit-with-0-cost attacks.
 
 **Grep:**
+
 ```bash
 grep -rn "\.decimals()\|EURS\|2.*decimal\|decimals.*2\b" contracts/
 # For any non-standard decimal token: test edge cases near 0
@@ -684,6 +708,7 @@ grep -rn "\.decimals()\|EURS\|2.*decimal\|decimals.*2\b" contracts/
 **Key insight:** For every early `return` or fast path: which state updates happen in normal flow but NOT here? The delta is the bug. This is the most common Critical pattern across Immunefi competition reports.
 
 **Grep:**
+
 ```bash
 grep -rn "if.*sufficient\|fast.*path\|return\b" contracts/ -B3 -A10
 # For each early return: which state updates happen in normal flow but NOT here?
@@ -714,6 +739,7 @@ grep -rn "if.*sufficient\|fast.*path\|return\b" contracts/ -B3 -A10
 **Key insight:** No virtual offset in ERC4626 = first depositor inflation possible. Fix: OpenZeppelin's implementation adds `totalSupply() + 10**_decimalsOffset()` to numerator.
 
 **Grep:**
+
 ```bash
 grep -rn "convertToShares\|_convertToShares" contracts/ -A5
 # Is there: totalSupply() + 10**decimalsOffset() or totalAssets() + 1?
@@ -744,6 +770,7 @@ grep -rn "convertToShares\|_convertToShares" contracts/ -A5
 **Key insight:** Any downcast (uint256 → uint16, uint128 → uint64) without a range check is a critical candidate if the result is used for security validation.
 
 **Grep:**
+
 ```bash
 grep -rn "uint16(\|uint8(\|as u16\|as u8" contracts/ src/
 # Is there a range check before the downcast?
@@ -768,17 +795,20 @@ grep -rn "uint16(\|uint8(\|as u16\|as u8" contracts/ src/
 Almost every bug comes from one of three root causes:
 
 **Pattern A: "I assumed function B was called, but it wasn't"**
+
 - Fast path skip, early return, conditional execution
 - The fix: ensure ALL paths update ALL state variables
 - Examples: #15 (Alchemix V3 fast path), #4 (Yeet accounting desync)
 
 **Pattern B: "I assumed the check meant X, but it actually means Y"**
+
 - `_requireOwned` = existence not ownership
 - `>` = doesn't include boundary
 - Modifier = silent bypass when missing
 - Examples: #2 (ZeroLend), #6 (VeChain), #3 (Alchemix poke)
 
 **Pattern C: "I assumed this can't happen, but it can"**
+
 - "ecrecover can't return address(0)" → it can
 - "negative amounts can't be passed" → they can (felt252)
 - "this function won't be called twice" → it will (no onlyNewEpoch)

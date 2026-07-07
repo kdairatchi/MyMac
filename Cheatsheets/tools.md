@@ -45,8 +45,6 @@ otherapp.10.0.0.1.nip.io
 - [Wayback Machine](https://archive.org/web/) (Find stuff which was hosted on the domain in past)
 - [FindSubdomains](https://findsubdomains.com/) (Find subdomains using domain or keywords)
 
-
-
 **Report Templates**
 
 - https://github.com/fransr/template-generator

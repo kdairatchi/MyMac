@@ -20,6 +20,7 @@ Ask IN ORDER. One wrong answer = STOP immediately.
 ### Q1: Can an attacker use this RIGHT NOW, step by step?
 
 Complete this template:
+
 ```
 1. Setup:   I need [own account / another user's ID / no account]
 2. Request: [exact HTTP method, URL, headers, body — copy-paste ready]
@@ -37,6 +38,7 @@ Complete this template:
 Go to the program page. Find "Vulnerability Types" or "Out of Scope."
 
 Common tiers:
+
 - **Critical**: Any-user ATO without interaction, RCE, SQLi with data exfil, admin auth bypass
 - **High**: Mass PII exfil, privilege escalation, internal SSRF with data, stored XSS all users
 - **Medium**: IDOR on specific user non-critical data, XSS on sensitive page requiring click
@@ -49,6 +51,7 @@ Common tiers:
 ### Q3: Is the root cause in an in-scope asset?
 
 Confirm:
+
 - Vulnerable domain is on the in-scope list (not `*.internal.target.com`)
 - It's a production asset (not staging/dev unless explicitly in scope)
 - It's not a third-party service the company just uses (not Stripe, Salesforce, Google Auth)
@@ -69,6 +72,7 @@ Confirm:
 ### Q5: Is this already known or accepted behavior?
 
 Search:
+
 1. Program's HackerOne/Bugcrowd disclosed reports: Ctrl+F endpoint name + bug class
 2. GitHub issues on target repo: `is:issue label:security ENDPOINT_NAME`
 3. Changelog/CHANGELOG.md — does it mention this behavior?
@@ -100,6 +104,7 @@ Check the NEVER SUBMIT list below. If it's on this list without a chain → **KI
 Run in sequence. ALL 4 must PASS.
 
 ### Gate 0: Reality Check (30 seconds)
+
 ```
 [ ] Bug is REAL — confirmed with actual HTTP requests, not code reading alone
 [ ] Bug is IN SCOPE — checked program scope page explicitly
@@ -108,6 +113,7 @@ Run in sequence. ALL 4 must PASS.
 ```
 
 ### Gate 1: Impact Validation (2 minutes)
+
 ```
 [ ] Can answer: "What can attacker DO that they couldn't before?"
 [ ] Answer is more than "see non-sensitive data" (unless program pays for info disclosure)
@@ -116,6 +122,7 @@ Run in sequence. ALL 4 must PASS.
 ```
 
 ### Gate 2: Deduplication Check (5 minutes)
+
 ```
 [ ] Searched HackerOne Hacktivity for this program + similar bug title/endpoint
 [ ] Searched GitHub issues for target repo
@@ -125,6 +132,7 @@ Run in sequence. ALL 4 must PASS.
 ```
 
 ### Gate 3: Report Quality (10 minutes)
+
 ```
 [ ] Title: [Bug Class] in [Endpoint] allows [actor] to [impact]
 [ ] Steps to Reproduce: copy-pasteable HTTP request

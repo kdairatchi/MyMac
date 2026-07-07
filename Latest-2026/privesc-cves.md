@@ -63,7 +63,6 @@ _pending enrichment_
 ## 2026-04-19
 
 ### GPU Memory Write Permission Bypass — `CVE-2026-21733`
-
 - **Tags:** `#privesc`
 - **Severity:** high · **Hunt:** 2/5 · **Score:** 14.0 · **Status:** unknown · **Age:** 0d
 - **Sources:** [1](https://nvd.nist.gov/vuln/detail/CVE-2026-21733)

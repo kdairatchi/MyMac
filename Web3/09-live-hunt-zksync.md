@@ -44,6 +44,7 @@ description: ZKsync Era (Immunefi) completed hunt — 0 findings after exhaustiv
 ## ARCHITECTURE (What Makes It Hardened)
 
 ### L1 Bridge Stack
+
 ```
 Bridgehub (router)
   ├── L1AssetRouter (token routing)
@@ -54,6 +55,7 @@ Bridgehub (router)
 ```
 
 ### L2 System Contracts (kernel space 0x8000-0xFFFF)
+
 ```
 Bootloader (0x8001) → AccountCodeStorage, NonceHolder, KnownCodeStorage,
 ImmutableSimulator, ContractDeployer, L1Messenger (0x8008),
@@ -62,11 +64,13 @@ BootloaderUtilities, Compressor, ComplexUpgrader
 ```
 
 ### L2 User Space Contracts (0x10000+)
+
 ```
 Create2Factory, Bridgehub, AssetRouter, NativeTokenVault, MessageRoot
 ```
 
 ### Diamond Proxy Pattern (EIP-2535)
+
 - All facets (Admin, Executor, Mailbox, Getters) share single `ZKChainStorage` struct
 - No storage collision possible between facets
 - Function selectors explicitly mapped in DiamondCut
@@ -115,29 +119,37 @@ Create2Factory, Bridgehub, AssetRouter, NativeTokenVault, MessageRoot
 ## WHY THIS PROTOCOL IS UNHUNTABLE (Solidity Surface)
 
 ### Defense Pattern 1: CEI Everywhere
+
 ```solidity
 // L1Nullifier._finalizeDeposit (line 411)
 isWithdrawalFinalized[chainId][l2BatchNumber][l2MessageIndex] = true; // EFFECT first
 // ... then external call to NTV
 ```
+
 Every single withdrawal/claim/deposit path follows Check-Effect-Interact.
 
 ### Defense Pattern 2: Independent Access Control on L2
+
 Each L2 system contract independently enforces access:
+
 - `L2BaseToken.transferFromTo`: checks `msg.sender` against 3 allowed callers
 - `L1Messenger.sendToL1`: open to anyone, but L1 verifies sender field in log
 - `SystemContext`: `onlyCallFromBootloader` on all state-changing functions
 - No single RBAC failure cascades
 
 ### Defense Pattern 3: Encoding Collision Resistance
+
 ```
 LEGACY_ENCODING_VERSION = 0x00  (first byte)
 NEW_ENCODING_VERSION    = 0x01  (first byte)
 ```
+
 Different first byte = impossible to confuse one format for another.
 
 ### Defense Pattern 4: Mature Legacy Boundary Handling
+
 Three bridge generations coexist cleanly:
+
 1. L1ERC20Bridge (legacy wrapper → delegates to AssetRouter)
 2. L1SharedBridge (previous → absorbed into AssetRouter/Nullifier)
 3. L1AssetRouter + L1Nullifier (current)
@@ -145,6 +157,7 @@ Three bridge generations coexist cleanly:
 Each boundary has explicit version checks, try/catch decoding, and fallback paths.
 
 ### Defense Pattern 5: Audit Fix Quality
+
 V29 OZ audit found 3 HIGHs. All fixes were thorough — not just patches but architectural improvements.
 The "least audited code" assumption (that fixes are hastily applied) did NOT hold here.
 
@@ -153,12 +166,14 @@ The "least audited code" assumption (that fixes are hastily applied) did NOT hol
 ## STRATEGIC TAKEAWAYS
 
 ### When to Abandon a Large L1 Bridge Target
+
 1. After systematically testing top 8 attack vectors (Days 1-2): if all blocked, ROI drops exponentially
 2. If OZ/ToB audited the EXACT codebase version you're reviewing (not an older version)
 3. If 22+ automated agents all return clean across all contracts
 4. If encoding, access control, and CEI are all consistently applied with zero exceptions
 
 ### What Could Still Work on ZKsync
+
 1. **ZK circuits** (Rust/RISC-V) — different skillset, different attack surface, prior $50K payout proves bugs exist there
 2. **Bootloader assembly** (Yul) — 5000+ lines of hand-written Yul, complex gas accounting, less audited
 3. **New code drops** (V30+) — fresh code = fresh bugs. Monitor `era-contracts` releases
@@ -166,7 +181,9 @@ The "least audited code" assumption (that fixes are hastily applied) did NOT hol
 5. **Interop protocol** (when launched) — `L2InteropRootStorage` is minimal now, but interop = massive new surface
 
 ### Pre-Dive Scoring Refinement
+
 Add to the scorecard:
+
 ```
 SOFT KILL: If protocol has OZ/ToB/Cyfrin audit on current version AND codebase > 500K LOC
            → expect 40+ hours for MAYBE 1 finding

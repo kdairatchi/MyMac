@@ -4,6 +4,7 @@ description: Case study: role misconfiguration bug class applied to a yield aggr
 ---
 
 # CASE STUDY: ROLE MISCONFIGURATION IN A YIELD AGGREGATOR
+>
 > Bug Class: Access Control | Severity: Critical/Medium | Payout Range: $10K–$50K
 > This file shows how to apply the full 10-class methodology to a real yield aggregator target.
 
@@ -55,6 +56,7 @@ User withdraws:
 ```
 
 **Key state variables:**
+
 - `deposits[user]` — user principal (stablecoin)
 - `totalDeposited` — sum of all principals
 - `depositTimestamp[user]` — last deposit time (affects withdrawal fee)
@@ -66,10 +68,13 @@ User withdraws:
 ## KNOWN ISSUES (Risk Accepted by Team — Do NOT Submit)
 
 ### Firm A Findings (16 total, all Risk Accepted)
+
 All standard: missing events, gas optimizations, reentrancy guards present (CEI followed), centralization risks (owner can pause), single oracle (DEX swap is operational, not security-critical).
 
 ### Firm B Findings (18 total, all Risk Accepted)
+
 Including:
+
 - HAL-01: withdrawFee can be changed by owner (centralization)
 - HAL-05: deposit() resets depositTimestamp even on partial top-ups → **extends lock period for existing deposits**
 - HAL-08: Missing check for DISTRIBUTOR_ROLE being set *(flagged but did NOT verify it was never granted)*
@@ -84,13 +89,16 @@ Including:
 ### 1. Accounting Desync — 2 FINDINGS
 
 **Finding 1: The `-1` Stranding Pattern**
+
 ```solidity
 // In _performHarvest():
 harvestAmount = aToken.balanceOf(address(this)) - totalDeposited - 1; // strands 1 wei
 ```
+
 The hardcoded `-1` strands 1 wei of stablecoin per harvest permanently. Over thousands of harvests, this accumulates. Severity: LOW/INFORMATIONAL (no user loss, just protocol dust accumulation).
 
 **Finding 2: Dust Harvest DoS** ← VALID MEDIUM
+
 ```
 Scenario: Accumulated harvest amount is very tiny (< DEX minimum swap)
 1. harvest() calls dex.exactInputSingle(stablecoin → rewardToken)
@@ -103,6 +111,7 @@ Verification: Check if distribute(0) reverts. Check DEX minimum swap threshold.
 ```
 
 ### 2. Access Control — 1 FINDING (CRITICAL/HIGH)
+
 **Finding: DISTRIBUTOR_ROLE Never Granted** ← MAIN FINDING
 
 ```solidity
@@ -120,11 +129,13 @@ function claimFor(address user) external {
 **How Firm B missed it:** They flagged "missing check for whether role is set" — but their fix recommendation was "add a require that checks the role exists." They didn't verify that `getRoleMemberCount(DISTRIBUTOR_ROLE) == 0` on the live deployment.
 
 **Severity Assessment:**
+
 - If harvest HAS already happened: CRITICAL (funds locked forever)
 - If harvest never happened yet: HIGH (permanent lock when it does happen)
 - Impact × Likelihood × Exploitability: 3 × 3 × 3 = 27 → CRITICAL
 
 **Verification commands:**
+
 ```bash
 # Check if any address has DISTRIBUTOR_ROLE (replace with actual address)
 cast call <REWARDS_DISTRIBUTOR_ADDR> \
@@ -137,38 +148,49 @@ cast call <REWARDS_DISTRIBUTOR_ADDR> \
 ```
 
 ### 3. Incomplete Path — Known (Risk Accepted)
+
 Firm B HAL-05: `deposit()` resets `depositTimestamp[user]` even on partial top-ups, extending the lock period for all existing deposits. Risk Accepted by team.
 
 ### 4. Off-by-One — CLEAN
+
 All boundary operators (`>=`, `<`) in Vault.sol and RewardsDistributor.sol are correct.
 
 ### 5. Oracle Price — CLEAN
+
 Protocol does NOT use price oracles for security decisions (no lending, no liquidation, no collateral). The DEX swap is operational (converting yield), not security-critical. MEV/sandwich risk exists but is a griefing/efficiency issue, not a theft vulnerability.
 
 ### 6. ERC4626 Vaults — NOT APPLICABLE
+
 Uses a custom 1:1 share model, NOT ERC4626:
+
 - `deposits[user]` tracks exact principal
 - No share price, no share-based rounding
 - Transfers between users are blocked
 - First depositor inflation attack does NOT apply
 
 ### 7. Reentrancy — CLEAN
+
 Follows CEI (Checks-Effects-Interactions) correctly:
+
 - `deposits[user] += amount` BEFORE `lendingProtocol.supply()`
 - `deposits[user] -= amount` BEFORE `lendingProtocol.withdraw()`
 - Missing `nonReentrant` guard, but CEI makes it safe. Not submittable without PoC.
 
 ### 8. Flash Loan — CLEAN (Economically)
+
 Flash loan attack would attempt: deposit → dilute harvest → withdraw to steal yield.
 The `withdrawFee` makes this unprofitable:
+
 - Attacker deposits $1M → harvest dilutes → attacker gains $0 extra yield
 - But: attacker pays withdrawal fee to exit
 - Net: negative expected value → NOT PROFITABLE
 
 ### 9. Signature Replay — NOT APPLICABLE
+
 No signature-based functions, no EIP-2612 permit, no meta-transactions.
 
 ### 10. Proxy/Upgrade — NOT APPLICABLE
+
 Not upgradeable proxies. No proxy pattern.
 
 ---
@@ -178,6 +200,7 @@ Not upgradeable proxies. No proxy pattern.
 ### SUBMIT (2 findings):
 
 **Finding 1 — CRITICAL/HIGH:**
+
 ```
 Title: DISTRIBUTOR_ROLE never granted in RewardsDistributor.sol,
        permanently locking all reward tokens
@@ -195,6 +218,7 @@ Severity: Critical (if harvest has occurred) / High (if not yet)
 ```
 
 **Finding 2 — MEDIUM:**
+
 ```
 Title: _performHarvest() dust harvest causes permanent DoS on yield distribution
 
@@ -208,6 +232,7 @@ Severity: Medium (requires specific conditions but permanently impacts yield)
 ```
 
 ### DO NOT SUBMIT:
+
 - The `-1` stranding (informational, design choice)
 - depositTimestamp reset (Risk Accepted by team)
 - Missing nonReentrant (CEI is followed; no PoC = no submission)
@@ -264,12 +289,14 @@ contract RoleNeverGrantedTest is Test {
 ```
 
 **Run:**
+
 ```bash
 forge test --match-test testDistributorRoleNeverGranted -vvvv \
   --fork-url $MAINNET_RPC_URL
 ```
 
 **Expected output:**
+
 ```
 Addresses with DISTRIBUTOR_ROLE: 0
 CONFIRMED: claimFor() reverts for all users.
@@ -325,6 +352,7 @@ This pattern (role defined, never granted) appears frequently in:
 3. **Contracts with multiple initialization steps** — if setup requires calling multiple functions in sequence, the grant is often missed
 
 **Grep to find candidates:**
+
 ```bash
 # Find all role definitions
 grep -r "bytes32 public constant.*ROLE" ./src/

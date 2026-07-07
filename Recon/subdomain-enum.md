@@ -39,6 +39,7 @@ massdns -r resolvers.txt -t A -o S -w massdns.out all-raw.txt
 ```
 
 Fresh resolvers:
+
 ```bash
 curl -s https://public-dns.info/nameservers-all.txt | \
   dnsvalidator --threads 50 -o resolvers.txt

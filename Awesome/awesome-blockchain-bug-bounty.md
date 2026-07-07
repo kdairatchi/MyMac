@@ -1,15 +1,18 @@
 # Awesome Blockchain Bug Bounty
+
 A comprehensive curated list of available Blockchain Bug Bounty Programs.
 
 中文版请见: [此处](https://slowmist.io/awesome-blockchain-bug-bounty/?s=github)
 
 ## Table of Contents
+
 - [Blockchains](#blockchains)
 - [Exchanges](#exchanges)
 - [Wallets](#wallets)
 - [Other Applications](#other-applications)
 
 ### Blockchains
+
 - [Ark](https://blog.ark.io/ark-github-development-bounty-113806ae9ffe/)
 - [Bitcoin](https://bounty.bitcoin.com/)
 - [BitShares](https://hackthedex.io/)
@@ -43,6 +46,7 @@ A comprehensive curated list of available Blockchain Bug Bounty Programs.
 - [Zcoin](https://github.com/zcoinofficial/zcoin/wiki/Zcoin-Vulnerability-Bounty-Program)
 
 ### Exchanges
+
 - [Binance](https://bugcrowd.com/binance)
 - [Chaince](https://slowmist.io/en/chaince/)
 - [Coinbase](https://hackerone.com/coinbase)
@@ -53,6 +57,7 @@ A comprehensive curated list of available Blockchain Bug Bounty Programs.
 - [TOP.ONE](https://slowmist.io/en/topone/)
 
 ### Wallets
+
 - [BYTOM](https://slowmist.io/en/bytom/)
 - [FIBOS](https://slowmist.io/en/fibos/)
 - [GXChain](https://slowmist.io/en/gxchain/)
@@ -64,4 +69,5 @@ A comprehensive curated list of available Blockchain Bug Bounty Programs.
 - [VeChain](https://slowmist.io/en/vechain/)
 
 ### Other Applications
+
 - [BOX](https://slowmist.io/en/box/)

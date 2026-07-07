@@ -31,6 +31,7 @@ GOOD: "An attacker can access any user's order history by changing the user_id
 ```
 
 **Good titles (specific, impact-first):**
+
 ```
 IDOR in /api/v2/invoices/{id} allows authenticated user to read any customer's invoice data
 Missing auth on POST /api/admin/users allows unauthenticated attacker to create admin accounts
@@ -40,6 +41,7 @@ Race condition in coupon redemption allows same code to be used unlimited times
 ```
 
 **Bad titles (vague, useless to triager):**
+
 ```
 IDOR vulnerability found
 Broken access control
@@ -84,9 +86,11 @@ account are required."
 2. Send the following request:
 
 ```
+
 GET /api/users/456/orders HTTP/1.1
 Host: target.com
 Authorization: Bearer ATTACKER_TOKEN_HERE
+
 ```
 
 3. Observe response:
@@ -113,6 +117,7 @@ with a simple loop.
 ## Recommended Fix
 
 Add server-side ownership verification:
+
 ```python
 if order.user_id != current_user.id:
     raise Forbidden()
@@ -122,6 +127,7 @@ if order.user_id != current_user.id:
 
 [Screenshot showing attacker's session returning victim's order data]
 [Video walkthrough if available]
+
 ```
 
 ---
@@ -217,6 +223,7 @@ CVSS 3.1 Score: X.X ([Severity]) — AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N
 ```
 
 **Intigriti-specific notes:**
+
 - Title format: `[Bug Class]: [One-line impact]` (no formula required, but keep it specific)
 - Severity is set by you: Critical/High/Medium/Low/Exceptional
 - CVSS 3.1 is standard (CVSS 4.0 also accepted on newer programs)
@@ -266,6 +273,7 @@ Requires $Z gas. Attack is repeatable."]
 ## Recommended Fix
 
 [Specific code change with before/after]
+
 ```
 
 ---
@@ -274,7 +282,9 @@ Requires $Z gas. Attack is repeatable."]
 
 ### Formula
 ```
+
 CVSS = f(AV, AC, PR, UI, S, C, I, A)
+
 ```
 
 ### Metric Quick Picks
@@ -346,11 +356,13 @@ CVSS = f(AV, AC, PR, UI, S, C, I, A)
 
 Each YES raises severity:
 ```
+
 1. Exposes PII / health / financial data of other users?        → +1 severity
 2. Allows account takeover or privilege escalation?             → +2 severity
 3. Requires ZERO user interaction from victim?                  → +1 severity
 4. Affects ALL users (not specific condition)?                  → +1 severity
 5. Remotely exploitable with no internal network access?        → baseline for High+
+
 ```
 
 ---
@@ -371,6 +383,7 @@ Each YES raises severity:
 ## THE 60-SECOND PRE-SUBMIT CHECKLIST
 
 ```
+
 [ ] Title follows formula: [Class] in [endpoint] allows [actor] to [impact]
 [ ] First sentence states exact impact in plain English
 [ ] Steps to Reproduce has exact HTTP request (copy-paste ready)
@@ -383,6 +396,7 @@ Each YES raises severity:
 [ ] Severity claimed matches impact described — don't overclaim
 [ ] Never used "could potentially" or "may allow"
 [ ] PoC is reproducible by triager from a fresh state
+
 ```
 
 ---
@@ -414,12 +428,14 @@ CVSS 4.0 replaced CVSS 3.1 in November 2023. Some newer programs require it.
 
 ### Quick CVSS 4.0 Calculator
 ```
+
 Use: https://www.first.org/cvss/calculator/4.0
 Key fields:
   VC/VI/VA = Vulnerable System Confidentiality/Integrity/Availability
   SC/SI/SA = Subsequent System (downstream impact)
   AT = None (no special condition) | Present (race/specific config needed)
   UI = None | Passive (victim visits URL) | Active (victim takes explicit action)
+
 ```
 
 **Practical rule**: If program uses CVSS 4.0 and you don't know the vector, use the calculator and include the full string starting with `CVSS:4.0/AV:...`. Programs cannot dispute a valid vector string.
@@ -436,11 +452,13 @@ Key fields:
 
 **Escalation language (when payout is being downgraded):**
 ```
+
 "This vulnerability does not require any special privileges — only a free account."
 "The exposed data includes [PII type], which is subject to GDPR requirements."
 "An attacker can automate this with a simple loop — all [N] records in minutes."
 "This is exploitable externally without network access to any internal system."
 "The impact is equivalent to a full data breach of [feature/data type]."
+
 ```
 
 **Avoid:**

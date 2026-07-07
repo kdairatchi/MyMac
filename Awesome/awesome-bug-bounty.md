@@ -1,7 +1,9 @@
 # Awesome Bug Bounty [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
+
 A comprehensive curated list of Bug Bounty Programs and write-ups from the Bug Bounty hunters.
 
 ## Table of Contents
+
 - [Getting Started](#getting-started)
 - [Write Ups & Authors](#write-ups--authors)
 - [Platforms](#platforms)
@@ -9,6 +11,7 @@ A comprehensive curated list of Bug Bounty Programs and write-ups from the Bug B
 - [Contribution guide](contributing.md)
 
 ### Getting Started
+
 - [How to Become a Successful Bug Bounty Hunter](https://hackerone.com/blog/what-great-hackers-share)
 - [Researcher Resources - How to become a Bug Bounty Hunter](https://forum.bugcrowd.com/t/researcher-resources-how-to-become-a-bug-bounty-hunter/1102)
 - [Bug Bounties 101](https://whitton.io/articles/bug-bounties-101-getting-started/)
@@ -17,6 +20,7 @@ A comprehensive curated list of Bug Bounty Programs and write-ups from the Bug B
 - [Getting Started - Bug Bounty Hunter Methodology](https://www.bugcrowd.com/blog/getting-started-bug-bounty-hunter-methodology)
 
 ### Write Ups & Authors
+
 - [sakurity.com/blog](http://sakurity.com/blog)  -  by [Egor Homakov](https://twitter.com/homakov)
 - [respectxss.blogspot.in](http://respectxss.blogspot.in/)  -  by [Ashar Javed](https://twitter.com/soaj1664ashar)
 - [labs.detectify.com](http://labs.detectify.com/)  -  by [Frans Rosén](https://twitter.com/fransrosen)
@@ -31,15 +35,15 @@ A comprehensive curated list of Bug Bounty Programs and write-ups from the Bug B
 - [ibreak.software](https://ibreak.software/)  -  by [Riyaz Ahemed Walikar](https://twitter.com/riyazwalikar)
 - [panchocosil.blogspot.in](http://panchocosil.blogspot.in/)  -  by [Francisco Correa](https://twitter.com/@panchocosil)
 - [breakingmesh.blogspot.in](http://breakingmesh.blogspot.in/)  -  by [Sahil Sehgal](https://twitter.com/xXSehgalXx)
-- [websecresearch.com](http://www.websecresearch.com/)  -  by [ Ajay Singh Negi](https://twitter.com/ajaysinghnegi)
+- [websecresearch.com](http://www.websecresearch.com/)  -  by [Ajay Singh Negi](https://twitter.com/ajaysinghnegi)
 - [securitylearn.net](http://www.securitylearn.net/about/)  -  by [Satish Bommisetty](https://twitter.com/satishb3)
 - [secinfinity.net](http://www.secinfinity.net/)  -  by Prakash Sharma
 - [websecuritylog.com](http://www.websecuritylog.com/)  -  by [jitendra jaiswal](https://twitter.com/jeetjaiswal22)
 - [medium.com/@ajdumanhug](https://medium.com/@ajdumanhug) - by [Allan Jay Dumanhug](https://www.twitter.com/ajdumanhug)
 - [Web Hacking 101](https://leanpub.com/web-hacking-101) - by [Peter Yaworski](https://twitter.com/yaworsk)
 
-
 ### Platforms
+
 - [YesWeHack](https://yeswehack.com/)
 - [intigriti](https://intigriti.com/)
 - [HackerOne](https://hackerone.com/)
@@ -62,6 +66,7 @@ A comprehensive curated list of Bug Bounty Programs and write-ups from the Bug B
 - [CESPPA](https://www.cesppa.com/)
 
 ### Available Programs
+
 - [123Contact Form](http://www.123contactform.com/security-acknowledgements.htm)
 - [99designs](https://hackerone.com/99designs)
 - [Abacus](https://bugcrowd.com/abacus)
@@ -525,7 +530,7 @@ A comprehensive curated list of Bug Bounty Programs and write-ups from the Bug B
 - [Zetetic](mailto:support@zetetic.net)
 - [Ziggo](mailto:security@ziggo.nl)
 - [Zimbra](mailto:security@zimbra.com)
-- [Zoho](https://bugbounty.zoho.com/bb/info) 
+- [Zoho](https://bugbounty.zoho.com/bb/info)
 - [Zomato](https://hackerone.com/zomato)
 - [Zopim](https://hackerone.com/zopim)
 - [Zynga](mailto:whitehat@zynga.com)

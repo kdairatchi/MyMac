@@ -154,6 +154,7 @@ Medusa vs Echidna: Medusa is faster on large contracts due to coverage-guided ex
 ### Key Bug Classes From Real ToB Audits
 
 **EVM / Solidity:**
+
 ```
 REENTRANCY VARIANTS (still common)
 - Cross-function: lock in depositA, reenter via depositB before state update
@@ -188,6 +189,7 @@ SIGNATURE REPLAY
 ```
 
 **DeFi-Specific (from Uniswap, Frax, Reserve Protocol, Scroll audits):**
+
 ```
 LIQUIDITY MATH EDGE CASES
 - Integer overflow at extreme tick values (Uniswap V3 type)
@@ -259,6 +261,7 @@ grep -rn "abi.encodePacked\|abi.encode" contracts/ | grep -v "chainId\|block.cha
 | [Echidna: Effective, Usable, and Fast Fuzzing](https://github.com/trailofbits/publications/blob/master/papers/echidna_issta2020.pdf) | Master fuzzing methodology |
 
 **Free Guides:**
+
 ```
 Testing Handbook:            https://appsec.guide/
 ZKDocs (ZK vulnerabilities): https://www.zkdocs.com/
@@ -283,17 +286,20 @@ Phase 4: Multi-Chain + Specialization (ongoing)   → Pick your chain + live Imm
 ### Phase 1: Foundation
 
 **Blockchain Basics:**
+
 - Ethereum accounts, transactions, blocks, gas
 - Mempool: pending transactions, frontrunning mechanics
 - Storage: world state, Merkle-Patricia trees, slot layout
 
 **Solidity (Essential Level):**
+
 - Data types, memory vs storage vs calldata vs stack
 - Function visibility: public, external, internal, private
 - Low-level: `call`, `delegatecall`, `staticcall`, `create`, `create2`
 - Assembly (Yul): inline assembly, memory layout
 
 **Key Resources:**
+
 ```
 1. Solidity docs: docs.soliditylang.org (read ALL of it)
 2. Cyfrin Updraft: free courses, beginner to advanced
@@ -302,6 +308,7 @@ Phase 4: Multi-Chain + Specialization (ongoing)   → Pick your chain + live Imm
 ```
 
 **Practice:**
+
 ```
 1. Ethernaut: ethernaut.openzeppelin.com — 30 challenges (complete ALL before Phase 2)
 2. Capture The Ether: capturetheether.com — foundational math/crypto bugs
@@ -309,6 +316,7 @@ Phase 4: Multi-Chain + Specialization (ongoing)   → Pick your chain + live Imm
 ```
 
 **Phase 1 checkpoint:**
+
 - [ ] Can write a Solidity contract without referencing docs
 - [ ] Understand storage slot layout (slots, packing, mappings)
 - [ ] Completed all Ethernaut challenges
@@ -319,6 +327,7 @@ Phase 4: Multi-Chain + Specialization (ongoing)   → Pick your chain + live Imm
 ### Phase 2: DeFi Protocols & Real Hacks
 
 **Protocols to Understand Deeply (Tier 1 — composes with everything):**
+
 ```
 1. Uniswap V2/V3 — AMM formula x*y=k, flash swaps, TWAP oracle
 2. Aave V3 — aTokens, flash loans, health factor + liquidation
@@ -327,6 +336,7 @@ Phase 4: Multi-Chain + Specialization (ongoing)   → Pick your chain + live Imm
 ```
 
 **How to Study Real Hacks:**
+
 ```
 1. Read the post-mortem (rekt.news, medium, blog)
 2. Find the transaction on Etherscan
@@ -337,6 +347,7 @@ Phase 4: Multi-Chain + Specialization (ongoing)   → Pick your chain + live Imm
 ```
 
 **Hacks to Study (priority order):**
+
 ```
 1.  Cream Finance (Oct 2021) — $130M — flash loan + price manipulation
 2.  Euler Finance (Mar 2023) — $197M — donation attack + liquidation
@@ -351,6 +362,7 @@ Phase 4: Multi-Chain + Specialization (ongoing)   → Pick your chain + live Imm
 ```
 
 **Audit Reports to Read:**
+
 ```
 Solodit (solodit.cyfrin.io)         — 50K+ findings, searchable
 Code4rena (code4rena.com/reports)   — 700+ public reports
@@ -361,6 +373,7 @@ github.com/ConsenSys/Diligence-Audit-Reports
 ```
 
 **Phase 2 checkpoint:**
+
 - [ ] Can trace a real hack from post-mortem to running PoC
 - [ ] Understand all 4 Tier-1 DeFi protocols
 - [ ] Read 10+ audit reports, categorized findings by bug class
@@ -371,6 +384,7 @@ github.com/ConsenSys/Diligence-Audit-Reports
 ### Phase 3: EVM Internals + Advanced Techniques
 
 **Storage Layout:**
+
 ```
 Every contract has 2^256 storage slots
 - Slot 0: first state variable
@@ -380,6 +394,7 @@ Every contract has 2^256 storage slots
 ```
 
 **Key Opcodes for Auditors:**
+
 ```
 DELEGATECALL  — executes code in caller's context (storage collision risk)
 STATICCALL    — cannot modify state (no writes, no events)
@@ -389,6 +404,7 @@ TSTORE/TLOAD  — transient storage (post-Cancun, cleared each tx)
 ```
 
 **Proxy Patterns:**
+
 ```
 Transparent Proxy: admin controls upgrades, user calls go to impl
 UUPS (EIP-1822):   upgrade logic IN the implementation — protect _authorizeUpgrade()
@@ -396,6 +412,7 @@ Beacon Proxy:      all proxies point to Beacon — one upgrade changes ALL
 ```
 
 **Symbolic Execution:**
+
 ```bash
 pip install halmos
 halmos --contract ContractName --function testSymbolic
@@ -403,6 +420,7 @@ halmos --contract ContractName --function testSymbolic
 ```
 
 **Phase 3 checkpoint:**
+
 - [ ] Can calculate any storage slot manually
 - [ ] Understand all 3 proxy patterns and their attack surfaces
 - [ ] Can write Echidna fuzzing properties for any protocol
@@ -423,6 +441,7 @@ halmos --contract ContractName --function testSymbolic
 | Move (Sui/Aptos) | Sui, Aptos | Move Prover | Wrong ability annotations, missing capability |
 
 **SlowMist's 8-Step Audit Methodology:**
+
 ```
 1. Information Collection — docs, design, scope (exact commit hash)
 2. Risk Item Sorting — list all fund-holding components, rank by TVL
@@ -435,6 +454,7 @@ halmos --contract ContractName --function testSymbolic
 ```
 
 **SlowMist Security Checklist (Condensed):**
+
 ```
 Arithmetic:
 - [ ] Division before multiplication? (should multiply first)
@@ -691,6 +711,7 @@ Source: github.com/immunefi-team/Web3-Security-Library — Immunefi's official v
 
 **Class 1: Access Control**
 Missing or improperly implemented authorization. Sub-types: missing modifier, incorrect modifier (silent bypass), privilege escalation, unprotected initialization.
+
 ```bash
 grep -rn "function.*public\|function.*external" contracts/ | grep -v "view\|pure"
 # For each: does it have onlyOwner/onlyRole?
@@ -698,6 +719,7 @@ grep -rn "function.*public\|function.*external" contracts/ | grep -v "view\|pure
 
 **Class 2: Arithmetic**
 Integer overflow/underflow, precision loss, rounding errors, type truncation, ERC4626 first depositor.
+
 ```bash
 grep -rn "unchecked {" contracts/ -A20
 grep -rn "uint8(\|uint16(\|uint32(\|uint64(" contracts/  # truncations
@@ -705,6 +727,7 @@ grep -rn "uint8(\|uint16(\|uint32(\|uint64(" contracts/  # truncations
 
 **Class 3: Oracle Manipulation**
 Spot price from AMM (getReserves, slot0), stale Chainlink (missing staleness check), single oracle, TWAP too short.
+
 ```bash
 grep -rn "getReserves\|slot0\|latestAnswer\|latestRoundData" contracts/
 # For latestRoundData: is updatedAt checked? Is price > 0?
@@ -712,6 +735,7 @@ grep -rn "getReserves\|slot0\|latestAnswer\|latestRoundData" contracts/
 
 **Class 4: Logic Errors**
 Wrong operator (> vs >=), missing state update on one path, tautology, missing guard on sibling function.
+
 ```bash
 grep -rn "[<>][^=]" contracts/ | grep "period\|epoch\|amount\|timestamp"
 # For each: ask "what happens when these are equal?"
@@ -719,6 +743,7 @@ grep -rn "[<>][^=]" contracts/ | grep "period\|epoch\|amount\|timestamp"
 
 **Class 5: Reentrancy**
 Classic, cross-function, read-only ($70M Curve), cross-contract, ERC721/ERC777 hooks.
+
 ```bash
 grep -rn "\.call{value:\|safeTransfer\|onERC721Received" contracts/
 ```
@@ -726,6 +751,7 @@ grep -rn "\.call{value:\|safeTransfer\|onERC721Received" contracts/
 **Class 6: Flash Loans**
 Zero-cost capital: oracle manipulation, flash loan governance voting, ERC4626 share price inflation.
 Key question: "If an attacker had unlimited capital for 1 transaction, what's the worst they could do?"
+
 ```bash
 grep -rn "getReserves\|slot0" contracts/                  # flash-manipulable oracles
 grep -rn "totalSupply\|balanceOf" contracts/ | grep "vote\|quorum"  # flash loan voting
@@ -733,12 +759,14 @@ grep -rn "totalSupply\|balanceOf" contracts/ | grep "vote\|quorum"  # flash loan
 
 **Class 7: Denial of Service**
 Gas limit DoS, reverting push payment, block stuffing, forced revert in catch block, griefing via protocol state.
+
 ```bash
 grep -rn "for.*\.length" contracts/ -A5 | grep "transfer\|send\|call"
 ```
 
 **Class 8: Cryptography**
 ECDSA malleability, missing chainId (cross-chain replay), missing nonce (same-chain replay), weak RNG, ZK proof always passes, missing circuit range check.
+
 ```bash
 grep -rn "ecrecover(" contracts/                            # raw = malleable
 grep -rn "chainId\|block\.chainid" contracts/               # cross-check with ecrecover
@@ -747,6 +775,7 @@ grep -rn "block\.timestamp.*random\|blockhash.*random" contracts/
 
 **Class 9: Front-Running**
 ERC20 approve race, EIP-2612 permit frontrun DoS, sandwich attacks (missing slippage), harvest frontrun.
+
 ```bash
 grep -rn "minAmountOut\|minOut\|deadline" contracts/        # should be on all swaps
 grep -rn "permit(" contracts/ | grep -v "try\|catch"        # permit without try/catch = frontrunnable
@@ -754,14 +783,17 @@ grep -rn "permit(" contracts/ | grep -v "try\|catch"        # permit without try
 
 **Class 10: Token Standards**
 Fee-on-transfer (amount received ≠ sent), rebasing (balances change without transfers), ERC777 reentrancy, non-reverting ERC20 (USDT).
+
 ```bash
 grep -rn "transferFrom\|transfer(" contracts/               # safeTransfer used?
 grep -rn "balanceOf(address(this))" contracts/
 ```
+
 Key resource: github.com/d-xo/weird-erc20 — catalog of non-standard ERC20 behaviors
 
 **Class 11: Upgrade Patterns**
 Uninitialized implementation, storage slot collision, missing `_disableInitializers()`, UUPS `_authorizeUpgrade()` unprotected.
+
 ```bash
 grep -rn "function initialize\|_disableInitializers\|initializer\|reinitializer" contracts/
 grep -rn "_authorizeUpgrade" contracts/
@@ -770,6 +802,7 @@ grep -rn "_authorizeUpgrade" contracts/
 
 **Class 12: Bridge Vulnerabilities**
 Signature/message replay (missing nullifier), validator set manipulation, spoofed system accounts (Wormhole $320M), zero value as valid root (Nomad $200M).
+
 ```bash
 grep -rn "verify\|processMessage\|executeTransaction" contracts/
 grep -rn "messageHash\|nonce\|nullifier" contracts/
@@ -777,6 +810,7 @@ grep -rn "messageHash\|nonce\|nullifier" contracts/
 
 **Class 13: Governance**
 Flash loan voting (no snapshot), low quorum manipulation, timelock bypass.
+
 ```bash
 grep -rn "balanceOf\|getCurrentVotes" contracts/ | grep "vote\|proposal"
 # Should be: getPastVotes(account, block.number - 1) not current balance
@@ -784,6 +818,7 @@ grep -rn "balanceOf\|getCurrentVotes" contracts/ | grep "vote\|proposal"
 
 **Class 14: Randomness**
 `block.timestamp % n`, `blockhash`, `keccak256(block.timestamp, msg.sender)` — all predictable/manipulable. Use Chainlink VRF or commit-reveal.
+
 ```bash
 grep -rn "block\.timestamp.*%\|blockhash.*random\|keccak256.*block\." contracts/
 ```
@@ -978,6 +1013,7 @@ Mitigation reviews pay well — fixes often introduce NEW bugs.
 ### Key Bug Classes with Code
 
 **Invariant Breaking (TSwap — AMM):**
+
 ```bash
 # Write BEFORE reading all code:
 function invariant_constantProduct() public {
@@ -989,6 +1025,7 @@ function invariant_constantProduct() public {
 ```
 
 **Storage Collision (Thunder Loan — Proxy):**
+
 ```bash
 forge inspect ContractName storage-layout
 # Compare storage layouts of proxy vs implementation
@@ -996,6 +1033,7 @@ forge inspect ContractName storage-layout
 ```
 
 **Governance Attack (Vault Guardians):**
+
 ```solidity
 // VULNERABLE: flash loan voting
 function getVotes(address account) public view returns (uint256) {
@@ -1007,6 +1045,7 @@ function getVotes(address account) public view returns (uint256) {
 ```
 
 **Weak RNG:**
+
 ```solidity
 // VULNERABLE
 uint256 winner = uint256(keccak256(abi.encodePacked(
@@ -1058,6 +1097,7 @@ INFO/GAS — No security impact
 ```
 
 **The Rekt Test (protocol should answer YES to all):**
+
 ```
 □ All actors, roles, and privileges documented?
 □ External services, contracts, and oracles documented?
@@ -1104,12 +1144,14 @@ git clone https://github.com/lidofinance/community-staking-module.git
 ```
 
 **Highest-signal acknowledged bugs (all present in production):**
+
 - Certora V2: 4 High issues acknowledged
 - Statemind V2: 1 Critical + 2 High acknowledged
 - Oxorio V2 on-chain: 7 Major issues ALL acknowledged
 - MixBytes CSM: 23 out of 41 issues acknowledged
 
 **Recurring bug patterns across Lido audits:**
+
 1. **Oracle report manipulation** — off-chain oracle data accepted without validation on `submitReportData()` input params
 2. **Withdrawal queue accounting desync** — `requestWithdrawal()` and `finalize()` desynced, allows claiming more than deposited
 3. **Staking Router module trust** — modules self-report validator counts, malicious module can misreport
@@ -1118,6 +1160,7 @@ git clone https://github.com/lidofinance/community-staking-module.git
 6. **Dual Governance tiebreaker abuse** — tiebreaker activation bypasses veto state
 
 **Lido grep arsenal:**
+
 ```bash
 # Oracle
 grep -rn "submitReportData\|handleConsensusReport" contracts/
@@ -1143,30 +1186,35 @@ Protocols: Vana, Royco, Panoptic V2, Worldcoin (×11), Mellow (×7), ZkLend (×5
 **5 Critical Bug Classes (study these first):**
 
 1. **Empty array bypass of state reset (Vana)** — state flag set after a loop that can be skipped by passing `[]`
+
    ```bash
    grep -rn "= true;" src/ -B10 | grep -B10 "for.*calldata"
    # Flag: flag = true after loop that could be empty
    ```
 
 2. **Duplicate ID in batch operations (Vana)** — same ID passed twice → double credit
+
    ```bash
    grep -rn "function.*migrate\|function.*batch" src/ --include="*.sol" -A20
    # Missing: require(!seen[id]) inside loop
    ```
 
 3. **Uninitialized cache variable (Royco)** — `cachedTotalAssets` starts at 0, first depositor gets all shares
+
    ```bash
    grep -rn "cached\|_cache\|Cache" src/ --include="*.sol"
    # Missing: = realValue in constructor OR if (cache == 0) init guard
    ```
 
 4. **Unauthorized offer updates (Mangrove)** — `updateOffer()` has no `require(owner[id] == msg.sender)`
+
    ```bash
    grep -rn "function update\|function modify" src/ --include="*.sol"
    # If function takes ID but no owner check → critical
    ```
 
 5. **Decimal precision mismatch (Panoptic V2)** — 6-decimal token in 18-decimal math rounds collateral to 0
+
    ```bash
    grep -rn "/ 1e18\|/ WAD\|/ 10\*\*18" src/ --include="*.sol"
    grep -rn "decimals()\|IERC20Metadata" src/ --include="*.sol"
@@ -1174,6 +1222,7 @@ Protocols: Vana, Royco, Panoptic V2, Worldcoin (×11), Mellow (×7), ZkLend (×5
    ```
 
 **Top recurring patterns (Medium/High, 9–18 instances each):**
+
 - Cache sync desync — cache updated on deposit/withdraw but not on interest accrual
 - Rounding direction favoring attacker — `mulDiv` with wrong `Rounding` enum
 - ZK circuit input not range-checked — verifier passes but public input is unconstrained
@@ -1183,6 +1232,7 @@ Protocols: Vana, Royco, Panoptic V2, Worldcoin (×11), Mellow (×7), ZkLend (×5
 - Withdrawal queue invariant violation — `claimed <= claimable <= queued` not maintained
 
 **Nethermind 5-minute critical scan:**
+
 ```bash
 # 1. Empty-array state flag
 grep -rn "= true;" src/ | grep -v "require\|assert\|if ("
@@ -1202,6 +1252,7 @@ grep -rn "function update.*Id\|function modify.*Id" src/ --include="*.sol"
 ```
 
 **Highest-bounty protocols audited by Nethermind:**
+
 - Worldcoin (×11 audits) — $50K–$2M Critical
 - Lido ZK Oracle — $100K–$2M Critical
 - ZkLend (×5) — $50K–$1M Critical

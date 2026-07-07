@@ -4,6 +4,7 @@ description: MCP server integrating Slither + Aderyn + SWC patterns into Claude 
 ---
 
 # SKILL 36 — SOLIDITY AUDIT MCP: CLAUDE-NATIVE SMART CONTRACT SCANNER
+>
 > From: github.com/mariano-aguero/solidity-audit-mcp — MCP server plugging Slither + Aderyn + SWC patterns into Claude Code
 > 10 tools. 19 built-in finding explainers. 86 SWC detectors. DeFi + Web3 preset detector packs. CI/CD ready.
 
@@ -14,6 +15,7 @@ description: MCP server integrating Slither + Aderyn + SWC patterns into Claude 
 An MCP server that gives Claude Code direct access to Slither, Aderyn, Slang AST, SWC pattern matching, and a gas optimizer — all in one unified pipeline with auto-deduplication. Instead of context-switching between tools, you ask Claude to audit a contract and get a merged, severity-sorted report.
 
 **Stack:**
+
 ```
 External (install separately):
   Slither   → Trail of Bits, 90+ detectors, deep data flow
@@ -51,6 +53,7 @@ pip install halmos      # symbolic execution
 ```
 
 **Wire into Claude Code** — add to `~/.claude/mcp.json`:
+
 ```json
 {
   "mcpServers": {
@@ -63,6 +66,7 @@ pip install halmos      # symbolic execution
 ```
 
 **Or project-level** `.mcp.json` in repo root:
+
 ```json
 {
   "mcpServers": {
@@ -75,6 +79,7 @@ pip install halmos      # symbolic execution
 ```
 
 **Docker** (all tools pre-installed):
+
 ```bash
 docker run -v $(pwd):/contracts solidity-audit-mcp audit /contracts/Token.sol
 ```
@@ -94,6 +99,7 @@ analyze_contract(
 ```
 
 **Pipeline:**
+
 1. Parse metadata (functions, state vars, inheritance)
 2. Run Slither + Aderyn in parallel
 3. Detect risky patterns via Slang AST
@@ -108,6 +114,7 @@ get_contract_info("contracts/Protocol.sol")
 ```
 
 Returns instantly:
+
 - Functions by visibility (external, public, internal, private)
 - Payable functions — all ETH entry points
 - delegatecall usage — proxy risk surface
@@ -176,6 +183,7 @@ generate_invariants(
 Returns ready-to-paste `invariant_*()` functions + handler contract + `forge test --invariant` run commands.
 
 **Protocol-specific invariants generated:**
+
 ```
 ERC-4626 vault:    totalAssets >= total share value
                    share price non-decreasing
@@ -253,6 +261,7 @@ liquidity-removal-risk   → MEDIUM — LP withdrawal without reserve check
 ```
 
 **Load in Claude Code:**
+
 ```
 analyze_contract("contracts/Vault.sol", analyzers: ["slither", "aderyn"], detectorPreset: "defi")
 ```
@@ -302,6 +311,7 @@ jobs:
 ```
 
 **Exit codes for CI gates:**
+
 ```
 0 → no findings above threshold → PR can merge
 1 → findings detected → block PR

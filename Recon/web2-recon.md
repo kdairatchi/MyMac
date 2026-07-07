@@ -42,6 +42,7 @@ which subfinder httpx dnsx nuclei katana waybackurls gau dalfox ffuf anew gf int
 > If a target shows nothing interesting after 5 minutes of recon, move on. Don't burn hours on dead surface.
 
 **5-minute kill signals:**
+
 - All subdomains return 403 or static marketing pages
 - No API endpoints visible in URLs
 - No JavaScript bundles with interesting endpoint paths
@@ -424,6 +425,7 @@ Run gf patterns and the interesting-params grep above.
 ### Minutes 25-30: Manual Exploration
 
 Open Burp Suite. Browse the app with proxy on:
+
 1. Register an account
 2. Perform main user actions (create/read/update/delete resources)
 3. Note all API calls in Burp history

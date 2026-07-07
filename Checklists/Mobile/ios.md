@@ -27,6 +27,7 @@ plutil -p app/Payload/Target.app/Info.plist
 ```
 
 Look for:
+
 - `NSAllowsArbitraryLoads: true` in ATS config (cleartext HTTP allowed).
 - URL schemes in `CFBundleURLTypes`.
 - Universal links in `com.apple.developer.associated-domains`.

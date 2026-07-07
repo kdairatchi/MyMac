@@ -39,6 +39,7 @@ Don't claim Critical for a Medium bug. Triagers trust you less for every overcla
 Don't claim Medium for a Critical — you're leaving money on the table.
 
 Use the CVSS 3.1 formula. Common scoring:
+
 - IDOR read PII (auth required): 6.5 Medium
 - Auth bypass → admin: 9.8 Critical
 - SSRF → cloud metadata: 9.1 Critical
@@ -64,6 +65,7 @@ Build the chain first. Prove it works. Then report.
 ## 6. VERIFY DATA ISN'T ALREADY PUBLIC
 
 Before submitting an information disclosure finding:
+
 1. Open the target in an incognito browser (not logged in)
 2. Can you see the same data without authentication?
 3. If yes → not a bug
@@ -71,6 +73,7 @@ Before submitting an information disclosure finding:
 ## 7. TWO TEST ACCOUNTS FOR IDOR
 
 Never test IDOR with only one account (testing yourself).
+
 - Account A = attacker (your account doing the request)
 - Account B = victim (whose data you're reading)
 
@@ -88,6 +91,7 @@ Report must show: "I sent request with Account A's token but Account B's ID, and
 Triagers skim. Long reports get skimmed harder.
 
 Structure:
+
 - Sentence 1: What attacker can do (impact)
 - Sentence 2-3: How (endpoint, parameter, method)
 - Steps to reproduce: numbered, with exact HTTP request
@@ -107,6 +111,7 @@ Structure:
 ## 11. DON'T COMBINE SEPARATE BUGS
 
 If A and B are independent bugs (different endpoints, different impact):
+
 - Report them as SEPARATE reports = separate payouts
 - Only combine if they're part of ONE attack chain that requires both
 
@@ -117,6 +122,7 @@ If A and B are independent bugs (different endpoints, different impact):
 ```
 
 Examples:
+
 ```
 IDOR in /api/v2/invoices/{id} allows authenticated user to read any customer's invoice
 Missing auth on POST /api/admin/users allows unauthenticated creation of admin accounts
@@ -124,6 +130,7 @@ Stored XSS in profile bio field executes in admin panel — privilege escalation
 ```
 
 Bad (never use):
+
 ```
 IDOR vulnerability found
 Security issue in API

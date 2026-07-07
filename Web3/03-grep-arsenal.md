@@ -4,6 +4,7 @@ description: Master grep command arsenal for Web3 smart contract auditing. Use w
 ---
 
 # GREP ARSENAL — MASTER REFERENCE
+>
 > All grep commands in one place. Run in the first 30 minutes of any new target.
 > Replaces: 03-grep-surface-map, 14-grep-master-patterns + grep sections from 04-13
 
@@ -12,6 +13,7 @@ description: Master grep command arsenal for Web3 smart contract auditing. Use w
 ## HOW TO USE THE SURFACE MAP
 
 **Process:**
+
 1. Run ALL 10 blocks below (takes ~5 min)
 2. Collect all results in a notes file
 3. Tier-rank the hits (see Tier System below)
@@ -19,6 +21,7 @@ description: Master grep command arsenal for Web3 smart contract auditing. Use w
 5. In pass 2: Deep-dive on Tier 1 + 2 items
 
 **Tier System:**
+
 - **Tier 1** — Near privileged code, external calls, or state changes with no guards → Investigate first
 - **Tier 2** — Interesting patterns that need context before judging → Investigate after Tier 1
 - **Tier 3** — Informational only (documentation, test files, comments) → Skip unless Tier 1+2 exhausted
@@ -39,6 +42,7 @@ grep -rn "def admin_\|router\..*admin\|function.*[Aa]dmin" src/ --include="*.sol
 ```
 
 **Red flags:**
+
 - `tx.origin` used for auth → Tier 1 (phishing vector)
 - Modifier uses `if (condition) { _; }` without else → Tier 1 (silent bypass — function still executes for unauthorized callers)
 - `onlyOwner` count << total external function count → likely missing guards on siblings
@@ -55,6 +59,7 @@ grep -rn "nonReentrant\|ReentrancyGuard" src/ --include="*.sol"
 ```
 
 **Red flags:**
+
 - `.call{value:}` or `safeTransfer` BEFORE state updates in same function → Tier 1 (CEI violation)
 - `onERC721Received`/`onERC1155Received` hooks present → check for reentrancy path
 - External calls present but `nonReentrant` missing → verify CEI is followed
@@ -71,6 +76,7 @@ grep -rn "block\.timestamp" src/ --include="*.sol" | grep -v "//\|test\|Test" | 
 ```
 
 **Red flags:**
+
 - `slot0()` used for price → Tier 1 (Uniswap V3 spot, flash-loan manipulable)
 - `getReserves()` used for price → Tier 1 (Uniswap V2 spot, flash-loan manipulable)
 - `latestRoundData` without `updatedAt` check → Tier 1 (stale Chainlink price)
@@ -87,6 +93,7 @@ grep -rn "\* 10\*\*\|* 1e18\|* WAD\|* RAY" src/ --include="*.sol"
 ```
 
 **Red flags:**
+
 - `unchecked {}` blocks → manually verify each (Solidity 0.8+ unwraps here)
 - Division before multiplication (`a / b * c`) → precision loss
 - `/ 1e18` in contract that handles 6-decimal tokens → decimal mismatch
@@ -102,6 +109,7 @@ grep -rn "abi\.decode\|abi\.encodePacked" src/ --include="*.sol" | head -20
 ```
 
 **Red flags:**
+
 - `delegatecall` with user-controlled target → Tier 1 (arbitrary code execution)
 - `abi.decode` on user-supplied calldata without length validation → Tier 1
 - Array params in batch functions without dedup check → Tier 1 (double-count attack)
@@ -118,6 +126,7 @@ grep -rn "try.*permit\|catch.*permit" src/ --include="*.sol"
 ```
 
 **Red flags:**
+
 - `token.transfer()` without `SafeERC20.safeTransfer()` → Tier 1 (return value unchecked, fails silently on old USDT)
 - `balanceOf(address(this))` for pricing/shares → Tier 1 (donation attack vector)
 - `permit()` without try/catch wrapper → Tier 2 (frontrun DoS possible)
@@ -132,6 +141,7 @@ grep -rn "shares.*supply\|totalSupply\|mint.*shares" src/ --include="*.sol" | he
 ```
 
 **Red flags:**
+
 - ERC4626 present but `_decimalsOffset()` NOT present → Tier 1 (first depositor inflation)
 - `totalAssets()` uses `balanceOf(address(this))` → Tier 1 (donation attack)
 - `mint()` or `deposit()` called without same validation path → Tier 1 (MetaPool bug: mint skipped receipt check)
@@ -147,6 +157,7 @@ grep -rn "StorageSlot\|ERC1967\|TransparentProxy\|UUPSUpgradeable" src/ --includ
 ```
 
 **Red flags:**
+
 - `_authorizeUpgrade()` without `onlyOwner` or role check → Tier 1 (anyone can upgrade)
 - `initialize()` without `initializer` modifier → Tier 1 (re-initialization possible)
 - Proxy present but `_disableInitializers()` NOT in impl constructor → Tier 1 (impl attackable)
@@ -162,6 +173,7 @@ grep -rn "keccak256.*abi\.encode" src/ --include="*.sol" | head -20
 ```
 
 **Red flags:**
+
 - `ecrecover` present but `chainId`/`DOMAIN_SEPARATOR` NOT present → Tier 1 (cross-chain replay)
 - `ecrecover` without nonce → Tier 1 (same-chain replay)
 - `ecrecover` return not checked against `address(0)` → Tier 1 (invalid sigs succeed)
@@ -178,6 +190,7 @@ grep -rn "cached\|_cache\|lastKnown\|storedBalance" src/ --include="*.sol"
 ```
 
 **Red flags:**
+
 - Role defined but `grantRole()` call for that role NOT found anywhere → Tier 1 (role permanently empty)
 - Array-based function: `flag = true` OUTSIDE/AFTER loop → Tier 1 (empty array bypass)
 - `} catch { revert }` on critical path → Tier 2 (liveness DoS if external changes)
@@ -188,6 +201,7 @@ grep -rn "cached\|_cache\|lastKnown\|storedBalance" src/ --include="*.sol"
 ## PROTOCOL-SPECIFIC PATTERNS
 
 ### Yield Aggregator (like Ern, Yearn, Beefy)
+
 ```bash
 grep -rn "cumulativeReward\|rewardPerShare\|accRewardPerShare" src/ --include="*.sol"
 grep -rn "harvestCooldown\|canHarvest\|performHarvest\|_harvest" src/ --include="*.sol"
@@ -196,6 +210,7 @@ grep -rn "totalDeposited\|totalPrincipal" src/ --include="*.sol"
 ```
 
 ### Lending Protocol (like Aave, Compound)
+
 ```bash
 grep -rn "collateral\|borrow\|liquidat" src/ --include="*.sol"
 grep -rn "healthFactor\|isSolvent\|isLiquidatable" src/ --include="*.sol"
@@ -205,6 +220,7 @@ grep -rn "amplification\|A_PARAMETER\|getA()" src/ --include="*.sol"
 ```
 
 ### AMM / DEX
+
 ```bash
 grep -rn "getReserves\|reserve0\|reserve1" src/ --include="*.sol"
 grep -rn "slot0\|sqrtPriceX96\|tick\b" src/ --include="*.sol"
@@ -214,6 +230,7 @@ grep -rn "amountOutMin\|minAmountOut\|deadline" src/ --include="*.sol"
 ```
 
 ### Staking / Restaking
+
 ```bash
 grep -rn "epoch\|currentEpoch\|lastEpoch\|epochId" src/ --include="*.sol"
 grep -rn "unstake\|migrate\|slash\|jailValidator" src/ --include="*.sol"
@@ -222,6 +239,7 @@ grep -rn "validatorIds\|stakeIds\|delegateIds" src/ --include="*.sol"
 ```
 
 ### ZK / Proof Contracts
+
 ```bash
 grep -rn "verifyProof\|IVerifier\|publicInputs\b" src/ --include="*.sol"
 grep -rn "return true" src/ --include="*.sol" | grep -i "verify\|proof"
@@ -283,6 +301,7 @@ grep -rn "nullifiers\[.*\] = true\|nullifierUsed\[" src/ --include="*.sol" -B5
 ## SPECIFIC BUG PATTERN SEARCHES
 
 ### Silent Modifier (if vs require)
+
 ```bash
 # Find modifiers that use if() without revert — silently does nothing for unauthorized callers
 grep -rn "modifier only" src/ --include="*.sol" -A10 | grep -A10 "if ("
@@ -291,12 +310,14 @@ grep -rn "modifier only" src/ --include="*.sol" -A10 | grep -A10 "if ("
 ```
 
 ### Tautology Check (variable compared to itself)
+
 ```bash
 grep -rn "require(" src/ --include="*.sol" | grep "\b\(\w\+\) == \1\b"
 # e.g. require(a == a, ...) = always true → always passes
 ```
 
 ### Same-Role Count Mismatch
+
 ```bash
 grep -rn "onlyRole\b" src/ --include="*.sol" | wc -l
 grep -rn "grantRole(" src/ --include="*.sol" | wc -l
@@ -304,6 +325,7 @@ grep -rn "grantRole(" src/ --include="*.sol" | wc -l
 ```
 
 ### Accounting: Balance vs Tracked
+
 ```bash
 grep -rn "balanceOf(address(this))" src/ --include="*.sol"
 grep -rn "totalDeposited\|totalPrincipal\|_balance\b" src/ --include="*.sol"

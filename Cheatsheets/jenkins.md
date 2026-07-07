@@ -1,6 +1,7 @@
 Jenkins
 
-#Few links to Dive deep
+# Few links to Dive deep
+
 1. https://hackerone.com/reports/768266
 2. https://hackerone.com/reports/182104
 3. https://portswigger.net/daily-swig/jenkins-security-unpatched-xss-csrf-bugs-included-in-latest-plugin-advisory
@@ -13,8 +14,8 @@ Jenkins
 10. https://medium.com/@maheshwar.ramkrushna/enabling-csrf-protection-in-jenkins-step-by-step-guide-and-advantages-d8737d503889
 11. https://medium.com/@red_darkin/how-to-replicate-jenkins-cve-2024-23897-arbitrary-file-read-vulnerability-260c8174dd94
 
+# 10 Most Common things to check
 
-#10 Most Common things to check 
 1. Open Jenkins Instances
 2. Weak Authentication and Authorization
 3. Outdated Jenkins Core or Plugins
