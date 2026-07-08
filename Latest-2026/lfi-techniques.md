@@ -2,7 +2,16 @@
 
 > Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
 
-_Last updated: — · Items: 0_
+_Last updated: 2026-07-08 · Items: 1_
+
+## 2026-07-08 — Adobe ColdFusion RDS Path Traversal RCE (CVE-2026-48282)
+
+### Adobe ColdFusion RDS FILEIO Path Traversal → Unauthenticated RCE
+- **Date:** 2026-07-08 · **Source:** [resecurity.com](https://www.resecurity.com/blog/article/cve-2026-48282-adobe-coldfusion-rds-path-traversal-leading-to-rce) · **Class:** cve
+- **What:** Path traversal in ColdFusion RDS FILEIO handler lets unauthenticated remote attacker write arbitrary files → RCE; requires RDS enabled with auth disabled.
+- **Why it matters:** CVSS 10.0, CISA KEV added 2026-07-07 (patch deadline July 10), exploited in-the-wild within 2 hours of disclosure — ColdFusion runs under legacy enterprise apps common in BB scope.
+- **Hunt signal:** `nuclei -t http/cves/2026/CVE-2026-48282.yaml` or probe `/_cf_distributed_view/fileio?path=../../../../evil.cfm` on exposed RDS ports (8500/443 with `/CFIDE/main/ide.cfm`)
+- **Evidence:** [source](https://www.resecurity.com/blog/article/cve-2026-48282-adobe-coldfusion-rds-path-traversal-leading-to-rce) · [bleepingcomputer](https://www.bleepingcomputer.com/news/security/max-severity-adobe-coldfusion-flaw-now-exploited-in-attacks/) · [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-48282)
 
 ---
 
