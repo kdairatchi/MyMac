@@ -2,7 +2,16 @@
 
 > Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
 
-_Last updated: — · Items: 0_
+_Last updated: 2026-07-08 · Items: 1_
+
+## 2026-07-08 — Gitea Docker Reverse Proxy Header Auth Bypass (CVE-2026-20896)
+
+### Gitea Docker: X-WEBAUTH-USER Header Impersonation via Untrusted Proxy Default
+- **Date:** 2026-07-08 · **Source:** [hivesecurity.gitlab.io](https://hivesecurity.gitlab.io/blog/gitea-forgejo-nine-cves-1263-security-release-2026/) · **Class:** cve
+- **What:** Gitea Docker ≤1.26.2 defaults `REVERSE_PROXY_TRUSTED_PROXIES=*`; attacker injects `X-WEBAUTH-USER: admin` header to impersonate any user with zero credentials — no auth, no token.
+- **Why it matters:** CVSS 9.8, active exploitation as of 2026-07-07; ~6,200 exposed instances estimated; full repo/secrets compromise on any self-hosted Gitea with reverse proxy auth enabled.
+- **Hunt signal:** `curl -H "X-Webauth-User: gitea_admin" https://target/api/v1/users/search` — 200 with user data confirms bypass; or `nuclei -t CVE-2026-20896`
+- **Evidence:** [source](https://hivesecurity.gitlab.io/blog/gitea-forgejo-nine-cves-1263-security-release-2026/) · [securityweek](https://www.securityweek.com/critical-gitea-flaw-under-active-exploitation-researchers-warn/) · [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-20896)
 
 ---
 

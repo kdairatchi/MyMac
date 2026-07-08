@@ -3373,3 +3373,12 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 
 ---
 *Clustered 2 sources for this item.*
+
+## 2026-07-08 — Gitea Reverse Proxy Header Auth Bypass
+
+### One HTTP Header, Full Admin Access: Gitea Docker CVE-2026-20896 Explained
+- **Date:** 2026-07-08 · **Source:** [hivesecurity.gitlab.io](https://hivesecurity.gitlab.io/blog/gitea-forgejo-nine-cves-1263-security-release-2026/) · **Class:** writeup
+- **What:** Deep-dive on how Gitea Docker's default `REVERSE_PROXY_TRUSTED_PROXIES=*` setting makes `X-WEBAUTH-USER` header spoofing trivially impersonate any account including admins.
+- **Why it matters:** Technique generalizes to any app that trusts reverse-proxy identity headers without an IP allowlist — Gitea, Grafana, Keycloak, Jira, internal portals.
+- **Hunt signal:** Check `app.ini` / env vars for `ENABLE_REVERSE_PROXY_AUTHENTICATION=true` + `REVERSE_PROXY_TRUSTED_PROXIES=*`; then send `X-Webauth-User: admin` or `X-Forwarded-User: admin` directly to the app.
+- **Evidence:** [source](https://hivesecurity.gitlab.io/blog/gitea-forgejo-nine-cves-1263-security-release-2026/)
