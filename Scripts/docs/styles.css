@@ -1,0 +1,38 @@
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+.container {
+    width: 80%;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #0056b3;
+}
+pre {
+    background-color: #eee;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+code {
+    font-family: "Courier New", Courier, monospace;
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}

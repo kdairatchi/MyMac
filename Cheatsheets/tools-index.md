@@ -949,3 +949,12 @@ This commit automates metadata generation for CVEs within the Nuclei vulnerabili
 PentAGI is an AI-powered penetration testing assistant that leverages the OpenAI API to automate and guide pentesting workflows on Kali Linux. This guide walks through the full installation and configuration process, making it useful for bug bounty hunters who want to integrate LLM-driven reasoning into their recon and exploitation phases — though the tool itself is an aide rather than a direct attack surface, so its hunt value is limited to operational efficiency gains.
 
 ---
+### chore: generate new addition list 🤖
+- **Tags:** `#web` `#api`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://github.com/projectdiscovery/nuclei-templates/commit/cf2057a586609291229f3d1bcfe0c25562ee234c) · [2](https://github.com/projectdiscovery/nuclei-templates/commit/b5eacab5632d59c73ce04cab8bb668052e2b8d062)
+
+This commit updates the Nuclei vulnerability scanner template repository by automating the generation of a new addition list, ensuring security researchers and pentesters have access to the latest detection logic without manual intervention, making it essential for maintaining effective automated scanning pipelines.
+
+---
+*Clustered 2 sources for this item.*

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mission Control — kdairatchi · 2026-05-14 → 2026-06-14</title>
+<style>
+:root{
+  --bg:#08090a; --panel:#101113; --border:#1f2125; --text:#e6e6e6; --dim:#8a8f98;
+  --accent:#e4f222; --accent2:#7ee787; --warn:#f7b955; --red:#ff5d5d; --blue:#79b8ff;
+  --mono:'SF Mono','JetBrains Mono','Consolas',monospace;
+  --sans:'Inter','SF Pro Text',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.55}
+header{padding:24px 32px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:10}
+h1{margin:0;font-size:22px;font-weight:600;letter-spacing:-.01em}
+h1 span{color:var(--accent);font-family:var(--mono);font-size:18px;margin-left:12px}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin:0 0 12px;font-weight:600}
+h3{margin:16px 0 8px;font-size:15px;font-weight:600}
+main{max-width:1600px;margin:0 auto;padding:24px 32px;display:grid;gap:24px;grid-template-columns:1fr}
+.row{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(380px,1fr))}
+.row-3{display:grid;gap:24px;grid-template-columns:repeat(3,1fr)}
+@media(max-width:1100px){.row-3{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:18px}
+.card.full{grid-column:1/-1}
+.kpi{font-size:36px;font-weight:700;font-family:var(--mono);letter-spacing:-.02em}
+.kpi.accent{color:var(--accent)}
+.kpi.green{color:var(--accent2)}
+.kpi.warn{color:var(--warn)}
+.kpi.red{color:var(--red)}
+.kpi-label{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+.bar{background:#16181c;border-radius:4px;height:10px;overflow:hidden;margin-top:8px}
+.bar>span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#a3b806)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+th{font-weight:600;color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+tr:last-child td{border-bottom:0}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-family:var(--mono);background:#1f2125;color:var(--text);font-weight:500}
+.tag.go{background:rgba(126,231,135,.15);color:var(--accent2)}
+.tag.cau{background:rgba(247,185,85,.15);color:var(--warn)}
+.tag.kill{background:rgba(255,93,93,.15);color:var(--red)}
+.tag.acc{background:rgba(228,242,34,.15);color:var(--accent)}
+.tag.dim{background:#1a1c20;color:var(--dim)}
+.lane{padding:10px 12px;background:#0d0e10;border:1px solid var(--border);border-radius:6px;margin-bottom:8px}
+.lane .title{font-weight:600;font-size:14px}
+.lane .meta{font-size:12px;color:var(--dim);font-family:var(--mono);margin-top:2px}
+code{background:#1a1c20;color:var(--accent);padding:1px 6px;border-radius:3px;font-family:var(--mono);font-size:12px}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.day{padding:12px;border:1px solid var(--border);background:#0d0e10;border-radius:6px;margin-bottom:8px}
+.day h4{margin:0 0 4px;font-size:13px;color:var(--accent);font-family:var(--mono);font-weight:500}
+.day .body{font-size:13px;color:var(--text)}
+.day .meta{font-size:11px;color:var(--dim);font-family:var(--mono);margin-top:4px}
+.cat{display:inline-block;padding:1px 6px;border-radius:3px;font-size:10px;font-family:var(--mono);background:#1f2125;color:var(--dim);margin-right:6px}
+.cat.recon{background:rgba(121,184,255,.15);color:var(--blue)}
+.cat.hunt{background:rgba(228,242,34,.15);color:var(--accent)}
+.cat.report{background:rgba(126,231,135,.15);color:var(--accent2)}
+.cat.review{background:rgba(247,185,85,.15);color:var(--warn)}
+ul.tight{margin:6px 0;padding-left:18px}
+ul.tight li{margin:2px 0}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:800px){.split{grid-template-columns:1fr}}
+.lock{padding:10px 14px;background:rgba(228,242,34,.06);border-left:3px solid var(--accent);font-size:13px;margin-bottom:14px}
+.note{padding:8px 12px;background:#0d0e10;border:1px solid var(--border);border-radius:6px;font-size:12px;color:var(--dim);font-family:var(--mono)}
+@media print{header{position:static}body{background:#fff;color:#000}.card{background:#fafafa;border-color:#ccc}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Mission Control <span>kdairatchi · sprint 2026-05-14 → 2026-06-14</span></h1>
+</header>
+
+<main>
+
+  <!-- ============ NORTH STAR ============ -->
+  <section class="row-3">
+    <div class="card">
+      <h2>Goal — June Bounty</h2>
+      <div class="kpi accent">$2,000+</div>
+      <div class="kpi-label">target by 2026-06-14</div>
+      <div class="bar"><span style="width:5%"></span></div>
+      <div class="kpi-label">May closed: $890 · stretch goals: <span style="color:var(--accent2)">2x $1.8k</span> · <span style="color:var(--warn)">3x $2.7k</span> · <span style="color:var(--red)">4x $3.6k</span></div>
+    </div>
+    <div class="card">
+      <h2>Career Arc</h2>
+      <div style="font-size:14px;line-height:1.5">
+        Cybersec degree → full-time bug bounty hunter.<br>
+        Bounty pays college. Code-side identity = <strong>kdairatchi</strong>: own footprint, own style, no parroted methodology.
+      </div>
+    </div>
+    <div class="card">
+      <h2>Today's Forcing Function</h2>
+      <ul class="tight" style="font-size:13px">
+        <li><strong>Pick ONE</strong> primary target per day from <a href="#queue">Active Queue</a></li>
+        <li>Spend max 4h on it before pivot or report</li>
+        <li>Every probe → log to Caido + journal (auto-hook on)</li>
+        <li>Findings without PoC die in the Lead column</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ ACTIVE QUEUE ============ -->
+  <section class="card full" id="queue">
+    <h2>Active Hunt Queue — sorted by ROI</h2>
+    <table>
+      <thead><tr><th>Target</th><th>Plat</th><th>Top $</th><th>WAF</th><th>Status</th><th>Top lane</th><th>Bootstrap</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>xvideos</strong> (+ xnxx + xvideos.red)</td>
+          <td>H1</td><td>$20k</td>
+          <td><span class="tag go">none — direct nginx</span></td>
+          <td><span class="tag acc">primary — pivot from mobilevikings</span></td>
+          <td>Cross-brand IDOR · premium-tier auth bypass · video-private channel access</td>
+          <td><code>/new-target xvideos hackerone</code></td>
+        </tr>
+        <tr>
+          <td><strong>chaturbate</strong> (<code>*.securegatewayaccess.com</code> billing)</td>
+          <td>H1</td><td>$20k</td>
+          <td><span class="tag cau">cloudflare</span></td>
+          <td><span class="tag acc">runner-up — billing wildcard = critical asset</span></td>
+          <td>Billing-portal IDOR · token-economy financial logic · <code>*.cb.dev</code> testbed</td>
+          <td><code>/new-target chaturbate hackerone</code></td>
+        </tr>
+        <tr>
+          <td><strong>mobilevikings</strong></td>
+          <td>Intigriti</td><td>€5k</td>
+          <td><span class="tag cau">aws-waf-captcha</span></td>
+          <td><span class="tag dim">parked — keep for OpenVPN-AS CVE side-quest</span></td>
+          <td>OpenVPN-AS CVE (vpn.) · WordPress on jimmobile.be · Tier 3 wildcard harvest</td>
+          <td>bootstrapped → <code>targets/mobilevikings/</code></td>
+        </tr>
+        <tr>
+          <td><strong>smtp2go</strong></td>
+          <td>H1</td><td>$2k</td>
+          <td><span class="tag go">none</span></td>
+          <td><span class="tag cau">SCOPE BLOCKER — app-us.* not listed</span></td>
+          <td>9 pending leads (L7 CSRF-in-URL, L8 Zendesk SSO, L10 CORS, L11 RPC-action, L12 mass-assign, L13 secret-hunt)</td>
+          <td>bootstrapped → ask program first</td>
+        </tr>
+        <tr>
+          <td><strong>eero</strong> (Amazon IoT)</td>
+          <td>H1</td><td>$7k</td>
+          <td><span class="tag dim">unknown</span></td>
+          <td><span class="tag dim">previous session — 2 accounts ready</span></td>
+          <td>Premium-customer IDOR · network_transfers hijack · invite-code admin chain · payment IDOR</td>
+          <td>resume — accts.env has Account A + B verified</td>
+        </tr>
+        <tr>
+          <td><strong>hostinger</strong> (paid $890 once)</td>
+          <td>H1</td><td>$25k</td>
+          <td><span class="tag cau">cloudflare</span></td>
+          <td><span class="tag dim">tier-1 hpanel/cpanel/builder UNTOUCHED</span></td>
+          <td>Need paid hosting account; XSS=OOS; agents-CORS+IDOR exhausted</td>
+          <td>resume only after Tier 1 access</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note" style="margin-top:8px">Discipline: only ONE primary at a time. Park, don't context-switch. Hunt journal entries above 5 per day on the same target = stuck → run <code>hunt-watchdog</code>.</div>
+  </section>
+
+  <!-- ============ OWASP TOP 10 GRID ============ -->
+  <section class="card full">
+    <h2>OWASP Top 10 — kdairatchi Hunting Matrix</h2>
+    <p style="color:var(--dim);font-size:12px;margin:0 0 12px">Each linked to ELI5 page in <code>docs/owasp/</code> with own-style angles. <strong>Eligibility = per-program</strong> — always cross-check the program's exclusion list before testing.</p>
+    <table>
+      <thead><tr><th>#</th><th>Class</th><th>ELI5</th><th>Auto?</th><th>My-own-twist angle</th><th>Median$</th><th>Eligible</th><th>Page</th></tr></thead>
+      <tbody>
+        <tr><td>A01</td><td><strong>Broken Access Control</strong> (BOLA/BFLA/IDOR)</td><td>Backend forgot to check "is this user the owner of this thing"</td><td><span class="tag go">enum semi-auto</span></td><td>RPC <code>?action=</code> param enum + role.ivalue mass-assignment + cross-tenant on shared-ALB hosts</td><td>$300</td><td>almost always</td><td><a href="owasp/A01_access_control.md">→</a></td></tr>
+        <tr><td>A02</td><td><strong>Cryptographic Failures</strong></td><td>Storing secrets weakly or sending unencrypted</td><td><span class="tag cau">passive</span></td><td>HS256 secret hunt in static JS bundles · JWT-in-URL referer leak · weak signing</td><td>$400</td><td>varies — info-only often OOS</td><td><a href="owasp/A02_crypto.md">→</a></td></tr>
+        <tr><td>A03</td><td><strong>Injection</strong> (SQL/NoSQL/Command/Template/LDAP)</td><td>You sent text, server treated it as code</td><td><span class="tag cau">careful — automation banned by xvideos</span></td><td>Template-rendering on email previews · NoSQL operator injection (Mongo) · 2nd-order via stored field</td><td>$1,500</td><td>almost always</td><td><a href="owasp/A03_injection.md">→</a></td></tr>
+        <tr><td>A04</td><td><strong>Insecure Design</strong></td><td>The whole flow is broken, not just one bug</td><td><span class="tag kill">no — design-level</span></td><td>Token-economy race conditions (cam tip refunds) · withdrawal-replay · OTP timing</td><td>$2,500</td><td>yes if PoC complete</td><td><a href="owasp/A04_design.md">→</a></td></tr>
+        <tr><td>A05</td><td><strong>Security Misconfiguration</strong></td><td>Default settings or wrong knobs left on</td><td><span class="tag go">nuclei + httpx</span></td><td>CORS allow-origin <code>http://</code> + creds (smtp2go pattern) · S3 bucket policy · debug routes in prod</td><td>$300</td><td>varies — alone often Low</td><td><a href="owasp/A05_misconfig.md">→</a></td></tr>
+        <tr><td>A06</td><td><strong>Vulnerable Components</strong></td><td>Old library with known holes</td><td><span class="tag go">nuclei + cve-hunt</span></td><td>OpenVPN-AS CVEs · WP plugin variant hunt (Yoast Premium 7.x) · npm package version pin</td><td>$500</td><td>yes if working PoC</td><td><a href="owasp/A06_vuln_comp.md">→</a></td></tr>
+        <tr><td>A07</td><td><strong>Auth Failures</strong></td><td>Login system has gaps — bypass, reset, MFA</td><td><span class="tag cau">careful — rate limit policy varies</span></td><td>OTP timing brute · password-reset token reuse · OAuth scope-confusion · MFA downgrade</td><td>$600</td><td>often — read program brute-force policy</td><td><a href="owasp/A07_auth.md">→</a></td></tr>
+        <tr><td>A08</td><td><strong>Software & Data Integrity</strong></td><td>Untrusted updates, deserialization, supply chain</td><td><span class="tag kill">manual</span></td><td>Pickle/Java/JSON.NET deserialization · CI/CD webhook abuse · npm/pip typosquat callback</td><td>$2,000</td><td>yes — high impact</td><td><a href="owasp/A08_integrity.md">→</a></td></tr>
+        <tr><td>A09</td><td><strong>Logging & Monitoring</strong></td><td>Attacks not detected because logs missing</td><td><span class="tag kill">no — informational only</span></td><td>Generally OOS / Informational; pair with another finding to claim chain impact</td><td>$0</td><td>RARE — chain only</td><td><a href="owasp/A09_logging.md">→</a></td></tr>
+        <tr><td>A10</td><td><strong>SSRF</strong></td><td>You make the server fetch a URL you control → internal access</td><td><span class="tag cau">passive interactsh</span></td><td>Webhook URL verify · screenshot/preview render · email-template image · OAuth callback fetch</td><td><strong>$843 avg / $31k max</strong></td><td>almost always</td><td><a href="owasp/A10_ssrf.md">→</a></td></tr>
+      </tbody>
+    </table>
+    <div class="note" style="margin-top:10px"><strong>Workhorse class:</strong> SSRF (best p90 from real journal data — $300 median, $1.5k p90, $31k ceiling). <strong>Always-rejected unless chained:</strong> A09. <strong>Always read the program's exclusions BEFORE testing</strong> — XSS is OOS at Hostinger; user-enum OOS at Chaturbate; auto-tools banned at XVIDEOS.</div>
+  </section>
+
+  <!-- ============ 14-DAY SPRINT ============ -->
+  <section class="card full">
+    <h2>14-Day Sprint Calendar — 2026-05-14 → 2026-05-28</h2>
+    <p style="color:var(--dim);font-size:12px;margin:0 0 12px">Each day = ONE primary target × ONE-TO-TWO OWASP classes × 4-hour budget. Validate before report. <strong>If a class isn't paying after Day 7</strong>, drop it for Week 2.</p>
+
+    <div class="row-3">
+      <div>
+        <h3>Week 1 — establish primary, find one finding</h3>
+        <div class="day"><h4>Day 1 · Wed 5-14</h4><div class="body"><span class="cat recon">RECON</span> bootstrap <strong>xvideos</strong>; manual flow capture; cross-brand IDOR map (xvideos↔xnxx)</div><div class="meta">target: ALL 5 scope hosts | class: A01 | budget: 4h</div></div>
+        <div class="day"><h4>Day 2 · Thu 5-15</h4><div class="body"><span class="cat hunt">HUNT</span> A01 IDOR sweep on xvideos.red premium tier (paid features cross-account)</div><div class="meta">target: xvideos.red | class: A01 | budget: 4h | needs: 2 accounts</div></div>
+        <div class="day"><h4>Day 3 · Fri 5-16</h4><div class="body"><span class="cat hunt">HUNT</span> A10 SSRF — video-thumbnail render, share-preview, OAuth callback</div><div class="meta">target: xvideos | class: A10 | budget: 4h | tool: interactsh</div></div>
+        <div class="day"><h4>Day 4 · Sat 5-17</h4><div class="body"><span class="cat hunt">HUNT</span> Eero L1 — premium/customer + network_transfers IDOR (memory has 2 accts ready)</div><div class="meta">target: eero | class: A01 | budget: 4h</div></div>
+        <div class="day"><h4>Day 5 · Sun 5-18</h4><div class="body"><span class="cat hunt">HUNT</span> Eero L2 — invite-code admin chain (DEX-derived endpoints)</div><div class="meta">target: eero | class: A07 | budget: 4h</div></div>
+        <div class="day"><h4>Day 6 · Mon 5-19</h4><div class="body"><span class="cat review">VALIDATE</span> 7Q gate on top 3 leads; <span class="cat report">REPORT</span> the survivor</div><div class="meta">no probing today | use validator + report-writer agents</div></div>
+        <div class="day"><h4>Day 7 · Tue 5-20</h4><div class="body"><span class="cat review">REVIEW</span> week-1 ROI: <code>payout-analyst</code>; mid-sprint pivot if SSRF outpacing IDOR</div><div class="meta">decide week-2 primary</div></div>
+      </div>
+      <div>
+        <h3>Week 2 — submit 2 findings, scale</h3>
+        <div class="day"><h4>Day 8 · Wed 5-21</h4><div class="body"><span class="cat hunt">HUNT</span> Chaturbate <code>*.securegatewayaccess.com</code> billing portal — A01/A07/A04</div><div class="meta">target: chaturbate billing wildcard | budget: 4h</div></div>
+        <div class="day"><h4>Day 9 · Thu 5-22</h4><div class="body"><span class="cat hunt">HUNT</span> Chaturbate token-economy financial logic (refund/tip race)</div><div class="meta">target: chaturbate | class: A04 | budget: 4h | rate-limit: 100/min</div></div>
+        <div class="day"><h4>Day 10 · Fri 5-23</h4><div class="body"><span class="cat hunt">HUNT</span> mobilevikings vpn.* — OpenVPN-AS CVE banner + auth bypass</div><div class="meta">target: vpn.mobilevikings | class: A06 | budget: 2h side-quest</div></div>
+        <div class="day"><h4>Day 11 · Sat 5-24</h4><div class="body"><span class="cat hunt">HUNT</span> SMTP2GO L12 mass-assign + L13 secret-hunt (after scope clarification answer)</div><div class="meta">target: smtp2go | class: A01 + A02 | budget: 4h</div></div>
+        <div class="day"><h4>Day 12 · Sun 5-25</h4><div class="body"><span class="cat review">VALIDATE</span> + <span class="cat report">REPORT</span> bug #2; recon a new fresh H1 launch (filter: pay $5k+, no WAF)</div><div class="meta">use technique-scout + recon-ranker agents</div></div>
+        <div class="day"><h4>Day 13 · Mon 5-26</h4><div class="body"><span class="cat hunt">HUNT</span> chain attempt — combine 2 lower-sev findings into a higher-impact chain (use chain-builder agent)</div><div class="meta">no new target; deepen existing</div></div>
+        <div class="day"><h4>Day 14 · Tue 5-27</h4><div class="body"><span class="cat review">REVIEW</span> sprint retrospective: $/hour, conversion rate, dupe rate, lesson digest → memory</div><div class="meta">use loss-curator on every closed finding</div></div>
+      </div>
+      <div>
+        <h3>Beyond — June ramp</h3>
+        <div class="day"><h4>Days 15–21</h4><div class="body">Apply lessons. Double-down on whichever class hit p90 in week 2. Consider private-invite ladders.</div></div>
+        <div class="day"><h4>Days 22–31</h4><div class="body">Hit $2k goal. If at $1k by 6-7, accept and bank. If on track for $3k+, stretch into July.</div></div>
+        <div class="day"><h4>Daily ritual (every day)</h4><div class="body"><strong>10min:</strong> read previous SESSION.md · <strong>10min:</strong> intel refresh (CVE + skill recommender) · <strong>4h:</strong> primary target · <strong>30min:</strong> log + journal + plan tomorrow</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AGENT/SKILL AUDIT — KEEP/CULL/MERGE ============ -->
+  <section class="card full">
+    <h2>Workspace Audit — KEEP / MERGE / KILL (full breakdown in <a href="audit/AGENT_SKILL_AUDIT.md">audit/AGENT_SKILL_AUDIT.md</a>)</h2>
+    <div class="split">
+      <div>
+        <h3 style="color:var(--accent2)">Agents — KEEP (10)</h3>
+        <ul class="tight">
+          <li><code>autopilot</code> · <code>recon-agent</code> · <code>recon-ranker</code> · <code>scope-auditor</code> — core hunt loop</li>
+          <li><code>validator</code> · <code>report-writer</code> · <code>loss-curator</code> — validation + close-out</li>
+          <li><code>payout-analyst</code> — REAL data on $/hour</li>
+          <li><code>chain-builder</code> — escalates Lows to Highs</li>
+          <li><code>red-team-reproducer</code> — replay past wins for variants</li>
+          <li><code>code-reviewer</code> — keeps tooling honest</li>
+        </ul>
+        <h3 style="color:var(--warn)">Agents — MERGE (4)</h3>
+        <ul class="tight">
+          <li><code>hunt-dashboard</code> + <code>hunt-watchdog</code> + <code>bias-detector</code> → single <code>hunt-pulse</code> agent (one daily check)</li>
+          <li><code>technique-scout</code> + <code>intel-harvester</code> → single <code>intel</code> agent (technique + CVE + writeup)</li>
+        </ul>
+        <h3 style="color:var(--red)">Agents — KILL (3)</h3>
+        <ul class="tight">
+          <li><code>agency-dispatcher</code> — never used solo (memory shows 0 wins from agency runs); your workflow is sequential not parallel</li>
+          <li><code>web3-auditor</code> — TRON closed Dup, no other web3 in queue (defer until you re-pick web3)</li>
+          <li><code>gap-researcher</code> + <code>rules-enforcer</code> — overlap with skill-recommender hook; pick one</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color:var(--accent2)">Skills — KEEP (15)</h3>
+        <ul class="tight">
+          <li>Core hunt: <code>bug-bounty</code>, <code>web2-recon</code>, <code>web2-vuln-classes</code>, <code>caido-db</code>, <code>krait</code></li>
+          <li>Vuln-class deep: <code>js-security</code>, <code>http-smuggling</code>, <code>fuzzing</code>, <code>ai-assistant-attacks</code>, <code>cve-hunt</code></li>
+          <li>Specials: <code>mobile</code>, <code>opsec</code>, <code>secret-scanning</code>, <code>cdn-bypass-arsenal</code>, <code>nuclei-template-gen</code></li>
+        </ul>
+        <h3 style="color:var(--warn)">Skills — MERGE (8 → 3)</h3>
+        <ul class="tight">
+          <li><code>bb-methodology</code> + <code>bug-bounty</code> + <code>structured-analysis</code> → one master methodology page</li>
+          <li><code>cve-hunt</code> + <code>daily-cve-intel</code> + <code>searchsploit</code> → one CVE intel skill</li>
+          <li><code>complex-hunt</code> + <code>complex-study</code> + <code>target-intel</code> → one pre-hunt intel skill</li>
+        </ul>
+        <h3 style="color:var(--red)">Skills — KILL or move to <code>infra/</code> (15)</h3>
+        <ul class="tight">
+          <li><strong>Infra (move):</strong> <code>node-mac</code>, <code>node-pi</code>, <code>node-vps</code>, <code>node-wsl</code>, <code>mesh-agency</code>, <code>hermes-bounty-ops</code> — these are devops, not hunt-skill</li>
+          <li><strong>Niche stale:</strong> <code>blockchain-source-audit</code>, <code>web3-audit</code>, <code>smart-contract-report</code>, <code>crypto</code> (no web3 in queue), <code>vulnerableai</code> (test infra), <code>grafana-oss</code> (single-target), <code>netscaler</code> (single-target), <code>openclaw-pentest</code> (engagement-style not bounty), <code>poc-recording</code> (use OBS instead)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note" style="margin-top:14px">85 commands → cull all <code>/p-*</code> (28 pentest-engagement commands) — they're for client engagements, not bounty. Move to <code>commands/_pentest-archive/</code>.</div>
+  </section>
+
+  <!-- ============ AUTOMATION POLICY ============ -->
+  <section class="card full">
+    <h2>What CAN Be Automated (per program — ALWAYS check policy)</h2>
+    <div class="split">
+      <div>
+        <h3 style="color:var(--accent2)">Always-Allowed Automation</h3>
+        <ul class="tight">
+          <li><strong>Subdomain enum:</strong> subfinder, assetfinder, amass — passive only</li>
+          <li><strong>Cert transparency:</strong> crt.sh, censys</li>
+          <li><strong>Wayback / GAU:</strong> historical URL pull</li>
+          <li><strong>Tech-detect:</strong> httpx -tech-detect (single hit per host)</li>
+          <li><strong>WAF probe:</strong> wafw00f (single hit per host)</li>
+          <li><strong>DNS / WHOIS:</strong> standard lookups</li>
+          <li><strong>OAST callback:</strong> interactsh listening passively</li>
+          <li><strong>Static JS analysis:</strong> LinkFinder, SecretFinder offline on downloaded bundles</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color:var(--warn)">Conditionally-Allowed (READ POLICY)</h3>
+        <ul class="tight">
+          <li><strong>Nuclei:</strong> Chaturbate ≤100 req/min OK · XVIDEOS BANS automation entirely · most others OK at low rate</li>
+          <li><strong>Burp Active Scan:</strong> usually allowed on own accounts only · check rate limits</li>
+          <li><strong>Brute force:</strong> Chaturbate explicitly allows ≤100 req/min on own accounts to test rate-limit · most ban it</li>
+          <li><strong>Directory fuzzing (ffuf):</strong> usually OK at low rate, banned on some (XVIDEOS)</li>
+          <li><strong>SQLi auto (sqlmap):</strong> rarely allowed; always read program + use lowest threads</li>
+        </ul>
+        <h3 style="color:var(--red)">Never Automate (always manual)</h3>
+        <ul class="tight">
+          <li>Auth flows (login brute / password reset)</li>
+          <li>Payment / billing / withdrawal endpoints</li>
+          <li>State-changing endpoints with real-world side effects</li>
+          <li>Cross-account testing (use your own accounts only, manual)</li>
+          <li>Anything on a target that says "no automation" (XVIDEOS)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OWN-FOOTPRINT METHODOLOGY ============ -->
+  <section class="card full">
+    <h2>kdairatchi-Style Hunt Footprint (not parroted public methodology)</h2>
+    <div class="row-3">
+      <div>
+        <h3>Signature moves</h3>
+        <ul class="tight">
+          <li><strong>Variant hunt over fresh hunt</strong> — read disclosed reports, find what's been fixed-locally-but-not-globally</li>
+          <li><strong>Stack-drift exploitation</strong> — when an app runs Flask + Gin (smtp2go pattern), the newer language path skips middleware</li>
+          <li><strong>Wayback-first recon</strong> — pull old URLs/JWTs out of archive.org before any live probe (smtp2go gave us 8 expired JWTs revealing schema)</li>
+          <li><strong>Caido DB mining</strong> — never re-issue requests; mine the captured traffic for IDOR/auth/CORS/RPC patterns first</li>
+          <li><strong>Cross-brand backend search</strong> — sister brands (Mobile Vikings + JIM, xvideos + xnxx, eero + Ring) often share auth backend</li>
+          <li><strong>Honest park</strong> — if a finding can't be PoC'd today, it goes to LEAD column, not a soft report</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Anti-patterns I avoid</h3>
+        <ul class="tight">
+          <li>No theoretical CORS (`could potentially exfiltrate`) — prove impact or kill</li>
+          <li>No public CVE direct submissions — race to dupe</li>
+          <li>No raw nuclei output — every nuclei hit gets manual confirmation</li>
+          <li>No Burp-only XSS — needs realistic victim browser context</li>
+          <li>No "X is sequential therefore IDOR" — needs cross-account read proof</li>
+          <li>No reports against unconfirmed scope — ASK the program for clarification</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Where my style comes from</h3>
+        <ul class="tight">
+          <li><strong>Stack-drift mindset:</strong> I look for the seams between layers (Flask↔Gin, Apache↔ALB, mobile↔web)</li>
+          <li><strong>Memory-driven:</strong> every session writes to journal + auto-memory; future me reads past me's failures</li>
+          <li><strong>Honest journal:</strong> closed-Dup is a real outcome to log, not hidden</li>
+          <li><strong>Tool-builder, not tool-consumer:</strong> krait, hwaro, prowlrview are mine — I shape them around the bug classes I hunt</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LINKS ============ -->
+  <section class="card full">
+    <h2>Linked Pages (single source of truth)</h2>
+    <div class="row-3">
+      <div>
+        <h3>OWASP cheatsheets</h3>
+        <ul class="tight">
+          <li><a href="owasp/A01_access_control.md">A01 — Access Control / IDOR / BFLA</a></li>
+          <li><a href="owasp/A02_crypto.md">A02 — Crypto Failures (HS256 hunt)</a></li>
+          <li><a href="owasp/A03_injection.md">A03 — Injection (SQL/NoSQL/Cmd/Template)</a></li>
+          <li><a href="owasp/A04_design.md">A04 — Insecure Design (race/logic)</a></li>
+          <li><a href="owasp/A05_misconfig.md">A05 — Misconfig (CORS / S3)</a></li>
+          <li><a href="owasp/A06_vuln_comp.md">A06 — Vuln Components (CVE hunt)</a></li>
+          <li><a href="owasp/A07_auth.md">A07 — Auth (OTP/MFA/OAuth)</a></li>
+          <li><a href="owasp/A08_integrity.md">A08 — Integrity (deserialize)</a></li>
+          <li><a href="owasp/A09_logging.md">A09 — Logging (chain-only)</a></li>
+          <li><a href="owasp/A10_ssrf.md">A10 — SSRF (workhorse)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Operational</h3>
+        <ul class="tight">
+          <li><a href="audit/AGENT_SKILL_AUDIT.md">Agent + Skill Audit (KEEP/CULL/MERGE)</a></li>
+          <li><a href="sprint/SPRINT_2026-05-14.md">14-Day Sprint Plan (markdown)</a></li>
+          <li><code>~/claude-bug-bounty/CLAUDE.md</code> — workspace rules</li>
+          <li><code>~/claude-bug-bounty/hunt-memory/journal.jsonl</code> — auto-tracked</li>
+          <li><code>~/claude-bug-bounty/targets/</code> — per-target dirs (RULES/SCOPE/INTEL/SESSION/CHEATSHEET)</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Vault (second brain)</h3>
+        <ul class="tight">
+          <li><code>00 - Dashboard/MISSION_2026.md</code> ← mirrored copy of this</li>
+          <li><code>06 - Knowledge Base/OWASP/</code> ← mirrored OWASP pages</li>
+          <li><code>04 - Hunt Journal/</code> ← per-target sessions</li>
+          <li><code>10 - Finance/</code> ← bounty $ tracking</li>
+          <li><code>03 - Targets/</code> ← scope + program profiles</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="card full">
+    <div class="lock">
+      <strong>Lock-in mantra:</strong> One target. One class per session. Validate before report. PoC or it doesn't exist. Honest park beats soft report. Next month $2k+ pays for college. Then it scales.
+    </div>
+    <div class="note">Built 2026-05-14 · live HTML · keyboard <kbd>Ctrl+F</kbd> to search · <kbd>Ctrl+P</kbd> for print/PDF</div>
+  </section>
+
+</main>
+</body>
+</html>

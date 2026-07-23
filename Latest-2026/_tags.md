@@ -1,9 +1,9 @@
 # Tag Index
 Updated 2026-07-23.
 
-- `#web` — 10
+- `#web` — 11
+- `#api` — 5
 - `#llm` — 5
-- `#api` — 4
 - `#auth-bypass` — 4
 - `#rce` — 3
 - `#deserialization` — 2

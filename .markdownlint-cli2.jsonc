@@ -1,0 +1,72 @@
+// Markdownlint config for kdairatchi's research knowledge base.
+// Philosophy: enforce what breaks rendering on GitHub; tolerate what's just style.
+// A research doc with a long URL line is fine. A busted heading hierarchy is not.
+{
+  "config": {
+    "default": true,
+
+    // Line length — research notes quote long URLs, CVE descriptions, code blocks.
+    "MD013": false,
+
+    // Fenced code language — most fences here are plain output dumps or curl probes.
+    "MD040": false,
+
+    // Duplicate headings — CVE files intentionally repeat "What / Why / Hunt signal" per item.
+    "MD024": false,
+
+    // Inline HTML — used for <details>, <summary>, <center>, <img align> in READMEs.
+    "MD033": false,
+
+    // First-line H1 — some daily notes lead with dataview or frontmatter blocks.
+    "MD041": false,
+
+    // Emphasis-as-heading — kdai voice uses **What:** lead-ins inside list items.
+    "MD036": false,
+
+    // Table column style — compact tables without surrounding spaces are fine on GitHub.
+    "MD055": false,
+    "MD056": false,
+    "MD058": false,
+    "MD060": false,
+
+    // Trailing punctuation in headings — "Hunt signal:" is a valid heading.
+    "MD026": false,
+
+    // No bare URLs — we link raw URLs in evidence sections on purpose.
+    "MD034": false,
+
+    // Multiple H1 — some imported cheatsheets legitimately use multiple top-level
+    // headings as section dividers; render is fine on GitHub.
+    "MD025": false,
+
+    // Link fragments — the linter's slug algorithm disagrees with GitHub's for
+    // anchors containing parens/dots; targets actually resolve when clicked.
+    "MD051": false,
+
+    // Descriptive link text — "[here](...)" slips through in imports; worth
+    // fixing prose-side but not blocking CI for legacy content.
+    "MD059": false,
+
+    // Blanks around fences — numbered lists with inline code examples (common
+    // in cheatsheets imported upstream) don't always have perfect spacing.
+    "MD031": false
+  },
+
+  "globs": [
+    "**/*.md"
+  ],
+
+  // Reference dumps, payload libraries, and vendored awesome-lists — content fidelity
+  // wins over lint. These are imported as-is from upstream sources; reformatting would
+  // diverge from origin and break provenance.
+  "ignores": [
+    "node_modules",
+    ".git",
+    "skills",
+    "Awesome",
+    "Scripts",
+    "Burp",
+    "PoCs",
+    "Payloads"
+  ]
+}
