@@ -3382,3 +3382,164 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Why it matters:** Technique generalizes to any app that trusts reverse-proxy identity headers without an IP allowlist — Gitea, Grafana, Keycloak, Jira, internal portals.
 - **Hunt signal:** Check `app.ini` / env vars for `ENABLE_REVERSE_PROXY_AUTHENTICATION=true` + `REVERSE_PROXY_TRUSTED_PROXIES=*`; then send `X-Webauth-User: admin` or `X-Forwarded-User: admin` directly to the app.
 - **Evidence:** [source](https://hivesecurity.gitlab.io/blog/gitea-forgejo-nine-cves-1263-security-release-2026/)
+
+## 2026-07-23
+
+### SharePoint Deserialization RCE Creates Persistent Key Past Patch — `CVE-2026-50522`
+- **Tags:** `#deserialization` `#rce` `#web`
+- **Severity:** critical · **Hunt:** 4/5 · **Score:** 54.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@tymoteusz.netter/a-sharepoint-flaw-turns-one-request-into-a-key-that-outlives-the-patch-5865ead07d06)
+
+- **Trick:** Exploit a deserialization flaw in on-prem SharePoint to get RCE, but the real twist is that a single malicious request plants a persistent authentication key that survives the official patch — meaning patched instances may remain compromised.
+- **Why it matters:** Patching alone doesn't remediate access; defenders must also rotate/audit for lingering forged keys, making incident response significantly harder and extending the attacker's window indefinitely.
+- **Rating:** novel
+
+---
+### Client-Side Encryption Bypass Leads to Critical SQLi in LATAM Banking Apps
+- **Tags:** `#sqli` `#mobile` `#api`
+- **Severity:** critical · **Hunt:** 4/5 · **Score:** 54.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@justmobilesec/when-security-by-obscurity-blinds-the-waf-from-client-side-encryption-to-critical-sql-injection-f90b40ea5645) · [2](https://medium.com/@justmobilesec/when-security-by-obscurity-blinds-the-waf-from-client-side-encryption-to-critical-sql-injection-696805976ff4?source=rss------pentesting-5) · [3](https://cyberlabyrinthx.medium.com/blind-sql-injection-attack-with-conditional-responses-using-sniper-and-cluster-bomb-9759ebc69657?source=rss------bug_bounty-5) · [4](https://sayemeh.medium.com/how-i-find-sql-injection-vulnerabilities-my-bug-bounty-hunting-manual-testing-methodology-970c87535839?source=rss------bug_bounty-5)
+
+- **Trick:** Reverse the client-side encryption/obfuscation applied to API request parameters, then inject SQLi payloads through the encrypted channel — the WAF never sees the plaintext payload and lets it through.
+- **Why it matters:** Security-by-obscurity encryption in mobile banking/fintech apps blinds WAFs entirely; any app that encrypts parameters client-side before sending to a WAF-protected backend is likely vulnerable to the same class of bypass.
+- **Rating:** novel
+
+---
+*Clustered 4 sources for this item.*
+
+### CISA Emergency Directive on Langflow AI Framework Unauth RCE
+- **Tags:** `#rce` `#llm` `#api` `#web`
+- **Severity:** critical · **Hunt:** 4/5 · **Score:** 36.0 · **Status:** itw · **Age:** 0d
+- **Sources:** [1](https://cyberupdates365.medium.com/architectural-breakdown-cisas-emergency-directive-on-the-langflow-ai-framework-flaw-b1220b773dd1)
+
+- **Trick:** Unauthenticated remote code execution in the Langflow AI/MLOps framework, actively exploited by ENCFORGE ransomware to compromise enterprise AI pipelines.
+- **Why it matters:** CISA emergency directive confirms in-the-wild exploitation — AI infrastructure is now a direct ransomware target; unpatched Langflow instances expose model pipelines, training data, and downstream cloud credentials.
+- **Rating:** chain-worthy
+
+---
+### Bypassing K8s NodeRestriction via IAM Spoofing
+- **Tags:** `#kubernetes` `#aws` `#auth-bypass`
+- **Severity:** high · **Hunt:** 3/5 · **Score:** 31.5 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@sachinpatilsp/the-confused-deputy-in-the-aws-cloud-bypassing-kubernetes-noderestriction-via-iam-spoofing-04eec5298e32?source=rss------bug_bounty-5)
+
+- **Trick:** Exploits a confused deputy scenario where an attacker with AWS IAM permissions can spoof node identity, causing the Kubernetes API server's NodeRestriction admission plugin to authorize requests as if they came from a legitimate kubelet — bypassing node-level restrictions.
+- **Why it matters:** NodeRestriction is a core k8s hardening control; defeating it via cloud IAM misconfig means any IAM compromise can escalate to full cluster node impersonation, enabling pod creation, certificate signing, and privilege escalation across the cluster.
+- **Rating:** chain-worthy
+
+---
+### WP2Shell: Unauth WordPress Core Full Site Takeover
+- **Tags:** `#rce` `#auth-bypass` `#web`
+- **Severity:** critical · **Hunt:** 3/5 · **Score:** 27.0 · **Status:** itw · **Age:** 0d
+- **Sources:** [1](https://meetcyber.net/wordpress-core-vulnerability-wp2shell-c8eee96fbe03?source=rss------infosec-5)
+
+- **Trick:** Exploits a WordPress core bug to achieve full site takeover with no authentication required, converting a vulnerable instance into a shell (WP2Shell).
+- **Why it matters:** Unauthenticated RCE on WordPress core is extremely high-impact — the attack surface is massive given WordPress's market share, and the writeup confirms active in-the-wild exploitation.
+- **Rating:** novel
+
+---
+### Reflected XSS & HTML Injection on NASA via Google Dork
+- **Tags:** `#xss` `#web`
+- **Severity:** medium · **Hunt:** 2/5 · **Score:** 15.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@itss4leh/how-a-simple-google-dork-led-me-to-find-reflected-xss-html-injection-on-nasa-and-earn-a-letter-of-83075852de42?source=rss------infosec-5)
+
+- **Trick:** Used Google dorking to discover NASA subdomains with user-reflecting parameters, then identified reflected XSS and HTML injection points without heavy automation.
+- **Why it matters:** Shows that simple, manual reconnaissance (Google dorks) can still surface impactful bugs on high-profile targets; earned a letter of appreciation from NASA (no cash bounty).
+- **Rating:** variant
+
+---
+### System Prompt Extraction & AI Data Leakage
+- **Tags:** `#prompt-injection` `#llm` `#web`
+- **Severity:** medium · **Hunt:** 3/5 · **Score:** 15.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://kd-200.medium.com/system-prompt-extraction-ai-data-leakage-0e14cfa01f55)
+
+- **Trick:** Extracting system prompts from LLM-powered applications to reveal hidden instructions, internal logic, and sensitive operational data.
+- **Why it matters:** Leaked system prompts expose business rules, API endpoints, and guardrail definitions — enabling deeper prompt-injection chains, unauthorized actions, and data exfiltration from AI-integrated platforms.
+- **Rating:** variant
+
+---
+### Bypassing reCAPTCHA Due to Missing Server-Side Validation
+- **Tags:** `#auth-bypass` `#web`
+- **Severity:** medium · **Hunt:** 2/5 · **Score:** 10.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@0X0DOoOM/bypassing-recaptcha-due-to-missing-server-side-validation-7b653afd221c)
+
+- **Trick:** Server never validates the reCAPTCHA token on the backend, so removing or omitting the `g-recaptcha-response` parameter from the request bypasses the protection entirely.
+- **Why it matters:** CAPTCHA bypass enables mass automation of signup, password reset, or contact forms — often a prerequisite for account takeover or spam chains.
+- **Rating:** variant
+
+---
+### Field Notes #1 — Hallucinations
+- **Tags:** `#llm` `#prompt-injection`
+- **Severity:** unknown · **Hunt:** 2/5 · **Score:** 8.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://infosecwriteups.com/field-notes-1-hallucinations-4328f14ad2e1?source=rss------pentesting-5) · [2](https://medium.com/@SdxShadowlabs/ai-vs-human-audit-why-automation-cannot-replace-cybersecurity-expertise-0d9decbf80be?source=rss------bug_bounty-5)
+
+- **Trick:** Lessons and observations from real security projects focused on "hallucinations" — likely LLM/AI output manipulation or misperception of vulnerabilities during assessments.
+- **Why it matters:** Field notes from live engagements surface practical patterns around LLM security issues that formal research often misses; understanding how hallucinations manifest in real targets can sharpen probe strategies.
+- **Rating:** variant
+
+---
+*Clustered 2 sources for this item.*
+
+### Acid Reloaded CTF — Auth & Privilege Management Lessons
+- **Tags:** `#auth-bypass` `#privesc`
+- **Severity:** unknown · **Hunt:** 1/5 · **Score:** 4.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@pentesterclubpvtltd/acid-reloaded-ctf-lessons-in-web-security-authentication-and-privilege-management-81cfe280c5c8?source=rss------bug_bounty-5) · [2](https://osintteam.blog/python-web-penetration-testing-day-5-password-testing-dbac7fe4d7b8?source=rss------bug_bounty-5)
+
+- **Trick:** CTF walkthrough covering authentication flaws and privilege escalation misconfigurations.
+- **Why it matters:** Reinforces common auth-bypass and privesc patterns that translate directly to bug bounty targets; good for beginners building intuition.
+- **Rating:** variant
+
+---
+*Clustered 2 sources for this item.*
+
+### OpenAI & HuggingFace AI Supply Chain Incident Breakdown
+- **Tags:** `#supply-chain` `#deserialization` `#llm`
+- **Severity:** high · **Hunt:** 1/5 · **Score:** 3.5 · **Status:** patched · **Age:** 730d
+- **Sources:** [1](https://cyberupdates365.medium.com/architectural-breakdown-the-openai-and-hugging-face-ai-supply-chain-incident-1c110ad7ab02?source=rss------infosec-5) · [2](https://medium.com/@gpheheise/the-open-ai-hugging-face-incident-isnt-the-story-afc7e5ba9476?source=rss------pentesting-5)
+
+- **Trick:** Exploiting insecure serialization and model poisoning to compromise MLOps pipelines.
+- **Why it matters:** Malicious models can achieve RCE via deserialization flaws, turning trusted AI repositories into attack vectors against downstream enterprise systems.
+- **Rating:** chain-worthy
+
+---
+*Clustered 2 sources for this item.*
+
+### Building a Live Honeypot to Observe RDP Brute Force Attacks
+- **Tags:** `#cloud` `#azure`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@treynolds172/left-the-door-open-on-purpose-building-a-live-honeypot-and-watching-the-world-try-to-walk-through-6a397c2bf275?source=rss------infosec-5)
+
+- **Trick:** Deployed a deliberately exposed internet-facing VM with Microsoft Sentinel to capture and analyze real-world RDP brute force attack traffic from global sources.
+- **Why it matters:** Illustrates the sheer volume and automation of RDP brute force campaigns targeting cloud infrastructure, reinforcing the need for strict NSG rules and MFA on any exposed remote access.
+- **Rating:** variant
+
+---
+### The Browser Is a Battlefield: JS, DOM & Client-Side Attacks
+- **Tags:** `#xss` `#web`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@hdhffxfg/part-iv-the-browser-is-a-battlefield-javascript-the-dom-and-the-client-side-attack-surface-eb3c2424e019?source=rss------infosec-5)
+
+- **Trick:** Exploiting client-side JavaScript and DOM logic — sink/source mismatches, prototype pollution in browser context, and trust boundaries between server-rendered state and client-controlled execution.
+- **Why it matters:** Bug hunters over-focus on server-side; the browser holds real auth decisions, token handling, and redirect logic that are often unaudited and poorly sanitized.
+- **Rating:** variant
+
+---
+### OWASP MASTG Lab Uncrackable1 — Android RE & Root Bypass
+- **Tags:** `#mobile`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** theoretical · **Age:** 0d
+- **Sources:** [1](https://medium.com/@shaileshkharola0048/owasp-mastg-lab-uncrackable1-21c27b9274e1?source=rss------pentesting-5)
+
+- **Trick:** Reverse-engineer UnCrackable-Level1.apk in JADX-GUI; identify and bypass three root-detection checks (functions a, b, c) that block execution, then extract the hardcoded secret string from the AES-encrypted verification logic.
+- **Why it matters:** Foundational Android RE drill — the root-detection bypass and static-analysis workflow directly transfer to real mobile bug-bounty targets where anti-tampering blocks dynamic testing.
+- **Rating:** variant
+
+---
+### OpenVAS Vulnerability Scanner Overview
+- **Tags:** `#web`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@sevinjrb/openvas-f8493c25aaba?source=rss------pentesting-5)
+
+- **Trick:** Walkthrough of OpenVAS setup and usage for automated vulnerability scanning.
+- **Why it matters:** Useful for recon and identifying known CVEs on targets, but offers no novel attack technique — purely a tooling overview.
+- **Rating:** variant
+
+---

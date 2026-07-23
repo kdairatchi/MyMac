@@ -938,3 +938,14 @@ This nuclei template update adds detection logic for OpenRemote platform vulnera
 This commit automates metadata generation for CVEs within the Nuclei vulnerability scanner template repository. It should be utilized when maintaining the Nuclei library to ensure accurate vulnerability identification and CVE tracking during automated scans.
 
 ---
+
+## 2026-07-23
+
+### Installing and Configuring PentAGI on Kali Linux
+- **Tags:** `#llm` `#api`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://cyberaccoon.medium.com/installing-and-configuring-pentagi-on-kali-linux-a-complete-step-by-step-guide-b848b3dc938a)
+
+PentAGI is an AI-powered penetration testing assistant that leverages the OpenAI API to automate and guide pentesting workflows on Kali Linux. This guide walks through the full installation and configuration process, making it useful for bug bounty hunters who want to integrate LLM-driven reasoning into their recon and exploitation phases — though the tool itself is an aide rather than a direct attack surface, so its hunt value is limited to operational efficiency gains.
+
+---

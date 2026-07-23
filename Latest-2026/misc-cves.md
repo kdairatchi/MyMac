@@ -87,3 +87,19 @@
 ---
 *Clustered 27 sources for this item.*
 
+
+## 2026-07-23
+
+### PoC-in-GitHub Auto Update 2026-07-21
+- **Tags:** `#web`
+- **Severity:** unknown · **Hunt:** 1/5 · **Score:** 4.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://github.com/nomi-sec/PoC-in-GitHub/commit/7f6823bc066973da81d3ae0684f0bccdfe7fa7a4) · [2](https://github.com/nomi-sec/PoC-in-GitHub/commit/1953144e0a862e21586608506ae9739ef96590fd) · [3](https://github.com/nomi-sec/PoC-in-GitHub/commit/54c42a6a9df264c8b3d9aea3e258cd29ef8a2a93) · [4](https://github.com/nomi-sec/PoC-in-GitHub/commit/e28e8e8f0aba9e30b308efdfe0fc8edb9994cc08) · [5](https://github.com/nomi-sec/PoC-in-GitHub/commit/23e517062ed0b2ed99fd6159c2f5e11a73980c5c)
+
+- **What:** Automated commit adding new PoC references to the PoC-in-GitHub repository; no specific CVE or details in the commit message.
+- **Why it matters:** This is a bulk index update — the actual value is in the individual PoCs it links to, not the commit itself.
+- **Hunt signal:** pass
+- **Evidence:** [source] PoC-in-GitHub auto-aggregate commit with no actionable vulnerability details · [opinion] No specific CVE or exploit to act on; revisit if individual entries from this batch surface separately.
+
+---
+*Clustered 34 sources for this item.*
+

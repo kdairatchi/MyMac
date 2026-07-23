@@ -219,3 +219,22 @@ The profile of a Liberapay team member contained a link to an expired Twitter ac
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+
+## 2026-07-23 — H1 disclosures
+
+### OAuth redirect uri validation bypass for :proxima_first_party_sync apps
+
+- **2026-07-21** · sev: High · bounty: undisclosed · cve: CVE-2026-4296
+- Source: [hackerone.com/3588801](https://hackerone.com/reports/3588801) · Reporter: [@ahacker1](https://hackerone.com/ahacker1) · Team: [GitHub](https://hackerone.com/github)
+- CWE: Open Redirect
+
+**What**
+
+A vulnerability was identified in GitHub Enterprise Server that allowed an attacker to bypass OAuth redirect URI validation. The vulnerability was fixed in versions 3.20.1, 3.19.5, 3.18.8, 3.17.14, 3.16.17, 3.15.21, and 3.14.26. The vulnerability was reported through the GitHub Bug Bounty program.
+
+**PoC refs:** search `github.com/search?q=CVE-2026-4296` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-4296.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---

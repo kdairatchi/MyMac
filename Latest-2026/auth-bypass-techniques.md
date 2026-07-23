@@ -368,3 +368,34 @@ _No H1 summary provided._
 **Hunt signal:** pass — summary too thin
 
 ---
+
+
+## 2026-07-23 — H1 disclosures
+
+### AWS *.a2z.com | Unauthenticated Clickhouse UI : Database access + SSRF
+
+- **2026-07-22** · sev: High · bounty: undisclosed
+- Source: [hackerone.com/3809407](https://hackerone.com/reports/3809407) · Reporter: [@notnotnotveg](https://hackerone.com/notnotnotveg) · Team: [AWS VDP](https://hackerone.com/aws_vdp)
+- CWE: Authentication Bypass
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### SELECT ... INTO OUTFILE does not enforce the FILE WRITE privilege  unprivileged arbitrary file write on the   server
+
+- **2026-07-13** · sev: High · bounty: undisclosed
+- Source: [hackerone.com/3780695](https://hackerone.com/reports/3780695) · Reporter: [@bisht-ji](https://hackerone.com/bisht-ji) · Team: [SingleStore](https://hackerone.com/singlestore)
+- CWE: Missing Authorization
+
+**What**
+
+A security vulnerability was reported in SingleStore's self-managed database server where the SELECT...INTO OUTFILE command did not properly enforce the FILE WRITE privilege. This allowed any authenticated user, including those with only USAGE privileges, to write arbitrary files to the aggregator host at any path, written as the engine OS user. The vulnerability affected default-configuration self-managed deployments, but was not present in SingleStore Helios due to the local_file_system_access_restricted setting. …
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---

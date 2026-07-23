@@ -333,3 +333,34 @@ A reflected Cross-Site Scripting (XSS) vulnerability was found on the IBM.com do
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+
+## 2026-07-23 — H1 disclosures
+
+### Stored XSS in Rocket.Chat HTML File Export — Unauthenticated Entry via LiveChat
+
+- **2026-07-16** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3779690](https://hackerone.com/reports/3779690) · Reporter: [@olidayw](https://hackerone.com/olidayw) · Team: [Rocket.Chat](https://hackerone.com/rocket_chat)
+- CWE: Cross-site Scripting (XSS) - Stored
+
+**What**
+
+A vulnerability was discovered in the HTML file export feature of Rocket.Chat. The vulnerability allowed an attacker to inject arbitrary JavaScript code that would execute when the exported HTML file was opened. The root cause was that the application did not properly sanitize or escape user-supplied data before including it in the exported HTML. As a result, an unauthenticated attacker could leverage the vulnerability to perform actions such as data exfiltration and credential phishing.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Stored XSS on Trix Editor version latest (2.1.16) - Sanitizer Bypass 
+
+- **2026-07-14** · sev: Low · bounty: $337
+- Source: [hackerone.com/3581911](https://hackerone.com/reports/3581911) · Reporter: [@newbiefromcoma](https://hackerone.com/newbiefromcoma) · Team: [Basecamp](https://hackerone.com/basecamp)
+- CWE: Cross-site Scripting (XSS) - Stored
+
+**What**
+
+A vulnerability was discovered in Trix Editor version 2.1.16 that allowed for a Stored Cross-Site Scripting (XSS) attack. The vulnerability arose from an unsafe interaction between Trix's custom DOMPurify configuration and its document serialization logic. The issue was caused by Trix's use of the "data-trix-serialized-attributes" attribute, which was not properly sanitized during the serialization process, allowing an attacker to inject malicious JavaScript code. The vulnerability was deemed a direct bypass of previously reported Trix Editor vulnerabilities.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
