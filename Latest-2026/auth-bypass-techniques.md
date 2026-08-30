@@ -399,3 +399,64 @@ A security vulnerability was reported in SingleStore's self-managed database ser
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+
+## 2026-08-30 — H1 disclosures
+
+### libcurl Digest/NTLM authentication ignores an explicit Authorization header
+
+- **2026-08-25** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3963330](https://hackerone.com/reports/3963330) · Reporter: [@subadevan](https://hackerone.com/subadevan) · Team: [curl](https://hackerone.com/curl)
+- CWE: Incorrect Authorization
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Windows SSPI connection-pool probe can reuse a connection under the wrong user
+
+- **2026-08-14** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3938185](https://hackerone.com/reports/3938185) · Reporter: [@mr4bugs](https://hackerone.com/mr4bugs) · Team: [curl](https://hackerone.com/curl)
+- CWE: Authentication Bypass by Spoofing
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### JaaS SIP Gateway Authorization Bypass
+
+- **2026-08-12** · sev: Medium · bounty: $500
+- Source: [hackerone.com/3837634](https://hackerone.com/reports/3837634) · Reporter: [@offseq](https://hackerone.com/offseq) · Team: [8x8](https://hackerone.com/8x8-bounty)
+- CWE: Missing Authorization
+
+**What**
+
+The JaaS SIP gateway endpoint was validated without verifying the tenant's provisioned entitlements. This allowed tenants to place outbound SIP calls regardless of their subscription level. The issue was promptly addressed by implementing server-side entitlement checks to ensure proper authorization enforcement.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Unauthenticated Plugin Settings Modification on Three Crocoblock/Jet Plugins
+
+- **2026-07-06** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3839914](https://hackerone.com/reports/3839914) · Reporter: [@matty69v](https://hackerone.com/matty69v) · Team: [Essity](https://hackerone.com/essity)
+- CWE: Missing Authorization
+
+**What**
+
+The vulnerability summary is as follows:
+
+Three Crocoblock (Jet) plugins were found to expose REST API endpoints that allowed unauthenticated users to modify plugin settings via POST requests without any authentication or authorization checks. The endpoints validated and parsed the POST body, then persisted the submitted key-value pairs into the WordPress options table. The primary exploitable setting was the "avaliable_widgets" option, which controlled the activation of Elementor widgets site-wide. …
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---

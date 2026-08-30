@@ -324,3 +324,80 @@ _No H1 summary provided._
 **Hunt signal:** pass — summary too thin
 
 ---
+
+
+## 2026-08-30 — H1 disclosures
+
+### 50: CMake `HTTP_ONLY` does not disable SSH backends — SCP and SFTP remain usable
+
+- **2026-08-29** · sev: — · bounty: undisclosed
+- Source: [hackerone.com/3973228](https://hackerone.com/reports/3973228) · Reporter: [@giant_anteater](https://hackerone.com/giant_anteater) · Team: [curl](https://hackerone.com/curl)
+- CWE: Server-Side Request Forgery (SSRF)
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Critical SQL Injection WDM API (████████)
+
+- **2026-08-27** · sev: Critical · bounty: undisclosed
+- Source: [hackerone.com/3778282](https://hackerone.com/reports/3778282) · Reporter: [@matty69v](https://hackerone.com/matty69v) · Team: [Essity](https://hackerone.com/essity)
+- CWE: SQL Injection
+
+**What**
+
+A boolean-based and time-based blind SQL injection vulnerability was discovered in the searchText query parameter of the GET /api/WDMProduct endpoint. The vulnerability allowed an unauthenticated attacker to read or modify data in the backing Microsoft SQL Server database. The backend was found to be hosted on an Azure App Service and served by the in-scope Angular front-end application.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### DDP methods getThreadsList / getThreadMessages leaks private thread content to any authenticated low privilege user (unpatched sibling of #1446767)
+
+- **2026-08-20** · sev: High · bounty: undisclosed · cve: CVE-2026-65645
+- Source: [hackerone.com/3852135](https://hackerone.com/reports/3852135) · Reporter: [@iamaangx028](https://hackerone.com/iamaangx028) · Team: [Rocket.Chat](https://hackerone.com/rocket_chat)
+- CWE: NoSQL Injection
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-65645` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-65645.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Unauthenticated SSRF in Voxtelesys integration ('checkUrlForSsrf' Bypass via DNS rebinding)
+
+- **2026-07-29** · sev: High · bounty: undisclosed · cve: CVE-2024-39713
+- Source: [hackerone.com/3473145](https://hackerone.com/reports/3473145) · Reporter: [@button142857](https://hackerone.com/button142857) · Team: [Rocket.Chat](https://hackerone.com/rocket_chat)
+- CWE: Server-Side Request Forgery (SSRF)
+
+**What**
+
+An SSRF vulnerability was discovered in Rocket.Chat version 7.13.2 that was caused by a DNS rebinding attack. The vulnerability allowed an attacker to bypass a security check and access internal hosts on the same network as the Rocket.Chat server. The vulnerability was present in the SMS integration feature that used the `checkUrlForSsrf` function, which was bypassed by the DNS rebinding attack.
+
+**PoC refs:** search `github.com/search?q=CVE-2024-39713` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2024-39713.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Unauthenticated SQL Injection via REST Batch Route Confusion ████████
+
+- **2026-07-21** · sev: Critical · bounty: undisclosed
+- Source: [hackerone.com/3873072](https://hackerone.com/reports/3873072) · Reporter: [@matty69v](https://hackerone.com/matty69v) · Team: [Essity](https://hackerone.com/essity)
+- CWE: SQL Injection
+
+**What**
+
+A vulnerability was discovered in the WordPress REST API batch endpoint (/wp-json/batch/v1) on a certain website. The vulnerability allowed unauthenticated blind SQL injection by nesting a crafted batch payload, which triggered a route-dispatch desynchronization. This caused a user-controlled string to bypass parameter sanitization and reach a raw SQL NOT IN (...) clause. No authentication, cookies, or tokens were required to exploit the vulnerability.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---

@@ -3543,3 +3543,163 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Rating:** variant
 
 ---
+
+
+## 2026-08-30
+
+### From IDOR to AI Manipulation: Poisoning Another User's AI Chat Context
+- **Tags:** `#idor` `#llm` `#prompt-injection`
+- **Severity:** high · **Hunt:** 4/5 · **Score:** 42.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@manojxshrestha/from-idor-to-ai-manipulation-how-i-poisoned-another-users-persistent-chat-context-602bf0fa26fa?source=rss------bug_bounty-5)
+
+- **Trick:** Missing ownership check on AI chat endpoints let any logged-in user read and write another user's private conversations, enabling injection of persistent malicious instructions into the victim's AI context.
+- **Why it matters:** Turns a mundane IDOR into a stealthy, persistent prompt-injection payload — the victim's AI assistant behaves maliciously across all future sessions with no visible tampering.
+- **Rating:** chain-worthy
+
+---
+### Password Reset Vulnerability — Full Account Takeover on Booking/CRM Platform
+- **Tags:** `#auth-bypass` `#web`
+- **Severity:** critical · **Hunt:** 4/5 · **Score:** 36.0 · **Status:** itw · **Age:** 0d
+- **Sources:** [1](https://infosecwriteups.com/password-reset-vulnerability-how-i-found-a-full-account-takeover-868496710521?source=rss------infosec-5) · [2](https://bugwraith.medium.com/i-sent-one-http-request-and-hijacked-a-password-reset-link-ato-1f2d04de4d1b?source=rss------bug_bounty-5) · [3](https://medium.com/@belalmohamed3690/how-i-chained-4-simple-bugs-into-a-mass-compromise-of-every-organization-on-a-platform-02a8ee624d4d?source=rss------bug_bounty-5)
+
+- **Trick:** Exploiting a flaw in the password reset flow to take over any account without authentication on a live booking/CRM platform.
+- **Why it matters:** Full unauthenticated account takeover on a production platform — the bug is still partially open, meaning similar reset logic flaws are likely present elsewhere.
+- **Rating:** novel
+
+---
+*Clustered 3 sources for this item.*
+
+### Race Condition in Single-Use Coupon Redemption → Unlimited Credits
+- **Tags:** `#race-condition` `#web` `#api`
+- **Severity:** high · **Hunt:** 3/5 · **Score:** 31.5 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@t4nv1/how-a-race-condition-in-single-use-coupon-redemption-led-to-unlimited-credits-and-an-11-000-bounty-67a93a486ee0)
+
+- **Trick:** Fire multiple concurrent redemption requests for a single-use coupon before the server marks it consumed, allowing repeated credit application.
+- **Why it matters:** Classic business-logic race condition that turns a one-time coupon into unlimited credits — high financial impact, $11k payout confirms severity.
+- **Rating:** variant
+
+---
+### Never Trust the Client — Ranking Manipulation Bypassing Anti-Fraud
+- **Tags:** `#web` `#api` `#auth-bypass`
+- **Severity:** medium · **Hunt:** 3/5 · **Score:** 22.5 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@swanawett/never-trust-the-client-como-consegui-manipular-o-ranking-de-uma-aplica%C3%A7%C3%A3o-com-sistema-antifraude-4b3a71209344) · [2](https://medium.com/@whoadnan01/4-000-for-a-2-minute-google-search-publicly-exposed-invoice-leaking-customer-pii-7365bb80c6ab) · [3](https://github.com/nomi-sec/PoC-in-GitHub/commit/29530fe48510ed2bd7116119ab99c0d815bf9ea9) · [4](https://github.com/nomi-sec/PoC-in-GitHub/commit/8de018a81438509ef78bd32cf0a6d4ed9bf6d41f) · [5](https://github.com/nomi-sec/PoC-in-GitHub/commit/d487842f07c2af8ba72e3f97073acbaad2380c12)
+
+- **Trick:** Client-side parameters controlling ranking/scoring were tampered with despite the application having an anti-fraud system, which failed to validate server-side assertions of trust.
+- **Why it matters:** Anti-fraud and rate-limiting systems are meaningless if the server still trusts mutable client-supplied values for critical business logic like rankings or scores — a recurring pattern in competitive/gamified platforms.
+- **Rating:** variant
+
+---
+*Clustered 38 sources for this item.*
+
+### Unsanitized PDF Export Engine Leads to LFI and $14,000 Bounty
+- **Tags:** `#lfi` `#web`
+- **Severity:** high · **Hunt:** 3/5 · **Score:** 21.0 · **Status:** patched · **Age:** 0d
+- **Sources:** [1](https://medium.com/@t4nv1/how-an-unsanitized-pdf-export-engine-led-to-local-file-inclusion-and-a-14-000-bounty-971c19603d94?source=rss------pentesting-5)
+
+- **Trick:** Leveraging unsanitized input in a PDF export/report-generation feature to include local files on the server (e.g., `/etc/passwd`) within the rendered output.
+- **Why it matters:** "Export to PDF" and similar reporting features are ubiquitous in enterprise apps and often process user-controlled content server-side with filesystem access — a goldmine for LFI that's frequently overlooked in favour of more conventional injection points.
+- **Rating:** chain-worthy
+
+---
+### The Evil Twin Technique: AI Flag Leak via Prompt Injection
+- **Tags:** `#prompt-injection` `#llm` `#jailbreak`
+- **Severity:** medium · **Hunt:** 2/5 · **Score:** 15.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@daniyalriazcute/the-evil-twin-technique-how-i-got-an-ai-to-leak-its-own-flag-prompt-injection-ctf-writeup-dc5323402f30)
+
+- **Trick:** Crafting a duplicate/mirrored persona ("evil twin") prompt that tricks an LLM into treating the attacker's injected instructions as its own legitimate directives, causing it to output its hidden system prompt or flag.
+- **Why it matters:** Demonstrates that even without direct access to system prompts, LLM-backed applications can be manipulated into leaking sensitive embedded data — directly applicable to bug bounty targets exposing AI chatbots or agents with hidden instructions, API keys, or internal context.
+- **Rating:** variant
+
+---
+### Breaking Guava's BloomFilter: A 6-Byte Denial of Service
+- **Tags:** `#deserialization`
+- **Severity:** medium · **Hunt:** 2/5 · **Score:** 15.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://medium.com/@pswor69/breaking-guavas-bloomfilter-a-6-byte-denial-of-service-2f859d87afb3?source=rss------bug_bounty-5)
+
+- **Trick:** Unbounded allocation during BloomFilter deserialization in Google Guava allows a tiny attacker-controlled payload (6 bytes) to trigger massive memory consumption and denial of service.
+- **Why it matters:** Java deserialization surfaces are widespread; any endpoint accepting serialized Guava BloomFilter objects can be killed with minimal bandwidth — useful as a chain terminator or standalone DoS.
+- **Rating:** novel
+
+---
+### Autonomous Agent Compromises Domain Controller in 20 Minutes
+- **Tags:** `#privesc`
+- **Severity:** high · **Hunt:** 2/5 · **Score:** 14.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@jhnmusyoki/i-let-an-autonomous-agent-attack-a-domain-controller-it-won-in-20-minutes-a1871638231b)
+
+- **Trick:** An autonomous AI agent was given initial access to an Active Directory environment and chained AD misconfigurations and privilege escalation paths to fully compromise a Domain Controller within 20 minutes, without human intervention.
+- **Why it matters:** Demonstrates that autonomous agents can massively accelerate AD attack chains that would take a human pentester hours or days, raising the stakes for misconfigured AD environments and lowering the skill barrier for complex enterprise compromise.
+- **Rating:** novel
+
+---
+### alg:none and Friends — A JWT Hacking Field Guide
+- **Tags:** `#jwt` `#auth-bypass` `#web`
+- **Severity:** medium · **Hunt:** 2/5 · **Score:** 10.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://kd-200.medium.com/alg-none-and-friends-a-jwt-hacking-field-guide-4864f2e1c673?source=rss------infosec-5)
+
+- **Trick:** Manipulating the JWT algorithm header field to "none" (and related algorithm-confusion variants) to bypass signature verification and forge tokens.
+- **Why it matters:** JWTs underpin auth in countless APIs and web apps; alg:none and algorithm-substitution flaws remain shockingly common in bug bounty targets and can yield direct auth bypass.
+- **Rating:** variant
+
+---
+### Your Next Triager Is a $2 API Call — Trained to Distrust You
+- **Tags:** `#llm` `#api`
+- **Severity:** info · **Hunt:** 2/5 · **Score:** 2.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@rajnamdev/your-next-triager-is-a-2-api-call-and-its-trained-to-distrust-you-555b86cc8027?source=rss------bug_bounty-5)
+
+- **Trick:** Elastic built an LLM triage pipeline at ~$2/report that processed 1,390 submissions in six months, auto-closing 70% as NA/duplicate with 85% human agreement.
+- **Why it matters:** Low-effort or vague reports get filtered before human eyes — hunters must write clear, evidence-rich submissions that survive AI scrutiny.
+- **Rating:** variant
+
+---
+### The 24/7 Dark Web Helpdesk: Cybercrime SaaS Empire
+- **Tags:** `#supply-chain` `#cloud`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@mohiitlamba/the-24-7-dark-web-helpdesk-how-cybercrime-cloned-silicon-valley-and-took-down-las-vegas-7314223e9b38)
+
+- **Trick:** Cybercrime groups have replicated legitimate SaaS business models—helpdesks, SLAs, customer support—creating professionalized RaaS (Ransomware-as-a-Service) ecosystems that lower the barrier to entry for attackers.
+- **Why it matters:** Understanding how threat actors operationalize and commoditize attacks informs which infrastructure patterns (bulletproof hosting, initial access brokers, affiliate programs) to look for when hunting exposed admin panels, leaked dashboards, or misconfigured crime-as-a-service platforms on bug bounty targets.
+- **Rating:** variant
+
+---
+### BloodHound MCP — AI-Assisted Active Directory Analysis
+- **Tags:** `#mcp` `#llm`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@kasimerkin/bloodhound-mcp-ile-yapay-zeka-destekli-active-directory-analizi-68d8fb79f805?source=rss------pentesting-5)
+
+- **Trick:** Leveraging Model Context Protocol (MCP) to connect LLMs directly to BloodHound, replacing manual Cypher query authoring with natural-language-driven AD attack path discovery.
+- **Why it matters:** Eliminates the steepest friction in AD pentesting — crafting and interpreting complex Cypher queries — enabling faster privilege escalation path identification and lowering the skill barrier for effective BloodHound usage.
+- **Rating:** chain-worthy
+
+---
+### How AI Pentesting Really Works
+- **Tags:** `#llm` `#web` `#api`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://robertscocca.medium.com/how-ai-pentesting-really-works-883cd191199d?source=rss------pentesting-5) · [2](https://medium.com/@habeeba.shaik06/what-if-an-ai-tried-to-hack-your-application-before-attackers-did-36d78665cbe5?source=rss------pentesting-5)
+
+- **Trick:** Demystifies AI pentesting as a custom harness wrapped around an off-the-shelf LLM — no secret sauce, just orchestration of prompts, tool integrations, and output parsing for offensive workflows.
+- **Why it matters:** Cuts through the hype: "AI pentesting" is mostly glue code you can build yourself, which means understanding the stack helps you both replicate it and defend against it.
+- **Rating:** variant
+
+---
+*Clustered 2 sources for this item.*
+
+### How I use Claude Code (and I don't like it)
+- **Tags:** `#llm` `#claude`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@netscape101/how-i-use-claude-code-and-i-really-dont-like-it-at-all-4145bdd42665?source=rss------pentesting-5)
+
+- **Trick:** Leveraging Claude Code for security tasks despite personal reservations about AI.
+- **Why it matters:** Provides a pragmatic perspective on integrating LLM coding tools into pentesting workflows.
+- **Rating:** variant
+
+---
+### 15 Hidden Nmap Techniques Every Hacker Should Know
+- **Tags:** `#web`
+- **Severity:** info · **Hunt:** 1/5 · **Score:** 1.0 · **Status:** unknown · **Age:** 0d
+- **Sources:** [1](https://medium.com/@bugitrix/15-hidden-nmap-techniques-every-hacker-should-know-1b8af99a8ad0)
+
+- **Trick:** Compilation of 15 lesser-known Nmap flags and scanning techniques for improved network reconnaissance and service fingerprinting
+- **Why it matters:** Better Nmap proficiency sharpens attack-surface discovery and service identification during the recon phase of bug bounty engagements
+- **Rating:** variant
+
+---

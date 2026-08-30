@@ -89,3 +89,17 @@ _pending enrichment_
 - **Evidence:** [source] watchtowr labs full technical disclosure · [opinion] History repeats — expect rapid mass-scanning and exploitation mirroring the original CitrixBleed campaign; prioritize patching and session revocation immediately.
 
 ---
+
+## 2026-08-30
+
+### Citrix NetScaler Pre-Auth RCE (CVE-2026-8452) — `CVE-2026-8452`
+- **Tags:** `#rce` `#citrix` `#appliance`
+- **Severity:** critical · **Hunt:** 4/5 · **Score:** 54.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://labs.watchtowr.com/youre-back-in-the-room-citrix-netscaler-pre-auth-rce-cve-2026-8452/)
+
+- **What:** Pre-authentication remote code execution vulnerability in Citrix NetScaler, disclosed by watchtowr labs.
+- **Why it matters:** Unauthenticated RCE on a widely-deployed perimeter appliance — prime for mass exploitation, echoing Citrix Bleed (CVE-2023-4966) impact levels.
+- **Hunt signal:** Scan for exposed NetScaler VPN/login endpoints lacking the August 2026 patch; watch for abnormal child processes or unexpected outbound connections from appliance IPs.
+- **Evidence:** [watchtowr_labs] Full writeup with PoC details · [opinion] Expect rapid weaponization given Citrix's history as a high-value perimeter target; CVE ID may be provisional (noted with "?" in original title) — confirm official assignment before long-term filing.
+
+---

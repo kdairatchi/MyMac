@@ -269,3 +269,50 @@ _No H1 summary provided._
 **Hunt signal:** pass — summary too thin
 
 ---
+
+
+## 2026-08-30 — H1 disclosures
+
+### node:sqlite SQLTagStore Iterator Replay Lets Attacker Re-Execute Victim-Bound Writes Indefinitely
+
+- **2026-08-28** · sev: Medium · bounty: undisclosed · cve: CVE-2026-58041
+- Source: [hackerone.com/3795900](https://hackerone.com/reports/3795900) · Reporter: [@cantina-security](https://hackerone.com/cantina-security) · Team: [Node.js](https://hackerone.com/nodejs)
+- CWE: Time-of-check Time-of-use (TOCTOU) Race Condition
+
+**What**
+
+A flaw was discovered in the node:sqlite package for Node.js that allowed a stale StatementSyncIterator created through DatabaseSync#createTagStore() to continue executing a cached prepared statement after it had been reset and rebound with new parameters. The vulnerability was caused by the SQLTagStore feature resetting cached statements using sqlite3_reset() directly, bypassing the iterator invalidation mechanism introduced in recent releases. This issue affected Node.js versions 22.x, 24.x, and 26.x.
+
+**PoC refs:** search `github.com/search?q=CVE-2026-58041` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-58041.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+###  curl_share TOCTOU > RCE via Curl_llist _dtor Function Pointer Hijack
+
+- **2026-08-26** · sev: Critical · bounty: undisclosed
+- Source: [hackerone.com/3955945](https://hackerone.com/reports/3955945) · Reporter: [@k4rasu_s4ma](https://hackerone.com/k4rasu_s4ma) · Team: [curl](https://hackerone.com/curl)
+- CWE: Time-of-check Time-of-use (TOCTOU) Race Condition
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### libcurl cache updates follow symlinks and truncate their targets
+
+- **2026-08-14** · sev: Low · bounty: undisclosed
+- Source: [hackerone.com/3938220](https://hackerone.com/reports/3938220) · Reporter: [@mr4bugs](https://hackerone.com/mr4bugs) · Team: [curl](https://hackerone.com/curl)
+- CWE: Time-of-check Time-of-use (TOCTOU) Race Condition
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---

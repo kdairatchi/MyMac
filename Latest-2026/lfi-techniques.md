@@ -255,3 +255,68 @@ A path traversal vulnerability was discovered in the `/api/v1/uploads/analyze` e
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+
+## 2026-08-30 — H1 disclosures
+
+### Author → arbitrary file deletion anywhere on disk (site takeover) via `POST /wp/v2/media/<id>/finalize` poisoning `_wp_attachment_metadata`
+
+- **2026-08-28** · sev: Critical · bounty: undisclosed · cve: CVE-2018-12895
+- Source: [hackerone.com/3931777](https://hackerone.com/reports/3931777) · Reporter: [@jakubk](https://hackerone.com/jakubk) · Team: [WordPress](https://hackerone.com/wordpress)
+- CWE: Path Traversal
+
+**What**
+
+A vulnerability was discovered in the WordPress media processing functionality. This vulnerability allowed an authenticated author to delete arbitrary files on the server. The vulnerability was caused by insufficient input validation in the `finalize_item()` function, which allowed an attacker to control the file paths stored in the attachment metadata. This resulted in the `wp_delete_attachment_files()` function deleting files outside of the expected upload directory. The vulnerability was present in WordPress versions 7.0.2 and trunk revisions up to 7.1-beta3-62852.
+
+**PoC refs:** search `github.com/search?q=CVE-2018-12895` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2018-12895.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Path Traversal in Nextcloud Talk Android Exposes User Credentials and Private Data via FileProvider
+
+- **2026-08-24** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3696266](https://hackerone.com/reports/3696266) · Reporter: [@mirachael](https://hackerone.com/mirachael) · Team: [Nextcloud](https://hackerone.com/nextcloud)
+- CWE: Path Traversal
+
+**What**
+
+A vulnerability in Nextcloud Talk Android allowed an external Android app to write and retrieve config files by pinging an internal endpoint.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Unauthenticated Path Traversal (LFI) via /custom-sounds/ when CustomSounds uses FileSystem storage
+
+- **2026-08-03** · sev: High · bounty: undisclosed · cve: CVE-2026-56845
+- Source: [hackerone.com/3514640](https://hackerone.com/reports/3514640) · Reporter: [@howtoplay](https://hackerone.com/howtoplay) · Team: [Rocket.Chat](https://hackerone.com/rocket_chat)
+- CWE: Path Traversal
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-56845` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-56845.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Active Storage Vips Transformer Missing validate_transformation — CVE-2025-24293 Incomplete Fix
+
+- **2026-07-30** · sev: High · bounty: undisclosed · cve: CVE-2025-24293
+- Source: [hackerone.com/3553340](https://hackerone.com/reports/3553340) · Reporter: [@friedchicken112211](https://hackerone.com/friedchicken112211) · Team: [Ruby on Rails](https://hackerone.com/rails)
+- CWE: Path Traversal
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2025-24293` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2025-24293.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---

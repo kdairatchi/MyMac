@@ -231,3 +231,47 @@ _No H1 summary provided._
 **Hunt signal:** pass — summary too thin
 
 ---
+
+
+## 2026-08-30 — H1 disclosures
+
+### HTTP Request Smuggling via Silent Header Truncation in Node.js HTTP Parser
+
+- **2026-08-28** · sev: Low · bounty: undisclosed · cve: CVE-2026-58044
+- Source: [hackerone.com/3564941](https://hackerone.com/reports/3564941) · Reporter: [@yushengchen](https://hackerone.com/yushengchen) · Team: [Node.js](https://hackerone.com/nodejs)
+- CWE: HTTP Request Smuggling
+
+**What**
+
+A flaw in the Node.js HTTP client was discovered that could cause a request desynchronization for Node.js-based forwarding proxies. The issue was caused by the Node.js HTTP parser omitting headers beyond the configured limit from the visible request headers, while still using those headers internally for HTTP message framing. This vulnerability was found to affect all supported Node.js release lines.
+
+**PoC refs:** search `github.com/search?q=CVE-2026-58044` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-58044.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### HTTP Request Smuggling via Connection: close<TAB> in Node.js llhttp parser
+
+- **2026-07-31** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3723248](https://hackerone.com/reports/3723248) · Reporter: [@nadav0077](https://hackerone.com/nadav0077) · Team: [Node.js](https://hackerone.com/nodejs)
+- CWE: HTTP Request Smuggling
+
+**What**
+
+A vulnerability was discovered in the Node.js HTTP server where it ignores the "Connection: close" header when the token is followed by a tab character. This allows an attacker to send a second request on the same connection, even after the first request should have closed the connection.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+## 2026-08-30
+
+### CRLF-Powered Desync Attacks — Beheading HTTP Streams
+- **Tags:** `#smuggling` `#web`
+- **Severity:** high · **Hunt:** 4/5 · **Score:** 42.0 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://portswigger.net/research/crlf-powered-desync-attacks)
+
+**CRLF-Powered Desync Attacks — Beheading HTTP Streams** — CRLF injection in HTTP headers is far more dangerous than open-redirect/XSS; it enables full request desync by injecting stray CR/LF bytes that split and misalign the HTTP stream between frontend and backend servers, letting attackers "behead" requests and hijack downstream parsing. Hunt: inject `%0d%0a` sequences into any user-controlled header value (Host, X-Forwarded-*, custom headers) and observe differential timing or unexpected response framing that indicates backend stream desync. [PortSwigger Research](https://portswigger.net/research/crlf-powered-desync-attacks)
+
+---

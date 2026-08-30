@@ -364,3 +364,119 @@ A vulnerability was discovered in Trix Editor version 2.1.16 that allowed for a 
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+
+## 2026-08-30 — H1 disclosures
+
+### Author → stored XSS in wp-admin: unescaped sub-size filename from attachment metadata breaks out of the `src` attribute in `get_media_item()`
+
+- **2026-08-28** · sev: Critical · bounty: undisclosed
+- Source: [hackerone.com/3931771](https://hackerone.com/reports/3931771) · Reporter: [@jakubk](https://hackerone.com/jakubk) · Team: [WordPress](https://hackerone.com/wordpress)
+- CWE: Cross-site Scripting (XSS) - Stored
+
+**What**
+
+A vulnerability was discovered in the WordPress media upload and finalize endpoints. An author could upload a crafted image with a malicious filename, which was then stored verbatim by the endpoint and rendered without proper escaping in the WordPress admin media library. This could allow the execution of arbitrary JavaScript in the context of an administrator's browser session.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Pre-authentication Stored XSS in Essity Customer-Service Pipeline via ContactApi (reCAPTCHA bypass + no rate limit)
+
+- **2026-08-27** · sev: Critical · bounty: undisclosed
+- Source: [hackerone.com/3729501](https://hackerone.com/reports/3729501) · Reporter: [@matty69v](https://hackerone.com/matty69v) · Team: [Essity](https://hackerone.com/essity)
+- CWE: Cross-site Scripting (XSS) - Stored
+
+**What**
+
+A pre-authentication stored cross-site scripting (XSS) vulnerability was discovered in the customer service API of the Essity company. The API accepted unauthenticated ticket submissions with arbitrary HTML/JavaScript in multiple fields, bypassing reCAPTCHA validation, CSRF protection, and rate limiting. When customer service operators viewed these tickets in the Umbraco back-office, the stored XSS executed in their authenticated session, enabling potential account takeover and other attacks. …
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### @jitsi/docker-jitsi-meet: `/colibri-relay-ws/` unsafe nginx regex (OCTO relay configuration)
+
+- **2026-08-25** · sev: Low · bounty: undisclosed
+- Source: [hackerone.com/3889473](https://hackerone.com/reports/3889473) · Reporter: [@a3z4km3](https://hackerone.com/a3z4km3) · Team: [8x8](https://hackerone.com/8x8-bounty)
+- CWE: Cross-site Scripting (XSS) - Generic
+
+**What**
+
+An unsafe nginx regex pattern was discovered in the `/colibri-relay-ws/` location of the @jitsi/docker-jitsi-meet project. The regex `[a-zA-Z0-9-\\._]+` accepted arbitrary domain names and IP addresses for proxy_pass directives, allowing unauthenticated requests to be proxied to attacker-specified destinations. The vulnerable nginx location and associated relay WebSocket proxy configuration have been removed.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### URI scheme validation bypass in ActionText `to_markdown` via user-supplied `<action-text-markdown>` marker tag
+
+- **2026-08-24** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3727743](https://hackerone.com/reports/3727743) · Reporter: [@offsetmd](https://hackerone.com/offsetmd) · Team: [Ruby on Rails](https://hackerone.com/rails)
+- CWE: Cross-site Scripting (XSS) - Reflected
+
+**What**
+
+_No H1 summary provided._
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Stored HTML Injection (CWE-79) via Livechat Visitor Name
+
+- **2026-08-20** · sev: Low · bounty: undisclosed · cve: CVE-2026-65644
+- Source: [hackerone.com/3872858](https://hackerone.com/reports/3872858) · Reporter: [@hillng](https://hackerone.com/hillng) · Team: [Rocket.Chat](https://hackerone.com/rocket_chat)
+- CWE: Cross-site Scripting (XSS) - DOM
+
+**What**
+
+_No H1 summary provided._
+
+**PoC refs:** search `github.com/search?q=CVE-2026-65644` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-65644.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
+
+**Hunt signal:** pass — summary too thin
+
+---
+
+### Stored XSS in nameserver field on account settings page
+
+- **2026-07-31** · sev: Low · bounty: undisclosed
+- Source: [hackerone.com/3644182](https://hackerone.com/reports/3644182) · Reporter: [@axolot23](https://hackerone.com/axolot23) · Team: [Tucows (VDP)](https://hackerone.com/tucows_vdp)
+- CWE: Cross-site Scripting (XSS) - Stored
+
+**What**
+
+A stored XSS vulnerability was discovered in the nameserver field on the account settings page. The lack of input validation and weak CSP configuration allowed the injection of malicious JavaScript code that executed when the settings page was reloaded. The vulnerability was limited to a self-XSS scenario, affecting only the account owner who injected the payload and not other users.
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+### Stored XSS via SVG Upload — check_content() Blocklist Bypass & 256-Byte Scan Limit (Self-Propagating Worm)
+
+- **2026-07-30** · sev: Medium · bounty: undisclosed
+- Source: [hackerone.com/3606773](https://hackerone.com/reports/3606773) · Reporter: [@a7mmr](https://hackerone.com/a7mmr) · Team: [phpBB](https://hackerone.com/phpbb)
+- CWE: Cross-site Scripting (XSS) - Stored
+
+**What**
+
+A stored XSS vulnerability was discovered in phpBB 4.0.0-a2-dev. The vulnerability was caused by an incomplete blocklist for file uploads and a 256-byte read limit in the content scanning check. Specifically, SVG files with malicious payloads in the onload and onbegin attributes were able to bypass the content check and be stored on the server. Additionally, any content beyond the 256-byte limit was not scanned, allowing payloads like <script> tags to be successfully uploaded. …
+
+**Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+## 2026-08-30
+
+### What's in a Tag Name? JavaScript in Tag Names
+- **Tags:** `#xss` `#web`
+- **Severity:** medium · **Hunt:** 3/5 · **Score:** 22.5 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://portswigger.net/research/whats-in-a-tag-name-javascript-apparently) · [2](https://medium.com/@zishanfiroz/how-i-landed-in-iiscs-hall-of-fame-stored-xss-via-svg-upload-194edc071f8a?source=rss------bug_bounty-5)
+
+**What's in a Tag Name? JavaScript in Tag Names** — HTML tag names accept far more characters after the initial letter than commonly assumed, enabling XSS payloads inside tag names that bypass WAFs and sanitizers expecting only alphanumeric content. Hunt: inject non-alphanumeric characters (e.g., `<x/onmouseover=alert(1)>` or custom tag variants) in reflected input contexts where tag creation is possible but filters strip standard XSS vectors. [src](https://portswigger.net/research/whats-in-a-tag-name-javascript-apparently)
+
+---
+*Clustered 2 sources for this item.*
+

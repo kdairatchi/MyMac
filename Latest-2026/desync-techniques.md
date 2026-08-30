@@ -177,3 +177,14 @@ key=
 - **HTTP/1.1 must die** · Fundamental protocol ambiguity; existing mitigations (reject-both, normalize) are all bypassable via obfuscation; HTTP/2+ is the only real fix · https://portswigger.net/research/http1-must-die
 - **HTTP Anomaly Rank** · Statistical outlier detection for bulk response analysis — designed to surface desync/smuggling candidates in Intruder output · https://portswigger.net/research/introducing-http-anomaly-rank
 - **H2.CL / H2.TE (PortSwigger 2024)** · HTTP/2 desync variants affect major CDN/load balancer combinations; Cloudflare, Akamai, and Fastly all had H2.CL-class issues in their downgrade paths
+
+## 2026-08-30
+
+### HTTP Terminator — AI-Discovered Novel Attack Technique
+- **Tags:** `#desync` `#smuggling` `#llm`
+- **Severity:** high · **Hunt:** 3/5 · **Score:** 31.5 · **Status:** poc · **Age:** 0d
+- **Sources:** [1](https://portswigger.net/research/can-ai-do-novel-security-research)
+
+**HTTP Terminator — AI-Discovered Novel Attack Technique** — An autonomous AI system invented a previously unknown HTTP desync/smuggling technique ("HTTP Terminator") and demonstrated it against live websites at scale, proving AI can produce novel attack primitives—not just rediscover known bugs. Hunt: test HTTP/1.1 parsers for desync using Terminator-specific malformations once details are published; watch PortSwigger for the full technical breakdown. [src](https://portswigger.net/research/can-ai-do-novel-security-research)
+
+---

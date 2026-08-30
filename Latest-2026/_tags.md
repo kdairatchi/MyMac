@@ -1,19 +1,33 @@
 # Tag Index
-Updated 2026-07-23.
+Updated 2026-08-30.
 
-- `#web` — 11
-- `#api` — 5
-- `#llm` — 5
-- `#auth-bypass` — 4
-- `#rce` — 3
-- `#deserialization` — 2
-- `#mobile` — 2
-- `#xss` — 2
+- `#web` — 19
+- `#api` — 10
+- `#rce` — 8
+- `#llm` — 7
+- `#auth-bypass` — 6
+- `#smuggling` — 3
+- `#appliance` — 2
+- `#data-exfil` — 2
 - `#prompt-injection` — 2
 - `#cloud` — 2
-- `#sqli` — 1
-- `#kubernetes` — 1
-- `#aws` — 1
+- `#citrix` — 1
+- `#idor` — 1
+- `#csrf` — 1
+- `#desync` — 1
+- `#race-condition` — 1
+- `#path-traversal` — 1
+- `#docker` — 1
+- `#oauth` — 1
+- `#xss` — 1
+- `#lfi` — 1
+- `#jailbreak` — 1
+- `#deserialization` — 1
+- `#ssrf` — 1
+- `#ssti` — 1
 - `#privesc` — 1
+- `#jwt` — 1
+- `#command-injection` — 1
 - `#supply-chain` — 1
-- `#azure` — 1
+- `#mcp` — 1
+- `#claude` — 1
