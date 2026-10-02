@@ -2,7 +2,17 @@
 
 > Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
 
-_Last updated: 2026-07-08 · Items: 1_
+_Last updated: 2026-10-01 · Items: 2_
+
+## 2026-10-01 — CVE-2026-87902: WordPress Core Unauthenticated LFI / Conditional RCE
+
+### CVE-2026-87902
+- **Date:** 2026-10-01 · **Source:** [github.com/ressl/cve-2026-87902-poc](https://github.com/ressl/cve-2026-87902-poc) · **Class:** cve
+- **What:** Unauthenticated attacker abuses `get_page_template()` in WordPress 4.7.0–7.1.1 to force inclusion of an arbitrary readable local `.php` file outside theme directories; chains to RCE via PEAR `pearcmd.php` on default Apache installs.
+- **Why it matters:** Public PoC released; WordPress powers ~40% of the web; patched Sept 22 2026 meaning most bug bounty targets running self-hosted WP are likely still vulnerable; direct path to RCE as `www-data`.
+- **Hunt signal:** `nuclei -t cves/2026/CVE-2026-87902.yaml` OR check WP version via `/wp-json/wp/v2` → if <=7.1.1, attempt `?page_template=../../../../../tmp/test`
+- **Evidence:** [PoC repo](https://github.com/ressl/cve-2026-87902-poc) · [socprime writeup](https://socprime.com/blog/cve-2026-87902-critical-wordpress-core-rce-flaw/) · [cyberkendra](https://www.cyberkendra.com/2026/09/cve-2026-87902-wordpress-file-inclusion-rce.html)
+- **CVSS:** 8.1 (NVD) / 9.2 (CVSS 4.0) · **KEV:** No · **PoC:** PUBLIC · **Affected:** WordPress 4.7.0 – 7.1.1
 
 ## 2026-07-08 — Adobe ColdFusion RDS Path Traversal RCE (CVE-2026-48282)
 
