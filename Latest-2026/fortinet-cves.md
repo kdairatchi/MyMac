@@ -2,7 +2,7 @@
 
 > Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
 
-_Last updated: 2026-04-16 · Items: 1_
+_Last updated: 2026-10-03 · Items: 2_
 
 ---
 
@@ -115,5 +115,22 @@ Priority-ordered:
 - **Why it matters:** As a central WAF appliance, compromising FortiWeb provides attackers with a privileged position to inspect, modify, or block traffic and potentially pivot to internal networks.
 - **Hunt signal:** Scan FortiWeb management interfaces for exposed impersonation endpoints or test for logic flaws that allow switching user contexts without proper validation.
 - **Evidence:** [watchtowr_labs] Technical analysis of CVE-2025-64446 revealing the misuse of the impersonation API. · [opinion] Critical vulnerability for perimeter defense appliances; patch immediately if exposed.
+
+---
+
+## 2026-10-03 — FortiMail Path Traversal + NULL Byte Arbitrary File Write (CVE-2026-104286)
+
+### FortiMail Path Traversal Arbitrary File Write — `CVE-2026-104286`
+- **Date:** 2026-10-03 · **Source:** [securityonline.info](https://securityonline.info/fortimail-vulnerability-cve-2026-104286/) · **Class:** cve
+- **What:** Unauthenticated attacker sends crafted HTTP/HTTPS request combining URL-encoded directory traversal sequences with null-byte injection, bypassing path validation and writing arbitrary files to the underlying FortiMail filesystem.
+- **Why it matters:** CVSS 9.8, CISA KEV added 2026-10-01 with federal patch deadline 2026-10-04; exploited in the wild; arbitrary file write at perimeter MTA = likely RCE via cron/config drop.
+- **Hunt signal:** `nuclei -t cves/2026/CVE-2026-104286.yaml` OR probe `/api/v2/config/attachment` with `../../../../etc/passwd%00.txt` — look for 200 vs 403 delta; `shodan query: "Server: FortiMail" http.title:"FortiMail"`
+- **Evidence:** [Fortinet advisory FG-IR-26-175](https://www.fortinet.com/blog/psirt-blogs) · [CISA KEV 2026-10-01](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) · [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-104286)
+
+**Affected:** FortiMail 8.0.0–8.0.1, 7.6.0–7.6.6, 7.4.0–7.4.8, 7.2.0–7.2.9  
+**CVSS:** 9.8 (AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H)  
+**KEV:** YES — added 2026-10-01  
+**PoC:** PRIVATE (exploited in wild per Fortinet FG-IR-26-175; no public PoC confirmed)  
+**Bounty scope:** Fortinet's own HackerOne program; enterprise SaaS providers running on-prem FortiMail — scope research required per program.
 
 ---
