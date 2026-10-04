@@ -234,3 +234,13 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+## 2026-10-04 — CVE-2026-23918: Apache HTTP Server HTTP/2 Double-Free RCE
+
+### Apache HTTP/2 Double-Free mod_http2 (CVE-2026-23918)
+- **Date:** 2026-10-04 · **Source:** [thehackernews.com](https://thehackernews.com/2026/05/critical-apache-http2-flaw-cve-2026.html) · **Class:** cve
+- **What:** Double-free in Apache httpd 2.4.66 mod_http2 triggered when client sends HTTP/2 HEADERS + RST_STREAM (non-zero error) on same stream; enables RCE or DoS by crashing worker processes.
+- **Why it matters:** Apache is the second most-deployed web server globally; bug bounty targets running 2.4.66 on any subdomain are exploitable via unauthenticated HTTP/2 request.
+- **Hunt signal:** `nuclei -t cves/2026/CVE-2026-23918.yaml` or `curl -v --http2 <target>` to confirm HTTP/2 support, then check Server header for Apache/2.4.66
+- **Evidence:** [thehackernews.com](https://thehackernews.com/2026/05/critical-apache-http2-flaw-cve-2026.html) · [securityaffairs.com](https://securityaffairs.com/191759/security/apache-fixes-critical-http-2-double-free-flaw-cve-2026-23918-enabling-rce.html) · [security.berkeley.edu](https://security.berkeley.edu/news/critical-apache-2-4-66-http2-flaw-allows-rce-dos-cve-2026-23918)
+
