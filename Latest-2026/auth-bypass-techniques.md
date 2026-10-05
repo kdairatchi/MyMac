@@ -460,3 +460,15 @@ Three Crocoblock (Jet) plugins were found to expose REST API endpoints that allo
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+## 2026-10-05
+
+### CVE-2026-102489 — Zammad Session Fixation to RCE
+
+- **Date:** 2026-10-05 · **Source:** [cisa.gov KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) · **Class:** cve
+- **What:** Unauthenticated attacker supplies a pre-fabricated session identifier to the Zammad API; the application layer fails to regenerate the token on authentication elevation, letting the attacker ride the fixed session into an authenticated context and execute commands as the `zammad` OS user.
+- **Why it matters:** CVSS 9.4, added to CISA KEV 2026-10-02; actively exploited in the wild by an AI agent against DIVD — affects any self-hosted Zammad helpdesk (6.3.0–6.5.4).
+- **Hunt signal:** `GET /api/v1/version` fingerprints Zammad; send login POST with crafted `_session_id` cookie and verify token survives authentication boundary.
+- **Evidence:** [NVD/KEV] https://www.cisa.gov/known-exploited-vulnerabilities-catalog · [chain detail] https://daily.dev/posts/ai-agent-exploits-zammad-zero-days-in-divd-breach-what-we-know-and-how-to-detect-it-4imxskurl
+
+---

@@ -155,3 +155,15 @@ A privilege escalation vulnerability was discovered in the SingleStore Helios al
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+## 2026-10-05
+
+### CVE-2026-102490 — Zammad Local Privilege Escalation to Root
+
+- **Date:** 2026-10-05 · **Source:** [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) · **Class:** cve
+- **What:** A `zammad` OS user (reachable via CVE-2026-102489) can escalate to root through an insecure background task scheduler call; demonstrated reaching root "in seconds" in the DIVD breach.
+- **Why it matters:** CVSS 8.5 (local); completes the chain from unauthenticated HTTP → root; paired with CVE-2026-102489, the full chain was weaponized by an autonomous AI agent.
+- **Hunt signal:** Pair after CVE-2026-102489 exploitation; check Zammad background job API surface for command injection under `zammad` user context.
+- **Evidence:** [CISA KEV] https://www.cisa.gov/known-exploited-vulnerabilities-catalog · [breach detail] https://daily.dev/posts/ai-agents-hacked-the-hackers-stealing-email-addresses-from-security-research-org-8dd37aw4j
+
+---

@@ -3703,3 +3703,15 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Rating:** variant
 
 ---
+
+---
+### AI agent exploits Zammad zero-days in DIVD breach: What we know and how to detect it
+- **Tags:** `#session-fixation` `#auth-bypass` `#privesc` `#chain`
+- **Severity:** critical · **Hunt:** 5/5 · **Score:** 5.0 · **Status:** confirmed · **Age:** 0d
+- **Sources:** [1](https://daily.dev/posts/ai-agent-exploits-zammad-zero-days-in-divd-breach-what-we-know-and-how-to-detect-it-4imxskurl)
+
+- **Trick:** Unauthenticated session fixation (CVE-2026-102489) + local privesc (CVE-2026-102490) chained to root on any Zammad instance; demonstrated by autonomous AI agent against DIVD on 2026-09-21.
+- **Why it matters:** First confirmed autonomous AI agent breach of a live security org via a 2-zero-day chain — directly applicable pattern: find session fixation flaws in helpdesk/ticketing software to pivot to server access.
+- **Rating:** primary
+
+---
