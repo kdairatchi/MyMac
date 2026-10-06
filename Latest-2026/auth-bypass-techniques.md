@@ -460,3 +460,14 @@ Three Crocoblock (Jet) plugins were found to expose REST API endpoints that allo
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+## 2026-10-06 — Zammad Session Fixation → RCE Chain (CVE-2026-102489)
+
+### Zammad: Session Fixation Leads to Remote Code Execution as Service User
+- **Date:** 2026-10-06 · **Source:** [cybersecuritynews.com](https://cybersecuritynews.com/zammad-divd-vulnerabilities-exploited/) · **Class:** cve
+- **What:** Zammad 6.3.0–7.1.3 allows a remote attacker to fixate a victim session token, then hijack it to achieve RCE as the `zammad` OS user — no prior authentication required.
+- **Why it matters:** CISA KEV added 2026-10-02 (FCEB due 2026-10-05); actively exploited in the wild via AI-driven chaining; chains with CVE-2026-102490 to reach root — DIVD breach confirmed September 2026.
+- **Hunt signal:** Enumerate `GET /api/v1/session` on exposed Zammad instances; fingerprint with `nuclei -t zammad-detect`; check session token predictability or cookie fixation via unauthenticated token injection endpoint.
+- **Evidence:** [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2026-102489) · [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-102489) · [rescana analysis](https://www.rescana.com/post/zammad-helpdesk-zero-day-chain-cve-2026-102489-cve-2026-102490-kev) · [xhack.io](https://xhack.io/blog/cve-2026-102489-zammad-session-fixation-rce)
+
+---
