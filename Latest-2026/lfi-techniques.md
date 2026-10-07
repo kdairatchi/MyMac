@@ -2,7 +2,7 @@
 
 > Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
 
-_Last updated: 2026-07-08 · Items: 1_
+_Last updated: 2026-10-07 · Items: 2_
 
 ## 2026-07-08 — Adobe ColdFusion RDS Path Traversal RCE (CVE-2026-48282)
 
@@ -320,3 +320,17 @@ _No H1 summary provided._
 **Hunt signal:** pass — summary too thin
 
 ---
+
+---
+
+## 2026-10-07 — CVE-2026-21589: Atlassian Data Center Unauthenticated Path Traversal (8 Products)
+
+### CVE-2026-21589: Atlassian Data Center Arbitrary File Read via Path Traversal
+- **Date:** 2026-10-07 · **Source:** [cycognito.com](https://www.cycognito.com/blog/emerging-threat-cve-2026-21589-atlassian-data-center-arbitrary-file-access-via-path-traversal/) · **Class:** cve
+- **What:** Unauthenticated attacker can read known files within the web-application root directory on eight Atlassian Data Center products via unsanitized `../` traversal sequences in HTTP requests.
+- **Why it matters:** Covers Jira, Confluence, Bitbucket, Bamboo, Crowd, Crucible, Fisheye, Jira Service Management — any self-hosted Atlassian stack is in scope; exposing config files, tokens, or internal paths escalates to further compromise.
+- **Hunt signal:** `nuclei -t cves/2026/CVE-2026-21589.yaml` once published; manual: send `GET /%2e%2e/%2e%2e/WEB-INF/web.xml` against `/rest/` or static asset paths on Atlassian DC installs.
+- **Evidence:** [rescana.com](https://www.rescana.com/post/critical-cve-2026-21589-vulnerability-exposes-atlassian-data-center-products-to-unauthenticated-file-disclosure) · [socprime.com](https://socprime.com/blog/cve-2026-21589-critical-atlassian-vulnerability-exposes-sensitive-files-across-eight-products/) · [securityonline.info](https://securityonline.info/atlassian-data-center-vulnerability-cve-2026-21589/)
+- **CVSS:** 9.3 · **KEV:** No (as of 2026-10-07) · **PoC:** NONE (researcher-only)
+- **Affected versions:** Bitbucket DC <9.4.26/10.2.8/10.5.1; Confluence DC <9.2.26/10.2.19; Jira SW DC <9.12.40/10.3.26/11.3.12; Jira SM DC <5.12.40/10.3.26/11.3.12; Bamboo DC <10.2.24/12.1.12
+- **Bounty programs:** Atlassian (HackerOne); any self-hosted Atlassian DC in scope on any program
