@@ -234,3 +234,12 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+## 2026-10-10 — CVE-2026-105192: LMCache Unauthenticated RCE via ZeroMQ ROUTER
+
+### CVE-2026-105192: LMCache Missing Auth → Root RCE
+- **Date:** 2026-10-10 · **Source:** [jfrog.com](https://jfrog.com/blog/) · **Class:** cve
+- **What:** LMCache 0.3.9–0.5.5 multiprocess mode exposes an unauthenticated ZeroMQ ROUTER socket; any host can register as a worker and execute code with root privileges on the server's container.
+- **Why it matters:** vLLM/LMCache is widely deployed in AI inference infrastructure; unpatched with public PoC means any exposed multi-node deployment is immediately rootable.
+- **Hunt signal:** `shodan search 'port:5555 product:LMCache'`; check for `--host 0.0.0.0` in k8s/helm manifests; CVE affects all versions through 0.5.5
+- **Evidence:** [JFrog JFSA-2026-001694382](https://jfrog.com/blog/) · [PoC coverage: GBHackers](https://gbhackers.com/critical-lmcache-rce-vulnerability/) · NVD: https://nvd.nist.gov/vuln/detail/CVE-2026-105192
