@@ -460,3 +460,19 @@ Three Crocoblock (Jet) plugins were found to expose REST API endpoints that allo
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+---
+
+## 2026-10-11 — CVE-2026-102489: Zammad Session Fixation → RCE Chain (CISA KEV)
+
+### Zammad Helpdesk Session Fixation to Root (CVE-2026-102489 / CVE-2026-102490)
+- **Date:** 2026-10-11 · **Source:** [kev.5sn.com](https://kev.5sn.com/2026/) · **Class:** cve
+- **What:** Unauthenticated session fixation in Zammad 6.3.0–6.5.4 (CWE-384) lets an attacker hijack an admin session without credentials; chains with CVE-2026-102490 for full root privilege escalation.
+- **Why it matters:** CISA KEV-listed 2026-10-02 with federal remediation deadline; any org running self-hosted Zammad customer support is directly exposed, and many bug bounty programs use Zammad internally.
+- **Hunt signal:** `nuclei -t cves/2026/CVE-2026-102489.yaml` once template ships; manually: check if `Set-Cookie` on login response includes a predictable or reusable session token pre-auth; probe `GET /api/v1/users` unauthenticated to confirm version.
+- **Evidence:** [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) · [Sploitus PoC](https://sploitus.com/exploit?id=D07AE947-BD80-5F45-9D17-CD1B7B4DC4F4) · [DIESEC write-up](https://diesec.com/2026/10/zammad-zero-day-vulnerabilities-cve-2026-102489-102490/) · [byteiota analysis](https://byteiota.com/zammad-cve-2026-102489-rce-patch-now/)
+- **CVE:** CVE-2026-102489 (session fixation, CVSS 9.8) + CVE-2026-102490 (privesc, no fix as of 2026-10-05)
+- **Affected:** Zammad 6.3.0–6.5.4; fixed in 7.2.0 (CVE-2026-102490 unfixed at disclosure)
+- **KEV:** Yes — added 2026-10-02, federal due date 2026-10-05
+- **PoC:** PUBLIC — https://sploitus.com/exploit?id=D07AE947-BD80-5F45-9D17-CD1B7B4DC4F4
+
