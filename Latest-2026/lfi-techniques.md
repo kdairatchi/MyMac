@@ -2,7 +2,7 @@
 
 > Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
 
-_Last updated: 2026-07-08 · Items: 1_
+_Last updated: 2026-10-12 · Items: 2_
 
 ## 2026-07-08 — Adobe ColdFusion RDS Path Traversal RCE (CVE-2026-48282)
 
@@ -320,3 +320,12 @@ _No H1 summary provided._
 **Hunt signal:** pass — summary too thin
 
 ---
+
+## 2026-10-12 — Atlassian Data Center Unauthenticated Path Traversal File Read (CVE-2026-21589)
+
+### Atlassian Data Center Unauthenticated Arbitrary File Read — CVE-2026-21589
+- **Date:** 2026-10-12 · **Source:** [rapid7.com](https://www.rapid7.com/blog/post/etr-cve-2026-21589-critical-unauthenticated-arbitrary-file-access-in-atlassian-products/) · **Class:** cve
+- **What:** Unauthenticated path traversal via `::` substitution for `/` in 8 Atlassian Data Center products (Jira, Confluence, Bitbucket, Bamboo + 4 more); reads arbitrary files from app web root — web.xml, crowd.properties — no directory listing.
+- **Why it matters:** CVSS 4.0 9.3; KEV not yet listed but actively exploited (158 honeypot hits from 26 IPs/8 countries within hours of PoC); public PoC published Oct 9; Atlassian self-hosted runs in thousands of BB scopes.
+- **Hunt signal:** Probe plugin servlet paths substituting `::` for `/`; grep access logs for double-colon sequences in paths; `nuclei -t http/cves/2026/CVE-2026-21589.yaml` when available.
+- **Evidence:** [rapid7](https://www.rapid7.com/blog/post/etr-cve-2026-21589-critical-unauthenticated-arbitrary-file-access-in-atlassian-products/) · [PoC](https://github.com/gotr00t0day/CVE-2026-21589) · [bleepingcomputer](https://bleepingcomputer.com/news/security/hackers-exploit-critical-atlassian-flaw-after-public-poc-release) · [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-21589)
