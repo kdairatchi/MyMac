@@ -117,3 +117,12 @@ Priority-ordered:
 - **Evidence:** [watchtowr_labs] Technical analysis of CVE-2025-64446 revealing the misuse of the impersonation API. · [opinion] Critical vulnerability for perimeter defense appliances; patch immediately if exposed.
 
 ---
+
+## 2026-10-14
+
+### FortiMail Unauthenticated Path Traversal — CVE-2026-104286
+- **Date:** 2026-10-14 · **Source:** [ismalicious.com/cve/kev/2026-10](https://ismalicious.com/cve/kev/2026-10) · **Class:** cve
+- **What:** Unauthenticated path traversal in FortiMail management interface allows writing files outside intended directory, exploited in-the-wild before patch shipped.
+- **Why it matters:** CVSS 9.8, CISA KEV added 2026-10-01 (due 2026-10-04); FortiMail sits on the network perimeter in enterprise environments and handles inbound email for VPN-adjacent infrastructure.
+- **Hunt signal:** `nuclei -t fortinet/fortimail-path-traversal.yaml` against exposed FortiMail admin interfaces; check for APSB-adjacent CVE chaining if admin panel is reachable.
+- **Evidence:** [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) · [senserva KEV tracker](https://senserva.com/exploited-this-week.html)
