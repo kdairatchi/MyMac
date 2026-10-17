@@ -3802,3 +3802,7 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Why it matters:** None of the five bugs would have paid out alone; the chain illustrates that triage-rejected "informational" findings can combine into critical impact — a motivation to build and document bug chains rather than dropping low-severity reports.
 - **Hunt signal:** On any multi-tenant web app: identify CSRF-weak state-change endpoints + reflected/stored XSS + OAuth implicit flow + missing `postMessage` origin check → attempt to chain; one-click attack surface multiplies the P1 hit rate.
 - **Evidence:** [DEV Community analysis](https://dev.to/iamfaizanakhtar/cross-account-javascript-execution-in-basecamps-fizzy-how-pirikara-chained-five-quiet-bugs-into-a-3p23)
+# Bug Bounty Writeups 2026
+
+<!-- Entries appended newest-first per run. Format: date · source · class · title -->
+
