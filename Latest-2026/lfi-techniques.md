@@ -320,3 +320,14 @@ _No H1 summary provided._
 **Hunt signal:** pass — summary too thin
 
 ---
+
+---
+
+## 2026-10-20 — CVE-2026-21589 Atlassian Data Center Unauthenticated File Read
+
+### CVE-2026-21589 — Atlassian Multiple Data Center Products Path Traversal / File Read
+- **Date:** 2026-10-20 · **Source:** [bleepingcomputer.com](https://bleepingcomputer.com/news/security/hackers-exploit-critical-atlassian-flaw-after-public-poc-release) · **Class:** cve
+- **What:** Unauthenticated path traversal in a shared Atlassian library converts `::` → `/`, bypassing traversal checks and exposing WEB-INF files (web.xml, Crowd passwords, configs). Affects Jira Software, Confluence, Bitbucket, Jira Service Management Data Center — self-hosted only; cloud patched.
+- **Why it matters:** Reading `crowd.properties` or `web.xml` leaks plaintext credentials, leading to Jira admin. Atlassian Bugcrowd program and any customer program with self-hosted Atlassian in scope.
+- **Hunt signal:** `GET /..;/WEB-INF/web.xml` or `GET /..::/WEB-INF/web.xml` on Jira/Confluence/Bitbucket endpoints; watchTowr check script at [helpnetsecurity.com](https://www.helpnetsecurity.com/?p=387226)
+- **Evidence:** CISA KEV added 2026-10-15 · CVSS 9.3 · [socprime.com](https://socprime.com/?p=53994) · [crowdsec.net](https://www.crowdsec.net/vulntracking-report/cve-2026-21589-atlassian-jira-confluence-flaw-exploited) · 89 IPs scanning as of 2026-10-07
