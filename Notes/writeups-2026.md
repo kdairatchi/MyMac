@@ -3703,3 +3703,7 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Rating:** variant
 
 ---
+
+---
+
+**HackerOne IDOR Leaking Private Report Data via Error Response — H1 #3862641** · `#idor` · critical ($15,000) — A POST to HackerOne's `reference.json` endpoint returned a 403 with a body that leaked metadata from private reports belonging to other programs. Disclosed 2026-10-01. Technique generalizes to any platform that returns rich error bodies on access-denied responses. Hunt: probe POST/PUT endpoints for 4xx responses containing object data beyond "access denied"; compare error body fields against the API's normal response schema — leakage is in the diff. Kill signal: if 403 body is a flat `{"error":"forbidden"}` with no nested data, move on. [H1 #3862641](https://hackerone.com/reports/3862641)

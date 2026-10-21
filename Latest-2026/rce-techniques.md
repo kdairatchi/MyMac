@@ -234,3 +234,14 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+## 2026-10-21 — PHP Core RCE (php2shell)
+
+### CVE-2026-109618 / CVE-2026-109619 — PHP Core Remote Code Execution (php2shell)
+- **Date:** 2026-10-21 · **Source:** [phoenix.security](https://phoenix.security/php-core-rce-cve-2026-109618-109619-critical-remote-code-execution/) · **Class:** cve
+- **What:** Two RCE flaws in PHP core (CVSS v4.0 9.2) affecting PHP 5.4+ — patch shipped Oct 21 for supported branches (8.2–8.5); PHP ≤8.1 EOL and unpatched.
+- **Why it matters:** Any PHP-based web target on EOL PHP is a live unauthenticated RCE; mass exploitation expected within days of patch release.
+- **Hunt signal:** `nuclei -t php/php-version-detection.yaml` — fingerprint PHP version on target; pivot to EOL installations; check `X-Powered-By` / `phpinfo()` leaks.
+- **Evidence:** [sansec.io](https://sansec.io/research/php2shell) · [securelayer7 analysis](https://blog.securelayer7.net/php-rce-cve-2026-109618-109619/) · [Beazley advisory BSL-A1233](https://labs.beazley.security/advisories/BSL-A1233)
+- **KEV status:** Not listed (no ITW exploitation confirmed as of 2026-10-21 UTC 14:00)
+- **PoC:** PUBLIC — leaked as "PHP2Shell"; watchTowr reproduced CVE-2026-109618; full chain not yet published
