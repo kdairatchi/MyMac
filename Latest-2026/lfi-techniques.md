@@ -320,3 +320,17 @@ _No H1 summary provided._
 **Hunt signal:** pass — summary too thin
 
 ---
+
+## 2026-10-24 — CVE-2026-21589: Atlassian Data Center Path Traversal → WEB-INF File Read
+
+### CVE-2026-21589 — Atlassian atlassian-plugins Webresource Path Traversal
+- **Date:** 2026-10-05 · **Source:** [akamai.com](https://www.akamai.com/blog/security-research/cve-2026-21589-atlassian-arbitrary-file-read-vulnerability) · **Class:** cve
+- **What:** Unauthenticated path traversal in the `atlassian-plugins` webresource library exposes WEB-INF files (web.xml, application context) from Tomcat on self-hosted Atlassian Data Center products.
+- **Why it matters:** web.xml often contains DB credentials, API keys, and internal hostnames; Jira/Confluence Data Center appear in dozens of enterprise bounty programs and VDPs.
+- **Hunt signal:** `GET /rest/..;/WEB-INF/web.xml` or nuclei tag `CVE-2026-21589`; 10+ public PoCs and a watchTowr Nuclei template on GitHub; mass-scanning began Oct 6.
+- **Evidence:** [Akamai analysis](https://www.akamai.com/blog/security-research/cve-2026-21589-atlassian-arbitrary-file-read-vulnerability) · [CrowdSec tracking](https://www.crowdsec.net/vulntracking-report/cve-2026-21589-atlassian-jira-confluence-flaw-exploited) · [Feedly KEV/PoC](https://feedly.com/cve/CVE-2026-21589)
+
+**Affected:** Confluence 9.x < 9.2.26, 10.x < 10.2.19; Jira Software 9.x < 9.12.40, 10.x < 10.3.26, 11.x < 11.3.12. Self-hosted Data Center only. Cloud already patched.
+**CVSS:** 9.3 (NVD not scored yet; vendor advisory). **KEV:** No (not listed as of 2026-10-12). **PoC:** PUBLIC — watchTowr write-up + ~10 GitHub PoCs incl. mass scanner.
+
+---

@@ -3703,3 +3703,18 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Rating:** variant
 
 ---
+
+## 2026-10-24 — Password Reset Token Captured by Front-End RUM Script (Remitly H1 #2831902)
+
+### Password Reset Token Leakage via Real User Monitoring (RUM) Endpoint
+- **Date:** 2026-10-~20 · **Source:** [hackerone.com/reports/2831902](https://hackerone.com/reports/2831902) · **Class:** writeup
+- **What:** Remitly's password reset link embeds the token as a URL parameter; Datadog RUM (or equivalent front-end monitoring) captures the full URL before redirect, exfiltrating the token to the analytics vendor's endpoint. No user interaction beyond visiting the reset link required.
+- **Why it matters:** Any program using RUM/analytics that puts reset tokens in URLs is potentially vulnerable; common stack: Datadog, Segment, Mixpanel, Hotjar, FullStory, Heap.
+- **Hunt signal:**
+  1. Trigger password reset; check email for the reset URL structure — does the token appear as a query param (`?token=` or `?code=`)?
+  2. Load the reset URL in a browser with network tab open; filter for requests to `rum.browser-intake-datadoghq.com`, `cdn.segment.com`, `mixpanel.com`, `hotjar.com`, `fullstory.com` and inspect payloads for the URL.
+  3. If token appears in any analytics payload → critical ATO; if redirect strips it before analytics fires → not vulnerable.
+- **Kill criterion:** Reset token delivered only in the POST body or via a one-time link that redirects to `/reset-password#token=<fragment>` (fragments are not sent in the URL to analytics).
+- **Evidence:** [H1 Hacktivity listing](https://hackerone.com/hacktivity/overview)
+
+---
