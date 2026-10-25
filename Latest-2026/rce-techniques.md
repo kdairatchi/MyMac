@@ -234,3 +234,21 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+## 2026-10-25 — PHP2Shell Pre-Auth RCE
+
+### CVE-2026-109618 — PHP Pre-Auth RCE (Out-of-Memory Corruption)
+- **Date:** 2026-10-21 · **Source:** [watchtowr.com](https://watchtowr.com/intelligence/php-remote-code-execution-php2shell/) · **Class:** cve
+- **What:** Unauthenticated HTTP POST triggers out-of-memory corruption in PHP, achieving RCE against Apache mod_php and PHP-FPM; affects all PHP < 8.5.12 / 8.4.27 / 8.3.36 / 8.2.35.
+- **Why it matters:** Active exploitation in the wild since Oct 21; Cloudflare logged millions of attempts within 24h — any bug bounty target running PHP on Apache or FPM is potentially owned.
+- **Hunt signal:** `nuclei -t cves/2026/CVE-2026-109618.yaml` — verify PHP version via `phpinfo()` exposure or `Server:` header + error page fingerprinting; unauthenticated POST to any PHP endpoint.
+- **Evidence:** [Rapid7 ETR](https://www.rapid7.com/blog/post/etr-cve-2026-109618-and-cve-2026-109619-critical-unauthenticated-remote-code-execution-in-php/) · [PoC](https://github.com/eness/php2shell-CVE-2026-109618-CVE-2026-109619-PoC) · [Datadog repro](https://securitylabs.datadoghq.com/articles/php2shell-critical-vulnerabilities-in-php/)
+
+### CVE-2026-109619 — PHP Pre-Auth RCE (Stale Global State)
+- **Date:** 2026-10-21 · **Source:** [watchtowr.com](https://watchtowr.com/intelligence/php-remote-code-execution-php2shell/) · **Class:** cve
+- **What:** Stale global state in PHP allows unauthenticated RCE via a separate code path from CVE-2026-109618; same affected version range.
+- **Why it matters:** Distinct attack vector from -109618 — one patch fixes both, but WAF rules tuned for -109618 may miss this path.
+- **Hunt signal:** Same nuclei template covers both; probe PHP-FPM setups specifically (nginx + fpm often bypasses mod_php mitigations).
+- **Evidence:** [abstract.security](https://www.abstract.security/blog/php2shell-critical-php-rce-vulnerabilities-cve-2026-109618-and-cve-2026-109619) · [Qualys](https://blog.qualys.com/vulnerabilities-threat-research/2026/10/20/php-announces-critical-security-release-for-two-vulnerabilities)
+
+---
