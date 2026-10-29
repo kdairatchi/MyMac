@@ -3703,3 +3703,12 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Rating:** variant
 
 ---
+
+---
+
+### Intigriti October 2026 Challenge — Discount Stacking Logic Bypass
+- **Date:** 2026-10-27 · **Source:** [medium.com/@krishnajonnagaddala](https://medium.com/@krishnajonnagaddala/a-666-eur-box-for-66-eur-c420971389a7) · **Class:** writeup
+- **What:** E-commerce checkout compared a new coupon only against the most recent applied promotion — not against the running discount total — letting discount codes stack to 100%, bypassing the price floor entirely.
+- **Why it matters:** Business logic flaw requiring zero technical skill after identification; generalizes to any multi-coupon or multi-discount checkout on any e-commerce target.
+- **Hunt signal:** Apply two distinct discount codes in the same cart and compare final price against each code's stated discount; flag when totals exceed 100% of item value
+- **Evidence:** [medium.com/@krishnajonnagaddala](https://medium.com/@krishnajonnagaddala/a-666-eur-box-for-66-eur-c420971389a7)

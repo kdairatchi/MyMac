@@ -173,3 +173,12 @@ jobs:
 - **Axios developer tool compromise** · Release pipeline hijacked, malicious artifacts signed with legitimate certificate, distributed via official channels — rapid cert rotation was the kill-switch · https://openai.com/index/axios-developer-tool-compromise
 - **CVE-2025-68143/44/45** · mcp-server-git path traversal, file overwrite, path bypass — MCP tool servers are a new supply chain vector; third-party MCP providers can compromise all Claude Code sessions using them
 - **GitHub Actions `pull_request_target` supply chain** · Widely exploited pattern — public repos using this trigger expose GITHUB_TOKEN and repository secrets to PR-submitting attackers; search: `grep -r "pull_request_target" .github/`
+
+## 2026-10-29 — GhostAction Returns: Maintainer Takeover Steals Workflow Secrets
+
+### GhostAction October 2026 Resurgence
+- **Date:** 2026-10-08 · **Source:** [stepsecurity.io](https://www.stepsecurity.io/blog/ghostaction-campaign-over-3-000-secrets-stolen-through-malicious-github-workflows) · **Class:** technique
+- **What:** Attackers used two stolen maintainer PATs (likely from infostealer logs) to push a malicious GitHub Actions workflow into 345 repos; workflow exfiltrated all repository secrets to an attacker endpoint within 4 seconds of the next push trigger.
+- **Why it matters:** Any program with GitHub Actions in scope is live attack surface — PAT compromise → mass secret harvest in one push, no code review needed.
+- **Hunt signal:** `grep -r "pull_request_target\|workflow_dispatch" .github/workflows/` then audit secrets referenced; check for unexpected workflow commits from maintainer accounts
+- **Evidence:** [StepSecurity](https://www.stepsecurity.io/blog/ghostaction-campaign-over-3-000-secrets-stolen-through-malicious-github-workflows) · [GitGuardian](https://blog.gitguardian.com/ghostaction-campaign-3-325-secrets-stolen/) · [BleepingComputer](https://bleepingcomputer.com/news/security/hackers-steal-3-325-secrets-in-ghostaction-github-supply-chain-attack)

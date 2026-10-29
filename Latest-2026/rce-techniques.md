@@ -234,3 +234,14 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+## 2026-10-29 — PHP2Shell: Dual Unauthenticated RCE in PHP Core (CVE-2026-109618 + CVE-2026-109619)
+
+### PHP2Shell — CVE-2026-109618 & CVE-2026-109619
+- **Date:** 2026-10-21 · **Source:** [unit42.paloaltonetworks.com](https://unit42.paloaltonetworks.com/cve-2026-109618-cve-2026-109619.md) · **Class:** cve
+- **What:** Two unauthenticated RCE flaws in PHP core: CVE-2026-109618 exploits uninitialized memory via longjmp() on OOM abort; CVE-2026-109619 is a use-after-free triggered through fatal error handling.
+- **Why it matters:** PHP powers ~75% of web servers — any exposed PHP-FPM, Apache mod_php, or LiteSpeed host is an unauthenticated shell. CISA KEV-confirmed active exploitation; AWS reports ITW probes started four days before the patch.
+- **Hunt signal:** `nuclei -t cves/2026/CVE-2026-109618.yaml` or probe: send oversized POST body to exhaust `memory_limit` and observe response deviation (crash vs. normal error)
+- **Evidence:** [Fastly blog](https://www.fastly.com/jp/blog/critical-rce-vulnerabilities-discovered-core-php-cve-2026-109618-cve-2026-109619) · [CISA alert](https://www.cisa.gov/news-events/alerts/2026/10/21/critical-vulnerabilities-php-require-immediate-patching) · [Ampcus PoC update](https://www.ampcuscyber.com/shadowopsintel/php2shell-update-active-exploitation-confirmed-public-poc-released/)
+- **CVSS:** 9.2 (CVSS 4.0) · **KEV:** Yes — added 2026-10-26 · **Affected:** PHP < 8.2.35, < 8.3.36, < 8.4.27, < 8.5.12 · **PoC:** PUBLIC (Sophos CTU; Vulmon)
+- **Bounty scope:** Any program running PHP on the backend — Shopify (custom PHP services), WordPress.com (Automattic), GitLab, phpMyAdmin, any SaaS on PHP-FPM
