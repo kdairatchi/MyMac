@@ -2,7 +2,7 @@
 
 > Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
 
-_Last updated: 2026-04-17 · Items: 1_
+_Last updated: 2026-10-31 · Items: 2_
 
 ---
 
@@ -174,6 +174,27 @@ filename="shell.php%00.jpg"
 - **CVE-2023-24489** · Citrix ShareFile pre-auth RCE via `UploadClientModule.asmx` — unsafe .NET XML deserialization, `ObjectDataProvider` gadget chain · https://www.assetnote.io/resources/research/advisory-sharefile-pre-auth-rce-cve-2023-24489
 - **CVE-2023-34362** · MOVEit Transfer RCE — deserialization in file processing pipeline, SYSTEM-level compromise via crafted file transfer · https://www.assetnote.io/resources/research/moveit-transfer-rce-part-two-cve-2023-34362
 - **CVE-2023-38646** · Metabase pre-auth RCE — H2 JDBC `INIT` param via `/api/setup/validate`, SQL → Java method invocation chain · https://www.assetnote.io/resources/research/chaining-our-way-to-pre-auth-rce-in-metabase-cve-2023-38646
+
+## 2026-10-31 — PHP2Shell (CVE-2026-109618)
+
+### PHP Core Unauthenticated RCE via Request-Cleanup Memory Corruption
+
+- **Date:** 2026-10-31 · **Source:** [thehackernews.com](https://thehackernews.com/2026/10/php-issues-emergency-patches-for-two.html) · **Class:** cve
+- **What:** Out-of-memory corruption during PHP worker request cleanup allows unauthenticated RCE across all SAPI modes (mod_php, PHP-FPM, php-cgi, FrankenPHP, LiteSpeed).
+- **Why it matters:** Affects every PHP web tier; CISA KEV Oct 26, actively exploited ITW; no auth, no prior access — full server compromise.
+- **Hunt signal:** `nuclei -t cves/2026/CVE-2026-109618.yaml -l targets.txt` / fingerprint: send malformed Content-Length request, compare crash vs 500 on unpatched hosts
+- **Evidence:** [thehackernews.com](https://thehackernews.com/2026/10/php-issues-emergency-patches-for-two.html) · PoC: [github.com/eness/php2shell-CVE-2026-109618-CVE-2026-109619-PoC](https://github.com/eness/php2shell-CVE-2026-109618-CVE-2026-109619-PoC)
+
+| Field | Value |
+|---|---|
+| CVE | CVE-2026-109618 (pair: CVE-2026-109619) |
+| CVSS | 9.2 (v4.0) |
+| Affected | PHP < 8.2.35 / 8.3.36 / 8.4.27 / 8.5.12; PHP 8.1 EOL |
+| KEV | YES — added 2026-10-26 |
+| PoC | PUBLIC |
+| Fix | Upgrade to patched release; set `post_max_size` low + rate-limit at proxy as interim |
+
+---
 
 ## 2026-04-17
 
