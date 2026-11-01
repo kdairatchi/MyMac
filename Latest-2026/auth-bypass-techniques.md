@@ -460,3 +460,14 @@ Three Crocoblock (Jet) plugins were found to expose REST API endpoints that allo
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+## 2026-11-01 — CVE-2026-61654: Lightdash Unauthenticated dbt Webhook Endpoint (SSRF)
+
+### CVE-2026-61654 — Lightdash Missing Auth on dbt Cloud Webhook
+- **Date:** 2026-11-01 · **Source:** [vuldb.com/cve/CVE-2026-61654](https://vuldb.com/cve/CVE-2026-61654) · **Class:** cve
+- **What:** Lightdash < 0.3214.0 exposes a dbt Cloud webhook route without authentication middleware or HMAC signature validation, allowing unauthenticated SSRF via attacker-controlled URL.
+- **Why it matters:** Any company self-hosting Lightdash for BI/analytics is exposed; SSRF → internal metadata endpoint access, potential credential theft.
+- **Hunt signal:** `GET /api/v1/webhook` or `POST /api/v1/dbt-cloud/` routes on Lightdash instances; probe with `http://169.254.169.254/latest/meta-data/` as URL payload
+- **Evidence:** [vuldb] https://vuldb.com/cve/CVE-2026-61654 · CVSS 8.3 (CVSS 4.0, GitHub CNA) · Fixed in 0.3214.0 · No confirmed public PoC
+
+---
