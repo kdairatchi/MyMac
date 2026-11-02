@@ -234,3 +234,12 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+## 2026-11-02 — CVE-2026-111497 (HTTP2Shell / Brotli decoder RCE)
+
+### CVE-2026-111497: Brotli Decoder OOB Write → RCE (HTTP2Shell)
+- **Date:** 2026-11-02 · **Source:** [aicybr.com](https://aicybr.com/blog/brotli-cve-2026-111497-nodejs-python-bun-envoy-patches) · **Class:** cve
+- **What:** Out-of-bounds write in Google Brotli decoder 1.0.3–1.2.0 allows RCE when a web server decompresses attacker-controlled HTTP/2 Brotli-compressed data.
+- **Why it matters:** Affects any backend using Brotli (Node.js, Python brotli, Bun, Envoy); broad cloud-native API surface in bug bounty programs.
+- **Hunt signal:** Send malformed Brotli-compressed body to endpoints advertising `br` in Accept-Encoding; watch for 500s/crashes. Nuclei tag: `CVE-2026-111497`.
+- **Evidence:** [CVSS 9.2 record](https://cipherssecurity.com/cve/CVE-2026-111497/) · CISA KEV added 2026-10-27, fed deadline 2026-11-10 · [BleepingComputer](https://www.bleepingcomputer.com/news/security/cisa-warns-of-hackers-now-exploiting-critical-node2shell-flaw/amp/)
