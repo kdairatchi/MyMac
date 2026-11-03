@@ -91,3 +91,12 @@ _pending enrichment_
 - **Evidence:** [source] watchtowr labs published detailed analysis of the vulnerability · [opinion] Ivanti appliances remain consistently fertile ground for critical pre-auth bugs; prioritize patching and external-facing asset audits.
 
 ---
+
+## 2026-11-03 — Ivanti Connect Secure Zero-Day Chain (CVE-2026-111357 + CVE-2026-118527)
+
+### Ivanti Connect Secure Auth Bypass + Privilege Escalation Chain
+- **Date:** 2026-11-03 · **Source:** [rapid7.com](https://www.rapid7.com/blog/post/etr-additional-ivanti-connect-secure-zero-days-exploited-in-the-wild-cve-2026-111357-cve-2026-118527/) · **Class:** cve
+- **What:** CVE-2026-111357 (CVSS 8.8 per Ivanti, 7.0 per NVD — missing auth, privilege escalation) + CVE-2026-118527 (CVSS 4.3 — predictable-ID file upload) chained with CVE-2026-104935 to achieve unauthenticated root-level code execution on Ivanti Connect Secure appliances. Both added to CISA KEV 2026-10-30. Fix: ICS 25.1.1.3 / 22.8R2.6.
+- **Why it matters:** Active exploitation confirmed; federal patch deadline was 2026-11-13. Any enterprise program that exposes an Ivanti VPN endpoint is live target surface.
+- **Hunt signal:** `http.title:"Ivanti Connect Secure"` on Shodan/Fofa; probe version endpoint `/api/v1/configuration/system/system-information` for pre-patch version strings; nuclei tag `ivanti-connect-secure` for CVE-2026-104935 chain entry.
+- **Evidence:** [SecurityWeek](https://www.securityweek.com/ivanti-patches-two-more-zero-days-exploited-in-connect-secure-attack-chain/) · [CISA alert](https://www.scworld.com/brief/cisa-adds-ivanti-connect-secure-vulnerabilities-to-known-exploited-catalog)
