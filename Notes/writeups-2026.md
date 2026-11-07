@@ -3703,3 +3703,12 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Rating:** variant
 
 ---
+
+---
+
+### How I Found SSRF in 6 Known Companies Using One Methodology in 2026
+- **Date:** 2026-11-07 · **Source:** [medium.com/@shawkat7h](https://medium.com/@shawkat7h/how-i-found-ssrf-in-6-known-companies-using-one-methodology-in-2026-987d79b27620) · **Class:** writeup
+- **What:** Author chains redirect bypass on webhook features to reach unauthenticated internal services (Envoy Admin at 127.0.0.1:15000) across six separate programs.
+- **Why it matters:** Webhook-to-internal-service SSRF is consistent across cloud-native apps; redirect validation is the common weak point.
+- **Hunt signal:** find webhook/callback URL input → submit `http://127.0.0.1:15000` → if blocked, try open redirect chain `https://attacker.com/r?to=http://127.0.0.1:15000`
+- **Evidence:** [article](https://medium.com/@shawkat7h/how-i-found-ssrf-in-6-known-companies-using-one-methodology-in-2026-987d79b27620)

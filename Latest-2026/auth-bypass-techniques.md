@@ -460,3 +460,12 @@ Three Crocoblock (Jet) plugins were found to expose REST API endpoints that allo
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+## 2026-11-07 — SonicWall SonicOS SAML Authentication Bypass (CVE-2026-19868)
+
+### SonicWall SonicOS SAML MFA Bypass
+- **Date:** 2026-11-07 · **Source:** [cisa.gov](https://www.cisa.gov/news-events/alerts/2026/11/03/cisa-adds-one-known-exploited-vulnerability-catalog) · **Class:** cve
+- **What:** Attackers holding credentials for a non-SAML login method can bypass SAML-enforced MFA checks in SonicOS, gaining access without completing the second factor.
+- **Why it matters:** CISA KEV-listed (added 2026-11-06) with BOD 26-04 federal remediation deadline 2026-11-20; any SonicWall-using org's VPN login page is in direct scope.
+- **Hunt signal:** probe `/api/sonicos/auth` with credential swap between SAML and local auth flow; look for session cookies issued without SAML assertion present
+- **Evidence:** [CISA KEV catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) · [SecurityWeek coverage](https://www.securityweek.com/sonicwall-patches-exploited-sonicos-bug-that-weakens-vpn-logins/) · [DEV writeup](https://dev.to/damiano_builds/your-mfa-didnt-fail-it-was-never-asked-the-sonicwall-saml-bypass-1dfl)
