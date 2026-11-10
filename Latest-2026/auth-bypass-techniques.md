@@ -460,3 +460,12 @@ Three Crocoblock (Jet) plugins were found to expose REST API endpoints that allo
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+## 2026-11-10 — CVE-2026-4052 · WSO2 API Manager Missing Authorization
+
+### CVE-2026-4052 · WSO2 API Manager / Identity Server Resident Key Manager
+- **Date:** 2026-11-10 · **Source:** [security.docs.wso2.com](https://security.docs.wso2.com/en/latest/security-announcements/security-advisories/2026/WSO2-2026-5212/) · **Class:** cve
+- **What:** Self-registered users obtain a token from WSO2 Identity Server and access System REST APIs of WSO2 API Manager when configured as Resident Key Manager (CWE-862, CVSS 9.8).
+- **Why it matters:** No-priv access to API management admin endpoints; affects enterprise API gateways common in fintech, telco, and SaaS bounty scope.
+- **Hunt signal:** enumerate `/api/am/admin/` and `/api/am/publisher/` endpoints with a self-registration token; check if tenant-management operations return 200.
+- **Evidence:** [WSO2-2026-5212](https://security.docs.wso2.com/en/latest/security-announcements/security-advisories/2026/WSO2-2026-5212/) · [strix.ai](https://www.strix.ai/cve/CVE-2026-4052) · [sploitus listing](https://sploitus.com/exploit?id=CVE-2026-4052) · KEV: no · Affected: API Manager 4.1.0–4.6.0, apim-km-wso2is < 1.8.8

@@ -409,3 +409,12 @@ An authenticated user could inject messages into Talk conversations they no long
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+## 2026-11-10 — CVE-2026-111490 · MatchPoint API actingasuser Header IDOR
+
+### CVE-2026-111490 · MatchPoint API Insecure Direct Object Reference
+- **Date:** 2026-11-10 · **Source:** [app.opencve.io](https://app.opencve.io/cve/CVE-2026-111490) · **Class:** cve
+- **What:** The MatchPoint API trusts the `actingasuser` HTTP header without checking if the requester is authorized for the specified user, allowing unauthenticated access to any user's data (CWE-639, CVSS 4.0: 9.9).
+- **Why it matters:** Header-spoofing IDORs are common across API platforms with impersonation features; pattern is fully generalizable to any API implementing x-user-id or similar headers.
+- **Hunt signal:** Add `actingasuser: <victim_id>` to any MatchPoint API request; also test `x-impersonate`, `x-user-id`, `x-on-behalf-of`, `x-forwarded-user` on other API targets.
+- **Evidence:** [opencve.io](https://app.opencve.io/cve/CVE-2026-111490) · [cve.threatint.com](https://cve.threatint.com/CVE/CVE-2026-111490) · KEV: no · Vendor fix: server-side deployed, install latest app version
