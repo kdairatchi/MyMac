@@ -2,7 +2,7 @@
 
 > Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
 
-_Last updated: 2026-07-08 · Items: 1_
+_Last updated: 2026-11-12 · Items: 2_
 
 ## 2026-07-08 — Gitea Docker Reverse Proxy Header Auth Bypass (CVE-2026-20896)
 
@@ -458,5 +458,16 @@ The vulnerability summary is as follows:
 Three Crocoblock (Jet) plugins were found to expose REST API endpoints that allowed unauthenticated users to modify plugin settings via POST requests without any authentication or authorization checks. The endpoints validated and parsed the POST body, then persisted the submitted key-value pairs into the WordPress options table. The primary exploitable setting was the "avaliable_widgets" option, which controlled the activation of Elementor widgets site-wide. …
 
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
+
+---
+
+## 2026-11-12 — GPUStack Unauthenticated Admin Access (CVE-2026-102895)
+
+### GPUStack Auth Bypass — Unauthenticated Admin Access + RCE via POST /v2/inference-backends/from-yaml
+- **Date:** 2026-11-12 · **Source:** [securityonline.info](https://securityonline.info/gpustack-authentication-bypass-cve-2026-102895-exploited/) · **Class:** cve
+- **What:** GPUStack <2.2.0 (CWE-287/290/346) allows unauthenticated attackers to create persistent admin API keys, modify users/models, exfiltrate cloud-provider secrets, and execute code via `POST /v2/inference-backends/from-yaml`.
+- **Why it matters:** CVSS 9.8; added CISA KEV 2026-11-09, federal patch deadline 2026-11-12. Active exploitation confirmed against 2.1.1 deployments. AI-infrastructure product — any org self-hosting GPUStack for LLM serving is in scope.
+- **Hunt signal:** `curl -s -X POST https://TARGET/v2/api-keys -H "Content-Type: application/json" -d '{"name":"test"}' | grep -i "token\|api_key"` — 200 with token = bypass; or `nuclei -t CVE-2026-102895`
+- **Evidence:** [securityonline](https://securityonline.info/gpustack-authentication-bypass-cve-2026-102895-exploited/) · [opencve](https://app.opencve.io/cve/CVE-2026-102895) · [KEV advisory](https://thehackernews.com/2026/11/cisa-warns-of-active-exploitation-of.html) · [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-102895)
 
 ---
