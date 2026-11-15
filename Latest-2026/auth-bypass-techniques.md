@@ -460,3 +460,14 @@ Three Crocoblock (Jet) plugins were found to expose REST API endpoints that allo
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+## 2026-11-15 — CVE-2026-123158 OpenSSH "SSHole" Password Authentication Bypass
+
+### CVE-2026-123158 — OpenSSH musl Password Authentication Bypass ("SSHole")
+- **Date:** 2026-11-15 · **Source:** [ccb.belgium.be](https://ccb.belgium.be/advisories/warning-actively-exploited-cve-2026-123158-cvss-81-affects-openssh-sshd-linux-systems) · **Class:** cve
+- **What:** OpenSSH sshd on Linux with musl libc and PAM disabled (default Alpine Linux) allows remote unauthenticated password bypass by sending a 257–1024 byte password against certain password-disabled accounts.
+- **Why it matters:** CISA KEV-listed (added ~2026-11-09), actively exploited with confirmed root on honeypots within 9h of disclosure; any cloud host running Alpine Linux (common in containers) is in scope.
+- **Hunt signal:** `nuclei -t cves/2026/CVE-2026-123158.yaml` OR probe: `grep -r "Alpine\|musl" /etc/*release` on target infra; check if OpenSSH < 10.6p2 on Alpine 3.21–3.24
+- **Evidence:** [NVD/CVSS 8.1](https://ccb.belgium.be/advisories/warning-actively-exploited-cve-2026-123158-cvss-81-affects-openssh-sshd-linux-systems) · [PoC on GitHub](https://feedly.com/cve/CVE-2026-123158) · [KEV confirmation](https://thehackernews.com/2026/11/hackers-exploited-openssh-sshole-flaw.html)
+
+---
