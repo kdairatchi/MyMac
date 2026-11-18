@@ -320,3 +320,18 @@ _No H1 summary provided._
 **Hunt signal:** pass — summary too thin
 
 ---
+## 2026-10-13 — CVE-2026-85706: GitLab Commits API Unauthenticated Path Traversal (CVSS 10.0)
+
+### GitLab Commits API Path Traversal — CVE-2026-85706
+- **Date:** 2026-10-13 · **Source:** [rapid7.com](https://www.rapid7.com/blog/post/etr-cve-2026-85706-critical-gitlab-path-traversal-exploited-in-the-wild/) · **Class:** cve
+- **What:** Unauthenticated path traversal in GitLab's repository commits API allows arbitrary file read from self-managed CE/EE instances with at least one public project, via a single crafted HTTP request.
+- **Why it matters:** CVSS 10.0, KEV-listed (2026-09-11), exploited in the wild within 20h of patch release; secrets, CI/CD vars, and private keys are directly reachable without auth.
+- **Hunt signal:** `GET /api/v4/projects/<id>/repository/commits?ref_name=../../../etc/passwd` or nuclei tag `CVE-2026-85706`; check Shodan/Censys for `X-Gitlab-Meta` header on unpatched 18.7–19.3.1.
+- **Evidence:** [rapid7](https://www.rapid7.com/blog/post/etr-cve-2026-85706-critical-gitlab-path-traversal-exploited-in-the-wild/) · [CSA research note](https://labs.cloudsecurityalliance.org/research/csa-research-note-gitlab-cve-2026-85706-kev-20260912-csa-sty/) · CISA KEV added 2026-09-11
+
+**Affected:** GitLab CE/EE 18.7–19.3.1 (fixed: 19.1.8, 19.2.6, 19.3.2)
+**CVSS:** 10.0 (NVD) · **KEV:** yes, 2026-09-11
+**PoC:** PUBLIC — in-the-wild exploitation confirmed; PoC circulating on GitHub (`github.com/search?q=CVE-2026-85706`)
+**Bounty programs:** GitLab HackerOne program (`hackerone.com/gitlab`); any target self-hosting GitLab (DevOps toolchain scope).
+
+---
