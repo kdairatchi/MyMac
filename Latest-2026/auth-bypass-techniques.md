@@ -2,7 +2,7 @@
 
 > Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
 
-_Last updated: 2026-07-08 · Items: 1_
+_Last updated: 2026-11-12 · Items: 2_
 
 ## 2026-07-08 — Gitea Docker Reverse Proxy Header Auth Bypass (CVE-2026-20896)
 
@@ -559,3 +559,14 @@ Three Crocoblock (Jet) plugins were found to expose REST API endpoints that allo
 - **Why it matters:** CVSSv3 9.8, in CISA KEV (added 2026-11-09, due 2026-11-12); actively exploited for reverse shells on worker hosts; AI infra platforms running GPUStack are likely bug-bounty targets.
 - **Hunt signal:** `curl -H "X-GPUStack-Real-IP: 127.0.0.1" https://<target>/v1/users` — 200 with admin context = vuln; nuclei tag pending community template
 - **Evidence:** [NVD/OpenCVE](https://app.opencve.io/cve/CVE-2026-102895) · [SecurityOnline](https://securityonline.info/gpustack-authentication-bypass-cve-2026-102895-exploited/) · [CISA KEV](https://www.cisa.gov/news-events/alerts/2026/11/13/cisa-adds-two-known-exploited-vulnerabilities-catalog)
+
+## 2026-11-12 — GPUStack Unauthenticated Admin Access (CVE-2026-102895)
+
+### GPUStack Auth Bypass — Unauthenticated Admin Access + RCE via POST /v2/inference-backends/from-yaml
+- **Date:** 2026-11-12 · **Source:** [securityonline.info](https://securityonline.info/gpustack-authentication-bypass-cve-2026-102895-exploited/) · **Class:** cve
+- **What:** GPUStack <2.2.0 (CWE-287/290/346) allows unauthenticated attackers to create persistent admin API keys, modify users/models, exfiltrate cloud-provider secrets, and execute code via `POST /v2/inference-backends/from-yaml`.
+- **Why it matters:** CVSS 9.8; added CISA KEV 2026-11-09, federal patch deadline 2026-11-12. Active exploitation confirmed against 2.1.1 deployments. AI-infrastructure product — any org self-hosting GPUStack for LLM serving is in scope.
+- **Hunt signal:** `curl -s -X POST https://TARGET/v2/api-keys -H "Content-Type: application/json" -d '{"name":"test"}' | grep -i "token\|api_key"` — 200 with token = bypass; or `nuclei -t CVE-2026-102895`
+- **Evidence:** [securityonline](https://securityonline.info/gpustack-authentication-bypass-cve-2026-102895-exploited/) · [opencve](https://app.opencve.io/cve/CVE-2026-102895) · [KEV advisory](https://thehackernews.com/2026/11/cisa-warns-of-active-exploitation-of.html) · [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-102895)
+
+---
