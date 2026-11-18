@@ -3,6 +3,7 @@
 > Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
 
 _Last updated: 2026-10-31 · Items: 2_
+_Last updated: 2026-07-01 · Items: 2_
 
 ---
 
@@ -19,6 +20,7 @@ See items under ## Items for per-finding details.
 
 | CVE | Date | Title | CVSS | Status | Src |
 |---|---|---|---|---|---|
+| CVE-2026-20253 | 2026-07-01 | Splunk Enterprise Unauthenticated RCE via PostgreSQL Sidecar | 9.8 | KEV/exploited | [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-20253) |
 | CVE-2023-34362 | 2026-04-17 | Patch Diffing Progress MOVEit Transfer RCE (CVE-2023-34362) | high | patched | [src](https://www.assetnote.io/resources/research/patch-diffing-progress-moveit-transfer-rce-cve-2023-34362) |
 | cve-2023-34362 | 2026-04-17 | Patch Diffing Progress MOVEit Transfer RCE (CVE-2023-34362) | high | patched | [src](https://www.assetnote.io/resources/research/patch-diffing-progress-moveit-transfer-rce-cve-2023-34362) |
 
@@ -193,6 +195,17 @@ filename="shell.php%00.jpg"
 | KEV | YES — added 2026-10-26 |
 | PoC | PUBLIC |
 | Fix | Upgrade to patched release; set `post_max_size` low + rate-limit at proxy as interim |
+
+---
+
+## 2026-07-01
+
+### Splunk Enterprise Unauthenticated RCE via PostgreSQL Sidecar (CVE-2026-20253)
+- **Date:** 2026-07-01 · **Source:** [nvd.nist.gov](https://nvd.nist.gov/vuln/detail/CVE-2026-20253) · **Class:** cve
+- **What:** Unauthenticated attacker with network access can create/truncate arbitrary files and achieve RCE on Splunk Enterprise via an unprotected PostgreSQL sidecar API endpoint (CWE-306, missing auth on critical function).
+- **Why it matters:** CVSS 9.8, KEV-listed (June 18 2026), actively exploited within 2 days of disclosure; any org running Splunk Enterprise 10.0–10.2 that's internet-exposed is a high-value target and many have HackerOne/VDP programs.
+- **Hunt signal:** `shodan search "Splunk" port:8089` or `nuclei -t cves/2026/CVE-2026-20253.yaml -u https://target:8089` — check for unauthenticated response on `/services/` namespace; patch cutoff is 10.2.4 / 10.0.7.
+- **Evidence:** [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-20253) · [Splunk Advisory](https://advisory.splunk.com/) · [HelpNetSecurity](https://www.helpnetsecurity.com/2026/06/19/splunk-vulnerability-cve-2026-20253-exploited/) · [Orca writeup](https://orca.security/resources/blog/cve-2026-20253-splunk-enterprise-rce-unauthenticated-file-operations/)
 
 ---
 
