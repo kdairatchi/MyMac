@@ -3703,3 +3703,13 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Rating:** variant
 
 ---
+
+---
+### $9,600 for Trusting a Header the Client Writes: Password Reset Poisoning via Host Header Injection
+- **Tags:** `#auth-bypass` `#host-header` `#password-reset`
+- **Severity:** high · **Hunt:** 4/5 · **Score:** 4.0 · **Status:** paid · **Age:** 0d
+- **Sources:** [1](https://medium.com/@t4nv1/9-600-for-trusting-a-header-the-client-writes-password-reset-poisoning-via-host-header-injection-d0f91707c2cd)
+
+- **Trick:** Intercept password reset request, swap `Host:` / `X-Forwarded-Host:` to attacker-controlled domain; server echoes it into the reset link, victim clicks, token captured.
+- **Why it matters:** Lands in auth-heavy SaaS consistently; Auth0/Okta, SSO portals, and any app that delegates reset emails are high-value targets.
+- **Rating:** original
