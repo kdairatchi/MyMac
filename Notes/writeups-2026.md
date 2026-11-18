@@ -3703,3 +3703,15 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Rating:** variant
 
 ---
+
+
+---
+
+### $800 Bounty: Privilege Escalation via API — From Scheduler to Team Admin (Mass Assignment)
+- **Tags:** `#mass-assignment` `#privesc` `#api`
+- **Severity:** high · **Hunt:** 4/5 · **Score:** 32.0 · **Status:** patched · **Age:** 0d
+- **Sources:** [1](https://infosecwriteups.com/800-bounty-privilege-escalation-via-api-from-scheduler-to-team-admin-810bb8401a0f)
+
+- **Trick:** Intercepted a role-update API request and injected `"team_leader_ids": [<own_user_id>]` into the JSON body — the backend accepted and persisted the extra field, granting team-admin permissions without authorization.
+- **Why it matters:** REST APIs that use object binding without an allow-list of accepted fields (ORM mass assignment) silently accept privilege-flag fields; yields horizontal → vertical privesc in one request.
+- **Rating:** high

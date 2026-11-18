@@ -234,3 +234,13 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+
+## 2026-11-18 — HTTP/2 Race-Condition Heap Corruption → RCE (CVE-2026-119618 pattern)
+
+### Apache mod_http2 Race Condition Primitive
+- **Date:** 2026-11-18 · **Source:** [bleepingcomputer.com](https://www.bleepingcomputer.com/news/security/apache-http-server-patches-critical-http-2-remote-code-execution-flaw/) · **Class:** cve
+- **What:** Concurrent H2 header processing hits a race in `assign_headers()` that corrupts the heap allocator, giving an attacker an arbitrary-write primitive — no auth required.
+- **Why it matters:** Affects ~40% of web servers on the internet; unpatched Apache 2.4.55–2.4.70 with HTTP/2 enabled equals unauthenticated RCE on any reachable endpoint.
+- **Hunt signal:** `curl --http2 -sI https://<target>/ | grep -i server` for Apache 2.4.55–70; submit version banner as recon, escalate if confirmed unpatched.
+- **Evidence:** [BleepingComputer] https://www.bleepingcomputer.com/news/security/apache-http-server-patches-critical-http-2-remote-code-execution-flaw/
