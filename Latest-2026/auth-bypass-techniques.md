@@ -511,3 +511,12 @@ Three Crocoblock (Jet) plugins were found to expose REST API endpoints that allo
 - **Scope:** GPUStack self-hosted deployments; check programs covering internal ML infra, AI-platform VMs, or cloud-native AI services.
 
 ---
+
+## 2026-10-02 — CVE-2026-71362: Adobe Commerce / Magento Session Identity Confusion → Account Takeover
+
+### Adobe Commerce Incorrect Authorization (CVE-2026-71362)
+- **Date:** 2026-10-02 · **Source:** [nvd.nist.gov](https://nvd.nist.gov/vuln/detail/CVE-2026-71362) · **Class:** cve
+- **What:** Unauthenticated attacker rebinds their active session to an arbitrary customer ID by poisoning the session via a failing editPost request with a mass-assigned `id` parameter, then triggering the vulnerable edit endpoint.
+- **Why it matters:** Full account takeover on any Adobe Commerce / Magento storefront without credentials — enumerate victim PII, hijack orders, steal payment methods; CVSS 9.1, actively exploited, CISA KEV 2026-09-24.
+- **Hunt signal:** `POST /index.php/customer/account/editPost` with `id=<victim_id>` in body; WAF bypass: try chunked encoding or param pollution; nuclei: `cve-2026-71362`
+- **Evidence:** [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-71362) · [BleepingComputer](https://www.bleepingcomputer.com/news/security/hackers-exploit-critical-adobe-commerce-flaw-to-hijack-customer-accounts/amp/) · [CyCognito analysis](https://www.cycognito.com/blog/emerging-threat-cve-2026-71362-adobe-commerce-account-takeover-via-session-identity-flaw/) · [CISA KEV](https://www.cisa.gov/news-events/alerts/2026/09/24/cisa-adds-two-known-exploited-vulnerabilities-catalog)
