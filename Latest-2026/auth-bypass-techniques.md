@@ -570,3 +570,12 @@ Three Crocoblock (Jet) plugins were found to expose REST API endpoints that allo
 - **Evidence:** [securityonline](https://securityonline.info/gpustack-authentication-bypass-cve-2026-102895-exploited/) · [opencve](https://app.opencve.io/cve/CVE-2026-102895) · [KEV advisory](https://thehackernews.com/2026/11/cisa-warns-of-active-exploitation-of.html) · [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-102895)
 
 ---
+
+## 2026-10-19 — CVE-2026-111639: bbs-go Google One Tap aud-claim bypass
+
+### bbs-go Google One Tap Account Takeover via Token Replay (CVE-2026-111639)
+- **Date:** 2026-10-19 · **Source:** [opencve.io](https://app.opencve.io/cve/CVE-2026-111639) · **Class:** cve
+- **What:** The `/api/login/google_one_tap` endpoint in bbs-go ≤4.4.6 never checks the `aud` claim on the submitted Google ID token, so an attacker with any Google OAuth client can replay a victim's token and log in as them.
+- **Why it matters:** Any Go forum or CMS using bbs-go with Google One Tap login is fully compromised with a valid Google token from another client — no brute-force needed.
+- **Hunt signal:** `grep -r "google_one_tap\|googleOneTap" .` in Go source; probe `POST /api/login/google_one_tap` with a self-issued token against any bbs-go instance.
+- **Evidence:** [thehackerwire.com/CVE-2026-111639](https://www.thehackerwire.com/vulnerability/CVE-2026-111639/) · CVSS 8.1 (High) · CWE-287 · Published 2026-10-16 · No KEV · No public PoC
