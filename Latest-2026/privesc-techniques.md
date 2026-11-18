@@ -155,3 +155,14 @@ A privilege escalation vulnerability was discovered in the SingleStore Helios al
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+## 2026-10-06 — Zammad Local Privilege Escalation to Root (CVE-2026-102490)
+
+### Zammad: Service User Escapes to Root via Improper Privilege Management
+- **Date:** 2026-10-06 · **Source:** [gbhackers.com](https://gbhackers.com/zammad-vulnerabilities/) · **Class:** cve
+- **What:** Code running as the `zammad` service user can escalate to root in Zammad ≤7.1.3 due to improper privilege management; typically chained after CVE-2026-102489 RCE.
+- **Why it matters:** CISA KEV 2026-10-02; CVSS 8.5 standalone, 9.4 chained; confirmed full-chain exploit (anon → root) used in DIVD breach by autonomous AI agent; patch is Zammad 7.2.0.
+- **Hunt signal:** `find / -user zammad -perm -u=s 2>/dev/null`; review Zammad service account sudoers entries; check systemd unit capabilities for `CAP_SETUID`/`CAP_SETGID`.
+- **Evidence:** [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) · [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-102490) · [gbhackers](https://gbhackers.com/zammad-vulnerabilities/) · [runzero fingerprint guide](https://www.runzero.com/blog/zammad/)
+
+---
