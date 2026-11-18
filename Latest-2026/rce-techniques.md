@@ -262,3 +262,13 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 - **Hunt signal:** `nuclei -t cves/2026/CVE-2026-23918.yaml` or `curl -v --http2 <target>` to confirm HTTP/2 support, then check Server header for Apache/2.4.66
 - **Evidence:** [thehackernews.com](https://thehackernews.com/2026/05/critical-apache-http2-flaw-cve-2026.html) · [securityaffairs.com](https://securityaffairs.com/191759/security/apache-fixes-critical-http-2-double-free-flaw-cve-2026-23918-enabling-rce.html) · [security.berkeley.edu](https://security.berkeley.edu/news/critical-apache-2-4-66-http2-flaw-allows-rce-dos-cve-2026-23918)
 
+
+
+## 2026-11-18 — HTTP/2 Race-Condition Heap Corruption → RCE (CVE-2026-119618 pattern)
+
+### Apache mod_http2 Race Condition Primitive
+- **Date:** 2026-11-18 · **Source:** [bleepingcomputer.com](https://www.bleepingcomputer.com/news/security/apache-http-server-patches-critical-http-2-remote-code-execution-flaw/) · **Class:** cve
+- **What:** Concurrent H2 header processing hits a race in `assign_headers()` that corrupts the heap allocator, giving an attacker an arbitrary-write primitive — no auth required.
+- **Why it matters:** Affects ~40% of web servers on the internet; unpatched Apache 2.4.55–2.4.70 with HTTP/2 enabled equals unauthenticated RCE on any reachable endpoint.
+- **Hunt signal:** `curl --http2 -sI https://<target>/ | grep -i server` for Apache 2.4.55–70; submit version banner as recon, escalate if confirmed unpatched.
+- **Evidence:** [BleepingComputer] https://www.bleepingcomputer.com/news/security/apache-http-server-patches-critical-http-2-remote-code-execution-flaw/
