@@ -590,3 +590,14 @@ Three Crocoblock (Jet) plugins were found to expose REST API endpoints that allo
 - **Evidence:** [NVD/CVSS 8.1](https://ccb.belgium.be/advisories/warning-actively-exploited-cve-2026-123158-cvss-81-affects-openssh-sshd-linux-systems) · [PoC on GitHub](https://feedly.com/cve/CVE-2026-123158) · [KEV confirmation](https://thehackernews.com/2026/11/hackers-exploited-openssh-sshole-flaw.html)
 
 ---
+
+## 2026-10-18 — Header-Based Auth Bypass in Ivanti Connect Secure (CVE-2026-104935)
+
+### Ivanti ICS Header Injection Auth Bypass
+- **Date:** 2026-10-18 · **Source:** [volexity.com](https://www.volexity.com/blog/2026/10/13/a-series-of-unauthenticated-events-chained-exploitation-of-ivanti-connect-secure-zero-days/) · **Class:** technique
+- **What:** Access control validates the requested URL path, but the script that executes is selected from an attacker-controlled HTTP header (X-DSCGI-PATH). The mismatch lets an unauthenticated request reach privileged handlers via /welcome.cgi.
+- **Why it matters:** Pattern generalizes: any gateway that separates "which URL did you hit" from "which backend code runs" is candidate for this class of bypass. Look for header-routing in reverse proxies, CDN workers, and API gateways.
+- **Hunt signal:** `curl -s -o /dev/null -w "%{http_code}" -H "X-DSCGI-PATH: /dana-na/auth/login.cgi" https://TARGET/welcome.cgi` — delta between baseline and header-injected response codes flags potential.
+- **Evidence:** [Volexity chain](https://www.volexity.com/blog/2026/10/13/a-series-of-unauthenticated-events-chained-exploitation-of-ivanti-connect-secure-zero-days/) · [watchTowr FAQ](https://watchtowr.com/intelligence/ivanti-connect-secure-cve-2026-104935-faq/)
+
+---

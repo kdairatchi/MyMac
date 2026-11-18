@@ -100,3 +100,15 @@ _pending enrichment_
 - **Why it matters:** Active exploitation confirmed; federal patch deadline was 2026-11-13. Any enterprise program that exposes an Ivanti VPN endpoint is live target surface.
 - **Hunt signal:** `http.title:"Ivanti Connect Secure"` on Shodan/Fofa; probe version endpoint `/api/v1/configuration/system/system-information` for pre-patch version strings; nuclei tag `ivanti-connect-secure` for CVE-2026-104935 chain entry.
 - **Evidence:** [SecurityWeek](https://www.securityweek.com/ivanti-patches-two-more-zero-days-exploited-in-connect-secure-attack-chain/) · [CISA alert](https://www.scworld.com/brief/cisa-adds-ivanti-connect-secure-vulnerabilities-to-known-exploited-catalog)
+
+## 2026-10-18 — Ivanti Connect Secure Authentication Bypass + Unauthenticated RCE Chain (CVE-2026-104935)
+
+### CVE-2026-104935: Ivanti Connect Secure Auth Bypass by Spoofing
+- **Date:** 2026-10-18 · **Source:** [bleepingcomputer.com](https://www.bleepingcomputer.com/news/security/ivanti-warns-of-connect-secure-zero-day-exploited-in-attacks/) · **Class:** cve
+- **What:** Header injection (X-DSCGI-PATH) bypasses URL-based access control checks in Ivanti Connect Secure, allowing unauthenticated script execution; chained with an unpatched priv-esc zero-day for full root RCE.
+- **Why it matters:** KEV-listed Oct 13 2026, actively exploited by UTA0576 (Volexity) since at least Oct 3; patch 22.8R2.5 / 25.1.3.0 / 25.1.1.2 required immediately — companion priv-esc still unpatched.
+- **Hunt signal:** `nuclei -t ivanti-connect-secure-cve-2026-104935.yaml` OR probe /welcome.cgi with X-DSCGI-PATH header for non-200 → 200 response delta; log tampering by attacker makes forensics unreliable.
+- **Evidence:** [Rapid7 ETR](https://www.rapid7.com/blog/post/etr-ivanti-connect-secure-zero-day-exploited-in-the-wild-cve-2026-104935/) · [Volexity chain](https://www.volexity.com/blog/2026/10/13/a-series-of-unauthenticated-events-chained-exploitation-of-ivanti-connect-secure-zero-days/) · [CISA KEV 2026-10-13](https://www.cisa.gov/news-events/alerts/2026/10/13/cisa-adds-two-known-exploited-vulnerabilities-catalog)
+- **CVSS:** 8.6 (CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:L) · **KEV:** yes, 2026-10-13 · **PoC:** NONE public
+
+---
