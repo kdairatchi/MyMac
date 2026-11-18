@@ -498,3 +498,16 @@ Three Crocoblock (Jet) plugins were found to expose REST API endpoints that allo
 - **Evidence:** [vuldb] https://vuldb.com/cve/CVE-2026-61654 · CVSS 8.3 (CVSS 4.0, GitHub CNA) · Fixed in 0.3214.0 · No confirmed public PoC
 
 ---
+
+## 2026-11-17 — GPUStack Authentication Bypass via Trusted Loopback Header (CVE-2026-102895)
+
+### GPUStack unauthenticated admin via X-GPUStack-Real-IP header spoofing
+- **Date:** 2026-11-17 · **Source:** [securityonline.info](https://securityonline.info/gpustack-authentication-bypass-cve-2026-102895-exploited/) · **Class:** cve
+- **What:** GPUStack <2.2.0 trusts `X-GPUStack-Real-IP: 127.0.0.1` as a loopback source; any unauthenticated HTTP request forging this header bypasses authentication and receives full admin privileges.
+- **Why it matters:** Exploited in the wild per CISA KEV (added 2026-11-09, due 2026-11-12); attackers confirmed dropping reverse shells on worker hosts; AI/ML stack management panels are increasingly bug-bounty scope.
+- **Hunt signal:** `curl -H "X-GPUStack-Real-IP: 127.0.0.1" https://target/api/v1/users` — 200 with user list = bypass confirmed; also test `X-Forwarded-For: 127.0.0.1`, `X-Real-IP: 127.0.0.1` variants.
+- **Evidence:** [cvereports.com](https://cvereports.com/reports/CVE-2026-102895) · CVSS 9.8 (AV:N/AC:L/PR:N/UI:N) · KEV 2026-11-09 · Fix: upgrade to 2.2.0+
+- **PoC:** PRIVATE — reproduction steps in advisory only; no standalone public PoC confirmed.
+- **Scope:** GPUStack self-hosted deployments; check programs covering internal ML infra, AI-platform VMs, or cloud-native AI services.
+
+---
