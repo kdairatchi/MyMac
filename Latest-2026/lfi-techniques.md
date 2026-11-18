@@ -395,3 +395,19 @@ _No H1 summary provided._
 - **Why it matters:** CVSS 4.0 9.3; KEV not yet listed but actively exploited (158 honeypot hits from 26 IPs/8 countries within hours of PoC); public PoC published Oct 9; Atlassian self-hosted runs in thousands of BB scopes.
 - **Hunt signal:** Probe plugin servlet paths substituting `::` for `/`; grep access logs for double-colon sequences in paths; `nuclei -t http/cves/2026/CVE-2026-21589.yaml` when available.
 - **Evidence:** [rapid7](https://www.rapid7.com/blog/post/etr-cve-2026-21589-critical-unauthenticated-arbitrary-file-access-in-atlassian-products/) · [PoC](https://github.com/gotr00t0day/CVE-2026-21589) · [bleepingcomputer](https://bleepingcomputer.com/news/security/hackers-exploit-critical-atlassian-flaw-after-public-poc-release) · [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-21589)
+
+## 2026-10-27 — CVE-2026-21589: Atlassian Data Center Pre-Auth Arbitrary File Read
+
+### Atlassian Data Center Pre-Auth Arbitrary File Read (CVE-2026-21589)
+- **Date:** 2026-10-27 · **Source:** [watchtowr.com](https://watchtowr.com/intelligence/atlassian-jira-confluence-arbitrary-file-read-cve-2026-21589/) · **Class:** cve
+- **What:** Unauthenticated attacker can read any file within Tomcat web application context (including WEB-INF/) across 8 Atlassian Data Center products — no login required, path must be known.
+- **Why it matters:** On Jira+Crowd deployments, WEB-INF/classes/crowd.properties leaks Crowd app password in plaintext; in labs this chained to full Jira admin takeover. CISA KEV confirmed Oct 15.
+- **Hunt signal:** `GET /s/..;/META-INF/MANIFEST.MF` or `GET /<app>/WEB-INF/web.xml`; nuclei template `CVE-2026-21589`; grep scope for `atlassian.net` self-hosted or `jira.*`, `confluence.*`, `bitbucket.*` subdomains with on-prem fingerprint (`X-ASEN` header or `/version` endpoint < patched)
+- **Evidence:** [watchTowr advisory](https://watchtowr.com/intelligence/atlassian-jira-confluence-arbitrary-file-read-cve-2026-21589/) · [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) · [securityonline.info](https://securityonline.info/cve-2026-21589-exploitation-in-the-wild/)
+
+**CVSS:** 9.3 (CVSS 4.0, Critical) · **KEV:** YES — added 2026-10-15
+**Affected:** Bitbucket DC < 10.5.1 / 10.2.8 / 9.4.26; Jira Software DC, Jira Service Mgmt DC, Confluence DC, Bamboo DC, Crowd, Crucible, Fisheye — all pre-patch releases
+**Fixed:** Bitbucket 9.4.26, 10.2.8, 10.5.1 (and equivalents per product)
+**PoC:** watchTowr published checker script; full RCE chain not public but file-read + Crowd credential extraction demonstrated in lab
+**BB scope:** Programs running self-hosted Atlassian stack (enterprises, SaaS startups, dev tool companies); scope research required per target
+
