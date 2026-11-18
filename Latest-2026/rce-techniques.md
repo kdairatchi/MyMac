@@ -342,3 +342,13 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 - **Evidence:** [Fastly blog](https://www.fastly.com/jp/blog/critical-rce-vulnerabilities-discovered-core-php-cve-2026-109618-cve-2026-109619) · [CISA alert](https://www.cisa.gov/news-events/alerts/2026/10/21/critical-vulnerabilities-php-require-immediate-patching) · [Ampcus PoC update](https://www.ampcuscyber.com/shadowopsintel/php2shell-update-active-exploitation-confirmed-public-poc-released/)
 - **CVSS:** 9.2 (CVSS 4.0) · **KEV:** Yes — added 2026-10-26 · **Affected:** PHP < 8.2.35, < 8.3.36, < 8.4.27, < 8.5.12 · **PoC:** PUBLIC (Sophos CTU; Vulmon)
 - **Bounty scope:** Any program running PHP on the backend — Shopify (custom PHP services), WordPress.com (Automattic), GitLab, phpMyAdmin, any SaaS on PHP-FPM
+
+## 2026-07-03 — Adobe ColdFusion Pre-Auth Unrestricted File Upload → RCE (APSB26-68)
+
+### Adobe ColdFusion APSB26-68: Pre-Auth File Upload RCE (CVE-2026-48276/48283)
+- **Date:** 2026-07-03 · **Source:** [labs.watchtowr.com](https://labs.watchtowr.com/its-37oc-and-all-we-can-think-about-is-coldfusion-adobe-coldfusion-security-bulletin-apsb26-68-cve-bonanza/) · **Class:** technique
+- **What:** ColdFusion 2023/2025 fails to validate file types on upload endpoints (CWE-434); unauthenticated attackers upload `.cfm` or `.jsp` webshells and execute with server privileges. Four additional CVSS 10.0 bugs cover improper input validation → RCE; CVE-2026-48282 adds path traversal arbitrary read.
+- **Why it matters:** CVSS 10.0, pre-auth, no user interaction — Adobe HackerOne program actively credited two researchers from this bulletin; unpatched internet-facing ColdFusion is zero-click RCE.
+- **Hunt signal:** `shodan query 'http.html:"ColdFusion" OR http.headers:"JRun"'`; probe `/CFIDE/wizards/` and RDS endpoint (`/CFIDE/componentutils/`) unauthenticated; test file upload with `.cfm`, `.cfml`, `.jsp` extension variants; path traversal with `../` in file-read params. Kill criterion: ColdFusion 2025 Update ≥10 or ColdFusion 2023 Update ≥21 = patched, skip.
+- **Evidence:** [watchTowr July 2](https://labs.watchtowr.com/its-37oc-and-all-we-can-think-about-is-coldfusion-adobe-coldfusion-security-bulletin-apsb26-68-cve-bonanza/) · [Adobe APSB26-68](https://helpx.adobe.com/security/products/coldfusion/apsb26-68.html) · [Adobe H1](https://hackerone.com/adobe)
+
