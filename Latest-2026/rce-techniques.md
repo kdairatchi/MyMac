@@ -352,3 +352,12 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 - **Hunt signal:** `shodan query 'http.html:"ColdFusion" OR http.headers:"JRun"'`; probe `/CFIDE/wizards/` and RDS endpoint (`/CFIDE/componentutils/`) unauthenticated; test file upload with `.cfm`, `.cfml`, `.jsp` extension variants; path traversal with `../` in file-read params. Kill criterion: ColdFusion 2025 Update ≥10 or ColdFusion 2023 Update ≥21 = patched, skip.
 - **Evidence:** [watchTowr July 2](https://labs.watchtowr.com/its-37oc-and-all-we-can-think-about-is-coldfusion-adobe-coldfusion-security-bulletin-apsb26-68-cve-bonanza/) · [Adobe APSB26-68](https://helpx.adobe.com/security/products/coldfusion/apsb26-68.html) · [Adobe H1](https://hackerone.com/adobe)
 
+
+## 2026-10-30 — PHP2Shell: Heap UAF RCE in PHP Core (CVE-2026-109618, CVE-2026-109619)
+
+### PHP2Shell: Unauthenticated RCE via Heap Use-After-Free in PHP Core
+- **Date:** 2026-10-30 · **Source:** [bleepingcomputer.com](https://www.bleepingcomputer.com/news/security/cisa-confirms-php2shell-vulnerabilities-now-exploited-in-attacks/) · **Class:** cve
+- **What:** Two heap use-after-free flaws in PHP core (multipart upload-progress unserializer + stale global state reuse) allow unauthenticated RCE on any PHP-serving web server; affects Apache mod_php, PHP-FPM, php-cgi, FrankenPHP, LiteSpeed — all PHP versions < 8.2.35 / 8.3.36 / 8.4.27 / 8.5.12.
+- **Why it matters:** In-the-wild exploitation confirmed; CISA added both CVEs to KEV 2026-10-26; demonstrated against WordPress, Drupal, Joomla by Wiz. PHP runs ~77% of tracked web servers — enormous bounty-eligible attack surface across virtually every PHP-based target.
+- **Hunt signal:** Check `X-Powered-By: PHP/` header — anything < 8.2.35 is a potential flag for program impact (do not exploit on live targets; report version only where rules permit). Public PoCs exist at `eness/php2shell-CVE-2026-109618-CVE-2026-109619-PoC` and `Is4yev/php2shell-poc` — use only in authorized lab environments.
+- **Evidence:** [CISA KEV alert](https://www.cisa.gov/news-events/alerts/2026/10/21/critical-vulnerabilities-php-require-immediate-patching) · [xalgorix digest](https://www.xalgorix.com/blog/weekly-appsec-threat-digest-oct-23-30-2026) · [BleepingComputer](https://www.bleepingcomputer.com/news/security/cisa-confirms-php2shell-vulnerabilities-now-exploited-in-attacks/)
