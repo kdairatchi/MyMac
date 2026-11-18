@@ -15,3 +15,13 @@
 
 ---
 *Clustered 3 sources for this item.*
+
+## 2026-10-28
+
+### PHP2Shell — CVE-2026-109618 & CVE-2026-109619
+- **Date:** 2026-10-28 · **Source:** [theregister.com](https://theregister.com/cyber-crime/2026/10/27/cisa-confirms-php2shell-under-attack-as-researchers-clock-successful-exploits/5305681) · **Class:** cve
+- **What:** Out-of-memory corruption in PHP's request initialization via longjmp(); unauthenticated attacker achieves RCE on any PHP-FPM or CLI handler running unpatched PHP.
+- **Why it matters:** CISA KEV-listed (Oct 26, deadline Oct 29 for federal). Active exploitation since Oct 21 via honeypots. Ubiquitous target surface — most PHP web apps on shared hosting and cloud still unpatched.
+- **Hunt signal:** `httpx -title -tech-detect -H 'X-Powered-By'` for PHP versions < 8.2.35/8.3.36/8.4.27/8.5.12; nuclei tag `cve-2026-109618`
+- **Evidence:** [source] TheRegister/CISA KEV confirmation · [Tenable FAQ](https://www.tenable.com/blog/php2shell-cve-2026-109618-cve-2026-109619-frequently-asked-questions-about-critical-php-remote) · [watchTowr](https://watchtowr.com/intelligence/php-cve-2026-109618-faq/)
+
