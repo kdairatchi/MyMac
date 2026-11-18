@@ -102,3 +102,12 @@
 
 ---
 *Clustered 34 sources for this item.*
+
+## 2026-11-11
+
+### CVE-2026-63215 — SuiteCRM REST API Blind SQLi
+- **Date:** 2026-11-11 · **Source:** [opencve.io](https://app.opencve.io/cve/CVE-2026-63215) · **Class:** cve
+- **What:** Time-based blind SQL injection in SuiteCRM REST API v4.1 `get_entry_list` method; affects < 7.15.2 and < 8.10.2; requires low-privilege auth.
+- **Why it matters:** CRM platforms are common bug bounty scope; SQLi in a REST endpoint means data exfil or account enumeration without full admin — high payout potential.
+- **Hunt signal:** `nuclei -t cves/2026/CVE-2026-63215.yaml` once template ships; manually: auth'd `GET /index.php?module=&action=&rest_data=` with SQLi payload in `get_entry_list` params
+- **Evidence:** [source](https://app.opencve.io/cve/CVE-2026-63215) · NVD status: Awaiting Analysis · CVSS 8.3 (NVD pending, vendor-reported) · KEV: no · PoC: NONE
