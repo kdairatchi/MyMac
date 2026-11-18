@@ -234,3 +234,12 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+## 2026-11-09 — CVE-2026-97229 GitLab CI/CD RCE
+
+### CVE-2026-97229: GitLab CE/EE CI/CD Regex Compiler RCE (CVSS 10.0)
+- **Date:** 2026-11-09 · **Source:** [rapid7.com](https://www.rapid7.com/blog/post/etr-cve-2026-97229-critical-unauthenticated-remote-code-execution-in-gitlab/) · **Class:** cve
+- **What:** Integer overflow in GitLab's CI/CD regex compiler allows unauthenticated RCE on instances where self-registration is enabled; attacker plants malicious `.gitlab-ci.yml` in a new project.
+- **Why it matters:** CVSS 10.0, CISA KEV Oct 29 2026, 1,000+ unpatched instances per Shadowserver; any self-hosted GitLab in bug bounty scope is a direct RCE candidate.
+- **Hunt signal:** `nuclei -t cves/2026/CVE-2026-97229.yaml` or check `/api/v4/version` for versions < 19.2.8 / 19.3.5 / 19.4.2
+- **Evidence:** [Rapid7 ETR](https://www.rapid7.com/blog/post/etr-cve-2026-97229-critical-unauthenticated-remote-code-execution-in-gitlab/) · [PoC repo](https://github.com/Certbn/CVE-2026-97229-GitLab-CI-CD) · [KEV entry via HackerStorm](https://www.hackerstorm.com/search-insights/cisa-kev-cve-data)
