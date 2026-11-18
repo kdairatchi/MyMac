@@ -3,16 +3,12 @@
 > Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
 
 _Last updated: 2026-10-31 · Items: 2_
-_Last updated: 2026-07-01 · Items: 2_
+
 
 ---
 
 ## What
 
-_Define the class, prerequisites, and typical finding shape. Fill with real content._
-_pending enrichment — baseline opener below_
-
-See items under ## Items for per-finding details.
 
 ---
 
@@ -22,20 +18,16 @@ See items under ## Items for per-finding details.
 |---|---|---|---|---|---|
 | CVE-2026-20253 | 2026-07-01 | Splunk Enterprise Unauthenticated RCE via PostgreSQL Sidecar | 9.8 | KEV/exploited | [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-20253) |
 | CVE-2023-34362 | 2026-04-17 | Patch Diffing Progress MOVEit Transfer RCE (CVE-2023-34362) | high | patched | [src](https://www.assetnote.io/resources/research/patch-diffing-progress-moveit-transfer-rce-cve-2023-34362) |
-| cve-2023-34362 | 2026-04-17 | Patch Diffing Progress MOVEit Transfer RCE (CVE-2023-34362) | high | patched | [src](https://www.assetnote.io/resources/research/patch-diffing-progress-moveit-transfer-rce-cve-2023-34362) |
 
 ---
 
 ## Probes
 
-_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
-_pending enrichment_
 
 ---
 
 ## PoCs
 
-_Public PoC links rolled up from items below._
 
 - **CVE-2023-34362** — [source](https://www.assetnote.io/resources/research/patch-diffing-progress-moveit-transfer-rce-cve-2023-34362)
 
@@ -43,15 +35,11 @@ _Public PoC links rolled up from items below._
 
 ## Reproduction
 
-_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
-_pending enrichment_
 
 ---
 
 ## Defense
 
-_Patch guidance and detection rules. Populated from vendor advisories._
-_pending enrichment_
 
 ---
 
@@ -232,7 +220,6 @@ filename="shell.php%00.jpg"
 
 **What**
 
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -246,7 +233,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -295,7 +281,6 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 - **Why it matters:** Apache is the second most-deployed web server globally; bug bounty targets running 2.4.66 on any subdomain are exploitable via unauthenticated HTTP/2 request.
 - **Hunt signal:** `nuclei -t cves/2026/CVE-2026-23918.yaml` or `curl -v --http2 <target>` to confirm HTTP/2 support, then check Server header for Apache/2.4.66
 - **Evidence:** [thehackernews.com](https://thehackernews.com/2026/05/critical-apache-http2-flaw-cve-2026.html) · [securityaffairs.com](https://securityaffairs.com/191759/security/apache-fixes-critical-http-2-double-free-flaw-cve-2026-23918-enabling-rce.html) · [security.berkeley.edu](https://security.berkeley.edu/news/critical-apache-2-4-66-http2-flaw-allows-rce-dos-cve-2026-23918)
-
 
 
 ## 2026-11-18 — HTTP/2 Race-Condition Heap Corruption → RCE (CVE-2026-119618 pattern)

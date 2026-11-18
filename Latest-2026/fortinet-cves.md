@@ -61,7 +61,6 @@ Response fingerprints:
 
 ## PoCs
 
-_Public PoC links rolled up from items below._
 
 - **CVE-2025-64446** — [source](https://labs.watchtowr.com/when-the-impersonation-function-gets-used-to-impersonate-users-fortinet-fortiweb-auth-bypass/)
 

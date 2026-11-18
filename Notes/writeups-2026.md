@@ -18,15 +18,7 @@
 
 ---
 
-**NTLM Relay: The Attack That Turns Your Network Against Itself** · `#auth-bypass #windows` · high — Captures NTLM auth from one service, relays to another to impersonate users without cracking; leads to domain compromise if positioned correctly. Hunt: pass on internal engagements with Responder/ntlmrelayx; low value for external BB. [Medium writeup](https://medium.com/@garrettstimpson/ntlm-relay-the-attack-that-turns-your-network-against-itself-6eeba27c341b)
-
----
-
 **Flutter iOS SSL Pinning Bypass** · `#mobile` · medium — Bypass SSL pinning in Flutter iOS apps by hooking into native iOS networking stack (not Dart layer) via Frida/Objection; prerequisite for API analysis on Flutter targets. Hunt: any Flutter app in scope — check `libflutter.so` / Dart network stack. [Medium writeup](https://medium.com/@anuragbhoir07/flutter-based-ios-application-sslpinning-bypass-37b1c84332fa)
-
----
-
-**Kerberoasting: Why Your AD Service Accounts Are Already Toast** · `#auth-bypass #privesc` · high — Any authenticated domain user can request TGS tickets for SPN accounts and crack them offline; weak passwords = domain compromise. Hunt: pass on internal AD engagements; out of scope for most external BB. [Medium writeup](https://medium.com/@garrettstimpson/kerberoasting-why-your-ad-service-accounts-are-already-toast-977a836de9d2)
 
 ---
 
@@ -39,10 +31,6 @@
 ---
 
 **WordPress XML-RPC Admin Path Disclosure** · `#web #data-exfil` · info — Malformed requests to `xmlrpc.php` trigger verbose errors revealing absolute filesystem path; useful prerequisite for LFI. Hunt: `nuclei -t wordpress/xmlrpc-*` or manual POST to `/xmlrpc.php`. [Medium writeup](https://vanshrathorebughunter.medium.com/hunting-for-xmlrpc-uncovering-wordpress-xml-rpc-admin-path-disclosures-b5707b8f5424)
-
----
-
-**Inside GPT-5.4-Cyber: OpenAI's Defensive LLM** · `#llm` · info — Speculative architecture article on a hypothetical security-tuned LLM for threat detection and vuln analysis; arms race framing. Hunt: pass. [Medium writeup](https://medium.com/@psyduck90/inside-gpt-5-4-cyber-openais-new-secret-weapon-for-security-defenders-845daa714cdd)
 
 ---
 
@@ -390,8 +378,6 @@
 
 **What**
 
-_No H1 summary provided._
-
 **PoC refs:** search `github.com/search?q=CVE-2022-27775` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2022-27775.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
 **Hunt signal:** pass — summary too thin
@@ -405,8 +391,6 @@ _No H1 summary provided._
 - CWE: Insufficiently Protected Credentials
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2022-27774` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2022-27774.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -439,8 +423,6 @@ A stored XSS vulnerability was discovered in the attachment-display feature of R
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -468,8 +450,6 @@ A vulnerability was discovered in the `Rails::HTML::Sanitizer.allowed_uri?` meth
 - CWE: Information Exposure Through Sent Data
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -513,8 +493,6 @@ The `verifyAccountRecoveryPhoneNumber` mutation has no alias dedup. Send N alias
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -542,8 +520,6 @@ A vulnerability was discovered in the `ssrf_filter` library. The vulnerability a
 - CWE: SQL Injection
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -590,8 +566,6 @@ The vulnerability allowed for cross-tenant ActionText reference resolution and d
 - CWE: Insecure Direct Object Reference (IDOR)
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -661,8 +635,6 @@ The Nextcloud Desktop Client was found to automatically include user credentials
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -674,8 +646,6 @@ _No H1 summary provided._
 - CWE: Integer Overflow
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2020-19909` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2020-19909.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -690,8 +660,6 @@ _No H1 summary provided._
 - CWE: Insertion of Sensitive Information into Log File
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -769,8 +737,6 @@ A memory leak vulnerability was discovered in the gem decode logic of the Rubyge
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -781,8 +747,6 @@ _No H1 summary provided._
 - Source: [hackerone.com/3620761](https://hackerone.com/reports/3620761) · Reporter: [@misop00p](https://hackerone.com/misop00p) · Team: [AWS VDP](https://hackerone.com/aws_vdp)
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -796,8 +760,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -809,8 +771,6 @@ _No H1 summary provided._
 - CWE: Improper Access Control - Generic
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2022-42916` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2022-42916.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -825,8 +785,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **PoC refs:** search `github.com/search?q=CVE-2020-8284` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2020-8284.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
 **Hunt signal:** pass — summary too thin
@@ -840,8 +798,6 @@ _No H1 summary provided._
 - CWE: Improper Authorization
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -883,8 +839,6 @@ A stack buffer overflow was reported in the Monero RPC server. Specifically, on 
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -896,8 +850,6 @@ _No H1 summary provided._
 - CWE: CRLF Injection
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -911,8 +863,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -924,8 +874,6 @@ _No H1 summary provided._
 - CWE: Concurrent Execution using Shared Resource with Improper Synchronization ('Race Condition')
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -939,8 +887,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -952,8 +898,6 @@ _No H1 summary provided._
 - CWE: Authentication Bypass by Primary Weakness
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2022-27782` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2022-27782.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -969,8 +913,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **PoC refs:** search `github.com/search?q=CVE-2022-35252` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2022-35252.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
 **Hunt signal:** pass — summary too thin
@@ -984,8 +926,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -998,8 +938,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -1010,8 +948,6 @@ _No H1 summary provided._
 - Source: [hackerone.com/3479692](https://hackerone.com/reports/3479692) · Reporter: [@eclipse07077](https://hackerone.com/eclipse07077) · Team: [Nextcloud](https://hackerone.com/nextcloud)
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -1025,8 +961,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -1039,8 +973,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -1052,8 +984,6 @@ _No H1 summary provided._
 - CWE: Improper Handling of Highly Compressed Data (Data Amplification)
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -1098,8 +1028,6 @@ A path traversal vulnerability was discovered in the `protodump` tool. The vulne
 
 **What**
 
-_No H1 summary provided._
-
 **PoC refs:** search `github.com/search?q=CVE-2026-21717` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-21717.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
 **Hunt signal:** pass — summary too thin
@@ -1113,8 +1041,6 @@ _No H1 summary provided._
 - CWE: Information Disclosure
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-21715` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-21715.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -1130,8 +1056,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **PoC refs:** search `github.com/search?q=CVE-2026-21713` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-21713.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
 **Hunt signal:** pass — summary too thin
@@ -1145,8 +1069,6 @@ _No H1 summary provided._
 - CWE: Improper Access Control - Generic
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-21711` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-21711.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -1162,8 +1084,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **PoC refs:** search `github.com/search?q=CVE-2026-21710` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-21710.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
 **Hunt signal:** pass — summary too thin
@@ -1177,8 +1097,6 @@ _No H1 summary provided._
 - CWE: Improper Access Control - Generic
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-21716` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-21716.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -1194,8 +1112,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **PoC refs:** search `github.com/search?q=CVE-2026-21714` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-21714.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
 **Hunt signal:** pass — summary too thin
@@ -1210,8 +1126,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -1223,8 +1137,6 @@ _No H1 summary provided._
 - CWE: Improper Input Validation
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -1251,8 +1163,6 @@ A password strength policy bypass was discovered due to a server-side validation
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -1263,8 +1173,6 @@ _No H1 summary provided._
 - Source: [hackerone.com/2439734](https://hackerone.com/reports/2439734) · Reporter: [@sinic](https://hackerone.com/sinic) · Team: [passhash](https://hackerone.com/passhash)
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -1309,8 +1217,6 @@ The OIDC Access Policy implementation evaluated user-supplied regular expression
 
 **What**
 
-_No H1 summary provided._
-
 **PoC refs:** search `github.com/search?q=CVE-2026-3783` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-3783.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
 **Hunt signal:** pass — summary too thin
@@ -1325,8 +1231,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -1339,8 +1243,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -1352,8 +1254,6 @@ _No H1 summary provided._
 - CWE: Out-of-bounds Read
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -1427,8 +1327,6 @@ A vulnerability was discovered in the Pontoon application where any user could p
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -1487,8 +1385,6 @@ A vulnerability was discovered in the reward redemption process of a points and 
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -1500,8 +1396,6 @@ _No H1 summary provided._
 - CWE: Improper Neutralization of Escape, Meta, or Control Sequences
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -1545,8 +1439,6 @@ A business logic vulnerability was identified that allowed users on a free plan 
 - Source: [hackerone.com/3603300](https://hackerone.com/reports/3603300) · Reporter: [@tavro](https://hackerone.com/tavro) · Team: [curl](https://hackerone.com/curl)
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -1605,8 +1497,6 @@ A SQL injection vulnerability was found on an ibm.com endpoint. The vulnerabilit
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -1618,8 +1508,6 @@ _No H1 summary provided._
 - CWE: Off-by-one Error
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -1650,8 +1538,6 @@ A bypass was discovered for a previously patched open redirect vulnerability on 
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -1663,8 +1549,6 @@ _No H1 summary provided._
 - CWE: Use After Free
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-3805` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-3805.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -1680,8 +1564,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **PoC refs:** search `github.com/search?q=CVE-2026-3784` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-3784.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
 **Hunt signal:** pass — summary too thin
@@ -1695,8 +1577,6 @@ _No H1 summary provided._
 - CWE: Information Exposure Through Sent Data
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-3783` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-3783.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -1712,8 +1592,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **PoC refs:** search `github.com/search?q=CVE-2022-22576` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2022-22576.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
 **Hunt signal:** pass — summary too thin
@@ -1728,8 +1606,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -1740,8 +1616,6 @@ _No H1 summary provided._
 - Source: [hackerone.com/3557138](https://hackerone.com/reports/3557138) · Reporter: [@locus-x64](https://hackerone.com/locus-x64) · Team: [AWS VDP](https://hackerone.com/aws_vdp)
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -1771,8 +1645,6 @@ A Broken Access Control vulnerability was discovered that allowed users to chang
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -1784,8 +1656,6 @@ _No H1 summary provided._
 - CWE: Improper Neutralization of Value Delimiters
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -2004,8 +1874,6 @@ A vulnerability was discovered in Fastify versions 5.7.0 and later. The issue wa
 
 **What**
 
-_No H1 summary provided._
-
 **PoC refs:** search `github.com/search?q=CVE-2026-29198` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-29198.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
 **Hunt signal:** pass — summary too thin
@@ -2038,8 +1906,6 @@ A vulnerability was discovered in the SSH management interface of Weblate, a web
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2067,8 +1933,6 @@ A flaw was discovered in the Node.js TLS error handling that left SNICallback in
 
 **What**
 
-_No H1 summary provided._
-
 **PoC refs:** search `github.com/search?q=CVE-2026-29197` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-29197.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
 **Hunt signal:** pass — summary too thin
@@ -2086,8 +1950,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2099,8 +1961,6 @@ _No H1 summary provided._
 - CWE: Improper Certificate Validation
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -2114,8 +1974,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2128,8 +1986,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2141,8 +1997,6 @@ _No H1 summary provided._
 - CWE: Time-of-check Time-of-use (TOCTOU) Race Condition
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -2170,8 +2024,6 @@ A security inconsistency was identified in the user_oidc app where group-based l
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2182,8 +2034,6 @@ _No H1 summary provided._
 - Source: [hackerone.com/3733946](https://hackerone.com/reports/3733946) · Reporter: [@giant_anteater](https://hackerone.com/giant_anteater) · Team: [curl](https://hackerone.com/curl)
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2022-27774` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2022-27774.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -2227,8 +2077,6 @@ A vulnerability was discovered in the HMAC signature verification process of the
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2241,8 +2089,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2254,8 +2100,6 @@ _No H1 summary provided._
 - CWE: Incorrect Authorization
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-4873` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-4873.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -2271,8 +2115,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **PoC refs:** search `github.com/search?q=CVE-2020-8231` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2020-8231.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
 **Hunt signal:** pass — summary too thin
@@ -2287,8 +2129,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2301,8 +2141,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2314,8 +2152,6 @@ _No H1 summary provided._
 - CWE: Business Logic Errors
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2013-4545` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2013-4545.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -2330,8 +2166,6 @@ _No H1 summary provided._
 - CWE: Allocation of Resources Without Limits or Throttling
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2023-38039` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2023-38039.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -2363,8 +2197,6 @@ A vulnerability was identified in GitHub Enterprise Server that allowed an attac
 
 **What**
 
-_No H1 summary provided._
-
 **PoC refs:** search `github.com/search?q=CVE-2018-16840` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2018-16840.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
 **Hunt signal:** pass — summary too thin
@@ -2379,8 +2211,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2392,8 +2222,6 @@ _No H1 summary provided._
 - CWE: Allocation of Resources Without Limits or Throttling
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -2407,8 +2235,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2420,8 +2246,6 @@ _No H1 summary provided._
 - CWE: Cleartext Transmission of Sensitive Information
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2022-30115` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2022-30115.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -2467,8 +2291,6 @@ The `/api/v1/autotranslate.translateMessage` endpoint allowed any authenticated 
 
 **What**
 
-_No H1 summary provided._
-
 **PoC refs:** search `github.com/search?q=CVE-2022-30115` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2022-30115.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
 **Hunt signal:** pass — summary too thin
@@ -2483,8 +2305,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2496,8 +2316,6 @@ _No H1 summary provided._
 - CWE: SQL Injection
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-45545` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-45545.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -2511,8 +2329,6 @@ _No H1 summary provided._
 - Source: [hackerone.com/3725659](https://hackerone.com/reports/3725659) · Reporter: [@rootofpi_ramesh](https://hackerone.com/rootofpi_ramesh) · Team: [curl](https://hackerone.com/curl)
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -2538,8 +2354,6 @@ A vulnerability was discovered in Amazon Quick Suite (formerly QuickSight) that 
 - CWE: Open Redirect
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -2615,8 +2429,6 @@ A vulnerability was discovered where view-only guests could see deleted Collecti
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2671,8 +2483,6 @@ A vulnerability was disclosed that could cause a Monero node's outbound connecti
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2698,8 +2508,6 @@ A security issue was discovered in the /api-internal/login authentication endpoi
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2710,8 +2518,6 @@ _No H1 summary provided._
 - Source: [hackerone.com/3707747](https://hackerone.com/reports/3707747) · Reporter: [@codexxxx](https://hackerone.com/codexxxx) · Team: [curl](https://hackerone.com/curl)
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-7168` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-7168.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -2726,8 +2532,6 @@ _No H1 summary provided._
 - CWE: ASI05: Unexpected Code Execution (RCE)
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -2769,8 +2573,6 @@ The netcontrol syscall in the kernel had a vulnerability where the socket file d
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2783,8 +2585,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2796,8 +2596,6 @@ _No H1 summary provided._
 - CWE: Authentication Bypass by Primary Weakness
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-1965` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-1965.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -2813,8 +2611,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2826,8 +2622,6 @@ _No H1 summary provided._
 - CWE: Exposure of Data Element to Wrong Session
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-7168` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-7168.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -2843,8 +2637,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **PoC refs:** search `github.com/search?q=CVE-2024-8096` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2024-8096.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
 **Hunt signal:** pass — summary too thin
@@ -2857,8 +2649,6 @@ _No H1 summary provided._
 - Source: [hackerone.com/3669637](https://hackerone.com/reports/3669637) · Reporter: [@joesephdiver](https://hackerone.com/joesephdiver) · Team: [curl](https://hackerone.com/curl)
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-6253` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-6253.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -2874,8 +2664,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **PoC refs:** search `github.com/search?q=CVE-2026-5545` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-5545.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
 **Hunt signal:** pass — summary too thin
@@ -2890,8 +2678,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **PoC refs:** search `github.com/search?q=CVE-2026-6276` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-6276.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
 **Hunt signal:** pass — summary too thin
@@ -2905,8 +2691,6 @@ _No H1 summary provided._
 - CWE: Information Exposure Through Sent Data
 
 **What**
-
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-6429` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-6429.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -2953,8 +2737,6 @@ A vulnerability was discovered in curl version 8.19.0 and earlier versions that 
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2967,8 +2749,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
-
 **Hunt signal:** pass — summary too thin
 
 ---
@@ -2980,8 +2760,6 @@ _No H1 summary provided._
 - CWE: Uncontrolled Recursion
 
 **What**
-
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 

@@ -8,51 +8,36 @@ _Last updated: — · Items: 0_
 
 ## What
 
-_Define the class, prerequisites, and typical finding shape. Fill with real content._
-_pending enrichment — baseline opener below_
-
-See items under ## Items for per-finding details.
 
 ---
 
 ## CVEs
 
-_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
 
 ---
 
 ## Probes
 
-_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
-_pending enrichment_
 
 ---
 
 ## PoCs
 
-_Public PoC links rolled up from items below._
-
-_No PoCs in items yet._
 
 ---
 
 ## Reproduction
 
-_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
-_pending enrichment_
 
 ---
 
 ## Defense
 
-_Patch guidance and detection rules. Populated from vendor advisories._
-_pending enrichment_
 
 ---
 
 ## References
 
-_Populated by daily refresh-latest pipeline._
 
 ---
 
@@ -214,7 +199,6 @@ Or `SELECT ... FOR UPDATE` inside a transaction.
 
 **What**
 
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -231,7 +215,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -245,7 +228,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -262,7 +244,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-48931` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-48931.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -297,7 +278,6 @@ A flaw was discovered in the node:sqlite package for Node.js that allowed a stal
 
 **What**
 
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -311,7 +291,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 

@@ -2,9 +2,8 @@
 
 > Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
 
-_Last updated: 2026-07-08 · Items: 1_
-_Last updated: 2026-07-08 · Items: 1_
-_Last updated: 2026-10-01 · Items: 2_
+_Last updated: 2026-10-12 · Items: 2_
+
 
 ## 2026-10-01 — CVE-2026-87902: WordPress Core Unauthenticated LFI / Conditional RCE
 
@@ -15,8 +14,6 @@ _Last updated: 2026-10-01 · Items: 2_
 - **Hunt signal:** `nuclei -t cves/2026/CVE-2026-87902.yaml` OR check WP version via `/wp-json/wp/v2` → if <=7.1.1, attempt `?page_template=../../../../../tmp/test`
 - **Evidence:** [PoC repo](https://github.com/ressl/cve-2026-87902-poc) · [socprime writeup](https://socprime.com/blog/cve-2026-87902-critical-wordpress-core-rce-flaw/) · [cyberkendra](https://www.cyberkendra.com/2026/09/cve-2026-87902-wordpress-file-inclusion-rce.html)
 - **CVSS:** 8.1 (NVD) / 9.2 (CVSS 4.0) · **KEV:** No · **PoC:** PUBLIC · **Affected:** WordPress 4.7.0 – 7.1.1
-_Last updated: 2026-10-07 · Items: 2_
-_Last updated: 2026-10-12 · Items: 2_
 
 ## 2026-07-08 — Adobe ColdFusion RDS Path Traversal RCE (CVE-2026-48282)
 
@@ -31,51 +28,36 @@ _Last updated: 2026-10-12 · Items: 2_
 
 ## What
 
-_Define the class, prerequisites, and typical finding shape. Fill with real content._
-_pending enrichment — baseline opener below_
-
-See items under ## Items for per-finding details.
 
 ---
 
 ## CVEs
 
-_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
 
 ---
 
 ## Probes
 
-_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
-_pending enrichment_
 
 ---
 
 ## PoCs
 
-_Public PoC links rolled up from items below._
-
-_No PoCs in items yet._
 
 ---
 
 ## Reproduction
 
-_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
-_pending enrichment_
 
 ---
 
 ## Defense
 
-_Patch guidance and detection rules. Populated from vendor advisories._
-_pending enrichment_
 
 ---
 
 ## References
 
-_Populated by daily refresh-latest pipeline._
 
 ---
 
@@ -311,7 +293,6 @@ A vulnerability in Nextcloud Talk Android allowed an external Android app to wri
 
 **What**
 
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-56845` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-56845.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -327,7 +308,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2025-24293` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2025-24293.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 

@@ -8,51 +8,36 @@ _Last updated: — · Items: 0_
 
 ## What
 
-_Define the class, prerequisites, and typical finding shape. Fill with real content._
-_pending enrichment — baseline opener below_
-
-See items under ## Items for per-finding details.
 
 ---
 
 ## CVEs
 
-_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
 
 ---
 
 ## Probes
 
-_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
-_pending enrichment_
 
 ---
 
 ## PoCs
 
-_Public PoC links rolled up from items below._
-
-_No PoCs in items yet._
 
 ---
 
 ## Reproduction
 
-_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
-_pending enrichment_
 
 ---
 
 ## Defense
 
-_Patch guidance and detection rules. Populated from vendor advisories._
-_pending enrichment_
 
 ---
 
 ## References
 
-_Populated by daily refresh-latest pipeline._
 
 ---
 
@@ -200,7 +185,6 @@ A bypass was discovered for a previously patched open redirect vulnerability on 
 
 **What**
 
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 

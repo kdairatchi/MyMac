@@ -25,7 +25,6 @@ Grep targets: `innerHTML`, `document.write`, `eval`, `dangerouslySetInnerHTML`, 
 
 ## CVEs
 
-_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
 
 ---
 
@@ -77,16 +76,11 @@ Context reminders:
 
 ## PoCs
 
-_Public PoC links rolled up from items below._
-
-_No PoCs in items yet._
 
 ---
 
 ## Reproduction
 
-_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
-_pending enrichment_
 
 ---
 
@@ -108,7 +102,6 @@ Priority-ordered:
 
 ## References
 
-_Populated by daily refresh-latest pipeline._
 
 ---
 
@@ -418,7 +411,6 @@ An unsafe nginx regex pattern was discovered in the `/colibri-relay-ws/` locatio
 
 **What**
 
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -432,7 +424,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-65644` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-65644.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 

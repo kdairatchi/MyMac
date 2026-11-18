@@ -8,45 +8,31 @@ _Last updated: 2026-04-17 · Items: 1_
 
 ## What
 
-_Define the class, prerequisites, and typical finding shape. Fill with real content._
-_pending enrichment — baseline opener below_
-
-See items under ## Items for per-finding details.
 
 ---
 
 ## CVEs
 
-_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
 
 ---
 
 ## Probes
 
-_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
-_pending enrichment_
 
 ---
 
 ## PoCs
 
-_Public PoC links rolled up from items below._
-
-_No PoCs in items yet._
 
 ---
 
 ## Reproduction
 
-_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
-_pending enrichment_
 
 ---
 
 ## Defense
 
-_Patch guidance and detection rules. Populated from vendor advisories._
-_pending enrichment_
 
 ---
 
@@ -205,7 +191,6 @@ Scan with: `ppmap` — automated prototype pollution scanner.
 
 **What**
 
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -253,7 +238,6 @@ A SQL injection vulnerability was found on an ibm.com endpoint. The vulnerabilit
 
 **What**
 
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-29198` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-29198.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -272,7 +256,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-45545` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-45545.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -319,7 +302,6 @@ The link-preview feature in Rocket.Chat version 7.11.0 did not properly validate
 
 **What**
 
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -336,7 +318,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -364,7 +345,6 @@ A boolean-based and time-based blind SQL injection vulnerability was discovered 
 
 **What**
 
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-65645` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-65645.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 

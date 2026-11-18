@@ -17,51 +17,36 @@ _Last updated: 2026-11-12 · Items: 2_
 
 ## What
 
-_Define the class, prerequisites, and typical finding shape. Fill with real content._
-_pending enrichment — baseline opener below_
-
-See items under ## Items for per-finding details.
 
 ---
 
 ## CVEs
 
-_No CVE-assigned items yet. Items below are pre-CVE or class-level findings._
 
 ---
 
 ## Probes
 
-_Grep, curl, nuclei probes for this class. Append as items arrive with real PoCs._
-_pending enrichment_
 
 ---
 
 ## PoCs
 
-_Public PoC links rolled up from items below._
-
-_No PoCs in items yet._
 
 ---
 
 ## Reproduction
 
-_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
-_pending enrichment_
 
 ---
 
 ## Defense
 
-_Patch guidance and detection rules. Populated from vendor advisories._
-_pending enrichment_
 
 ---
 
 ## References
 
-_Populated by daily refresh-latest pipeline._
 
 ---
 
@@ -175,7 +160,6 @@ Cookie: __Host-session=attacker_value
 
 **What**
 
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -189,7 +173,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -203,7 +186,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2022-27782` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2022-27782.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -219,7 +201,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -233,7 +214,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-3784` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-3784.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -252,7 +232,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-4873` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-4873.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -268,7 +247,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-1965` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-1965.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -284,7 +262,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-5545` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-5545.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -315,7 +292,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2022-27782` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2022-27782.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -331,7 +307,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2026-8458` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2026-8458.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -361,7 +336,6 @@ The Taskcluster web-server's OAuth2 token-exchange handler did not consume autho
 
 **What**
 
-_No H1 summary provided._
 
 **PoC refs:** search `github.com/search?q=CVE-2022-27782` · [trickest/cve](https://github.com/trickest/cve/blob/main/CVE-2022-27782.md) · [nomi-sec/PoC-in-GitHub](https://github.com/nomi-sec/PoC-in-GitHub)
 
@@ -380,7 +354,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -411,7 +384,6 @@ A security vulnerability was reported in SingleStore's self-managed database ser
 
 **What**
 
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 
@@ -425,7 +397,6 @@ _No H1 summary provided._
 
 **What**
 
-_No H1 summary provided._
 
 **Hunt signal:** pass — summary too thin
 

@@ -75,16 +75,11 @@ nuclei -u https://target -id CVE-2025-29927   # middleware bypass template
 
 ## PoCs
 
-_Public PoC links rolled up from items below._
-
-_No PoCs in items yet._
 
 ---
 
 ## Reproduction
 
-_Step-by-step repro steps per CVE. Populated as items arrive with enough detail._
-_pending enrichment_
 
 ---
 
@@ -102,7 +97,6 @@ _pending enrichment_
 
 ## References
 
-_Populated by daily refresh-latest pipeline._
 
 ---
 
