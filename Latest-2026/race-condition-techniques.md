@@ -316,3 +316,14 @@ _No H1 summary provided._
 **Hunt signal:** pass — summary too thin
 
 ---
+
+## 2026-11-04 — CVE-2026-119977 WordPress Core Upgrade-Window RCE
+
+### CVE-2026-119977 — WordPress Core TOCTOU Race Condition RCE
+- **Date:** 2026-11-04 · **Source:** [cisa.gov](https://www.cisa.gov/news-events/alerts/2026/11/03/cisa-adds-one-known-exploited-vulnerability-to-catalog) · **Class:** cve
+- **What:** Time-of-check time-of-use (TOCTOU / CWE-367) race condition during WordPress Core package upgrade allows unauthenticated RCE on affected hosts.
+- **Why it matters:** CISA KEV-listed (Nov 3 2026, remediate by Nov 6); active exploitation confirmed; affects every self-hosted WordPress pre-7.1.4 running on a shared filesystem or slow storage.
+- **Hunt signal:** identify targets running WP <7.1.4 via `wappalyzer` or `whatweb`, check `/wp-admin/update-core.php` exposure; look for leftover PHP files in `wp-content/` after upgrade window.
+- **Evidence:** [xhack.io advisory](https://xhack.io/blog/cve-2026-119977-wordpress-core-upgrade-rce) · [aicybr.com remediation](https://aicybr.com/blog/wordpress-cve-2026-119977-upgrade-window-rce-remediation) · CVSS 8.1 (Wordfence CNA); WordPress advisory rates Low (scoring dispute noted)
+
+---
