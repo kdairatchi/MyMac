@@ -322,3 +322,12 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 - **Evidence:** [abstract.security](https://www.abstract.security/blog/php2shell-critical-php-rce-vulnerabilities-cve-2026-109618-and-cve-2026-109619) · [Qualys](https://blog.qualys.com/vulnerabilities-threat-research/2026/10/20/php-announces-critical-security-release-for-two-vulnerabilities)
 
 ---
+
+## 2026-10-26 — CVE-2026-110447: Collabora Online CODE Server Unauthenticated RCE
+
+### Collabora Online Built-in CODE Server — Unauthenticated OS Command Injection (CVE-2026-110447)
+- **Date:** 2026-10-26 · **Source:** [securityonline.info](https://securityonline.info/nextcloud-collabora-online-cve-2026-110447-exploited/) · **Class:** cve
+- **What:** Unauthenticated OS command injection in `proxy.php` of the bundled Nextcloud app `richdocumentscode` (all versions < 26.4.303); reachable only when the local CODE server is not running.
+- **Why it matters:** CISA KEV-listed (added 2026-10-23, deadline 2026-10-26); already exploited to drop PHP webshells under `apps/richdocumentscode/shx*.php` — Nextcloud is common enterprise self-hosted scope.
+- **Hunt signal:** `curl -sk "https://TARGET/index.php/apps/richdocumentscode/proxy.php?status" -v` — 200 or traversal error with server down = unpatched; check for unexpected PHP files in that path.
+- **Evidence:** [Censys advisory](https://censys.com/advisory/cve-2026-110447) · [CISA KEV](https://www.thehackerwire.com/cve-tracker/kev/) · [rescana.com](https://www.rescana.com/post/collabora-built-in-code-server-cve-2026-110447-nextcloud-kev)
