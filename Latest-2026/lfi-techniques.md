@@ -2,6 +2,7 @@
 
 > Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
 
+_Last updated: 2026-07-08 · Items: 1_
 _Last updated: 2026-10-01 · Items: 2_
 
 ## 2026-10-01 — CVE-2026-87902: WordPress Core Unauthenticated LFI / Conditional RCE
@@ -13,6 +14,7 @@ _Last updated: 2026-10-01 · Items: 2_
 - **Hunt signal:** `nuclei -t cves/2026/CVE-2026-87902.yaml` OR check WP version via `/wp-json/wp/v2` → if <=7.1.1, attempt `?page_template=../../../../../tmp/test`
 - **Evidence:** [PoC repo](https://github.com/ressl/cve-2026-87902-poc) · [socprime writeup](https://socprime.com/blog/cve-2026-87902-critical-wordpress-core-rce-flaw/) · [cyberkendra](https://www.cyberkendra.com/2026/09/cve-2026-87902-wordpress-file-inclusion-rce.html)
 - **CVSS:** 8.1 (NVD) / 9.2 (CVSS 4.0) · **KEV:** No · **PoC:** PUBLIC · **Affected:** WordPress 4.7.0 – 7.1.1
+_Last updated: 2026-10-07 · Items: 2_
 
 ## 2026-07-08 — Adobe ColdFusion RDS Path Traversal RCE (CVE-2026-48282)
 
@@ -368,3 +370,17 @@ _No H1 summary provided._
 - **Evidence:** [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-48282) · [BleepingComputer](https://www.bleepingcomputer.com/news/security/max-severity-adobe-coldfusion-flaw-now-exploited-in-attacks/) · [Resecurity analysis](https://www.resecurity.com/blog/article/cve-2026-48282-adobe-coldfusion-rds-path-traversal-leading-to-rce) · [Help Net Security](https://www.helpnetsecurity.com/2026/07/07/adobe-coldfusion-cve-2026-48282-exploitation-detected/) · [WatchTowr](https://labs.watchtowr.com/its-37oc-and-all-we-can-think-about-is-coldfusion-adobe-coldfusion-security-bulletin-apsb26-68-cve-bonanza/)
 
 ---
+
+---
+
+## 2026-10-07 — CVE-2026-21589: Atlassian Data Center Unauthenticated Path Traversal (8 Products)
+
+### CVE-2026-21589: Atlassian Data Center Arbitrary File Read via Path Traversal
+- **Date:** 2026-10-07 · **Source:** [cycognito.com](https://www.cycognito.com/blog/emerging-threat-cve-2026-21589-atlassian-data-center-arbitrary-file-access-via-path-traversal/) · **Class:** cve
+- **What:** Unauthenticated attacker can read known files within the web-application root directory on eight Atlassian Data Center products via unsanitized `../` traversal sequences in HTTP requests.
+- **Why it matters:** Covers Jira, Confluence, Bitbucket, Bamboo, Crowd, Crucible, Fisheye, Jira Service Management — any self-hosted Atlassian stack is in scope; exposing config files, tokens, or internal paths escalates to further compromise.
+- **Hunt signal:** `nuclei -t cves/2026/CVE-2026-21589.yaml` once published; manual: send `GET /%2e%2e/%2e%2e/WEB-INF/web.xml` against `/rest/` or static asset paths on Atlassian DC installs.
+- **Evidence:** [rescana.com](https://www.rescana.com/post/critical-cve-2026-21589-vulnerability-exposes-atlassian-data-center-products-to-unauthenticated-file-disclosure) · [socprime.com](https://socprime.com/blog/cve-2026-21589-critical-atlassian-vulnerability-exposes-sensitive-files-across-eight-products/) · [securityonline.info](https://securityonline.info/atlassian-data-center-vulnerability-cve-2026-21589/)
+- **CVSS:** 9.3 · **KEV:** No (as of 2026-10-07) · **PoC:** NONE (researcher-only)
+- **Affected versions:** Bitbucket DC <9.4.26/10.2.8/10.5.1; Confluence DC <9.2.26/10.2.19; Jira SW DC <9.12.40/10.3.26/11.3.12; Jira SM DC <5.12.40/10.3.26/11.3.12; Bamboo DC <10.2.24/12.1.12
+- **Bounty programs:** Atlassian (HackerOne); any self-hosted Atlassian DC in scope on any program
