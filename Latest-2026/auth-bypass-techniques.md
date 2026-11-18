@@ -550,3 +550,12 @@ Three Crocoblock (Jet) plugins were found to expose REST API endpoints that allo
 - **Why it matters:** No-priv access to API management admin endpoints; affects enterprise API gateways common in fintech, telco, and SaaS bounty scope.
 - **Hunt signal:** enumerate `/api/am/admin/` and `/api/am/publisher/` endpoints with a self-registration token; check if tenant-management operations return 200.
 - **Evidence:** [WSO2-2026-5212](https://security.docs.wso2.com/en/latest/security-announcements/security-advisories/2026/WSO2-2026-5212/) · [strix.ai](https://www.strix.ai/cve/CVE-2026-4052) · [sploitus listing](https://sploitus.com/exploit?id=CVE-2026-4052) · KEV: no · Affected: API Manager 4.1.0–4.6.0, apim-km-wso2is < 1.8.8
+
+## 2026-11-16 — GPUStack Authentication Bypass via Loopback Spoofing (CVE-2026-102895)
+
+### GPUStack: Unauthenticated Admin via X-GPUStack-Real-IP Header Spoofing
+- **Date:** 2026-11-16 · **Source:** [advisories.gitlab.com](https://advisories.gitlab.com/pypi/gpustack/CVE-2026-102895/) · **Class:** cve
+- **What:** GPUStack <2.2.0 treats any request appearing to originate from loopback as the built-in admin; a forged `X-GPUStack-Real-IP: 127.0.0.1` header is sufficient to bypass auth and gain full admin API access including RCE via inference-backend YAML.
+- **Why it matters:** CVSSv3 9.8, in CISA KEV (added 2026-11-09, due 2026-11-12); actively exploited for reverse shells on worker hosts; AI infra platforms running GPUStack are likely bug-bounty targets.
+- **Hunt signal:** `curl -H "X-GPUStack-Real-IP: 127.0.0.1" https://<target>/v1/users` — 200 with admin context = vuln; nuclei tag pending community template
+- **Evidence:** [NVD/OpenCVE](https://app.opencve.io/cve/CVE-2026-102895) · [SecurityOnline](https://securityonline.info/gpustack-authentication-bypass-cve-2026-102895-exploited/) · [CISA KEV](https://www.cisa.gov/news-events/alerts/2026/11/13/cisa-adds-two-known-exploited-vulnerabilities-catalog)
