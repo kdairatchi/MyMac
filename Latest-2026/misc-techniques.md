@@ -401,3 +401,14 @@ A vulnerability was discovered in the WordPress REST API batch endpoint (/wp-jso
 **Hunt signal:** _Review H1 report for probe; add grep/nuclei tag here._
 
 ---
+
+## 2026-11-01 — CVE-2026-115700: SSRF Allowlist Bypass via Percent-Encoded IPv6 / Trailing-Dot IP in hackney
+
+### CVE-2026-115700 — hackney SSRF Allowlist Bypass (Erlang/Elixir HTTP client)
+- **Date:** 2026-11-01 · **Source:** [radar.offseq.com/cve-2026-115700](https://radar.offseq.com/threat/cve-2026-115700) · **Class:** technique
+- **What:** hackney (Erlang HTTP client used by Elixir/Phoenix apps) fails to normalize percent-encoded IPv6 bracket notation and trailing-dot IP literals before allowlist comparison, enabling bypass of SSRF filters.
+- **Why it matters:** Pattern generalizes beyond hackney — any SSRF filter doing string-match before URL normalization is bypassed with `%5B::1%5D` or `127.0.0.1.`; hits Phoenix/LiveView apps and anything in the Erlang ecosystem.
+- **Hunt signal:** Try `http://%5B::ffff:127.0.0.1%5D/`, `http://127.0.0.1./`, `http://[::ffff:169.254.169.254]/` against webhook/URL-fetch inputs on Elixir stacks (look for Beam/ERTS in headers or job queues)
+- **Evidence:** CVE-2026-115700 · CVSS 6.9 (Medium) · Published 2026-10-26 · hackney fixed in 1.22.1 equivalent or later
+
+---
