@@ -374,3 +374,12 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 - **Why it matters:** In-the-wild exploitation confirmed; CISA added both CVEs to KEV 2026-10-26; demonstrated against WordPress, Drupal, Joomla by Wiz. PHP runs ~77% of tracked web servers — enormous bounty-eligible attack surface across virtually every PHP-based target.
 - **Hunt signal:** Check `X-Powered-By: PHP/` header — anything < 8.2.35 is a potential flag for program impact (do not exploit on live targets; report version only where rules permit). Public PoCs exist at `eness/php2shell-CVE-2026-109618-CVE-2026-109619-PoC` and `Is4yev/php2shell-poc` — use only in authorized lab environments.
 - **Evidence:** [CISA KEV alert](https://www.cisa.gov/news-events/alerts/2026/10/21/critical-vulnerabilities-php-require-immediate-patching) · [xalgorix digest](https://www.xalgorix.com/blog/weekly-appsec-threat-digest-oct-23-30-2026) · [BleepingComputer](https://www.bleepingcomputer.com/news/security/cisa-confirms-php2shell-vulnerabilities-now-exploited-in-attacks/)
+
+## 2026-10-15 — CVE-2026-94545: Next.js ImageResponse (next/og) SVG Injection RCE
+
+### CVE-2026-94545 — Next.js Satori SVG RCE via next/og ImageResponse
+- **Date:** 2026-09-22 · **Source:** [wiz.io](https://www.wiz.io/ko-kr/vulnerability-database/cve/cve-2026-94545) · **Class:** cve
+- **What:** Satori (the SVG renderer bundled inside Next.js `next/og`) fails to escape attacker-controlled strings before inserting them into SVG output; on the Node.js runtime this allows unauthenticated RCE — CVSS v4 9.5 (3.1 9.8 per Qi An Xin advisory).
+- **Why it matters:** Virtually every Next.js 16.2.0–16.3.5 SaaS that renders an OG image from user-supplied text (titles, usernames, blog posts) is exploitable; Satori is bundled, so it won't surface in `npm audit` or lockfile scanners as a separate dep.
+- **Hunt signal:** `grep -r '"next"' package.json` → confirm version 16.2.x–16.3.5 in target's `package.json`/`package-lock.json`; then find any `ImageResponse` endpoint that reflects unsanitized user input into SVG `<text>` nodes.
+- **Evidence:** [wiz.io](https://www.wiz.io/ko-kr/vulnerability-database/cve/cve-2026-94545) · [aicybr.com writeup](https://aicybr.com/blog/nextjs-16-3-6-cve-2026-94545-imageresponse-rce) · [socprime](https://socprime.com/?p=53133) · PoC: PUBLIC (secrss.com advisory, confirmed no in-wild exploitation as of Sep 24)
