@@ -3725,3 +3725,15 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Trick:** Intercepted a role-update API request and injected `"team_leader_ids": [<own_user_id>]` into the JSON body — the backend accepted and persisted the extra field, granting team-admin permissions without authorization.
 - **Why it matters:** REST APIs that use object binding without an allow-list of accepted fields (ORM mass assignment) silently accept privilege-flag fields; yields horizontal → vertical privesc in one request.
 - **Rating:** high
+
+---
+### AI agent exploits Zammad zero-days in DIVD breach: What we know and how to detect it
+- **Tags:** `#session-fixation` `#auth-bypass` `#privesc` `#chain`
+- **Severity:** critical · **Hunt:** 5/5 · **Score:** 5.0 · **Status:** confirmed · **Age:** 0d
+- **Sources:** [1](https://daily.dev/posts/ai-agent-exploits-zammad-zero-days-in-divd-breach-what-we-know-and-how-to-detect-it-4imxskurl)
+
+- **Trick:** Unauthenticated session fixation (CVE-2026-102489) + local privesc (CVE-2026-102490) chained to root on any Zammad instance; demonstrated by autonomous AI agent against DIVD on 2026-09-21.
+- **Why it matters:** First confirmed autonomous AI agent breach of a live security org via a 2-zero-day chain — directly applicable pattern: find session fixation flaws in helpdesk/ticketing software to pivot to server access.
+- **Rating:** primary
+
+---
