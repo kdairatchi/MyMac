@@ -377,3 +377,12 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 - **Why it matters:** Affects any backend using Brotli (Node.js, Python brotli, Bun, Envoy); broad cloud-native API surface in bug bounty programs.
 - **Hunt signal:** Send malformed Brotli-compressed body to endpoints advertising `br` in Accept-Encoding; watch for 500s/crashes. Nuclei tag: `CVE-2026-111497`.
 - **Evidence:** [CVSS 9.2 record](https://cipherssecurity.com/cve/CVE-2026-111497/) · CISA KEV added 2026-10-27, fed deadline 2026-11-10 · [BleepingComputer](https://www.bleepingcomputer.com/news/security/cisa-warns-of-hackers-now-exploiting-critical-node2shell-flaw/amp/)
+
+## 2026-11-19 — CVE-2026-114938 (Java4Shell: Pre-Auth RCE in OpenJDK)
+
+### CVE-2026-114938: Java4Shell — Heap Overflow in JDK Base64 Decoder
+- **Date:** 2026-11-19 · **Source:** [BleepingComputer](https://www.bleepingcomputer.com/news/security/critical-java4shell-flaw-allows-rce-attacks-on-major-java-applications/) · **Class:** cve
+- **What:** Heap-based buffer overflow (CWE-122) in the optimized Base64 decoder of OpenJDK 17/21/25/27 HotSpot JVM; unauthenticated attacker sends crafted Base64 input to crash the JVM and achieve RCE.
+- **Why it matters:** Pre-auth RCE hitting Jira, Jenkins, Keycloak, Spring Boot, and any app running Java 17+; CVSS 3.1 8.1 (Oracle) / 9.2 (CVSS 4.0 researcher score); broad bug bounty scope.
+- **Hunt signal:** Fingerprint Java version via `Server:` / `X-Powered-By:` / JVM stack traces; fuzz Base64-heavy API endpoints (upload, JWT decode, file export); `nuclei -t cves/2026/CVE-2026-114938.yaml`; patch version check: 17.0.21.1, 21.0.13.1, 25.0.5.1, 27.0.1.1
+- **Evidence:** [Tenable FAQ](https://www.tenable.com/blog/java4shell-cve-2026-114938-frequently-asked-questions-about-openjdk-rce-vulnerability) · [THN: Java4Shell in Jira/Jenkins/Keycloak](https://thehackernews.com/2026/11/java4shell-cve-2026-114938-enables-pre.html) · [Rapid7 ETR](https://www.rapid7.com/blog/post/etr-cve-2026-114938-reported-critical-pre-authentication-remote-code-execution-java-17/) · PoC: PRIVATE (researcher working exploit; no public code as of 2026-11-17)

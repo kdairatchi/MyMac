@@ -3584,3 +3584,12 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 
 <!-- Entries appended newest-first per run. Format: date · source · class · title -->
 
+
+## 2026-11-19 — Anonymous API Rate Limit Bypass via X-Forwarded-For
+
+### Anonymous API Rate Limit Bypass via X-Forwarded-For (hexafaton)
+- **Date:** 2026-11-15 (H1 disclosed) · **Source:** [RedPacket Security](https://www.redpacketsecurity.com/hackerone-bugbounty-disclosure-anonymous-api-rate-limit-bypass-via-x-forwarded-for-hexafaton/) · **Class:** writeup
+- **What:** App trusted client-supplied `X-Forwarded-For` header as the source IP for rate limiting; anonymous users bypassed per-IP throttling by rotating header values.
+- **Why it matters:** Converts a P3/P4 rate-limit finding on login/reset/2FA/search into a brute-force P1; the pattern appears on any proxy-fronted service that trusts forwarding headers without validation.
+- **Hunt signal:** Send 10 rapid requests to a throttled endpoint; add `X-Forwarded-For: 1.2.3.4` on the 11th and increment — if the counter resets per header value, exploitable.
+- **Evidence:** [RedPacket mirror](https://www.redpacketsecurity.com/hackerone-bugbounty-disclosure-anonymous-api-rate-limit-bypass-via-x-forwarded-for-hexafaton/)
