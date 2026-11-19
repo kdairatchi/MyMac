@@ -1,6 +1,6 @@
 # Latest-2026 — Rolling Attack Surface Tracker
 
-> **Last refresh:** 2026-08-30 · Maintainer: [@kdairatchi](https://github.com/kdairatchi)
+> **Last refresh:** 2026-11-19 · Maintainer: [@kdairatchi](https://github.com/kdairatchi)
 
 A rolling index of fresh attack surface, CVEs, and techniques that matter for bug bounty **right now**. Dated, evidence-labeled, no filler.
 
@@ -25,10 +25,20 @@ grep -rln "CVE-2025" Latest-2026/
 grep -rln "desync\|smuggling" Latest-2026/
 ```
 
-## Recent (last 10)
+## Recent (cumulative — newest first)
 
 | Date | Item | Class | Hunt |
 |---|---|---|---|
+| 2026-11-19 | CVE-2026-49980 Rclone Unauth RCE via --rc-serve | cve | 4/5 |
+| 2026-11-18 | XSS in innerHTML without equals (PortSwigger) | technique | 5/5 |
+| 2026-11-17 | Basecamp heap overflow via TIFF/JPEG image upload | writeup | 5/5 |
+| 2026-11-15 | Weblate priv esc via unfiltered backup restore (Critical) | writeup | 5/5 |
+| 2026-11-11 | Stealing credentials through CSP (PortSwigger) | technique | 4/5 |
+| 2026-11-05 | CVE-2026-116606 Barracuda ESG Pre-Auth Root RCE | cve | 4/5 |
+| 2026-11-04 | HTTP header injection critical with AI prompt (PortSwigger) | technique | 4/5 |
+| 2026-10-27 | CVE-2026-94127 F5 BIG-IP Unauth Heap Overflow RCE | cve | 4/5 |
+| 2026-10-09 | CVE-2026-82077 PaperCut Pre-Auth RCE Chain + Patch Bypasses | cve | 4/5 |
+| 2026-10-06 | CVE-2026-21589 Atlassian Jira/Confluence Pre-Auth File Read | cve | 5/5 |
 | 2026-08-30 | CVE-2026-8452 Citrix NetScaler Pre-Auth RCE (watchTowr) | cve | 4/5 |
 | 2026-08-30 | CVE-2026-63359 Equifax Appriss VINE unauth auth bypass | cve | 5/5 |
 | 2026-08-30 | CVE-2026-47669 DbGate ZIP slip → unauth RCE as root | cve | 3/5 |

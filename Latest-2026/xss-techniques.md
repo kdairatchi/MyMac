@@ -2,7 +2,7 @@
 
 > Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
 
-_Last updated: — · Items: 0_
+_Last updated: 2026-11-19 · Items: 3_
 
 ---
 
@@ -25,6 +25,32 @@ Grep targets: `innerHTML`, `document.write`, `eval`, `dangerouslySetInnerHTML`, 
 
 ## CVEs
 
+
+---
+
+## 2026-11-18 — XSS in innerHTML Without Equals (PortSwigger)
+
+- **Date:** 2026-11-18 · **Source:** [PortSwigger Research](https://portswigger.net/research/achieving-the-impossible-xss-in-innerhtml-without-equals) · **Class:** technique
+- **What:** Achieves code execution through innerHTML sinks without using the `=` character. Bypasses filters that strip or block `=` in attribute contexts.
+- **Why it matters:** innerHTML is the most common DOM XSS sink. Filters that block `=` are widespread — this technique defeats them. Directly applicable to any innerHTML-based DOM XSS lead where `=` is filtered.
+- **Hunt signal:** Grep JS bundles for `innerHTML` assignments. Test targets that filter `=` in reflected/DOM contexts. Re-test any parked DOM XSS lead. Priority: ArenaNet GW3 DOM XSS (previously dead due to URL-encoding).
+- **Evidence:** [source](https://portswigger.net/research/achieving-the-impossible-xss-in-innerhtml-without-equals)
+
+## 2026-11-11 — Stealing Credentials Through CSP (PortSwigger)
+
+- **Date:** 2026-11-11 · **Source:** [PortSwigger Research](https://portswigger.net/research/blind-trust-stealing-credentials-through-csp) · **Class:** technique
+- **What:** CSP misconfigurations exploited to exfiltrate credentials. The trust relationships in CSP directives become the attack surface for data exfiltration.
+- **Why it matters:** CSP is usually defensive. Turning it into an exfil channel is novel. Chains with any existing injection — if you have XSS but CSP blocks exfil, this technique may bypass it.
+- **Hunt signal:** Audit CSP headers on all targets for overly permissive `connect-src`, `script-src`, or `default-src` directives. Chain with existing XSS/injection leads.
+- **Evidence:** [source](https://portswigger.net/research/blind-trust-stealing-credentials-through-csp)
+
+## 2026-10-27 — Scalable Vector Grief: SVG Injection (PortSwigger)
+
+- **Date:** 2026-10-27 · **Source:** [PortSwigger Research](https://portswigger.net/research/scalable-vector-grief) · **Class:** technique
+- **What:** SVG upload/render as an injection vector. SVGs bypass common image validation and execute JavaScript in the browser context when served inline.
+- **Why it matters:** SVG is widely allowed in image uploads and avatars. If the target serves uploaded SVGs with `Content-Type: image/svg+xml` without `Content-Disposition: attachment`, you get XSS for free.
+- **Hunt signal:** Upload SVG with `<svg onload="alert(1)">` to any image upload endpoint. Check `Content-Type` and `Content-Disposition` headers on served uploads.
+- **Evidence:** [source](https://portswigger.net/research/scalable-vector-grief)
 
 ---
 

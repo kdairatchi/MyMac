@@ -3580,7 +3580,70 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Why it matters:** None of the five bugs would have paid out alone; the chain illustrates that triage-rejected "informational" findings can combine into critical impact — a motivation to build and document bug chains rather than dropping low-severity reports.
 - **Hunt signal:** On any multi-tenant web app: identify CSRF-weak state-change endpoints + reflected/stored XSS + OAuth implicit flow + missing `postMessage` origin check → attempt to chain; one-click attack surface multiplies the P1 hit rate.
 - **Evidence:** [DEV Community analysis](https://dev.to/iamfaizanakhtar/cross-account-javascript-execution-in-basecamps-fizzy-how-pirikara-chained-five-quiet-bugs-into-a-3p23)
-# Bug Bounty Writeups 2026
+---
 
-<!-- Entries appended newest-first per run. Format: date · source · class · title -->
+## 2026-11-19 refresh batch (8 items)
 
+### Basecamp — Heap Overflow via TIFF/JPEG Image Upload (Critical)
+- **Tags:** `#memory` `#image-processing` `#rce`
+- **Severity:** critical · **Hunt:** 5/5 · **Status:** disclosed · **Platform:** H1
+- **Sources:** [H1 basecamp](https://hackerone.com/basecamp)
+- **Trick:** Image upload triggers TIFF/JPEG heap overwrite in server-side image processing pipeline. Potential RCE.
+- **Why it matters:** Server-side image processing is underexplored. Every target with resize/crop/thumbnail is worth fuzzing.
+- **Rating:** novel
+
+### Basecamp — Cross-Account Stored XSS Leading to Admin ATO (High)
+- **Tags:** `#xss` `#stored` `#cross-account`
+- **Severity:** high · **Hunt:** 4/5 · **Status:** disclosed · **Platform:** H1
+- **Sources:** [H1 basecamp](https://hackerone.com/basecamp)
+- **Trick:** Stored XSS on app.basecamp.com that persists across account boundaries — fires in admin context.
+- **Why it matters:** Cross-account stored XSS is the payout tier. Shared content, notifications, and cross-org rendering are the sinks.
+- **Rating:** variant
+
+### GitHub — CSRF Deletes All Stored Slack/Teams Credentials (Medium)
+- **Tags:** `#csrf` `#destructive` `#integrations`
+- **Severity:** medium · **Hunt:** 3/5 · **Status:** disclosed · **Platform:** H1
+- **Sources:** [H1 github](https://hackerone.com/github)
+- **Trick:** Management Console integration credential deletion endpoint missing CSRF protection.
+- **Why it matters:** Destructive CSRF on third-party credentials. Classic miss — settings pages with delete actions.
+- **Rating:** variant
+
+### Weblate — Privilege Escalation via Unfiltered Backup Restore (Critical)
+- **Tags:** `#privesc` `#backup-restore` `#deserialization`
+- **Severity:** critical · **Hunt:** 5/5 · **Status:** disclosed · **Platform:** H1
+- **Sources:** [H1 weblate](https://hackerone.com/weblate)
+- **Trick:** Project backup import preserves serialized role data. Import a modified backup → role elevation to admin.
+- **Why it matters:** Backup/restore is a goldmine for priv esc. Any target with import/export of project data may carry role info.
+- **Rating:** novel
+
+### Node.js — HTTP/2 Stream UAF Leaks Freed Memory to Peer (High)
+- **Tags:** `#memory` `#http2` `#uaf` `#info-disclosure`
+- **Severity:** high · **Hunt:** 4/5 · **Status:** disclosed · **Platform:** H1
+- **Sources:** [H1 nodejs](https://hackerone.com/nodejs)
+- **Trick:** HTTP/2 stream teardown race sends freed response memory to the client. Heartbleed-class pattern for Node.js.
+- **Why it matters:** Any Node.js server using HTTP/2 could leak secrets from freed memory under concurrent stream teardown.
+- **Rating:** novel
+
+### Arc Browser — Unauthenticated Remote RPC Process Termination (High)
+- **Tags:** `#desktop` `#rpc` `#dos` `#unauth`
+- **Severity:** high · **Hunt:** 3/5 · **Status:** disclosed · **Platform:** H1
+- **Sources:** [H1 arc-bbp](https://hackerone.com/arc-bbp)
+- **Trick:** Custom RPC protocol on Arc browser nodes accepts unauthenticated termination commands.
+- **Why it matters:** Browser-level unauthenticated RPC. Desktop app attack surface. Similar pattern may exist in other Electron/WebView2 browsers.
+- **Rating:** variant
+
+### Discourse — Notification Reactions IDOR (High)
+- **Tags:** `#idor` `#notifications` `#auth`
+- **Severity:** high · **Hunt:** 3/5 · **Status:** disclosed · **Platform:** H1
+- **Sources:** [H1 discourse](https://hackerone.com/discourse)
+- **Trick:** View reactions on any user's notifications by manipulating the user ID in the API request.
+- **Why it matters:** Classic IDOR on notification metadata. Notification APIs are frequently under-protected.
+- **Rating:** variant
+
+### Essity — Unauthenticated LFI via ABCpdf (High)
+- **Tags:** `#lfi` `#path-traversal` `#pdf-generation`
+- **Severity:** high · **Hunt:** 4/5 · **Status:** disclosed · **Platform:** H1
+- **Sources:** [H1 essity](https://hackerone.com/essity)
+- **Trick:** Server-side PDF generation with ABCpdf processes user-controlled paths without sanitization. Path traversal to arbitrary file read.
+- **Why it matters:** ABCpdf is common in .NET stacks. Any PDF generation endpoint that takes user input is a path traversal candidate.
+- **Rating:** variant

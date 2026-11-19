@@ -2,7 +2,7 @@
 
 > Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
 
-_Last updated: 2026-04-16 · Items: 1_
+_Last updated: 2026-11-19 · Items: 4_
 
 ---
 
@@ -17,6 +17,9 @@ _Last updated: 2026-04-16 · Items: 1_
 |---|---|---|---|---|---|
 | CVE-2025-12101 | 2026-04-16 | Citrix NetScaler Memory Leak & RXSS (CVE-2025-12101) | medium | poc | [src](https://labs.watchtowr.com/is-it-citrixbleed4-well-no-is-it-good-also-no-citrix-netscalers-memory-leak-rxss-cve-2025-12101/) |
 | cve-2025-12101 | 2026-04-16 | Citrix NetScaler Memory Leak & RXSS (CVE-2025-12101) | medium | poc | [src](https://labs.watchtowr.com/is-it-citrixbleed4-well-no-is-it-good-also-no-citrix-netscalers-memory-leak-rxss-cve-2025-12101/) |
+| CVE-2026-88771 | 2026-09-28 | Citrix NetScaler PreAuth Command Injection | critical | poc | [src](https://labs.watchtowr.com/oh-look-the-foot-gun-went-off-again-citrix-netscaler-preauth-command-injection-cve-2026-88771/) |
+| CVE-2026-88772 | 2026-09-29 | Citrix NetScaler DTLS Preauth Memory Overflow | high | poc | [src](https://labs.watchtowr.com/here-we-go-again-citrix-netscaler-dtls-preauth-memory-overflow-cve-2026-88772/) |
+| CVE-2026-8452 | 2026-08-14 | Citrix NetScaler Pre-Auth RCE | critical | poc | [src](https://labs.watchtowr.com/youre-back-in-the-room-citrix-netscaler-pre-auth-rce-cve-2026-8452/) |
 
 ---
 
