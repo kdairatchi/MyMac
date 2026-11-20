@@ -3647,3 +3647,13 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Trick:** Server-side PDF generation with ABCpdf processes user-controlled paths without sanitization. Path traversal to arbitrary file read.
 - **Why it matters:** ABCpdf is common in .NET stacks. Any PDF generation endpoint that takes user input is a path traversal candidate.
 - **Rating:** variant
+
+## 2026-11-20 — Rate Limit Bypass via X-Forwarded-For (hexafaton, H1)
+
+### Rate Limit Bypass — X-Forwarded-For Header Spoofing
+- **Tags:** `#rate-limit` `#access-control` `#api`
+- **Severity:** medium-high · **Hunt:** 4/5 · **Status:** disclosed · **Platform:** H1
+- **Sources:** [H1 disclosure mirror](https://www.redpacketsecurity.com/hackerone-bugbounty-disclosure-anonymous-api-rate-limit-bypass-via-x-forwarded-for-hexafaton/)
+- **Trick:** Rate limit counter keys on IP extracted from XFF header. Rotate XFF value per request → fresh counter per "IP". Hits login, OTP, password reset endpoints.
+- **Why it matters:** Textbook but still wins bounties. Any API rate-limiting per IP from an untrusted header is vulnerable. Miss it = miss easy mediums.
+- **Rating:** variant

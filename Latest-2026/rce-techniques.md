@@ -377,3 +377,15 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 - **Why it matters:** Affects any backend using Brotli (Node.js, Python brotli, Bun, Envoy); broad cloud-native API surface in bug bounty programs.
 - **Hunt signal:** Send malformed Brotli-compressed body to endpoints advertising `br` in Accept-Encoding; watch for 500s/crashes. Nuclei tag: `CVE-2026-111497`.
 - **Evidence:** [CVSS 9.2 record](https://cipherssecurity.com/cve/CVE-2026-111497/) · CISA KEV added 2026-10-27, fed deadline 2026-11-10 · [BleepingComputer](https://www.bleepingcomputer.com/news/security/cisa-warns-of-hackers-now-exploiting-critical-node2shell-flaw/amp/)
+
+## 2026-11-20 — CVE-2026-40217: LiteLLM AI Gateway Guardrail Sandbox RCE
+
+### CVE-2026-40217 — BerriAI LiteLLM Guardrail Sandbox Escape → RCE
+- **Date:** 2026-11-20 · **Source:** [nvd.nist.gov](https://nvd.nist.gov/vuln/detail/CVE-2026-40217) · **Class:** cve
+- **What:** LiteLLM Proxy's `/guardrails/test_custom_code` endpoint executes attacker-supplied bytecode via unsafe reflection, allowing RCE on the AI gateway host.
+- **Why it matters:** LiteLLM is widely deployed as an AI API proxy layer in enterprises and AI startups; exploitation requires only a valid virtual key (often low-privilege), giving attackers full host compromise from a single API call.
+- **Hunt signal:** `nuclei -u https://target/ -t http/cves/2026/CVE-2026-40217.yaml` or `curl -X POST https://target/guardrails/test_custom_code -H "Authorization: Bearer <key>" -d '{"code":"import os; os.system(\"id\")"}'`
+- **Evidence:** [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-40217) · CVSS 8.8 · CISA KEV added 2026-11-18 · PoC: PUBLIC — [dev.to/alanwest](https://dev.to/alanwest/litellm-cve-2026-40217-is-exploited-from-virtual-keys-how-to-check-your-proxy-2n9k)
+
+**Affected:** LiteLLM Proxy < 1.83.11 · **Fixed:** 1.83.11+
+**BB scope:** AI platform programs (OpenAI, Anthropic, Cohere, Mistral, HuggingFace) if deploying LiteLLM internally; enterprise programs with LLM API gateway; scope research required.

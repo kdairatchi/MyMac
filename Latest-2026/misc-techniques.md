@@ -404,3 +404,12 @@ A vulnerability was discovered in the WordPress REST API batch endpoint (/wp-jso
 - **Affected:** Next.js 13.4.13 – 15.5.15, 16.0.0 – 16.2.4 (self-hosted only; Vercel-hosted unaffected)
 - **Fixed:** 15.5.16, 16.2.5 (May 2026)
 - **CVSS:** 8.6 · **KEV:** No
+
+## 2026-11-20 — Rate Limit Bypass via X-Forwarded-For Header Spoofing
+
+### Rate Limit Bypass — X-Forwarded-For IP Rotation
+- **Date:** 2026-11-20 · **Source:** [redpacketsecurity.com](https://www.redpacketsecurity.com/hackerone-bugbounty-disclosure-anonymous-api-rate-limit-bypass-via-x-forwarded-for-hexafaton/) · **Class:** technique
+- **What:** APIs that rate-limit per IP extracted from X-Forwarded-For can be bypassed by rotating that header value; each new IP creates a fresh bucket.
+- **Why it matters:** Generalizes to any rate-limited endpoint (login, OTP, password reset) on targets not stripping/pinning XFF server-side; frequently missed in API review and shows up repeatedly in H1 disclosures.
+- **Hunt signal:** Send 429-triggering requests; re-send adding `X-Forwarded-For: 127.0.0.1`. Also try `X-Real-IP`, `X-Originating-IP`, `X-Client-IP`, `True-Client-IP`, stacked XFF values.
+- **Evidence:** [H1 disclosure — hexafaton](https://www.redpacketsecurity.com/hackerone-bugbounty-disclosure-anonymous-api-rate-limit-bypass-via-x-forwarded-for-hexafaton/) · disclosed 2026-11-15
