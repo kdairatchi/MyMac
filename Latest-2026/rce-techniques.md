@@ -377,3 +377,12 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 - **Why it matters:** Affects any backend using Brotli (Node.js, Python brotli, Bun, Envoy); broad cloud-native API surface in bug bounty programs.
 - **Hunt signal:** Send malformed Brotli-compressed body to endpoints advertising `br` in Accept-Encoding; watch for 500s/crashes. Nuclei tag: `CVE-2026-111497`.
 - **Evidence:** [CVSS 9.2 record](https://cipherssecurity.com/cve/CVE-2026-111497/) · CISA KEV added 2026-10-27, fed deadline 2026-11-10 · [BleepingComputer](https://www.bleepingcomputer.com/news/security/cisa-warns-of-hackers-now-exploiting-critical-node2shell-flaw/amp/)
+
+## 2026-11-21 — CVE-2026-90817: REDCap Unauthenticated RCE (KEV 2026-11-18)
+
+### CVE-2026-90817 — REDCap Unauthenticated Code Injection (RCE)
+- **Date:** 2026-11-21 · **Source:** [securityaffairs.com](https://securityaffairs.com/203504/hacking/u-s-cisa-adds-apache-axis-vanderbilt-redcapberriai-litellm-and-synology-dsm-flaws-to-its-known-exploited-vulnerabilities-catalog.html) · **Class:** cve
+- **What:** Unauthenticated code injection in REDCap survey/data-import handling; crafted HTTP requests reach unintended controller routes, manipulating file paths or streams during data import; exploitation requires a valid public survey hash (routinely embedded in invitation emails).
+- **Why it matters:** CVSS 9.8; CISA KEV added 2026-11-18, federal deadline 2026-11-21; affects Vanderbilt REDCap <= 16.0.48 LTS / 17.3.9 LTS / 17.4.3 Standard; heavy deployment across universities, research institutions, and healthcare — large org-managed programs.
+- **Hunt signal:** Fingerprint REDCap via `/redcap_v*/index.php` path; check response headers for `X-Powered-By: REDCap`; enumerate `/surveys/index.php?s=<hash>` for exposed public survey endpoints. Version check only on authorized targets — PoC is public per TheHackerWire.
+- **Evidence:** [securityaffairs.com](https://securityaffairs.com/203504/hacking/u-s-cisa-adds-apache-axis-vanderbilt-redcapberriai-litellm-and-synology-dsm-flaws-to-its-known-exploited-vulnerabilities-catalog.html) · [ostorlab writeup](https://blog.ostorlab.co/redcap-unauthenticated-rce-cve-2026-90817.html) · [SentinelOne vuln DB](https://www.sentinelone.com/vulnerability-database/cve-2026-90817/) · PoC: PUBLIC (thehackerwire.com)
