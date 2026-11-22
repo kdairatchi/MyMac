@@ -2,7 +2,7 @@
 
 > Tracked CVEs and techniques for this class. Updated via daily `refresh-latest` pipeline.
 
-_Last updated: 2026-10-31 · Items: 2_
+_Last updated: 2026-11-22 · Items: 3_
 
 
 ---
@@ -377,3 +377,12 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 - **Why it matters:** Affects any backend using Brotli (Node.js, Python brotli, Bun, Envoy); broad cloud-native API surface in bug bounty programs.
 - **Hunt signal:** Send malformed Brotli-compressed body to endpoints advertising `br` in Accept-Encoding; watch for 500s/crashes. Nuclei tag: `CVE-2026-111497`.
 - **Evidence:** [CVSS 9.2 record](https://cipherssecurity.com/cve/CVE-2026-111497/) · CISA KEV added 2026-10-27, fed deadline 2026-11-10 · [BleepingComputer](https://www.bleepingcomputer.com/news/security/cisa-warns-of-hackers-now-exploiting-critical-node2shell-flaw/amp/)
+
+## 2026-11-22 — CVE-2026-90436: Apache Axis 1.x Unauthenticated RCE in Atlassian Confluence Data Center
+
+### CVE-2026-90436 — Confluence Data Center RCE via Apache Axis 1.x (XML-RPC/SOAP)
+- **Date:** 2026-11-22 · **Source:** [rapid7.com](https://www.rapid7.com/blog/post/etr-rapid7-detected-exploitation-of-cve-2026-90436-against-atlassian-confluence-data-center-n-able-n-central-also-exploited/) · **Class:** cve
+- **What:** Apache Axis 1.x (EOL SOAP library bundled in Confluence Data Center ≤9.x) allows unauthenticated RCE when the Remote API (XML-RPC & SOAP) is enabled — CVSS 3.1: 9.8 / CVSS v4: 9.3.
+- **Why it matters:** Active exploitation confirmed Nov 13 (Rapid7 MDR); Metasploit module dropped Nov 17; attackers targeting Confluence attachment storage for credentials and payment data; 1.2M+ instances exposed per CybersecurityNews.
+- **Hunt signal:** Probe `/_confluenceservlet/services/` or `/rpc/soap-axis/` — HTTP 200/SOAPFault without auth = vulnerable; Nuclei tag `CVE-2026-90436`; scanner: `foxcornlab/confluence-axis-scanner`.
+- **Evidence:** [Rapid7 ETR](https://www.rapid7.com/blog/post/etr-rapid7-detected-exploitation-of-cve-2026-90436-against-atlassian-confluence-data-center-n-able-n-central-also-exploited/) · [cipherssecurity](https://cipherssecurity.com/apache-axis-cve-2026-90436-confluence-rce/) · PoC: PUBLIC — Metasploit module 2026-11-17; [foxcornlab scanner](https://github.com/foxcornlab/confluence-axis-scanner) · Fix: Confluence 9.2.28+, or disable Remote API in Admin → General Configuration
