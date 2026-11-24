@@ -30,3 +30,12 @@
 - **PoC:** None public confirmed as of 2026-11-18 — check https://github.com/search?q=CVE-2026-119618
 - **Likely bounty scope:** Programs running own Apache infrastructure (Shopify, Atlassian self-hosted, any self-managed VPS apps); scope research required for SaaS targets.
 - **Evidence:** [Red Hat] https://access.redhat.com/security/cve/CVE-2026-119618
+
+## 2026-11-24 — CVE-2026-129448: Apache Roller Pre-Auth XML-RPC Deserialization RCE
+
+### CVE-2026-129448: Apache Roller Pre-Auth XML-RPC Deserialization RCE
+- **Date:** 2026-11-24 · **Source:** [cve.org](https://www.cve.org/CVERecord?id=CVE-2026-129448) · **Class:** cve
+- **What:** Unauthenticated XML-RPC Java deserialization in Apache Roller 4.0.0–6.1.4; attacker sends malicious serialized payload to `/roller-services/xmlrpc` endpoint, achieves RCE.
+- **Why it matters:** CVSS 9.8, CISA KEV (2026-11-20), no auth required. Fix: upgrade to 6.1.6+. Workaround: disable XML-RPC servlet mapping in `WEB-INF/web.xml`.
+- **Hunt signal:** Fingerprint via `<generator>` tag in Atom feed or `/roller-ui/login.rol`; probe xmlrpc endpoint with ysoserial URLDNS gadget chain for blind confirmation.
+- **Evidence:** [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-129448) · [PoC GitHub](https://github.com/Yanixos/APACHE-CVE-2026-129448) · [SOCPrime](https://socprime.com/blog/cve-2026-129448-critical-apache-roller-rce-flaw-exploited-in-the-wild/)

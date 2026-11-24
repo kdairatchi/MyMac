@@ -215,3 +215,12 @@ print(base64.b64encode(pickle.dumps(RCE())).decode())
 - **Why it matters:** Added to CISA KEV 2026-07-01 with a 72-hour federal patch deadline; public PoC confirmed live on GitHub; any org running unpatched on-prem SharePoint is an active exploitation target right now.
 - **Hunt signal:** Authenticate as low-priv Site Member; probe SPListItem API with a URLDNS ysoserial payload for OOB confirmation; check version headers against May 2026 patch threshold. `nuclei -t cves/2026/CVE-2026-45659.yaml` if template available.
 - **Evidence:** [PoC GitHub](https://github.com/mistbarbarianspot/CVE-2026-45659-SharePoint-RCE) · [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) · [NVD](https://nvd.nist.gov/vuln/detail/CVE-2026-45659)
+
+## 2026-11-24 — CVE-2026-129448: Apache Roller XML-RPC Pre-Auth Deserialization RCE
+
+### CVE-2026-129448: Apache Roller Pre-Auth XML-RPC Deserialization RCE
+- **Date:** 2026-11-24 · **Source:** [cve.org](https://www.cve.org/CVERecord?id=CVE-2026-129448) · **Class:** cve
+- **What:** Apache Roller 4.0.0–6.1.4 deserializes vendor-extension types in the XML-RPC endpoint before authenticating the caller, enabling unauthenticated RCE.
+- **Why it matters:** CVSS 9.8, in CISA KEV (added 2026-11-20), public PoC on GitHub; any org running Roller as an internal blog/CMS is an active exploitation target. Bug bounty scope: any company self-hosting Roller for developer blogs or docs portals.
+- **Hunt signal:** Send ysoserial CommonsCollections payload to `/roller-services/xmlrpc`; watch for OOB DNS. `nuclei -t cves/2026/CVE-2026-129448.yaml` when template ships. Version check: banner or `<generator>` in Atom feed.
+- **Evidence:** [NVD CVSS 9.8](https://nvd.nist.gov/vuln/detail/CVE-2026-129448) · [PoC GitHub](https://github.com/Yanixos/APACHE-CVE-2026-129448) · [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) · [HackerNews](https://thehackernews.com/2026/11/critical-apache-roller-rce-flaw-under.html)
