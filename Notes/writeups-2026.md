@@ -3647,3 +3647,19 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Trick:** Server-side PDF generation with ABCpdf processes user-controlled paths without sanitization. Path traversal to arbitrary file read.
 - **Why it matters:** ABCpdf is common in .NET stacks. Any PDF generation endpoint that takes user input is a path traversal candidate.
 - **Rating:** variant
+
+## 2026-11-25 — IBM Unauthenticated API Writes / SAP Default OAuth Credential writeups
+
+### IBM — Unauthenticated API Writes to Full Software Access
+- **Date:** 2026-11-23 · **Source:** [redpacketsecurity.com](https://www.redpacketsecurity.com/hackerone-bugbounty-disclosure-unauthenticated-api-writes-to-full-ibm-software-access-shadowbyte/) · **Class:** writeup
+- **What:** Unauthenticated POST requests to IBM platform API endpoints permitted writes requiring full software access, bypassing auth entirely.
+- **Why it matters:** Auth-missing-on-write-endpoints pattern is widespread in large enterprise APIs; any v1→v2 migration or internal microservice leak is a candidate.
+- **Hunt signal:** Fuzz POST/PUT/PATCH on API endpoints without a session cookie or Authorization header; compare responses with and without auth.
+- **Evidence:** [H1 disclosure mirror](https://www.redpacketsecurity.com/hackerone-bugbounty-disclosure-unauthenticated-api-writes-to-full-ibm-software-access-shadowbyte/)
+
+### SAP Commerce Cloud — Default OAuth2 Admin Token via Published Sample Secret (CVE-2026-44761)
+- **Date:** 2026-11-24 · **Source:** [redpacketsecurity.com](https://www.redpacketsecurity.com/hackerone-bugbounty-disclosure-default-oauth-credentials-on-sap-commerce-cloud-admin-token-via-published-sample-secret-cve-c-z/) · **Class:** writeup
+- **What:** SAP Commerce Cloud shipped with default OAuth2 client_id/client_secret from a published sample; using the documented example credentials yields an admin token in production deployments.
+- **Why it matters:** Default-credential bugs in enterprise platforms require no exploitation skill — just reading the docs. Any SAP, Salesforce Commerce, Magento, or similar enterprise shop deployment is worth checking.
+- **Hunt signal:** Identify OAuth2 token endpoint (`/oauth/token`); try client_id/secret pairs from vendor sample docs, GitHub examples, or DockerHub default-config files.
+- **Evidence:** [H1 disclosure mirror](https://www.redpacketsecurity.com/hackerone-bugbounty-disclosure-default-oauth-credentials-on-sap-commerce-cloud-admin-token-via-published-sample-secret-cve-c-z/)

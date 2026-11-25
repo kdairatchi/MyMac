@@ -404,3 +404,12 @@ A vulnerability was discovered in the WordPress REST API batch endpoint (/wp-jso
 - **Affected:** Next.js 13.4.13 – 15.5.15, 16.0.0 – 16.2.4 (self-hosted only; Vercel-hosted unaffected)
 - **Fixed:** 15.5.16, 16.2.5 (May 2026)
 - **CVSS:** 8.6 · **KEV:** No
+
+## 2026-11-25 — DNS Rebinding Against Local MCP Servers
+
+### DNS Rebinding → Unauthorized MCP Tool Access (H1 Disclosure Nov 24)
+- **Date:** 2026-11-24 · **Source:** [redpacketsecurity.com](https://www.redpacketsecurity.com/hackerone-bugbounty-disclosure-dns-rebinding-enables-unauthorized-mcp-tool-access-avishai-gonen/) · **Class:** technique
+- **What:** Locally running MCP servers on localhost without host/origin validation are reachable by any website the user visits; attacker controls DNS to remap their domain to 127.0.0.1 and invokes MCP tools cross-origin.
+- **Why it matters:** MCP adoption is surging; dev tooling bug bounty programs (Cursor, VSCode extensions, Burp Community) now carry this surface. CVEs confirmed in googleapis/mcp-toolbox (CVE-2026-11624), Go SDK (CVE-2026-34742), Python SDK (CVE-2025-66416), TypeScript SDK.
+- **Hunt signal:** Enumerate localhost ports 3000-9999 for MCP server responses (`curl -s http://localhost:<port>/mcp/`); check for missing `Origin` or `Host` header enforcement.
+- **Evidence:** [H1 mirror](https://www.redpacketsecurity.com/hackerone-bugbounty-disclosure-dns-rebinding-enables-unauthorized-mcp-tool-access-avishai-gonen/) · [DEV.to MCP rebind analysis](https://dev.to/custodiaadmin/the-dns-rebinding-vulnerability-in-self-hosted-browser-mcps-and-why-hosted-matters-25g7)

@@ -377,3 +377,14 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 - **Why it matters:** Affects any backend using Brotli (Node.js, Python brotli, Bun, Envoy); broad cloud-native API surface in bug bounty programs.
 - **Hunt signal:** Send malformed Brotli-compressed body to endpoints advertising `br` in Accept-Encoding; watch for 500s/crashes. Nuclei tag: `CVE-2026-111497`.
 - **Evidence:** [CVSS 9.2 record](https://cipherssecurity.com/cve/CVE-2026-111497/) · CISA KEV added 2026-10-27, fed deadline 2026-11-10 · [BleepingComputer](https://www.bleepingcomputer.com/news/security/cisa-warns-of-hackers-now-exploiting-critical-node2shell-flaw/amp/)
+
+## 2026-11-25 — CVE-2026-132165: Drupal Core Installer Unauthenticated RCE
+
+### CVE-2026-132165 — Drupal Core install.php Unauthenticated RCE / Site Takeover
+- **Date:** 2026-11-25 · **Source:** [thehackernews.com](https://thehackernews.com/2026/11/drupal-fail2install-exploit-details.html) · **Class:** cve
+- **What:** Under specific server configurations, install.php remains accessible on running Drupal sites, allowing an unauthenticated attacker to trigger a reinstall and achieve RCE or full site takeover.
+- **Why it matters:** Exploited in the wild since Nov 19; CISA KEV added Nov 24, federal deadline Nov 27. Any Drupal-based program target — intranets, government portals, university CMS — is immediately in scope.
+- **Hunt signal:** `curl -sk https://<target>/core/install.php | grep -i 'Drupal'`; if 200+body, unpatched. Nuclei tag: `CVE-2026-132165`.
+- **Evidence:** [Horizon3 research](https://horizon3.ai/attack-research/vulnerabilities/cve-2026-132165/) · [CISA KEV entry](https://zerohour.day/item/d52cc031d711c026493b7f5b6ca748c88c16b4af) · [DEV.to deep-dive](https://dev.to/anoymask/drupal-cve-2026-132165-site-takeover-and-pre-authentication-rce-via-re-running-installphp-299o)
+- **Affected:** Drupal 10.x < 10.6.22, 11.x < 11.3.22 / 11.4.13
+- **CVSS:** 9.8 (NVD pending, multiple sources) · **KEV:** Yes — added 2026-11-24
