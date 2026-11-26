@@ -3647,3 +3647,11 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Trick:** Server-side PDF generation with ABCpdf processes user-controlled paths without sanitization. Path traversal to arbitrary file read.
 - **Why it matters:** ABCpdf is common in .NET stacks. Any PDF generation endpoint that takes user input is a path traversal candidate.
 - **Rating:** variant
+
+---
+
+### IDOR — Private Post Comments Read/Write by Any Authenticated User (H1 / matteo)
+- **Date:** 2026-11-23 · **Source:** [RedPacket Security / H1 disclosure](https://www.redpacketsecurity.com/hackerone-bugbounty-disclosure-idor-private-post-comments-can-be-read-and-written-by-any-authenticated-user-matteo/) · **Class:** writeup
+- **What:** Any authenticated user can read and write comments on private posts by substituting the target user's object ID in the comments API endpoint — no ownership check server-side.
+- **Why it matters:** Demonstrates that "private" content visibility controls are often enforced only at the view layer; API endpoints skip object-level authorization checks. Direct applicability to any platform with private posts, DMs, or restricted content and a social/comment layer.
+- **Hunt signal:** Create two accounts; post private content as A; use B's session to call `GET/POST /api/comments/{A_object_id}`. Confirm: 200 with data = IDOR. Pair with notification-reaction IDOR pattern (Discourse disclosure) for a chain.

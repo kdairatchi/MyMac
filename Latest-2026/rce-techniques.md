@@ -377,3 +377,12 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 - **Why it matters:** Affects any backend using Brotli (Node.js, Python brotli, Bun, Envoy); broad cloud-native API surface in bug bounty programs.
 - **Hunt signal:** Send malformed Brotli-compressed body to endpoints advertising `br` in Accept-Encoding; watch for 500s/crashes. Nuclei tag: `CVE-2026-111497`.
 - **Evidence:** [CVSS 9.2 record](https://cipherssecurity.com/cve/CVE-2026-111497/) · CISA KEV added 2026-10-27, fed deadline 2026-11-10 · [BleepingComputer](https://www.bleepingcomputer.com/news/security/cisa-warns-of-hackers-now-exploiting-critical-node2shell-flaw/amp/)
+
+## 2026-11-26 — SOAP Fault Deserialization → Unauth RCE (CVE-2026-90436 / Apache Axis)
+
+### CVE-2026-90436: Confluence DC — Unauth RCE via Apache Axis SOAP
+- **Date:** 2026-11-26 · **Source:** [Rapid7](https://www.rapid7.com/blog/post/etr-rapid7-detected-exploitation-of-cve-2026-90436-against-atlassian-confluence-data-center-n-able-n-central-also-exploited/) · **Class:** cve
+- **What:** Apache Axis 1.x SOAP fault handling deserializes attacker input without authentication — full RCE on Confluence Data Center with Remote API enabled.
+- **Why it matters:** CISA KEV 2026-11-18; public Metasploit module; 1.2M exposed instances; enterprise target rich with bug bounty programs.
+- **Hunt signal:** `/_api/rpc/xmlrpc` or `/rpc/xmlrpc` probe; if XML response returned, send SOAP fault payload. `foxcornlab/confluence-axis-scanner` for detection-only triage.
+- **Evidence:** [Rapid7 ETR](https://www.rapid7.com/blog/post/etr-rapid7-detected-exploitation-of-cve-2026-90436-against-atlassian-confluence-data-center-n-able-n-central-also-exploited/) · PoC: PUBLIC (Metasploit 2026-11-17) · CVSS 9.8 / KEV YES
