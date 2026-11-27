@@ -3647,3 +3647,31 @@ A vulnerability was identified in the Japanese version of the pixiv dictionary w
 - **Trick:** Server-side PDF generation with ABCpdf processes user-controlled paths without sanitization. Path traversal to arbitrary file read.
 - **Why it matters:** ABCpdf is common in .NET stacks. Any PDF generation endpoint that takes user input is a path traversal candidate.
 - **Rating:** variant
+
+---
+
+### Nextcloud — Auth Bypass via Missing JWT Signature Verification in user_oidc (CVE-2026-45156)
+- **Tags:** `#auth-bypass` `#jwt` `#oidc` `#nextcloud`
+- **Severity:** critical · **Hunt:** 5/5 · **Status:** disclosed · **Platform:** H1
+- **Sources:** [H1 Nextcloud](https://hackerone.com/nextcloud) · [redpacketsecurity.com](https://www.redpacketsecurity.com/hackerone-bugbounty-disclosure-authentication-bypass-in-id-me-handling-via-missing-jwt-signature-verification-in-user-oidc-priyanka/)
+- **Trick:** The Nextcloud `user_oidc` plugin's ID.me handling path skips JWT signature verification — attacker crafts an unsigned or self-signed OIDC token and logs in as any user including admins.
+- **Why it matters:** JWTs without signature checks are a recurring class — look for OIDC/OAuth flows that accept `alg: none` or skip the `iss`/`aud` check. Any target using an OIDC SSO plugin is a candidate.
+- **Hunt recipe:**
+  1. Intercept OIDC callback on target. Modify JWT header to `"alg":"none"` and strip signature.
+  2. If callback accepts it, escalate to admin account by setting `sub` to known admin identifier.
+  3. Alternatively, test `alg: RS256` with HMAC-secret attack if public key is obtainable.
+- **Kill criterion:** Target validates JWT signature against a registered JWK set and rejects `alg: none` — confirm with a 401/403 on forged token before investing time.
+- **Rating:** generalizable
+
+### IBM Software — Unauthenticated API Write → Full Software Access (High)
+- **Tags:** `#idor` `#api` `#unauth-write` `#ibm`
+- **Severity:** high · **Hunt:** 4/5 · **Status:** disclosed · **Platform:** H1
+- **Sources:** [redpacketsecurity.com](https://www.redpacketsecurity.com/hackerone-bugbounty-disclosure-unauthenticated-api-writes-to-full-ibm-software-access-shadowbyte/)
+- **Trick:** IBM's software API accepted write operations (create/modify resources) without any authentication — unauthenticated requests granted full software-level access.
+- **Why it matters:** Unauthenticated write endpoints on vendor APIs are a quick win. Test all API endpoints — including those normally reached after OAuth — by stripping auth headers entirely.
+- **Hunt recipe:**
+  1. Map all API endpoints with Burp; identify POST/PUT/PATCH calls.
+  2. Replay each with `Authorization` header removed and all session cookies cleared.
+  3. If response is 200/201 (not 401/403), confirm write succeeded and assess scope.
+- **Kill criterion:** All endpoints return 401 without valid session token — stop.
+- **Rating:** variant

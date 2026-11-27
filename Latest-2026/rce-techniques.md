@@ -377,3 +377,14 @@ A vulnerability was discovered in the "aws-cdk-lib" NodejsFunction that allowed 
 - **Why it matters:** Affects any backend using Brotli (Node.js, Python brotli, Bun, Envoy); broad cloud-native API surface in bug bounty programs.
 - **Hunt signal:** Send malformed Brotli-compressed body to endpoints advertising `br` in Accept-Encoding; watch for 500s/crashes. Nuclei tag: `CVE-2026-111497`.
 - **Evidence:** [CVSS 9.2 record](https://cipherssecurity.com/cve/CVE-2026-111497/) · CISA KEV added 2026-10-27, fed deadline 2026-11-10 · [BleepingComputer](https://www.bleepingcomputer.com/news/security/cisa-warns-of-hackers-now-exploiting-critical-node2shell-flaw/amp/)
+
+## 2026-11-27 — CVE-2026-132165: Drupal Fail2Install Pre-Auth RCE (CISA KEV)
+
+### CVE-2026-132165 — Drupal Fail2Install: Unauthenticated Installer RCE
+- **Date:** 2026-11-27 · **Source:** [socradar.io](https://socradar.io/blog/drupal-fail2install-cve-2026-132165-exploited/) · **Class:** cve
+- **What:** Drupal core (8.9–11.4) fails to validate installer task state on already-installed sites; unauthenticated attackers can re-invoke `install.php`, plant a PHP webshell via SQLite DB injection, and achieve remote code execution.
+- **Why it matters:** CVSS 9.8, in CISA KEV (fed deadline 2026-11-27 = today), active exploitation confirmed since 2026-11-19. Affects all major Drupal hosting platforms — Pantheon, Acquia, Drupal.org — and any shared hosting running Drupal without install.php blocked.
+- **Hunt signal:** `curl -s -o /dev/null -w "%{http_code}" https://TARGET/core/install.php` — 200 on a live site = exposed; any Drupal version not on 10.6.22 / 11.3.22 / 11.4.13 is unpatched.
+- **Evidence:** [SA-CORE-2026-017](https://www.drupal.org/sa-core-2026-017) · [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) · [thehackernews](https://thehackernews.com/2026/11/drupal-fail2install-exploit-details.html) · PoC: PUBLIC (Searchlight Cyber research; active in-wild exploitation)
+- **CVSS:** 9.8 · **KEV:** Yes — added 2026-11-26 · **Affected:** Drupal 8.9–10.6.21, 11.0–11.3.21, 11.4.0–11.4.12
+- **Bounty scope:** Any program running Drupal (Pantheon, Acquia, Drupal Association, US .gov targets via CISA scope)
